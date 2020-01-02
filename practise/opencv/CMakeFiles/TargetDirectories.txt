@@ -1,0 +1,3 @@
+/home/yan/Desktop/practise/opencv/CMakeFiles/rebuild_cache.dir
+/home/yan/Desktop/practise/opencv/CMakeFiles/opencv_example.dir
+/home/yan/Desktop/practise/opencv/CMakeFiles/edit_cache.dir

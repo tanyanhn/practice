@@ -1,0 +1,33 @@
+document内的tex文件和pdf是程序设计文档。
+
+data内是借用张庆海老师的Dao文件内测试数据。
+
+
+code内是源码，main是可执行程序，使用
+./main 输入文件名1   输入文件名2    1 meet 2输出文件名    1 join 2输出文件名    1 complement输出文件名    2 complement 输出文件名
+
+./code 文件夹内 make run默认产生输入文件panda.input和mickey.input的输出结果output文件等.make clean清除输出文件,修改makefile可以修改输入,输入文件放在最外层
+
+
+若自定义main程序，
+可用函数有：
+1. void settol(double d) 设定精度要求，默认为1e-10，使用double存储数据，所以tol太小时结果未定义。时间复杂度O(1)
+
+2. Spajor input(istream& is) 由一个输入流生成一个Spajor唯一对应于一个Yin集，要求输入流第一个数为jordanline的数量。然后依次输入jordanline上的点的坐标，每个jordanline坐标输入前要输入代表这个jordanline的所有点的数量。时间复杂度O(klgk + nlgn)k为边的数量，n为点的数量。
+
+3. ostream& operator<<(ostream&, const Spajor) 以和input一样的格式输出数据。复杂度O(k)。
+
+4. Spajor Spajor::complement() const  由一个Spajor类调用，生成它代表的Yin集的补集唯一对应的Spajor。时间复杂度为O(k + n)。
+
+5. Spajor Spajor::meet(const Spajor) const 由一个Spajor类调用并输入另一个Spajor类输出它们的交。复杂度为O(klgk + nlgn)。
+
+6. Spajor Spajor::join(const Spajor) const 调用和复杂度同上同上，输出它们的并i。
+
+7. const int Spajor::IfInSpajor(const Point) const 判断一个点是否在提供的Spajor内部，对于内部，边上，外部依次输出1，0，-1 。单次时间复杂度为O(xlgx + k)x为输入点所在水平线穿过的边的数量。
+
+8. void completeclean() 使所有输入和生成的Spajor失效。时间复杂度为(klgk + nlgn)。
+
+
+
+（注意，对于Spajor s1,s2，交并运算s1.meet(s2)和s1.join(s2)不能连续调用，必须先调用completeclean()后重新输入一次s1,s2再调用另一个交并运算。如main.cpp中所示）
+

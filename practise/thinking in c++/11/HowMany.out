@@ -1,0 +1,6 @@
+after construction of h: objectCount = 1
+x argument inside f(): objectCount = 1
+~Howmany(): objectCount = 0
+after call to f(): objectCount = 0
+~Howmany(): objectCount = -1
+~Howmany(): objectCount = -2
