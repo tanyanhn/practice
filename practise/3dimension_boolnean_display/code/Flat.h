@@ -45,16 +45,16 @@ public:
         }
         normaldirect = d;
     }
-    bool ifintersectionFlat(const Flat& f1) const {
+    bool ifintersectionFlat(const Flat& f1) const;/* {
         if(normaldirect.unit().cross(f1.normaldirect.unit()).norm() < Tol::t)
             return false;
         return true;
-    }
-    bool ifintersectionLine(const Line& l1) const {
+        }*/
+    bool ifintersectionLine(const Line& l1) const;/* {
         if(normaldirect.unit().dot(l1.getdirect().unit()) < Tol::t)
             return false;
         return true;
-    }
+        }*/
     Line intersectionFlat(const Flat& f1) const;
     Point intersectionLine(const Line& l1) const;
 };

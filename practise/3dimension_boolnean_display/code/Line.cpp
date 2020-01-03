@@ -24,7 +24,7 @@ Point Line::intersectionLine(const Line& l2) const {
         //exit(0);
     }
     Direction d0 = direct.cross(l2.getdirect());
-    Direction normaldirect = d0.cross(direct);
+    Direction normaldirect = d0.cross(direct).unit();
     Flat f(fixpoint, normaldirect);
     return f.intersectionLine(l2);
     // double x, y, z;

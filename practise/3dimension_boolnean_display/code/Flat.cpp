@@ -5,12 +5,13 @@
 #include"Det.h"
 #include<iostream>
 #include<algorithm>
+#include<math.h>
 using namespace std;
 
 bool Flat::ifintersectionLine(const Line& l) const {
     Direction d1 = normaldirect, d2 = l.getdirect();
     double d = d1.dot(d2);
-    return d > Tol::t
+    return d > Tol::t;
 }
 
 Point Flat::intersectionLine(const Line& l) const {
@@ -41,6 +42,53 @@ Point Flat::intersectionLine(const Line& l) const {
 }
 
 
+bool Flat::ifintersectionFlat(const Flat& f1) const {
+    Direction d1 = normaldirect, d2 = f1.getnormaldirect();
+    if(d1.cross(d2).norm() < Tol::t)
+        return false;
+    return true;
+}
+
+
 Line Flat::intersectionFlat(const Flat& f1) const {
-    Direction direct = normaldirect.cross(f1.normaldirect).unit();
+    Direction linedirect = normaldirect.cross(f1.normaldirect).unit();
+    int i;
+    if(fabs(linedirect[0]) > fabs(linedirect[1]))
+        if(fabs(linedirect[0]) > fabs(linedirect[2]))
+            i = 0;
+        else
+            i = 2;
+    else
+        if(fabs(linedirect[1]) > fabs(linedirect[2]))
+            i = 1;
+        else
+            i = 2;
+    Direction d1 = normaldirect, d2 = f1.getnormaldirect();
+    Point p1 = fixpoint;, p2 = f1.getfixpoint();
+    double a00 = d1[0], a01 = d1[1], a02 = d1[2], a03 = d1[0] * p1[0] + d1[1] * p1[1] + d1[2] * p1[2],
+        a10 = d2[0], a11 = d2[1], a12 = d2[2], a13 = d2[0] * p2[0] + d2[1] * p2[1] + d2[2] * p2[2],
+        a20 = 0, a21 = 0, a22 = 0, a23 = 1;
+    if(i == 0){
+        a20 = 1;
+    }
+    if(i == 1){
+        a21 = 1;
+    }
+    if(i == 2){
+        a22 = 1;
+    }
+    double x, y, z;
+    double m = det(a00, a01, a02,
+                   a10, a11, a12,
+                   a20, a21, a22);
+    x = det(a03, a01, a02,
+            a13, a11, a12,
+            a23, a21, a22) / m;
+    y = det(a00, a03, a02,
+            a10, a13, a12,
+            a20, a23, a22) / m;
+    z = det(a00, a01, a03,
+            a10, a11, a13,
+            a20, a21, a23) / m;
+    return Line(Point(x, y, z), linedirect);
 }
