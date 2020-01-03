@@ -19,6 +19,8 @@ public:
     Flat(const Point& p1, const Point& p2, const Point p3) {
         Direction d1 = p2 - p1;
         Direction d2 = p3 - p1;
+        normaldirect = d1.cross(d2).unit();
+        fixpoint = p1;
     }
     Flat(const Flat& f) : fixpoint(f.fixpoint), normaldirect(f.normaldirect){}
     Flat& operator=(const Flat& f) {
@@ -26,6 +28,23 @@ public:
         normaldirect = f.normaldirect;
     }
     ~Flat(){}
+    Point getfixpoint() const {
+        return fixpoint;
+    }
+    void setfixpoint(const Point& p) {
+        fixpoint = p;
+    }
+    Direction getnormaldirect() const {
+        return normaldirect;
+    }
+    void setnormaldirect(const Direction& d) {
+        if(d.norm() < (1 - Tol::t) || d.norm() > (1 + Tol::t)){
+            std::cout << "Flat::setnormaldirect not unit.";
+            int i;
+            std::cin >> i;
+        }
+        normaldirect = d;
+    }
     bool ifintersectionFlat(const Flat& f1) const {
         if(normaldirect.unit().cross(f1.normaldirect.unit()).norm() < Tol::t)
             return false;

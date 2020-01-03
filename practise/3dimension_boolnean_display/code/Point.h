@@ -19,8 +19,20 @@ public:
     Point(const Point&);
     Point& operator=(const Point&);
     ~Point(){}
+    int getid() const {
+        return id;
+    }
+    void setid(const int i) {
+        id = i;
+    }
+    int getinYinset() const {
+        return inYinset;
+    }
+    void setinYinset(const int i) {
+        inYinset = i;
+    }
     const double operator[](const int i) const {
-        if(i < 0 || i > 3){
+        if(i < 0 || i > 2){
             cout << identity << " : " << i << " out of range";
             char a;
             cin >> a;
@@ -28,7 +40,7 @@ public:
         return coord[i];
     }
     double& operator[](const int i){
-        if(i < 0 || i > 3){
+        if(i < 0 || i > 2){
             cout << identity << " : " << i << " out of range";
             char a;
             cin >> a;

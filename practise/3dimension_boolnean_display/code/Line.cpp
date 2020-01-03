@@ -8,7 +8,7 @@
 using namespace std;
 
 bool Line::ifintersectionLine(const Line& l2) const {
-    Direction d0 = fixpoint - l2.fixpoint;
+    Direction d0 = fixpoint - l2.getfixpoint();
     if((direct.unit() - l2.getdirect().unit()).norm() < Tol::t)
         return false;
     if(fabs(direct.cross(l2.getdirect()).unit().dot(d0)) < Tol::t)

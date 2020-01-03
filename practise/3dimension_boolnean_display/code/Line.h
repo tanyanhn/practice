@@ -3,6 +3,8 @@
 
 #include"Direction.h"
 #include"Point.h"
+#include"Tol.h"
+#include<iostream>
 
 class Line{
 protected:
@@ -18,8 +20,22 @@ public:
         direct = l.direct;
     }
     ~Line(){}
+    Point getfixpoint() const {
+        return fixpoint;
+    }
+    void setfixpoint(const Point& p){
+        fixpoint = p;
+    }
     Direction getdirect() const {
         return direct;
+    }
+    void setdirect(const Direction& d) {
+        if(d.norm() > (1 + Tol::t) || d.norm() < (1 - Tol::t)){
+            std::cout << "set wrong Line::direct .";
+            int i;
+            std::cin >> i;
+        }
+        direct = d;
     }
     bool ifcontainPoint(const Point&) const;
     bool ifintersectionLine(const Line& l2) const;
