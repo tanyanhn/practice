@@ -3,6 +3,8 @@
 #include"Direction.h"
 #include"Line.h"
 #include"Det.h"
+#include<iostream>
+#include<algorithm>
 using namespace std;
 
 bool Flat::ifintersectionLine(const Line& l) const {
@@ -14,7 +16,8 @@ bool Flat::ifintersectionLine(const Line& l) const {
 Point Flat::intersectionLine(const Line& l) const {
     if(!ifintersectionLine(l)){
         cout << "Flat::intersectionLine: " << endl;
-        exit(0);
+        int i;
+        cin >> i;
     }
     Direction d1 = normaldirect, d2 = l.getdirect();
     Point p1 = fixpoint, p2 = l.getfixpoint();
@@ -40,6 +43,4 @@ Point Flat::intersectionLine(const Line& l) const {
 
 Line Flat::intersectionFlat(const Flat& f1) const {
     Direction direct = normaldirect.cross(f1.normaldirect).unit();
-    double x, y, z;
-    if(direct[0] > Tol::t)
 }
