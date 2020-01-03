@@ -4,6 +4,7 @@
 #include"Point.h"
 #include"Direction.h"
 #include"Tol.h"
+#include"Segment.h"
 #include<math.h>
 #include<iostream>
 
@@ -57,6 +58,8 @@ public:
         }*/
     Line intersectionFlat(const Flat& f1) const;
     Point intersectionLine(const Line& l1) const;
+    bool ifcontainPoint(const Point& p) const;
+    bool ifcontainSegment(const Segment& seg) const;
 };
 
 #endif

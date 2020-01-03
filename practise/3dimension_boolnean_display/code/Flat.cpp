@@ -3,6 +3,7 @@
 #include"Direction.h"
 #include"Line.h"
 #include"Det.h"
+#include"Segment.h"
 #include<iostream>
 #include<algorithm>
 #include<math.h>
@@ -10,7 +11,7 @@ using namespace std;
 
 bool Flat::ifintersectionLine(const Line& l) const {
     Direction d1 = normaldirect, d2 = l.getdirect();
-    double d = d1.dot(d2);
+    double d = fabs(d1.dot(d2));
     return d > Tol::t;
 }
 
@@ -91,4 +92,16 @@ Line Flat::intersectionFlat(const Flat& f1) const {
             a10, a11, a13,
             a20, a21, a23) / m;
     return Line(Point(x, y, z), linedirect);
+}
+
+bool Flat::ifcontainPoint(const Point& p) const {
+    Direction d = p - fixpoint;
+    double d = fabs(d.dot(normaldirect));
+    return d < Tol::t;
+}
+
+bool Flat::ifcontainSegment(const Segment& seg) const {
+    if(ifcontainPoint(seg[0]) && ifcontainPoint(seg[1]))
+        return true;
+    return false;
 }

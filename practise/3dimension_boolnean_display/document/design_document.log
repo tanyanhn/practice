@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.10.16)  3 JAN 2020 20:55
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.10.16)  3 JAN 2020 21:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1996,53 +1996,57 @@ Chapter 1.
 
 
 ]
-Overfull \hbox (1.87257pt too wide) in paragraph at lines 376--377
+Overfull \hbox (1.87257pt too wide) in paragraph at lines 380--381
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (20.84363pt too wide) in paragraph at lines 379--380
+Overfull \hbox (20.84363pt too wide) in paragraph at lines 383--384
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 443--444
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 445--446
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 447--448
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 449--451
+Underfull \hbox (badness 10000) in paragraph at lines 449--450
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 452--453
+Underfull \hbox (badness 10000) in paragraph at lines 451--452
 
  []
 
-[3] [4] [5] (./design_document.aux)
+
+Underfull \hbox (badness 10000) in paragraph at lines 453--455
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 456--457
+
+ []
+
+[3] [4] [5]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [6]
+[7] (./design_document.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.41063pt have occurred.
 
  ) 
 Here is how much of TeX's memory you used:
- 36176 strings out of 493007
- 751865 string characters out of 6136718
- 1023687 words of memory out of 5000000
- 39672 multiletter control sequences out of 15000+600000
+ 36180 strings out of 493007
+ 751884 string characters out of 6136718
+ 990687 words of memory out of 5000000
+ 39676 multiletter control sequences out of 15000+600000
  533912 words of font info for 63 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 57i,11n,82p,10443b,1160s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 57i,12n,82p,10443b,1723s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on design_document.pdf (6 pages).
+Output written on design_document.pdf (8 pages).

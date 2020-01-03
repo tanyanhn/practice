@@ -304,6 +304,10 @@ Operator:
 	\item Calculate intersection of a straight line and the plane \\
 	$ \longrightarrow $ bool ifintersectionLine(const Line) \\ Point intersectionLine(const Line)
 	
+	\item Determining if contain a point and a segment . \\
+	$ \longrightarrow $ bool ifcontainPoint(const Point)
+	\\ bool ifcontainSegment(const Segment)
+	
 
 \end{itemize}
 
@@ -480,7 +484,7 @@ solve ternary equations."
 
 \end{lstlisting}
 \paragraph{证明}
-点乘判断直线方向和平面法向量之间夹角是否接近90度.直线和平面相交是三元方程组,若有解有唯一解.
+Dot Product can be used to detect if parallel.
 
 
 \subsubsection{Flat::(if)intersectionFlat(const Flat)}
@@ -510,15 +514,28 @@ solve ternary equations."
 \end{lstlisting}
 \paragraph{证明}
 
+\subsubsection{Flat::ifcontainPoint(Segment)()}
+\paragraph{契约}
+\subparagraph{input}
+A Point p or A Segment seg. Tol::t
+\subparagraph{output}
+Bool value
+\subparagraph{precondition}
+non
+\subparagraph{postcondition}
+If the Plane contain Point or Segment return true, else return false.
+\paragraph{算法实现}
+\begin{lstlisting}
+Direction d = p - fixpoint;
+double d = fabs(d.dot(normaldirect));
+ifcontainPoint() :
+return d < Tol::t
 
-
-
-\end{multicols}
-
-
-\end{document}
-
-
+ifcontainSegment() : 
+return ifcontainPoint(seg[0]) && 
+	ifcontainPoint(seg[1]);
+\end{lstlisting}
+\paragraph{证明}
 
 \subsubsection{}
 \paragraph{契约}
@@ -535,6 +552,193 @@ solve ternary equations."
 
 \end{lstlisting}
 \paragraph{证明}
+
+\subsubsection{}
+\paragraph{契约}
+\subparagraph{input}
+
+\subparagraph{output}
+
+\subparagraph{precondition}
+
+\subparagraph{postcondition}
+
+\paragraph{算法实现}
+\begin{lstlisting}
+
+\end{lstlisting}
+\paragraph{证明}
+
+\subsubsection{}
+\paragraph{契约}
+\subparagraph{input}
+
+\subparagraph{output}
+
+\subparagraph{precondition}
+
+\subparagraph{postcondition}
+
+\paragraph{算法实现}
+\begin{lstlisting}
+
+\end{lstlisting}
+\paragraph{证明}
+
+\subsubsection{}
+\paragraph{契约}
+\subparagraph{input}
+
+\subparagraph{output}
+
+\subparagraph{precondition}
+
+\subparagraph{postcondition}
+
+\paragraph{算法实现}
+\begin{lstlisting}
+
+\end{lstlisting}
+\paragraph{证明}
+
+\subsubsection{}
+\paragraph{契约}
+\subparagraph{input}
+
+\subparagraph{output}
+
+\subparagraph{precondition}
+
+\subparagraph{postcondition}
+
+\paragraph{算法实现}
+\begin{lstlisting}
+
+\end{lstlisting}
+\paragraph{证明}
+
+\subsubsection{}
+\paragraph{契约}
+\subparagraph{input}
+
+\subparagraph{output}
+
+\subparagraph{precondition}
+
+\subparagraph{postcondition}
+
+\paragraph{算法实现}
+\begin{lstlisting}
+
+\end{lstlisting}
+\paragraph{证明}
+
+\subsubsection{}
+\paragraph{契约}
+\subparagraph{input}
+
+\subparagraph{output}
+
+\subparagraph{precondition}
+
+\subparagraph{postcondition}
+
+\paragraph{算法实现}
+\begin{lstlisting}
+
+\end{lstlisting}
+\paragraph{证明}
+
+\subsubsection{}
+\paragraph{契约}
+\subparagraph{input}
+
+\subparagraph{output}
+
+\subparagraph{precondition}
+
+\subparagraph{postcondition}
+
+\paragraph{算法实现}
+\begin{lstlisting}
+
+\end{lstlisting}
+\paragraph{证明}
+
+\subsubsection{}
+\paragraph{契约}
+\subparagraph{input}
+
+\subparagraph{output}
+
+\subparagraph{precondition}
+
+\subparagraph{postcondition}
+
+\paragraph{算法实现}
+\begin{lstlisting}
+
+\end{lstlisting}
+\paragraph{证明}
+
+\subsubsection{}
+\paragraph{契约}
+\subparagraph{input}
+
+\subparagraph{output}
+
+\subparagraph{precondition}
+
+\subparagraph{postcondition}
+
+\paragraph{算法实现}
+\begin{lstlisting}
+
+\end{lstlisting}
+\paragraph{证明}
+
+\subsubsection{}
+\paragraph{契约}
+\subparagraph{input}
+
+\subparagraph{output}
+
+\subparagraph{precondition}
+
+\subparagraph{postcondition}
+
+\paragraph{算法实现}
+\begin{lstlisting}
+
+\end{lstlisting}
+\paragraph{证明}
+
+\subsubsection{}
+\paragraph{契约}
+\subparagraph{input}
+
+\subparagraph{output}
+
+\subparagraph{precondition}
+
+\subparagraph{postcondition}
+
+\paragraph{算法实现}
+\begin{lstlisting}
+
+\end{lstlisting}
+\paragraph{证明}
+
+
+
+\end{multicols}
+
+
+\end{document}
+
+
+
+
 \subsubsection{}
 \paragraph{契约}
 \subparagraph{input}
