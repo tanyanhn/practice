@@ -10,12 +10,12 @@ using namespace std;
 
 class Point{
     double coord[3];
-    int identity;
+    int id;
     vector<int> inSegment;
     int inYinset;
 public:
     Point() : coord{1, 1, 1}, identity(-1), inSegment(vector<int>()), inYinset(-1) {}
-    Point(const double x, const double y, const double z, const int id = -1, const vector<int> &v = vector<int>(), const int it = -1);
+    Point(const double x, const double y, const double z, const int identity = -1, const vector<int> &v = vector<int>(), const int it = -1);
     Point(const Point&);
     Point& operator=(const Point&);
     ~Point(){}
