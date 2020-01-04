@@ -27,6 +27,7 @@ public:
     Flat& operator=(const Flat& f) {
         fixpoint = f.fixpoint;
         normaldirect = f.normaldirect;
+        return *this;
     }
     ~Flat(){}
     Point getfixpoint() const {

@@ -18,6 +18,7 @@ public:
     Line& operator=(const Line& l) {
         fixpoint = l.fixpoint;
         direct = l.direct;
+        return *this;
     }
     ~Line(){}
     Point getfixpoint() const {

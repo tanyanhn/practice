@@ -194,7 +194,7 @@ I'm coming to design a c++ program for Boolean Algebra on Yin sets in $ \mathbb{
 \begin{multicols}{2}
 \setlength{\columnseprule}{0.2pt}  
 
-\section{\heiti Translating from Mathematical Concepts to Classes}
+\section{ Translating from Mathematical Concepts to Classes}
 
 \subsection{Point to Class Point}
 Properties:
@@ -312,6 +312,44 @@ Operator:
 \end{itemize}
 
 
+\subsection{Segment to Class Segment : Public Line}
+
+Property:
+\begin{itemize}
+	\item[1] Each one in Class Line. 
+	
+	\item[2] Identities of endpoints of Segment.\\
+	$ \longrightarrow $ vector<int> points
+	
+	\item[3] Identity . \\
+	$ \longrightarrow $ int id
+	
+	\item[4] Identities of Planars that contains the Segment. \\
+	$ \longrightarrow $ vector<int> inPlanar 
+	
+	\item[5] Identity of a Yinset that contains it. \\
+	$ \longrightarrow $ int inYinset  
+\end{itemize}
+
+Operator:
+\begin{itemize}
+	\item[1] Every operator in Class Line.
+	
+	\item[2] Return endpoints. \\
+	 $ \longrightarrow $ Point operator[](const int)
+	 
+	\item[3] Determining equality.\\
+	$ \longrightarrow $ bool operator==(const Segment)
+	
+	\item[4] Determining and Calculating intersection of two Segments.\\
+	$ \longrightarrow $ bool ifintersectionSegment(const Segment) \\
+	Point intersectionSegment(const Segment) 
+	
+	\item[5] Determining whether contains a Point. \\
+	$ \longrightarrow $ bool
+	ifcontainPoint(const Point)
+	  
+\end{itemize}
 
 
 %\label{sec:logic}
@@ -537,67 +575,89 @@ return ifcontainPoint(seg[0]) &&
 \end{lstlisting}
 \paragraph{证明}
 
-\subsubsection{}
+
+\subsection{Class Segment : Public Line }
+
+\subsubsection{Segment::operator[](const int)}
 \paragraph{契约}
 \subparagraph{input}
-
+int
 \subparagraph{output}
-
+A Point
 \subparagraph{precondition}
-
+0 ,1
 \subparagraph{postcondition}
-
+When input 0, return the smaller point, 1 return  the other point. 
 \paragraph{算法实现}
 \begin{lstlisting}
 
 \end{lstlisting}
 \paragraph{证明}
 
-\subsubsection{}
+\subsubsection{Segment::operator==(const Segment)}
 \paragraph{契约}
 \subparagraph{input}
-
+Two Segment seg1, seg2. Tol::t.
 \subparagraph{output}
-
+Bool value.
 \subparagraph{precondition}
-
+non
 \subparagraph{postcondition}
-
+While Segments' endpoints equal respectively, returning true. Otherwise return false.
 \paragraph{算法实现}
 \begin{lstlisting}
-
+return seg1[0] == seg2[0] && seg1[1] == seg2[1];
 \end{lstlisting}
 \paragraph{证明}
 
-\subsubsection{}
+\subsubsection{Segment::(if)intersectionSegment(const Segment)}
 \paragraph{契约}
 \subparagraph{input}
-
+Two segment seg1, seg2. Tol::t.
 \subparagraph{output}
-
+...
 \subparagraph{precondition}
-
+Seg1 don't contain seg2's endpoints, seg2 too.
 \subparagraph{postcondition}
-
+...
 \paragraph{算法实现}
 \begin{lstlisting}
-
+if(!seg1.ifintersectionLine(seg2))
+	ifintersectionSegment() : 
+	return false;
+Point p seg1.intersectionLine(seg2);
+if(!(p > seg1[0] && p < seg1[1] &&
+     p > seg2[0] && p < seg2[1]) )
+   	ifintersectionSegment() :
+   	return false;
+ifintersectionSegment() :
+   	return true;
+intersettionSegment() :
+	return p;
 \end{lstlisting}
 \paragraph{证明}
 
-\subsubsection{}
+\subsubsection{Segment::ifcontainPoint(const Point)}
 \paragraph{契约}
 \subparagraph{input}
-
+A Segment seg and a Point p. Tol::t
 \subparagraph{output}
-
+...
 \subparagraph{precondition}
-
+non
 \subparagraph{postcondition}
-
+...
 \paragraph{算法实现}
 \begin{lstlisting}
-
+if(!Line::ifcontainPoint(p)) 
+	return false;
+double d1 = 
+(p - seg[0]).dot(seg[1] - seg[0]),
+d2 = 
+(seg[1] - seg[0]).dot(seg[1] - seg[0]));
+if(d1 < 0 || d1 > d2)
+	return false;
+return true;	
 \end{lstlisting}
 \paragraph{证明}
 

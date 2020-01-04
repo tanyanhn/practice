@@ -14,7 +14,7 @@ class Point{
     vector<int> inSegment;
     int inYinset;
 public:
-    Point() : coord{1, 1, 1}, identity(-1), inSegment(vector<int>()), inYinset(-1) {}
+    Point() : coord{1, 1, 1}, id(-1), inSegment(vector<int>()), inYinset(-1) {}
     Point(const double x, const double y, const double z, const int identity = -1, const vector<int> &v = vector<int>(), const int it = -1);
     Point(const Point&);
     Point& operator=(const Point&);
@@ -33,7 +33,7 @@ public:
     }
     const double operator[](const int i) const {
         if(i < 0 || i > 2){
-            cout << identity << " : " << i << " out of range";
+            cout << id << " : " << i << " out of range";
             char a;
             cin >> a;
         }
@@ -41,7 +41,7 @@ public:
     }
     double& operator[](const int i){
         if(i < 0 || i > 2){
-            cout << identity << " : " << i << " out of range";
+            cout << id << " : " << i << " out of range";
             char a;
             cin >> a;
         }

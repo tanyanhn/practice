@@ -1,9 +1,10 @@
 \contentsline {chapter}{\numberline {1}3D Boolean Algebra}{1}
-\contentsline {section}{\numberline {1.1}\heiti Translating from Mathematical Concepts to Classes}{1}
+\contentsline {section}{\numberline {1.1} Translating from Mathematical Concepts to Classes}{1}
 \contentsline {subsection}{\numberline {1.1.1}Point to Class Point}{1}
 \contentsline {subsection}{\numberline {1.1.2}Vector to Class Direction}{1}
 \contentsline {subsection}{\numberline {1.1.3}Straight Line to Class Line}{1}
 \contentsline {subsection}{\numberline {1.1.4}Plane to Class Flat}{2}
+\contentsline {subsection}{\numberline {1.1.5}Segment to Class Segment : Public Line}{2}
 \contentsline {section}{\numberline {1.2}UML Class Diagram}{2}
 \contentsline {section}{\numberline {1.3}Algorithm Implementation}{2}
 \contentsline {subsection}{\numberline {1.3.1}Class Point}{2}
@@ -18,17 +19,17 @@
 \contentsline {subsubsection}{Point::operator-+()}{2}
 \contentsline {paragraph}{契约}{2}
 \contentsline {subparagraph}{input}{2}
-\contentsline {subparagraph}{output}{2}
-\contentsline {subparagraph}{precondition}{2}
-\contentsline {subparagraph}{postcondition}{2}
-\contentsline {paragraph}{算法实现}{2}
-\contentsline {paragraph}{证明}{2}
-\contentsline {subsubsection}{Point::operator==><(const Point)}{2}
-\contentsline {paragraph}{契约}{2}
-\contentsline {subparagraph}{input}{2}
-\contentsline {subparagraph}{output}{2}
-\contentsline {subparagraph}{precondition}{2}
-\contentsline {subparagraph}{postcondition}{2}
+\contentsline {subparagraph}{output}{3}
+\contentsline {subparagraph}{precondition}{3}
+\contentsline {subparagraph}{postcondition}{3}
+\contentsline {paragraph}{算法实现}{3}
+\contentsline {paragraph}{证明}{3}
+\contentsline {subsubsection}{Point::operator==><(const Point)}{3}
+\contentsline {paragraph}{契约}{3}
+\contentsline {subparagraph}{input}{3}
+\contentsline {subparagraph}{output}{3}
+\contentsline {subparagraph}{precondition}{3}
+\contentsline {subparagraph}{postcondition}{3}
 \contentsline {paragraph}{算法实现}{3}
 \contentsline {paragraph}{证明}{3}
 \contentsline {subsection}{\numberline {1.3.2}Class Direction}{3}
@@ -47,8 +48,8 @@
 \contentsline {subparagraph}{output}{3}
 \contentsline {subparagraph}{precondition}{3}
 \contentsline {subparagraph}{postcondition}{3}
-\contentsline {paragraph}{算法实现}{3}
-\contentsline {paragraph}{证明}{3}
+\contentsline {paragraph}{算法实现}{4}
+\contentsline {paragraph}{证明}{4}
 \contentsline {subsection}{\numberline {1.3.4}Class Flat}{4}
 \contentsline {subsubsection}{Flat::(if)intersectionLine()}{4}
 \contentsline {paragraph}{契约}{4}
@@ -68,21 +69,14 @@
 \contentsline {paragraph}{证明}{4}
 \contentsline {subsubsection}{Flat::ifcontainPoint(Segment)()}{4}
 \contentsline {paragraph}{契约}{4}
-\contentsline {subparagraph}{input}{4}
-\contentsline {subparagraph}{output}{4}
-\contentsline {subparagraph}{precondition}{4}
-\contentsline {subparagraph}{postcondition}{4}
-\contentsline {paragraph}{算法实现}{4}
-\contentsline {paragraph}{证明}{4}
-\contentsline {subsubsection}{}{4}
-\contentsline {paragraph}{契约}{4}
-\contentsline {subparagraph}{input}{4}
+\contentsline {subparagraph}{input}{5}
 \contentsline {subparagraph}{output}{5}
 \contentsline {subparagraph}{precondition}{5}
 \contentsline {subparagraph}{postcondition}{5}
 \contentsline {paragraph}{算法实现}{5}
 \contentsline {paragraph}{证明}{5}
-\contentsline {subsubsection}{}{5}
+\contentsline {subsection}{\numberline {1.3.5}Class Segment : Public Line }{5}
+\contentsline {subsubsection}{Segment::operator[](const int)}{5}
 \contentsline {paragraph}{契约}{5}
 \contentsline {subparagraph}{input}{5}
 \contentsline {subparagraph}{output}{5}
@@ -90,7 +84,7 @@
 \contentsline {subparagraph}{postcondition}{5}
 \contentsline {paragraph}{算法实现}{5}
 \contentsline {paragraph}{证明}{5}
-\contentsline {subsubsection}{}{5}
+\contentsline {subsubsection}{Segment::operator==(const Segment)}{5}
 \contentsline {paragraph}{契约}{5}
 \contentsline {subparagraph}{input}{5}
 \contentsline {subparagraph}{output}{5}
@@ -98,7 +92,7 @@
 \contentsline {subparagraph}{postcondition}{5}
 \contentsline {paragraph}{算法实现}{5}
 \contentsline {paragraph}{证明}{5}
-\contentsline {subsubsection}{}{5}
+\contentsline {subsubsection}{Segment::(if)intersectionSegment(const Segment)}{5}
 \contentsline {paragraph}{契约}{5}
 \contentsline {subparagraph}{input}{5}
 \contentsline {subparagraph}{output}{5}
@@ -106,24 +100,8 @@
 \contentsline {subparagraph}{postcondition}{5}
 \contentsline {paragraph}{算法实现}{5}
 \contentsline {paragraph}{证明}{5}
-\contentsline {subsubsection}{}{5}
-\contentsline {paragraph}{契约}{5}
-\contentsline {subparagraph}{input}{5}
-\contentsline {subparagraph}{output}{5}
-\contentsline {subparagraph}{precondition}{5}
-\contentsline {subparagraph}{postcondition}{5}
-\contentsline {paragraph}{算法实现}{5}
-\contentsline {paragraph}{证明}{5}
-\contentsline {subsubsection}{}{5}
-\contentsline {paragraph}{契约}{5}
-\contentsline {subparagraph}{input}{5}
-\contentsline {subparagraph}{output}{5}
-\contentsline {subparagraph}{precondition}{5}
-\contentsline {subparagraph}{postcondition}{5}
-\contentsline {paragraph}{算法实现}{5}
-\contentsline {paragraph}{证明}{5}
-\contentsline {subsubsection}{}{5}
-\contentsline {paragraph}{契约}{5}
+\contentsline {subsubsection}{Segment::ifcontainPoint(const Point)}{6}
+\contentsline {paragraph}{契约}{6}
 \contentsline {subparagraph}{input}{6}
 \contentsline {subparagraph}{output}{6}
 \contentsline {subparagraph}{precondition}{6}
@@ -164,8 +142,32 @@
 \contentsline {paragraph}{证明}{6}
 \contentsline {subsubsection}{}{6}
 \contentsline {paragraph}{契约}{6}
-\contentsline {subparagraph}{input}{6}
-\contentsline {subparagraph}{output}{6}
-\contentsline {subparagraph}{precondition}{6}
-\contentsline {subparagraph}{postcondition}{6}
-\contentsline {paragraph}{算法实现}{6}
+\contentsline {subparagraph}{input}{7}
+\contentsline {subparagraph}{output}{7}
+\contentsline {subparagraph}{precondition}{7}
+\contentsline {subparagraph}{postcondition}{7}
+\contentsline {paragraph}{算法实现}{7}
+\contentsline {paragraph}{证明}{7}
+\contentsline {subsubsection}{}{7}
+\contentsline {paragraph}{契约}{7}
+\contentsline {subparagraph}{input}{7}
+\contentsline {subparagraph}{output}{7}
+\contentsline {subparagraph}{precondition}{7}
+\contentsline {subparagraph}{postcondition}{7}
+\contentsline {paragraph}{算法实现}{7}
+\contentsline {paragraph}{证明}{7}
+\contentsline {subsubsection}{}{7}
+\contentsline {paragraph}{契约}{7}
+\contentsline {subparagraph}{input}{7}
+\contentsline {subparagraph}{output}{7}
+\contentsline {subparagraph}{precondition}{7}
+\contentsline {subparagraph}{postcondition}{7}
+\contentsline {paragraph}{算法实现}{7}
+\contentsline {paragraph}{证明}{7}
+\contentsline {subsubsection}{}{7}
+\contentsline {paragraph}{契约}{7}
+\contentsline {subparagraph}{input}{7}
+\contentsline {subparagraph}{output}{7}
+\contentsline {subparagraph}{precondition}{7}
+\contentsline {subparagraph}{postcondition}{7}
+\contentsline {paragraph}{算法实现}{7}

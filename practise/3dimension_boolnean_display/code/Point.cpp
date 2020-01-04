@@ -27,6 +27,7 @@ Point& Point::operator=(const Point& q){
     id = q.id;
     inSegment = q.inSegment;
     inYinset = q.inYinset;
+    return *this;
 }
 
 

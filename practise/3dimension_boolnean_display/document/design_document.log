@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.10.16)  3 JAN 2020 21:27
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.10.16)  4 JAN 2020 16:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1946,26 +1946,8 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 \c@lstlisting=\count364
 
 (./design_document.toc
-*************************************************
-* fontspec warning: "script-not-exist"
-* 
-* Font 'FandolHei-Regular' does not contain script 'CJK'.
-*************************************************
-\g__fontspec_family_FandolHei-Regular_int=\count365
-.................................................
-. fontspec info: "defining-font"
-. 
-. Font family 'FandolHei-Regular(0)' created for font 'FandolHei-Regular' with
-. options [Script={CJK},Extension={.otf},BoldFont={FandolHei-Bold}].
-.  
-.  This font family consists of the following NFSS series/shapes:
-.  
-. - 'normal' (m/n) with NFSS spec.: <->"[FandolHei-Regular.otf]/OT"
-. - 'small caps'  (m/sc) with NFSS spec.: 
-. - 'bold' (bx/n) with NFSS spec.: <->"[FandolHei-Bold.otf]/OT"
-. - 'bold small caps'  (bx/sc) with NFSS spec.: 
-.................................................
 LaTeX Font Info:    Try loading font information for U+msa on input line 2.
+
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
@@ -1995,58 +1977,81 @@ Chapter 1.
 [1
 
 
-]
-Overfull \hbox (1.87257pt too wide) in paragraph at lines 380--381
+] [2]
+Overfull \hbox (1.87257pt too wide) in paragraph at lines 418--419
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (20.84363pt too wide) in paragraph at lines 383--384
+Overfull \hbox (20.84363pt too wide) in paragraph at lines 421--422
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 447--448
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 485--486
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 449--450
+Underfull \hbox (badness 10000) in paragraph at lines 487--488
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 451--452
+Underfull \hbox (badness 10000) in paragraph at lines 489--490
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 453--455
+Underfull \hbox (badness 10000) in paragraph at lines 491--493
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 456--457
+Underfull \hbox (badness 10000) in paragraph at lines 494--495
 
  []
 
-[3] [4] [5]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+[4]
+Underfull \hbox (badness 6625) in paragraph at lines 590--591
+ \TU/lmr/bx/n/10.53937 postcondition[] \TU/lmr/m/n/10.53937 When input 0, retur
+n the
+ []
 
- [6]
-[7] (./design_document.aux)
+
+Underfull \hbox (badness 10000) in paragraph at lines 606--607
+ \TU/lmr/bx/n/10.53937 postcondition[] \TU/lmr/m/n/10.53937 While Segments’ end
+points
+ []
+
+
+Overfull \hbox (52.46205pt too wide) in paragraph at lines 609--610
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 613--613
+[]\TU/lmr/bx/n/10.53937 Segment::(if)intersectionSegment(const Seg-
+ []
+
+[5]
+Overfull \hbox (1.87257pt too wide) in paragraph at lines 657--658
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[6] [7] [8] (./design_document.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.41063pt have occurred.
 
  ) 
 Here is how much of TeX's memory you used:
- 36180 strings out of 493007
- 751884 string characters out of 6136718
- 990687 words of memory out of 5000000
- 39676 multiletter control sequences out of 15000+600000
- 533912 words of font info for 63 fonts, out of 8000000 for 9000
+ 36178 strings out of 493007
+ 751606 string characters out of 6136718
+ 991687 words of memory out of 5000000
+ 39680 multiletter control sequences out of 15000+600000
+ 533896 words of font info for 61 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 57i,12n,82p,10443b,1723s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 57i,12n,82p,10443b,1722s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on design_document.pdf (8 pages).
+Output written on design_document.pdf (9 pages).
