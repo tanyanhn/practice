@@ -31,6 +31,24 @@ public:
         return *this;
     }
     ~Segment(){}
+    int getid() const {
+        return id;
+    }
+    void setid(const int i) {
+        id = i;
+    }
+    int getinYinset() const {
+        return inYinset;
+    }
+    void setinYinset(const int i) {
+        inYinset = i;
+    }
+    std::vector<int> getinPlanar() const {
+        return inPlanar;
+    }
+    void setinPlanar(const std::vector<int>& v){
+        inPlanar = v;
+    }
     int operator[](const int i) const {
         return points[i];
     }

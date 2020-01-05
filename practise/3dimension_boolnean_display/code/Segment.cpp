@@ -20,8 +20,8 @@ bool Segment::ifintersectionSegment(const Segment& seg2) const {
     if(!ifintersectionLine(seg2))
         return false;
     Point p(intersectionLine(seg2));
-    if(!(p > *[0] && p < *this.[1] &&
-         p > seg2[0] && p < seg2[1]))
+    if(!(p > Data::points[points[0]] && p < Data::points[points[1]] &&
+         p > Data::points[seg2[0]] && p < Data::points[seg2[1]]))
         return false;
     return true;
 }
@@ -32,5 +32,5 @@ Point Segment::intersectionSegment(const Segment& seg2) const {
         int i;
         std::cin >> i;
     }
-    return p(intersectionLine(seg2));
+    return Point(intersectionLine(seg2));
 }

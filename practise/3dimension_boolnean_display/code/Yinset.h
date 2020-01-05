@@ -1,28 +1,49 @@
-#ifndef DATA_BOOLEAN
-#define DATA_BOOLEAN
+#ifndef YINSET_BOOLEAN
+#define YINSET_BOOLEAN
 
-#include"Point.h"
-#include"Segment.h"
-#include"Planar.h"
-#include"Face.h"
-#include"Spajor.h"
-#include<map>
+#include"Data.h"
+#include"HassNode.h"
 #include<vector>
+#include<utility>
 
-class Data {
-    static std::vector<int> existpoints;
-    static std::vector<int> existsegments;
-    static std::vector<int> existplanars;
-    static std::vector<int> existfaces;
-    static std::map<int, Point> points;
-    static std::map<int, Segment> segments;
+class Yinset{
+    std::vector<int> faces;
+    std::vector<HassNode> hassmap;
+    int id;
+    int type;
+public:
+    explicit Yinset(std::vector<int> vf, int identity = -1, int t = -1) : faces(vf), id(identity), type(t) {}
+    Yinset(const Yinset& y) : faces(y.faces), hassmap(y.hassmap), id(y.id), type(f.type) {}
+    Yinset& operator=(const Yinset& y){
+        Yinset temp(y);
+        std::swap(*this, temp);
+        return *this;
+    }
+    std::vector<int> getfaces() const {
+        return faces;
+    }
+    void setfaces(const std::vector<int>& vf){
+        faces = vf;
+    }
+    std::vector<HassNode> gethassmap() const {
+        return hassmap;
+    }
+    void sethassmap(const std::vector<HassNode>& vh){
+        hassmap = vh;
+    }
+    int getid() const {
+        return id;
+    }
+    void setid(const int i){
+        id = i;
+    }
+    int gettype() const {
+        return type;
+    }
+    void settype(const int i){
+        type = i;
+    }
+    void generatorhassmap();
 };
-
-std::vector<int> Data::existpoints;
-std::vector<int> Data::existsegments;
-std::vector<int> Data::existplanars;
-std::vector<int> Data::existfaces;
-std::map<int, Point> Data::points;
-std::map<int, Segment> Data::segments;
 
 #endif
