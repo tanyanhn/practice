@@ -43,7 +43,7 @@ public:
     void settype(const int i) {
         type = i;
     }
-    bool ifincludeFace(const Face& f) const;
+    //bool ifincludeFace(const Face& f) const;
 };
 
 

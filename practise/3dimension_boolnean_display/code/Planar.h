@@ -82,7 +82,7 @@ public:
     Point intersectionSegment(const Segment&) const;
     bool ifintersectionPlanar(const Planar&) const;
     Segment intersectionPlanar(const Planar&) const;
-    std::vector<Planar> trianglulation();
+    //std::vector<Planar> trianglulation();
 };
 
 #endif

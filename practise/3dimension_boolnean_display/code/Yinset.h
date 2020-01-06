@@ -6,6 +6,8 @@
 #include<vector>
 #include<utility>
 
+class HassNode;
+
 class Yinset{
     std::vector<int> faces;
     std::vector<HassNode> hassmap;
@@ -43,7 +45,7 @@ public:
     void settype(const int i){
         type = i;
     }
-    void generatorhassmap();
+    //void generatorhassmap();
 };
 
 #endif
