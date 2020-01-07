@@ -20,7 +20,8 @@ class Planar : public Flat {
     int inYinset;
 public:
     Planar(){}
-    Planar(std::vector<int> p, std::vector<int> s, int identity = -1, int inF = -1, int inY = -1) : points(p), segments(s), id(identity), inFace(inF), inYinset(inY) {
+    Planar(std::vector<int> p, std::vector<int> s, int identity = -1, int inF = -1, int inY = -1)
+        : points(p), segments(s), id(identity), inFace(inF), inYinset(inY) {
         for(auto i = points.begin(), i != points.end(), i++){
             existpoints.insert(*i);
         }
@@ -28,7 +29,9 @@ public:
             existsegments.insert(*i);
         }
     }
-    Planar(const Planar& pl) : points(pl.points), segments(pl.segments), existpoints(pl.existpoints), existsegments(pl.existsegments), id(pl.ed), inFace(pl.inFace), inYinset(pl.inYinset) {}
+    Planar(const Planar& pl) : points(pl.points), segments(pl.segments),
+                               existpoints(pl.existpoints), existsegments(pl.existsegments),
+                               id(pl.ed), inFace(pl.inFace), inYinset(pl.inYinset) {}
     Planar& operator=(const Planar& pl) {
         Planar temp(pl);
         std::swap(*this, temp);

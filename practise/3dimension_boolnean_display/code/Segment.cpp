@@ -4,6 +4,10 @@
 
 
 bool Segment::ifcontainPoint(const Point& p) const {
+    Point p0 = Data::points[points[0]],
+        p1 = Data::points[points[1]];
+    if((p == p0) || (p == p1))
+        return true;
     if(!Line::ifcontainPoint(p))
         return false;
     Direction direct1 = (p - Data::points[points[0]]),
