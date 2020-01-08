@@ -38,3 +38,55 @@ Point Segment::intersectionSegment(const Segment& seg2) const {
     }
     return Point(intersectionLine(seg2));
 }
+
+bool Segment::ifoverlapSegment(const Segment& seg2) const {
+    //  if((direct.unit() - seg2.getdirect().unit).norm() > Tol::t)
+    //  return false;
+    Point p10 = Data::points[points[0]], p11 = Data::points[points[1]],
+        p20 = Data::points[seg2[0]], p21 = Data::points[seg2[1]];
+    if((p11 < p20) || (p21 < p10))
+        return false;
+    if(p21 < p11){
+        if(ifcontainPoint(p21) == false)
+            return false;
+    }
+    else{
+        if(seg2.ifcontainPoint(p11) == false)
+            return false;
+    }
+    if(p20 < p10){
+        if(seg2.ifcontainPoint(p10) == false)
+            return false;
+    }
+    else{
+        if(ifcontainPoint(p20) == false)
+            return false;
+    }
+    return true;
+}
+
+Segment Segment::overlapSegment(const Segment& seg2) const {
+    if(ifoverlapSegment(seg2) == false){
+        cout << "Segment::overlapSegment wrong : " << id <<
+            " : " << seg2.getid() ;
+        int i;
+        cin >> i;
+    }
+    Point p10 = Data::points[points[0]], p11 = Data::points[points[1]],
+        p20 = Data::points[seg2[0]], p21 = Data::points[seg2[1]],
+        p0 , p1;
+    if(p21 < p11){
+        p1 = p21;
+    }
+    else{
+        p1 = p11;
+    }
+    if(p20 < p10){
+        p0 = p10;
+    }
+    else{
+        p0 = p20;
+    }
+    return Segment(p0.getid(), p1.getid());
+}
+

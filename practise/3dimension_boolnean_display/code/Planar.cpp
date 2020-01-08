@@ -75,7 +75,7 @@ Point Planar::intersectionSegment(const Segment& seg) const {
 }
 
 
-
+/*
 Planar Planar::intersectionPlanar(const Planar& pl) const {
     Segment seg0 = Data::segments[pl.getsegments().[0]],
         seg1 = Data::segments[pl.getsegments().[1]],
@@ -98,7 +98,13 @@ Planar Planar::intersectionPlanar(const Planar& pl) const {
     Data::pointsnum++;
     Segment seg
 }
+*/
 
-
-
+bool Planar::ifintersectionFlat(const Planar& pl) const {
+    if(Flat::ifintersectionFlat(pl) == false){
+        return false;
+    }
+    Line l(Flat::intersectionFlat(pl));
+    
+}
 

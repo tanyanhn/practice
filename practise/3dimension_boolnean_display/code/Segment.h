@@ -78,6 +78,8 @@ public:
     bool ifcontainPoint(const Point& p) const ;
     bool ifintersectionSegment(const Segment& seg2) const ;
     Point intersectionSegment(const Segment& seg2) const ;
+    bool ifoverlapSegment(const Segment& seg2) const ;
+    Segment overlapSegment(const Segment& seg2) const ;
 };
 
 #endif
