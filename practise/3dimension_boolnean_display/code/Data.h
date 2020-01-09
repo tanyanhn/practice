@@ -43,6 +43,8 @@ struct Data {
     static std::vector<Planar> meetFace();
     static std::vector<Face> past();
     static std::vector<HassNode> generatehassmap();
+    static void load(Yinset&);
+    static void clean();
 };
 
 Point Data::farpoint;

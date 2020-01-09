@@ -21,7 +21,8 @@ class Planar : public Flat {
 public:
     Planar(){}
     Planar(std::vector<int> p, std::vector<int> s, int identity = -1, int inF = -1, int inY = -1)
-        : points(p), segments(s), id(identity), inFace(inF), inYinset(inY) {
+        : Flat(Data::points[p[0]], Data::points[p[1]], Data::points[p[2]]),
+          points(p), segments(s), id(identity), inFace(inF), inYinset(inY) {
         for(auto i = points.begin(), i != points.end(), i++){
             existpoints.insert(*i);
         }
@@ -29,9 +30,11 @@ public:
             existsegments.insert(*i);
         }
     }
-    Planar(const Planar& pl) : points(pl.points), segments(pl.segments),
-                               existpoints(pl.existpoints), existsegments(pl.existsegments),
-                               id(pl.ed), inFace(pl.inFace), inYinset(pl.inYinset) {}
+    Planar(const Planar& pl) :
+        Flat(pl),
+        points(pl.points), segments(pl.segments),
+        existpoints(pl.existpoints), existsegments(pl.existsegments),
+        id(pl.ed), inFace(pl.inFace), inYinset(pl.inYinset) {}
     Planar& operator=(const Planar& pl) {
         Planar temp(pl);
         std::swap(*this, temp);
@@ -83,8 +86,9 @@ public:
     bool ifcontainSegment(const Segment&) const;
     bool ifintersectionSegment(const Segment&) const;
     Point intersectionSegment(const Segment&) const;
-    bool ifintersectionPlanar(const Planar&) const;
-    Segment intersectionPlanar(const Planar&) const;
+    double angleBetweenPlanars(const Planar&, const Direction&) const;
+    //bool ifintersectionPlanar(const Planar&) const;
+    //Segment intersectionPlanar(const Planar&) const;
     //std::vector<Planar> trianglulation();
 };
 

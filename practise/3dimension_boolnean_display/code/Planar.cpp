@@ -1,6 +1,8 @@
 #include"Planar.h"
 #include"Line.h"
 #include<iostream>
+#include<math.h>
+using namespace std;
 
 
 bool Planar::ifcontainPoint(const Point& p) const {
@@ -74,37 +76,48 @@ Point Planar::intersectionSegment(const Segment& seg) const {
     return p;
 }
 
+double Planar::angleBetweenPlanars(const Planar& pl2,const Direction& di) const {
+    Direction d1 = Flat::normaldirect,
+        d2 = pl2.getnormaldirect();
+    if(d1.cross(d2).dot(di < -Tol::t))
+       return 2 * M_PI - acoss(d2.dot(d1));
+    else if(d1.cross(d2).dot(di > Tol::t))
+        return M_PI - acos(d2.dot(d1));
+    else if(d1.dot(d2) < 0)
+        return 0;
+    else if(d1.dot(d2) > 0)
+        return M_PI;
+}
 
 /*
-Planar Planar::intersectionPlanar(const Planar& pl) const {
-    Segment seg0 = Data::segments[pl.getsegments().[0]],
-        seg1 = Data::segments[pl.getsegments().[1]],
-        seg2 = Data::segments[pl.getsegments().[2]];
-    Point p0 = intersectionLine(seg0),
-        p1 = intersectionLine(seg1),
-        p2 = intersectionLine(seg2);
-    if((ifcontainPoint(p0) == true) ||
-       (ifcontainPoint(p1) == true) ||
-       (ifcontainPoint(p2) == true))
-        return true;
-    p0.setid(Data::pointsnum);
-    Data::points[Data::pointsnum] = p0;
-    Data::pointsnum++;
-    p1.setid(Data::pointsnum);
-    Data::points[Data::pointsnum] = p1;
-    Data::pointsnum++;
-    p2.setid(Data::pointsnum);
-    Data::points[Data::pointsnum] = p2;
-    Data::pointsnum++;
-    Segment seg
-}
-*/
+  Planar Planar::intersectionPlanar(const Planar& pl) const {
+  Segment seg0 = Data::segments[pl.getsegments().[0]],
+  seg1 = Data::segments[pl.getsegments().[1]],
+  seg2 = Data::segments[pl.getsegments().[2]];
+  Point p0 = intersectionLine(seg0),
+  p1 = intersectionLine(seg1),
+  p2 = intersectionLine(seg2);
+  if((ifcontainPoint(p0) == true) ||
+  (ifcontainPoint(p1) == true) ||
+  (ifcontainPoint(p2) == true))
+  return true;
+  p0.setid(Data::pointsnum);
+  Data::points[Data::pointsnum] = p0;
+  Data::pointsnum++;
+  p1.setid(Data::pointsnum);
+  Data::points[Data::pointsnum] = p1;
+  Data::pointsnum++;
+  p2.setid(Data::pointsnum);
+  Data::points[Data::pointsnum] = p2;
+  Data::pointsnum++;
+  Segment seg
+  }
 
-bool Planar::ifintersectionFlat(const Planar& pl) const {
+
+  bool Planar::ifintersectionFlat(const Planar& pl) const {
     if(Flat::ifintersectionFlat(pl) == false){
         return false;
     }
     Line l(Flat::intersectionFlat(pl));
-    
-}
+}*/
 
