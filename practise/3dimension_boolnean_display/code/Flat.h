@@ -61,6 +61,7 @@ public:
     Point intersectionLine(const Line& l1) const;
     bool ifcontainPoint(const Point& p) const;
     bool ifcontainSegment(const Segment& seg) const;
+    double angleBetweenFlats(const Flat&, const Direction&) const;
 };
 
 #endif

@@ -76,18 +76,20 @@ Point Planar::intersectionSegment(const Segment& seg) const {
     return p;
 }
 
+/*
 double Planar::angleBetweenPlanars(const Planar& pl2,const Direction& di) const {
     Direction d1 = Flat::normaldirect,
         d2 = pl2.getnormaldirect();
-    if(d1.cross(d2).dot(di < -Tol::t))
-       return 2 * M_PI - acoss(d2.dot(d1));
-    else if(d1.cross(d2).dot(di > Tol::t))
+    if(d1.cross(d2).dot(di) < -Tol::t)
+        return M_PI + acoss(d2.dot(d1));
+    else if(d1.cross(d2).dot(di) > Tol::t)
         return M_PI - acos(d2.dot(d1));
     else if(d1.dot(d2) < 0)
         return 0;
     else if(d1.dot(d2) > 0)
         return M_PI;
 }
+*/
 
 /*
   Planar Planar::intersectionPlanar(const Planar& pl) const {

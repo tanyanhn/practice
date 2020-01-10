@@ -86,7 +86,7 @@ public:
     bool ifcontainSegment(const Segment&) const;
     bool ifintersectionSegment(const Segment&) const;
     Point intersectionSegment(const Segment&) const;
-    double angleBetweenPlanars(const Planar&, const Direction&) const;
+    // double angleBetweenPlanars(const Planar&, const Direction&) const;
     //bool ifintersectionPlanar(const Planar&) const;
     //Segment intersectionPlanar(const Planar&) const;
     //std::vector<Planar> trianglulation();

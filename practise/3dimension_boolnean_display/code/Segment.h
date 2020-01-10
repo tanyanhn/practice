@@ -17,7 +17,7 @@ class Segment : public Line {
     std::vector<int> inPlanar01, inPlanar10;
     int inYinset;
 public:
-    Segment(int p0, int p1, int identity = -1,
+    explicit Segment(int p0 = -1, int p1 = -1, int identity = -1,
             const std::vector<int> inP01 = vector<int>(),
             const std::vector<int> inP10 = vector<int>(),
             int inY = -1)
