@@ -5,6 +5,25 @@
 using namespace std;
 
 
+Planar::Planar(std::vector<int> p, std::vector<int> s, int identity , int inF , int inY )
+    : Flat(Data::points[p[0]], Data::points[p[1]], Data::points[p[2]]),
+      points(p), segments(s), id(identity), inFace(inF), inYinset(inY) {
+    for(auto i = points.begin(); i != points.end(); i++){
+        existpoints.insert(*i);
+    }
+    for(auto i = segments.begin(); i != segments.end(); i++){
+        existsegments.insert(*i);
+    }
+}
+
+Planar::Planar(const Planar& pl) :
+    Flat(pl),
+    points(pl.points), segments(pl.segments),
+    existpoints(pl.existpoints), existsegments(pl.existsegments),
+    id(pl.id), inFace(pl.inFace), inYinset(pl.inYinset) {}
+
+
+
 bool Planar::ifcontainPoint(const Point& p) const {
     if(Flat::ifcontainPoint(p) == false)
         return false;
@@ -42,6 +61,13 @@ bool Planar::ifcontainSegment(const Segment& seg) const {
     return false;
 }
 
+bool Planar::ifcontainPlanar(const Planar& pl2) const {
+    Point p0 = Data::points[(pl2.getpoints()).[0]],
+        p1 = Data::points[(pl2.getpoints()).[1]],
+        p2 = Data::points[(pl2.getpoints()).[2]];
+    return ifcontainPoint(p0) && ifcontainPoint(p1) && ifcontainPoint(p2);
+}
+
 
 bool Planar::ifintersectionSegment(const Segment& seg) const {
     Point p0 = Data::points[seg[0]], p1 = Data::points[seg[1]],
@@ -53,7 +79,7 @@ bool Planar::ifintersectionSegment(const Segment& seg) const {
     if(Flat::ifintersectionLine(seg) == false)
         return false;
     Point p(Flat::intersectionLine(seg));
-    if((p! = p0) && (p! = p1) && (seg.ifcontainPoint(p) == false))
+    if(!(p == p0) && !(p == p1) && (seg.ifcontainPoint(p) == false))
         return false;
     if(/*(seg0.ifcontainPoint(p) == false) &&
        (seg1.ifcontainPoint(p) == false) &&

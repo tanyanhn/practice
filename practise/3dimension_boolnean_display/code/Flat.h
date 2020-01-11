@@ -4,11 +4,13 @@
 #include"Point.h"
 #include"Direction.h"
 #include"Tol.h"
-#include"Segment.h"
+//#include"Segment.h"
 #include<math.h>
 #include<iostream>
 
-
+class Line;
+class Segment;
+class Data;
 class Flat{
 protected:
     Point fixpoint;

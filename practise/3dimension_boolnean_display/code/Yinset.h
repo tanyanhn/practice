@@ -15,7 +15,7 @@ class Yinset{
     int type;
 public:
     explicit Yinset(std::vector<int> vf, int identity = -1, int t = -1) : faces(vf), id(identity), type(t) {}
-    Yinset(const Yinset& y) : faces(y.faces), hassmap(y.hassmap), id(y.id), type(f.type) {}
+    Yinset(const Yinset& y) : faces(y.faces), hassmap(y.hassmap), id(y.id), type(y.type) {}
     Yinset& operator=(const Yinset& y){
         Yinset temp(y);
         std::swap(*this, temp);

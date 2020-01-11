@@ -35,7 +35,7 @@ public:
     }
     Segment(const Segment& seg) : Line(seg), points{seg[0], seg[1]}, id(seg.id),
                                   inPlanar01(seg.inPlanar01), inPlanar10(seg.inPlanar10),
-                                  ininYinset(seg.inYinset) {}
+                                  inYinset(seg.inYinset) {}
     Segment& operator=(const Segment& seg){
         Segment temp(seg);
         std::swap(*this, temp);

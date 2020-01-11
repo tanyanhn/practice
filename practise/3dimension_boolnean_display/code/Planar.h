@@ -10,6 +10,10 @@
 #include<utility>
 #include<set>
 
+class Data;
+class Segment;
+class Flat;
+
 class Planar : public Flat {
     std::vector<int> points;
     std::vector<int> segments;
@@ -20,26 +24,26 @@ class Planar : public Flat {
     int inYinset;
 public:
     Planar(){}
-    Planar(std::vector<int> p, std::vector<int> s, int identity = -1, int inF = -1, int inY = -1)
-        : Flat(Data::points[p[0]], Data::points[p[1]], Data::points[p[2]]),
+    Planar(std::vector<int> p, std::vector<int> s, int identity = -1, int inF = -1, int inY = -1);
+    /*     : Flat(Data::points[p[0]], Data::points[p[1]], Data::points[p[2]]),
           points(p), segments(s), id(identity), inFace(inF), inYinset(inY) {
-        for(auto i = points.begin(), i != points.end(), i++){
+        for(auto i = points.begin(); i != points.end(); i++){
             existpoints.insert(*i);
         }
-        for(auto i = segments.begin(), i != segments.end(), i++){
+        for(auto i = segments.begin(); i != segments.end(); i++){
             existsegments.insert(*i);
         }
-    }
-    Planar(const Planar& pl) :
+    }*/
+    Planar(const Planar& pl);/* :
         Flat(pl),
         points(pl.points), segments(pl.segments),
         existpoints(pl.existpoints), existsegments(pl.existsegments),
-        id(pl.ed), inFace(pl.inFace), inYinset(pl.inYinset) {}
+        id(pl.id), inFace(pl.inFace), inYinset(pl.inYinset) {}
     Planar& operator=(const Planar& pl) {
         Planar temp(pl);
         std::swap(*this, temp);
         return *this;
-    }
+    }*/
     std::vector<int> getpoints() const {
         return points;
     }
@@ -61,8 +65,8 @@ public:
     std::set<int> getexistsegments() const {
         return existsegments;
     }
-    void setexistsegment(const std::set<int>& ss) {
-        existsegment = ss;
+    void setexistsegments(const std::set<int>& ss) {
+        existsegments = ss;
     }
     int getid() const {
         return id;
@@ -84,6 +88,7 @@ public:
     }
     bool ifcontainPoint(const Point&) const;
     bool ifcontainSegment(const Segment&) const;
+    bool ifcontainPlanar(const Planar&) const;
     bool ifintersectionSegment(const Segment&) const;
     Point intersectionSegment(const Segment&) const;
     // double angleBetweenPlanars(const Planar&, const Direction&) const;

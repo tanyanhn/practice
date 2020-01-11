@@ -10,7 +10,7 @@
 
 class TriangleIntersection {
 public:
-    Planar operator()(const Planar&, const Planar&);
+    void operator()(Planar&, Planar&);
 };
 
 class Triangulation {
@@ -19,6 +19,7 @@ public:
 };
 
 class YinsetContainTriangle {
+    enum{AddOverlap = 0, notAddOverlap = 1}
     bool operator()(const Yinset& , const Planar&);
 };
 

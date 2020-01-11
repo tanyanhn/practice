@@ -113,7 +113,7 @@ double Flat::angleBetweenFlats(const Flat& pl2,const Direction& di) const {
     Direction d1 = Flat::normaldirect,
         d2 = pl2.getnormaldirect();
     if(d1.cross(d2).dot(di) < -Tol::t)
-        return M_PI + acoss(d2.dot(d1));
+        return M_PI + acos(d2.dot(d1));
     else if(d1.cross(d2).dot(di) > Tol::t)
         return M_PI - acos(d2.dot(d1));
     else if(d1.dot(d2) < 0)

@@ -35,7 +35,7 @@ public:
         return inYinset;
     }
     void setinYinset(const int i) {
-        inYinset = i
+        inYinset = i;
     }
     int gettype() const {
         return type;

@@ -1,12 +1,12 @@
 #ifndef DATA_BOOLEAN
 #define DATA_BOOLEAN
 
-#include"Point.h"
-#include"Segment.h"
-#include"Planar.h"
-#include"Face.h"
-#include"Yinset.h"
-#include"HassNode.h"
+//#include"Point.h"
+//#include"Segment.h"
+//#include"Planar.h"
+//#include"Face.h"
+//#include"Yinset.h"
+//#include"HassNode.h"
 #include<map>
 #include<vector>
 
@@ -43,10 +43,8 @@ struct Data {
     static std::vector<Planar> meetFace();
     static std::vector<Face> past();
     static std::vector<HassNode> generatehassmap();
-    static void load(Yinset&);
-    static void clean();
 };
-
+/*
 Point Data::farpoint;
 std::vector<int> Data::existpoints;
 std::vector<int> Data::existsegments;
@@ -62,5 +60,6 @@ int Data::segmentsnum = 0;
 int Data::planarsnum = 0;
 int Data::facesnum = 0;
 int Data::yinsetsnum = 0;
+*/
 
 #endif

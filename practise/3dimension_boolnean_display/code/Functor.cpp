@@ -1,5 +1,6 @@
 #include"Functor.h"
 #include"Data.h"
+#include"Tol.h"
 #include<vector>
 #include<math.h>
 #include<iostream>
@@ -17,7 +18,7 @@ bool FaceContainFace::operator()(const Face& f1, const Face f2){
 }
 
 
-bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& triangle){
+bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& triangle, int overlaptriangle = AddOverlap){
     Point p0 = Data::points[triangle.getpoints().[0]],
         p1 = Data::points[triangle.getpoints().[1]],
         p2 = Data::points[triangle.getpoints().[2]];
@@ -37,6 +38,29 @@ bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& trian
         for(auto j = Data::faces[*i].getplanars().begin(),
                 j != Data::faces[*i].getplanars().end(), j++){
             Planar pl = Data::planars[*j];
+            if(pl.ifcontainPlanar(triangle)){
+                if(overlaptriangle == AddOverlap){
+                    if(triangle.getnormaldirect().dot(pl.getnormaldirect()) < -Tol::t)
+                        return true;
+                    else if(triangle.getnormaldirect().dot(pl.getnormaldirect()) > Tol::t)
+                        return false;
+                    else {
+                        cout << "YinsetContainTriangle wrong in overlaptriangle == AddOverlap : "
+                             << triangle.getid() << " : " << pl.getid();
+                        int i;
+                        cin >> i;
+                    }
+                }
+                else if(overlaptriangle == notAddOverlap){
+                    return false;
+                }
+                else {
+                    cout << "YinsetContainTriangle wrong in overlaptriangle : "
+                         << triangle.getid() << " : " << pl.getid();
+                    int i;
+                    cin >> i;
+                }
+            }
             Segment seg0 = Data::segments[pl.getsegments().[0]],
                 seg1 = Data::segments[pl.getsegments().[1]],
                 seg2 = Data::segments[pl.getsegments().[2]];
@@ -257,4 +281,9 @@ vector<int> FindNearTriangle::operator()(const Planar& triangle){
         }
     }
     return anwser;
+}
+
+
+void TriangleIntersection::operator()(Planar& tr1, Planar& tr2){
+    
 }
