@@ -41,6 +41,7 @@ public:
     bool ifcontainPoint(const Point&) const;
     bool ifintersectionLine(const Line& l2) const;
     Point intersectionLine(const Line& l2) const;
+    bool ifoverlapLine(const Line& l) const;
 };
 
 #endif

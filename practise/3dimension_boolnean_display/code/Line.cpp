@@ -40,3 +40,11 @@ bool Line::ifcontainPoint(const Point& p) const {
     else
         return false;
 }
+
+bool Line::ifoverlapLine(const Line& l) const {
+    if(ifcontainPoint(l.getfixpoint()) == false)
+        return false;
+    if(fabs(direct.dot(l.getdirect()) - 1) > Tol::t)
+        return false;
+    return true;
+}

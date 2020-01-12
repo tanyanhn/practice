@@ -4,12 +4,15 @@
 #include"Data.h"
 #include"Planar.h"
 #include"Face.h"
+#include"Segment.h"
 #include"Yinset.h"
 #include<vector>
 
 
 class TriangleIntersection {
 public:
+    Segment PlanarIntersectLine(const Planar&, const Line& l,
+                                bool&, bool&, bool&, bool&, bool&, bool&);
     void operator()(Planar&, Planar&);
 };
 

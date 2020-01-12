@@ -8,9 +8,11 @@ using namespace std;
 Planar::Planar(std::vector<int> p, std::vector<int> s, int identity , int inF , int inY )
     : Flat(Data::points[p[0]], Data::points[p[1]], Data::points[p[2]]),
       points(p), segments(s), id(identity), inFace(inF), inYinset(inY) {
+    /*
     for(auto i = points.begin(); i != points.end(); i++){
         existpoints.insert(*i);
     }
+    */
     for(auto i = segments.begin(); i != segments.end(); i++){
         existsegments.insert(*i);
     }

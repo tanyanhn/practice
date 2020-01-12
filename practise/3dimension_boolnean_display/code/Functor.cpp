@@ -2,6 +2,8 @@
 #include"Data.h"
 #include"Tol.h"
 #include<vector>
+#include<set>
+#include<map>
 #include<math.h>
 #include<iostream>
 
@@ -285,5 +287,208 @@ vector<int> FindNearTriangle::operator()(const Planar& triangle){
 
 
 void TriangleIntersection::operator()(Planar& tr1, Planar& tr2){
-    
+    Point tr2p0 = Data::points[tr2.getpoints()[0]],
+        tr2p1 = Data::points[tr2.getpoints()[1]],
+        tr2p2 = Data::points[tr2.getpoints()[2]],
+        tr1p0 = Data::points[tr1.getpoints()[0]],
+        tr1p1 = Data::points[tr1.getpoints()[1]],
+        tr1p2 = Data::points[tr1.getpoints()[2]];
+    Segment tr2seg0 = Data::segments[tr2.getsegments()[0]],
+        tr2seg1 = Data::segments[tr2.getsegments()[1]],
+        tr2seg2 = Data::segments[tr2.getsegments()[2]],
+        tr1seg0 = Data::segments[tr1.getsegments()[0]],
+        tr1seg1 = Data::segments[tr1.getsegments()[1]],
+        tr1seg2 = Data::segments[tr1.getsegments()[2]],
+        tr1IntersectSegment,
+        tr2IntersectSegment;
+    set<int> tr1existsegments = tr1.getexistsegments();
+    set<int> tr2existsegments = tr2.getexistsegments();
+    bool tr1notintersect = false, tr1intersectPoint = false, tr1intersectSegment = false,
+        tr2notintersect = false, tr2intersectPoint = false, tr2intersectSegment = false;
+    if(tr1.Flat::ifcontainPoint(p0) &&
+       tr1.Flat::ifcontainPoint(p1) &&
+       tr1.Flat::ifcontainPoint(p2)) {
+        /* if(tr1.ifcontainSegment(seg0)){
+            for(auto i = existsegments.begin(), i != existsegments.end(0), i++){
+                Segment seg = Data::segments[*i];
+                map<Point, vector<Segment>> intersect;
+                if(seg0.ifintersectionSegment(seg)){
+                }
+            }
+            }*/
+        tr2notintersect = true;
+        tr1notintersect = true;
+    }
+    else if(tr1.Flat::ifintersectionFlat(tr2) == false){
+        tr2notintersect = true;
+        tr1notintersect = true;
+    }
+    else {
+        Line l = tr1.Flat::intersectionFlat(tr2);
+        tr1IntersectSegment = PlanarIntersectLine(tr1, l, tr1notintersect, tr1intersectPoint, tr1intersectSegment);
+        tr2IntersectSegment = PlanarIntersectLine(tr2, l, tr2notintersect, tr2intersectPoint, tr2intersectSegment);
+    }
+}
+
+
+Segment TriangleIntersection::PlanarIntersectLine(const Planar& tr1, const Line& l,
+                                                  bool& tr1notintersect, bool& tr1intersectPoint,bool& tr1intersectSegment) {
+    Point tr1p0 = Data::points[tr1.getpoints()[0]],
+        tr1p1 = Data::points[tr1.getpoints()[1]],
+        tr1p2 = Data::points[tr1.getpoints()[2]];
+    Segment tr1seg0 = Data::segments[tr1.getsegments()[0]],
+        tr1seg1 = Data::segments[tr1.getsegments()[1]],
+        tr1seg2 = Data::segments[tr1.getsegments()[2]];
+    Point tr1segp0, tr1segp1,
+        tr2segp0, tr2segp1;
+    if(l.ifcontainPoint(tr1p0)){
+        tr1segp0 = tr1p0;
+        if(l.ifcontainPoint(tr1p1)){
+            tr1segp1 = tr1p1;
+            tr1intersectSegment = true;
+        }
+        else if(l.ifcontainPoint(tr1p2)){
+            tr1segp1 = tr1p2;
+            tr1intersectSegment = true;
+        }
+        else {
+            if(l.ifintersectionLine(tr1seg1) == false){
+                tr1intersectPoint = true;
+            }
+            else {
+                Point p = l.intersectionLine(tr1seg1);
+                if(tr1seg1.ifcontainPoint(p) == false){
+                    tr1intersectPoint = true;
+                }
+                else {
+                    p.setid(Data::pointsnum);
+                    Data::points[Data::pointsnum] = p;
+                    Data::pointsnum++;
+                    tr1segp1 = p;
+                }
+            }
+        }
+    }
+    else if(l.ifcontainPoint(tr1p1)){
+        tr1segp0 = tr1p1;
+        if(l.ifcontainPoint(tr1p0)){
+            tr1segp1 = tr1p0;
+            tr1intersectSegment = true;
+        }
+        else if(l.ifcontainPoint(tr1p2)){
+            tr1segp1 = tr1p2;
+            tr1intersectSegment = true;
+        }
+        else {
+            if(l.ifintersectionLine(tr1seg2) == false){
+                tr1intersectPoint = true;
+            }
+            else {
+                Point p = l.intersectionLine(tr1seg2);
+                if(tr1seg1.ifcontainPoint(p) == false){
+                    tr1intersectPoint = true;
+                }
+                else {
+                    p.setid(Data::pointsnum);
+                    Data::points[Data::pointsnum] = p;
+                    Data::pointsnum++;
+                    tr1segp1 = p;
+                }
+            }
+        }
+    }
+    else if(l.ifcontainPoint(tr1p2)){
+        tr1segp0 = tr1p2;
+        if(l.ifcontainPoint(tr1p1)){
+            tr1segp1 = tr1p1;
+            tr1intersectSegment = true;
+        }
+        else if(l.ifcontainPoint(tr1p0)){
+            tr1segp1 = tr1p0;
+            tr1intersectSegment = true;
+        }
+        else {
+            if(l.ifintersectionLine(tr1seg0) == false){
+                tr1intersectPoint = true;
+            }
+            else {
+                Point p = l.intersectionLine(tr1seg0);
+                if(tr1seg1.ifcontainPoint(p) == false){
+                    tr1intersectPoint = true;
+                }
+                else {
+                    p.setid(Data::pointsnum);
+                    Data::points[Data::pointsnum] = p;
+                    Data::pointsnum++;
+                    tr1segp1 = p;
+                }
+            }
+        }
+    }
+    else {
+        bool firstintersect = false;
+        if(l.ifintersectionLine(tr1seg0)){
+            Point p = l.intersectionLine(tr1seg0);
+            if(tr1seg0.ifcontainPoint(p)){
+                if(firstintersect == false){
+                    firstintersect = true;
+                    p.setid(Data::pointsnum);
+                    Data::points[Data::pointsnum] = p;
+                    Data::pointsnum++;
+                    tr1segp0 = p;
+                }
+                else {
+                    p.setid(Data::pointsnum);
+                    Data::points[Data::pointsnum] = p;
+                    Data::pointsnum++;
+                    tr1segp1 = p;
+                }
+            }
+        }
+        if(l.ifintersectionLine(tr1seg1)){
+            Point p = l.intersectionLine(tr1seg1);
+            if(tr1seg1.ifcontainPoint(p)){
+                if(firstintersect == false){
+                    firstintersect = true;
+                    p.setid(Data::pointsnum);
+                    Data::points[Data::pointsnum] = p;
+                    Data::pointsnum++;
+                    tr1segp0 = p;
+                }
+                else {
+                    p.setid(Data::pointsnum);
+                    Data::points[Data::pointsnum] = p;
+                    Data::pointsnum++;
+                    tr1segp1 = p;
+                }
+            }
+        }
+        if(l.ifintersectionLine(tr1seg2)){
+            Point p = l.intersectionLine(tr1seg2);
+            if(tr1seg2.ifcontainPoint(p)){
+                if(firstintersect == false){
+                    firstintersect = true;
+                    p.setid(Data::pointsnum);
+                    Data::points[Data::pointsnum] = p;
+                    Data::pointsnum++;
+                    tr1segp0 = p;
+                }
+                else {
+                    p.setid(Data::pointsnum);
+                    Data::points[Data::pointsnum] = p;
+                    Data::pointsnum++;
+                    tr1segp1 = p;
+                }
+            }
+        }
+        if(firstintersect == false){
+            tr1notintersect == true;
+        }
+    }
+    if(tr1segp0 > tr1segp1){
+        Point temp = tr1segp0;
+        tr1segp0 = tr1segp1;
+        tr1segp1 = temp;
+    }
+    return Segment(tr1segp0.getid(), tr1segp1.getid());
 }
