@@ -12,9 +12,14 @@
 class TriangleIntersection {
 public:
     Segment PlanarIntersectLine(const Planar&, const Line& l,
-                                bool&, bool&, bool&, bool&, bool&, bool&);
+                                bool&, bool&, bool&);
     void operator()(Planar&, Planar&);
 };
+
+class SegmentIntersection {
+public:
+    void operator()(Planar&);
+}
 
 class Triangulation {
 public:
@@ -23,7 +28,7 @@ public:
 
 class YinsetContainTriangle {
     enum{AddOverlap = 0, notAddOverlap = 1}
-    bool operator()(const Yinset& , const Planar&);
+    bool operator()(const Yinset& , const Planar&, int);
 };
 
 class FindNearTriangle {

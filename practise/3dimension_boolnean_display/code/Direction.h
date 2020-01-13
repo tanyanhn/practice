@@ -22,6 +22,7 @@ public:
         coord[0] = d2.coord[0];
         coord[1] = d2.coord[1];
         coord[2] = d2.coord[2];
+        return *this;
     }
     ~Direction(){}
     const double operator[](const int i) const {

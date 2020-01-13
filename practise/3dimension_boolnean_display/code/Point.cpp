@@ -2,7 +2,7 @@
 #include"Tol.h"
 
 
-Point::Point(const double x, const double y, const double z, const int identity, const vector<int> &v, const int it) : coord{x, y, z}, id(identity), inSegment(v), inYinset(it) {/*
+Point::Point(const double x, const double y, const double z, const int identity, const set<int> &v, const int it) : coord{x, y, z}, id(identity), inSegment(v), inYinset(it) {/*
     coord[0] = x;
     coord[1] = y;
     coord[2] = z;

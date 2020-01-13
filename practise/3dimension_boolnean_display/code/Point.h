@@ -4,6 +4,7 @@
 #include<iostream>
 #include<math.h>
 #include<vector>
+#include<set>
 #include"Direction.h"
 #include"Tol.h"
 using namespace std;
@@ -11,11 +12,11 @@ using namespace std;
 class Point{
     double coord[3];
     int id;
-    vector<int> inSegment;
+    set<int> inSegment;
     int inYinset;
 public:
-    Point() : coord{0, 0, 0}, id(-1), inSegment(vector<int>()), inYinset(-1) {}
-    Point(const double x, const double y, const double z, const int identity = -1, const vector<int> &v = vector<int>(), const int it = -1);
+    Point() : coord{0, 0, 0}, id(-1), inSegment(set<int>()), inYinset(-1) {}
+    Point(const double x, const double y, const double z, const int identity = -1, const set<int> &v = set<int>(), const int it = -1);
     Point(const Point&);
     Point& operator=(const Point&);
     ~Point(){}
@@ -31,10 +32,10 @@ public:
     void setinYinset(const int i) {
         inYinset = i;
     }
-    vector<int> getinSegment() const {
+    set<int> getinSegment() const {
         return inSegment;
     }
-    void setinSegment(const vector<int>& v) {
+    void setinSegment(const set<int>& v) {
         inSegment = v;
     }
     const double operator[](const int i) const {
