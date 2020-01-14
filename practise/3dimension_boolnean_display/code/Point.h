@@ -25,18 +25,27 @@ public:
     }
     void setid(const int i) {
         id = i;
+        if(id != -1){
+            Data::points[id] = *this;
+        }
     }
     int getinYinset() const {
         return inYinset;
     }
     void setinYinset(const int i) {
         inYinset = i;
+        if(id != -1){
+            Data::points[id] = *this;
+        }
     }
     set<int> getinSegment() const {
         return inSegment;
     }
     void setinSegment(const set<int>& v) {
         inSegment = v;
+        if(id != -1){
+            Data::points[id] = *this;
+        }
     }
     const double operator[](const int i) const {
         if(i < 0 || i > 2){

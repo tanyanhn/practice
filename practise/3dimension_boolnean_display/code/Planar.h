@@ -50,42 +50,63 @@ public:
     }
     void setpoints(const std::vector<int>& vp) {
         points = vp;
+        if(id != -1){
+            Data::points[id] = *this;
+        }
     }
     std::vector<int> getsegments() const {
         return segments;
     }
     void setsegments(const std::vector<int>& vs) {
         segments = vs;
+        if(id != -1){
+            Data::points[id] = *this;
+        }
     }
     std::set<int> getexistpoints() const {
         return existpoints;
     }
     void setexistpoints(const std::set<int>& sp) {
         existpoints = sp;
+        if(id != -1){
+            Data::points[id] = *this;
+        }
     }
     std::set<int> getexistsegments() const {
         return existsegments;
     }
     void setexistsegments(const std::set<int>& ss) {
         existsegments = ss;
+        if(id != -1){
+            Data::points[id] = *this;
+        }
     }
     int getid() const {
         return id;
     }
     void setid(const int i){
         id = i;
+        if(id != -1){
+            Data::points[id] = *this;
+        }
     }
     int getinFace() const {
         return inFace;
     }
     void setinFace(const int i){
         inFace = i;
+        if(id != -1){
+            Data::points[id] = *this;
+        }
     }
     int getinYinset() const {
         return inYinset;
     }
     void setinYinset(const int i){
         inYinset = i;
+        if(id != -1){
+            Data::points[id] = *this;
+        }
     }
     bool ifcontainPoint(const Point&) const;
     bool ifcontainSegment(const Segment&) const;

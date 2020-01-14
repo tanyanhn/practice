@@ -5,14 +5,15 @@
 #include"Yinset.h"
 #include"HassNode.h"
 #include<map>
+#include<set>
 #include<vector>
 
 
 Point Data::farpoint;
-std::vector<int> Data::existpoints;
-std::vector<int> Data::existsegments;
-std::vector<int> Data::existplanars;
-std::vector<int> Data::existfaces;
+std::set<int> Data::existpoints;
+std::set<int> Data::existsegments;
+std::set<int> Data::existplanars;
+std::set<int> Data::existfaces;
 std::map<int, Point> Data::points;
 std::map<int, Segment> Data::segments;
 std::map<int, Planar> Data::planars;

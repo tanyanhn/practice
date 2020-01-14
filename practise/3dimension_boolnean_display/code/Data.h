@@ -8,6 +8,7 @@
 //#include"Yinset.h"
 //#include"HassNode.h"
 #include<map>
+#include<set>
 #include<vector>
 
 class Point;
@@ -19,10 +20,10 @@ class HassNode;
 
 struct Data {
     static Point farpoint;
-    static std::vector<int> existpoints;
-    static std::vector<int> existsegments;
-    static std::vector<int> existplanars;
-    static std::vector<int> existfaces;
+    static std::set<int> existpoints;
+    static std::set<int> existsegments;
+    static std::set<int> existplanars;
+    static std::set<int> existfaces;
     static std::map<int, Point> points;
     static int pointsnum;
     static std::map<int, Segment> segments;

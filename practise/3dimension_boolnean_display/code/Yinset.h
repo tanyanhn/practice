@@ -26,24 +26,36 @@ public:
     }
     void setfaces(const std::vector<int>& vf){
         faces = vf;
+        if(id != -1){
+            Data::yinsets[id] = *this;
+        }
     }
     std::vector<HassNode> gethassmap() const {
         return hassmap;
     }
     void sethassmap(const std::vector<HassNode>& vh){
         hassmap = vh;
+        if(id != -1){
+            Data::yinsets[id] = *this;
+        }
     }
     int getid() const {
         return id;
     }
     void setid(const int i){
         id = i;
+        if(id != -1){
+            Data::yinsets[id] = *this;
+        }
     }
     int gettype() const {
         return type;
     }
     void settype(const int i){
         type = i;
+        if(id != -1){
+            Data::yinsets[id] = *this;
+        }
     }
     //void generatorhassmap();
 };

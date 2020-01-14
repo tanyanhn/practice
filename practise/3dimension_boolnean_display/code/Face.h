@@ -24,24 +24,36 @@ public:
     }
     void setplanars(const vector<int>& vp) {
         planars = vp;
+        if(id != -1){
+            Data::faces[id] = *id;
+        }
     }
     int getid()const {
         return id;
     }
     void setid(const int i) {
         id = i;
+        if(id != -1){
+            Data::faces[id] = *id;
+        }
     }
     int getinYinset()const {
         return inYinset;
     }
     void setinYinset(const int i) {
         inYinset = i;
+        if(id != -1){
+            Data::faces[id] = *id;
+        }
     }
     int gettype() const {
         return type;
     }
     void settype(const int i) {
         type = i;
+        if(id != -1){
+            Data::faces[id] = *id;
+        }
     }
     //bool ifincludeFace(const Face& f) const;
 };
