@@ -90,3 +90,8 @@ Segment Segment::overlapSegment(const Segment& seg2) const {
     return Segment(p0.getid(), p1.getid());
 }
 
+bool Segment::operator<(const Segment& seg2) const {
+    Point p1 = Tol::f.intersectionLine(*this),
+        p2 = Tol::f.intersectionLine(seg2);
+    return p1 < p2;
+}

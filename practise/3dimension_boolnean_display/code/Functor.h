@@ -7,6 +7,7 @@
 #include"Segment.h"
 #include"Yinset.h"
 #include<vector>
+#include<set>
 
 
 class TriangleIntersection {
@@ -22,8 +23,19 @@ public:
 }
 
 class Triangulation {
+    set<Segment> sweepflat;
+    map<int, int> helper;
+    Planar pl;
+    void makeMonotone();
+    void handleStartVertex(Point&);
+    void handleEndVertex(Point&);
+    void handleSplitVertex(Point&);
+    void handleMergeVertex(Point&);
+    void handleRegularVertex(Point&);
+    vector<Planar> generatorYMonotone();
+    vector<Planar> TriangulateMonotonePolygon(Planar&);
 public:
-    std::vector<Planar> operator()(const Planar&);
+    std::vector<Planar> operator()(Planar&);
 };
 
 class YinsetContainTriangle {

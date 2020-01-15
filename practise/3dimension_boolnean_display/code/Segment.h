@@ -6,6 +6,7 @@
 #include"Direction.h"
 #include"Tol.h"
 #include"Data.h"
+#include"Flat.h"
 #include<vector>
 #include<set>
 #include<algorithm>
@@ -160,6 +161,14 @@ public:
     }*/
     bool operator==(const Segment& seg1) const {
         return (points[0] == seg1[0] && points[1] == seg1[1]);
+    }
+    bool operator<(const Segment& seg2) const ;/*{
+        Point p1 = Tol::f.intersectionLine(*this),
+            p2 = Tol::f.intersectionLine(seg2);
+        return p1 < p2;
+        }*/
+    bool operator>(const Segment& seg2) const {
+        return seg2 < *this;
     }
     bool ifcontainPoint(const Point& p) const ;
     bool ifintersectionSegment(const Segment& seg2) const ;

@@ -7,6 +7,7 @@
 #include<math.h>
 #include<utility>
 #include<iostream>
+#include<algorithm>
 
 using namespace std;
 
@@ -786,3 +787,17 @@ void SegmentIntersection::operator()(Planar& pl){
         }
     }
 }
+
+
+vector<Planar> Triangulation::operator()(Planar& p) {
+    pl = p;
+    nakeMonotone();
+    vector<Planar> yMonotones = generatorYMonotone();
+    vector<Planar> triangles;
+    for(auto i = yMonotones.begin(); i != yMonotones.end(); i++){
+        vector<Planar> partTriangle = TriangulateMonotonePolygon(*i);
+        copy(partTriangle.begin(), partTriangle.end(), triangles.end());
+    }
+    return triangles;
+}
+
