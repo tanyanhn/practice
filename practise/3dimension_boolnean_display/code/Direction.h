@@ -76,6 +76,7 @@ public:
                          coord[2] * d2.coord[0] - coord[0] * d2.coord[2],
                          coord[0] * d2.coord[1] - coord[1] * d2.coord[0]);
     }
+    double angle(const Direction& d2, const Direction& di) const;
 };
 
 

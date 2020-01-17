@@ -42,6 +42,7 @@ public:
     bool ifintersectionLine(const Line& l2) const;
     Point intersectionLine(const Line& l2) const;
     bool ifoverlapLine(const Line& l) const;
+    //double angleBetweenLine(const Line& l) const;
 };
 
 #endif

@@ -791,6 +791,12 @@ void SegmentIntersection::operator()(Planar& pl){
 
 vector<Planar> Triangulation::operator()(Planar& p) {
     pl = p;
+    if(p.getnormaldirect.corss(Direction(0, 0, 1)).norm() < (1 - Tol::t)){
+        Tol::f.setnormaldirect(Direction(0, 1, 0));
+    }
+    else{
+        Tol::f.setnormaldirect(Direction(0, 0, 1));
+    }
     nakeMonotone();
     vector<Planar> yMonotones = generatorYMonotone();
     vector<Planar> triangles;
@@ -800,4 +806,35 @@ vector<Planar> Triangulation::operator()(Planar& p) {
     }
     return triangles;
 }
+
+
+void Triangulation::makeMonotone(){
+    Planar pl = this->pl;
+    set<Point> allPoints;
+    set<int> allSegments = pl.getexistsegment();
+    for(auto i = allSegments.begin(); i != allSegments.end(); i++){
+        Segment seg = Data::segments[*i];
+        allPoints.insert(seg[0]);
+        allPoints.insert(seg[1]);
+    }
+    map<double, int> nearSegment;
+    auto i = --allPoints.end();
+    while(1){
+        Point p = *i;
+        Tol::f.setfixpoint(p);
+        Line sweepline = Tol::f.intersectionFlat(pl);
+        nearSegment.clear();
+        set<int> inSegments = p.getinSegment();
+        for(auto j = inSegments.begin(); j != inSegments.end(); j++){
+            Segment seg = Data::segments[*j];
+            set<int> inPlanar = seg.getinPlanar();
+            if(inPlanar.find(pl.getid()) != inPlanar.end()){
+                nearSegment.insert(
+                    make_pair(sweepline.getdirect().angle(seg.getdirect(), pl.getnormaldirect()), seg.getid()));
+                
+            }
+        }
+    }
+}
+
 
