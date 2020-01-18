@@ -9,6 +9,7 @@
 #include<iostream>
 
 class Line;
+class Point;
 class Segment;
 class Data;
 class Flat{

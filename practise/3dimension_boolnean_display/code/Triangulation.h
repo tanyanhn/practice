@@ -1,29 +1,14 @@
-#ifndef FUNCTOR_BOOLEAN
-#define FUNCTOR_BOOLEAN
+#ifndef TRIANULATION_BOOLEAN
+#define TRIANULATION_BOOLEAN
 
-#include"Data.h"
-#include"Planar.h"
-#include"Face.h"
-#include"Segment.h"
-#include"Yinset.h"
-#include<vector>
 #include<set>
 #include<map>
-using std::vector;
-using std::set;
+#include"Point.h"
+#include"Segment.h"
+#include"Planar.h"
 using std::map;
-
-class TriangleIntersection {
-public:
-    Segment PlanarIntersectLine(const Planar&, const Line& l,
-                                bool&, bool&, bool&);
-    void operator()(Planar&, Planar&);
-};
-
-class SegmentIntersection {
-public:
-    void operator()(Planar&);
-};
+using std::set;
+using std::vector;
 
 class Triangulation {
     //private:
@@ -44,19 +29,6 @@ class Triangulation {
     vector<Planar> TriangulateMonotonePolygon(Planar&);
 public:
     std::vector<Planar> operator()(Planar&);
-};
-
-class YinsetContainTriangle {
-    enum{AddOverlap = 0, notAddOverlap = 1}
-    bool operator()(const Yinset& , const Planar&, int);
-};
-
-class FindNearTriangle {
-    std::vector<Planar> operator()(const Planar&);
-};
-
-class FaceContainFace {
-    bool operator()(const Face&, const Face&);
 };
 
 #endif

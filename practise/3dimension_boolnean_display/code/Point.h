@@ -7,6 +7,7 @@
 #include<set>
 #include"Direction.h"
 #include"Tol.h"
+#include"Data.h"
 using namespace std;
 
 class Point{
