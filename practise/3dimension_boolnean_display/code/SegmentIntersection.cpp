@@ -14,7 +14,7 @@ using namespace std;
 
 
 void SegmentIntersection::operator()(Planar& pl){
-    set<int> existsegments = pl.getexistsegments;
+    set<int> existsegments = pl.getexistsegments();
     set<Point> allPoint;
     for(auto i = existsegments.begin(); i != existsegments.end(); i++){
         Segment seg = Data::segments[*i];
@@ -55,7 +55,7 @@ void SegmentIntersection::operator()(Planar& pl){
         }
         if(it1 != allPoint.end()){
             Point p = *it1;
-            set<int> pinSegment = p.getinSegment().
+            set<int> pinSegment = p.getinSegment(),
                 p1inSegment = p1.getinSegment();
             for(auto j = p1inSegment.begin(); j != p1inSegment.end(); j++){
                 Segment segContainp1 = Data::segments[*j];
@@ -83,9 +83,10 @@ void SegmentIntersection::operator()(Planar& pl){
             }
         }
         if(pinseg.size() > 2){
+            set<int> allPlanar = seg.getinPlanar();
             for(auto j = pinseg.begin(); j != (--pinseg.end()); j++){
                 Point p0 = *j, p1 = *(++j);
-                Segment s(p0.geid(), p1.getid(), Data::segmentsnum,
+                Segment s(p0.getid(), p1.getid(), Data::segmentsnum,
                           seg.getinPlanar01(), seg.getinPlanar10(), seg.getinYinset());
                 Data::segmentsnum++;
                 s.setinPlanar(seg.getinPlanar());
@@ -107,7 +108,7 @@ void SegmentIntersection::operator()(Planar& pl){
                 }
             }
             Data::existsegments.erase(seg.getid());
-            set<int> allPlanar = seg.getinPlanar();
+            //set<int> allPlanar = seg.getinPlanar();
             for(auto j = allPlanar.begin(); j != allPlanar.end(); j++){
                 Planar pl = Data::planars[*j];
                 set<int> plexistsegment = pl.getexistsegments();
@@ -123,14 +124,14 @@ void SegmentIntersection::operator()(Planar& pl){
             cin >> i;
         }
     }
-    existsegments = Data::planars[pl.getid()];
-    set<Segment> segmentset;
-    set<Segment>::iterator it;
+    existsegments = Data::planars[pl.getid()].getexistsegments();
+    map<pair<int, int>, Segment> segmentmap;
+    map<pair<int, int>, Segment>::iterator it;
     for(auto i = existsegments.begin(); i != existsegments.end(); i++){
         Segment seg = Data::segments[*i];
-        it = segmentset.find(seg);
-        if(it != segmentset.end()){
-            Segment overlapseg = *it;
+        it = segmentmap.find(make_pair(seg[0], seg[1]));
+        if(it != segmentmap.end()){
+            Segment overlapseg = it->second;
             set<int> seginPlanar = seg.getinPlanar(),
                 inPlanar = overlapseg.getinPlanar();
             for(auto j = seginPlanar.begin(); j != seginPlanar.end(); j++){
@@ -159,7 +160,7 @@ void SegmentIntersection::operator()(Planar& pl){
             }
         }
         else {
-            segmentset.insert(seg);
+            segmentmap[make_pair(seg[0], seg[1])] = seg;
         }
     }
 }

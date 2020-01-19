@@ -25,7 +25,7 @@ public:
     void setplanars(const vector<int>& vp) {
         planars = vp;
         if(id != -1){
-            Data::faces[id] = *id;
+            Data::faces[id] = *this;
         }
     }
     int getid()const {
@@ -34,7 +34,7 @@ public:
     void setid(const int i) {
         id = i;
         if(id != -1){
-            Data::faces[id] = *id;
+            Data::faces[id] = *this;
         }
     }
     int getinYinset()const {
@@ -43,7 +43,7 @@ public:
     void setinYinset(const int i) {
         inYinset = i;
         if(id != -1){
-            Data::faces[id] = *id;
+            Data::faces[id] = *this;
         }
     }
     int gettype() const {
@@ -52,7 +52,7 @@ public:
     void settype(const int i) {
         type = i;
         if(id != -1){
-            Data::faces[id] = *id;
+            Data::faces[id] = *this;
         }
     }
     //bool ifincludeFace(const Face& f) const;

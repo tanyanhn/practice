@@ -51,7 +51,7 @@ public:
     void setpoints(const std::vector<int>& vp) {
         points = vp;
         if(id != -1){
-            Data::points[id] = *this;
+            Data::planars[id] = *this;
         }
     }
     std::vector<int> getsegments() const {
@@ -60,7 +60,7 @@ public:
     void setsegments(const std::vector<int>& vs) {
         segments = vs;
         if(id != -1){
-            Data::points[id] = *this;
+            Data::planars[id] = *this;
         }
     }
     std::set<int> getexistpoints() const {
@@ -69,7 +69,7 @@ public:
     void setexistpoints(const std::set<int>& sp) {
         existpoints = sp;
         if(id != -1){
-            Data::points[id] = *this;
+            Data::planars[id] = *this;
         }
     }
     std::set<int> getexistsegments() const {
@@ -78,7 +78,7 @@ public:
     void setexistsegments(const std::set<int>& ss) {
         existsegments = ss;
         if(id != -1){
-            Data::points[id] = *this;
+            Data::planars[id] = *this;
         }
     }
     int getid() const {
@@ -87,7 +87,7 @@ public:
     void setid(const int i){
         id = i;
         if(id != -1){
-            Data::points[id] = *this;
+            Data::planars[id] = *this;
         }
     }
     int getinFace() const {
@@ -96,7 +96,7 @@ public:
     void setinFace(const int i){
         inFace = i;
         if(id != -1){
-            Data::points[id] = *this;
+            Data::planars[id] = *this;
         }
     }
     int getinYinset() const {
@@ -105,7 +105,7 @@ public:
     void setinYinset(const int i){
         inYinset = i;
         if(id != -1){
-            Data::points[id] = *this;
+            Data::planars[id] = *this;
         }
     }
     bool ifcontainPoint(const Point&) const;

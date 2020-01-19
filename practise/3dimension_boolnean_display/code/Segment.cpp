@@ -1,4 +1,5 @@
 #include"Segment.h"
+#include<cmath>
 //#include"Point.h"
 //#include"Line.h"
 
@@ -91,7 +92,23 @@ Segment Segment::overlapSegment(const Segment& seg2) const {
 }
 
 bool Segment::operator<(const Segment& seg2) const {
-    Point p1 = Tol::f.intersectionLine(*this),
-        p2 = Tol::f.intersectionLine(seg2);
+    Point p1 = Tol::l->intersectionLine(*this),
+                       p2 = Tol::l->intersectionLine(seg2);
+    if(p1 == p2){
+        Direction d1, d2, d = Tol::l->getdirect();
+        if(p1.getid() == (*this)[0]){
+            d1 = Data::points[(*this)[1]] - Data::points[(*this)[0]];
+        }
+        else{
+            d1 = Data::points[(*this)[0]] - Data::points[(*this)[1]];
+        }
+        if(p2.getid() == seg2[0]){
+            d2 = Data::points[seg2[1]] - Data::points[seg2[0]];
+        }
+        else{
+            d2 = Data::points[seg2[0]] - Data::points[seg2[1]];
+        }
+        return d.angle(d1, *Tol::outside) < d.angle(d2, *Tol::outside);
+    }
     return p1 < p2;
 }

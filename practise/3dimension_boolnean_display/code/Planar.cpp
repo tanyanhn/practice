@@ -64,9 +64,9 @@ bool Planar::ifcontainSegment(const Segment& seg) const {
 }
 
 bool Planar::ifcontainPlanar(const Planar& pl2) const {
-    Point p0 = Data::points[(pl2.getpoints()).[0]],
-        p1 = Data::points[(pl2.getpoints()).[1]],
-        p2 = Data::points[(pl2.getpoints()).[2]];
+    Point p0 = Data::points[(pl2.getpoints())[0]],
+        p1 = Data::points[(pl2.getpoints())[1]],
+        p2 = Data::points[(pl2.getpoints())[2]];
     return ifcontainPoint(p0) && ifcontainPoint(p1) && ifcontainPoint(p2);
 }
 

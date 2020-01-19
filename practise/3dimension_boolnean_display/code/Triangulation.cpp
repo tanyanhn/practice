@@ -1,13 +1,18 @@
 #include"Triangulation.h"
-#include"Data.h"
+//#include"Data.h"
 #include"Tol.h"
-#include<vector>
-#include<set>
-#include<map>
-#include<math.h>
-#include<utility>
-#include<iostream>
-#include<algorithm>
+#include"Direction.h"
+#include"Line.h"
+#include"DatastructureHead.h"
+#include"FunctorHead.h"
+#include"STLHead.h"
+//#include<vector>
+//#include<set>
+//#include<map>
+//#include<math.h>
+//#include<utility>
+//#include<iostream>
+//#include<algorithm>
 
 using namespace std;
 
@@ -15,12 +20,16 @@ using namespace std;
 
 vector<Planar> Triangulation::operator()(Planar& p) {
     pl = p;
+    (*Tol::outside) = p.getnormaldirect();
+    Flat f;
     if(p.getnormaldirect.corss(Direction(0, 0, 1)).norm() < (Tol::t)){
-        Tol::f.setnormaldirect(Direction(0, 1, 0));
+        f.setnormaldirect(Direction(0, 1, 0));
     }
     else{
-        Tol::f.setnormaldirect(Direction(0, 0, 1));
+        f.setnormaldirect(Direction(0, 0, 1));
     }
+    Line l = f.intersectionFlat(p);
+    (*Tol::l) = l;
     nakeMonotone();
     vector<Planar> yMonotones = generatorYMonotone();
     vector<Planar> triangles;
@@ -46,7 +55,7 @@ void Triangulation::makeMonotone(){
     auto i = --allPoints.end();
     while(1){
         Point p = *i;
-        Tol::f.setfixpoint(p);
+        Tol::l->setfixpoint(p);
         Line sweepline = Tol::f.intersectionFlat(pl);
         if(sweepline.getdirect()
            .cross(Tol::f.getnormaldirect())
@@ -307,3 +316,4 @@ void Triangulation::handleRegularRightVertex(Point& p, set<Segment>::iterator& e
         pl.setexistsegments(plexistsegments);
     }
 }
+

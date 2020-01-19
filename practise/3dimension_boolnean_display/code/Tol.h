@@ -2,12 +2,14 @@
 #define TOLERANCE_BOOLEAN
 //#include"Flat.h"
 #include<memory>
-class Flat;
+class Line;
+class Direction;
 
 class Tol{
 public:
     static double t;
-    static std::unique_ptr<Flat> f;
+    static std::unique_ptr<Line> l;
+    static std::unique_ptr<Direction> outside;
     static void settol(double tt){
         t = tt;
     }

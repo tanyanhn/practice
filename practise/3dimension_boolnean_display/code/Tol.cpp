@@ -1,8 +1,10 @@
-#include"Flat.h"
+#include"Line.h"
 #include"Tol.h"
+#include"Direction.h"
 
 double Tol::t = 1e-5;
-std::unique_ptr<Flat> Tol::f (new Flat);
+std::unique_ptr<Direction> Tol::outside(new Direction);
+std::unique_ptr<Line> Tol::l (new Line);
 
 
 /*

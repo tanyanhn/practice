@@ -2,10 +2,10 @@
 #define FINDNEARTRIANLE_BOOLEAN
 
 #include"Planar.h"
-#include<vecotr>
+#include<vector>
 
 class FindNearTriangle {
-    std::vector<Planar> operator()(const Planar&);
+    std::vector<int> operator()(const Planar&);
 };
 
 
