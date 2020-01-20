@@ -47,7 +47,7 @@ public:
 };
 
 class YinsetContainTriangle {
-    enum{AddOverlap = 0, notAddOverlap = 1}
+    enum{AddOverlap = 0, notAddOverlap = 1};
     bool operator()(const Yinset& , const Planar&, int);
 };
 

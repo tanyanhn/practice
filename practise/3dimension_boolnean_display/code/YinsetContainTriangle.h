@@ -5,7 +5,8 @@
 #include"Yinset.h"
 
 class YinsetContainTriangle {
-    enum{AddOverlap = 0, notAddOverlap = 1}
+public:
+    enum mode {AddOverlap = 0, notAddOverlap = 1};
     bool operator()(const Yinset& , const Planar&, int);
 };
 

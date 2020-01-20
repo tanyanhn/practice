@@ -22,15 +22,18 @@ vector<Planar> Triangulation::operator()(Planar& p) {
     pl = p;
     (*Tol::outside) = p.getnormaldirect();
     Flat f;
-    if(p.getnormaldirect.corss(Direction(0, 0, 1)).norm() < (Tol::t)){
+    if(p.getnormaldirect().cross(Direction(0, 0, 1)).norm() < (Tol::t)){
         f.setnormaldirect(Direction(0, 1, 0));
     }
     else{
         f.setnormaldirect(Direction(0, 0, 1));
     }
-    Line l = f.intersectionFlat(p);
-    (*Tol::l) = l;
-    nakeMonotone();
+    Line sweepline = f.intersectionFlat(p);
+    if(sweepline.getfixpoint() > (sweepline.getfixpoint() + sweepline.getdirect())) {
+        sweepline.setdirect(sweepline.getdirect() * (-1));
+    }
+    (*Tol::l) = sweepline;
+    makeMonotone();
     vector<Planar> yMonotones = generatorYMonotone();
     vector<Planar> triangles;
     for(auto i = yMonotones.begin(); i != yMonotones.end(); i++){
@@ -44,24 +47,26 @@ vector<Planar> Triangulation::operator()(Planar& p) {
 void Triangulation::makeMonotone(){
     //Planar newpl = this->pl;
     set<Point> allPoints;
-    set<int> allSegments = pl.getexistsegment();
+    set<int> allSegments = pl.getexistsegments();
     //map<int, set<Segment>::iterator> sweepflatposition;
     for(auto i = allSegments.begin(); i != allSegments.end(); i++){
         Segment seg = Data::segments[*i];
-        allPoints.insert(seg[0]);
-        allPoints.insert(seg[1]);
+        allPoints.insert(Data::points[seg[0]]);
+        allPoints.insert(Data::points[seg[1]]);
     }
     map<double, int, DoubleComparer> nearSegment;
     auto i = --allPoints.end();
     while(1){
         Point p = *i;
         Tol::l->setfixpoint(p);
-        Line sweepline = Tol::f.intersectionFlat(pl);
+        Line sweepline = *Tol::l;
+        /*
         if(sweepline.getdirect()
            .cross(Tol::f.getnormaldirect())
            .dot(pl.getnormaldirect()) < 0) {
             sweepline.setdirect(sweepline.getdirect() * (-1));
         }
+        */
         nearSegment.clear();
         set<int> inSegments = p.getinSegment();
         for(auto j = inSegments.begin(); j != inSegments.end(); j++){
@@ -79,7 +84,7 @@ void Triangulation::makeMonotone(){
             }
         }
         if(nearSegment.empty()){
-            cout << "Triangulation::makeMonotone nearSegment.empty is true : " << pl.getid
+            cout << "Triangulation::makeMonotone nearSegment.empty is true : " << pl.getid()
                  << " : " << p.getid();
             int k;
             cin >> k;
@@ -95,7 +100,7 @@ void Triangulation::makeMonotone(){
             }
         }
         auto lit = sweepflatposition[leftseg];
-        if(lit == sweepflatposition.begin()){
+        if(lit == sweepflat.begin()){
             leftmost = true;
         }
         else{
@@ -104,15 +109,15 @@ void Triangulation::makeMonotone(){
         }
         if(nearSegment.size() == 1){
             auto j = nearSegment.begin();
-            auto segit = sweepflat.insert(Data::segments[j->second]);
+            set<Segment>::iterator segit = sweepflat.insert(Data::segments[j->second]).first;
             sweepflatposition[j->second] = segit;
             if(!(j->first >= M_PI)){
                 if(leftmost == false){
-                    handleSplitVertex(p, lsegit);
+                    handleSplitVertex(p, segit, lsegit);
                 }
                 else{
                     cout << "shouldn't exist situation segment exist outside triangle :"
-                         << pl.getid << " : " << p.getid();
+                         << pl.getid() << " : " << p.getid();
                     int k;
                     cin >> k;
                 }
@@ -123,7 +128,7 @@ void Triangulation::makeMonotone(){
                 }
                 else{
                     cout << "shouldn't exist situation segment exist outside triangle :"
-                         << pl.getid << " : " << p.getid();
+                         << pl.getid() << " : " << p.getid();
                     int k;
                     cin >> k;
                 }
@@ -140,7 +145,7 @@ void Triangulation::makeMonotone(){
         else {
             for(auto j = nearSegment.begin(); j != nearSegment.end(); j++){
                 if(j->first >= M_PI){
-                    auto it = sweepflat.insert(Data::segments[j->second]);
+                    auto it = sweepflat.insert(Data::segments[j->second]).first;
                     sweepflatposition[j->second] = it;
                 }
             }
@@ -206,7 +211,7 @@ void Triangulation::makeMonotone(){
                 }
                 else {
                     cout << "shouldn't exist situation not noraml point :"
-                         << pl.getid << " : " << p.getid();
+                         << pl.getid() << " : " << p.getid();
                     int k;
                     cin >> k;
                 }
