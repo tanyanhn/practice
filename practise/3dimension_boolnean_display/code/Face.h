@@ -22,7 +22,7 @@ public:
     std::vector<int> getplanars() const {
         return planars;
     }
-    void setplanars(const vector<int>& vp) {
+    void setplanars(const std::vector<int>& vp) {
         planars = vp;
         if(id != -1){
             Data::faces[id] = *this;

@@ -230,6 +230,7 @@ void Triangulation::makeMonotone(){
         }
         i--;
     }
+    pl = Data::planars[pl.getid()];
 }
 
 
@@ -322,3 +323,47 @@ void Triangulation::handleRegularRightVertex(Point& p, set<Segment>::iterator& e
     }
 }
 
+
+vector<Planar> Triangulation::generatorYMonotone(){
+    map<Point, set<pair<Point, Point>>> directEdge;
+    Segment triangleEdge0 = Data::segments[pl.getsegments()[0]],
+        triangleEdge1 = Data::segments[pl.getsegments()[1]],
+        triangleEdge2 = Data::segments[pl.getsegments()[2]];
+    for(auto i = pl.getexistsegments().begin(); i != pl.getexistsegments().end(); i++){
+        Segment seg = Data::segments[*i];
+        Point segp0 = Data::points[seg[0]],
+            segp1 = Data::points[seg[1]];
+        Direction segdi = segp1 - segp0;
+        if(triangleEdge0.ifoverlapSegment(seg)){
+            if(triangleEdge0.getdirect().dot(segdi) > 0){
+                directEdge[segp0].insert(make_pair(segp0, segp1));
+            }
+            else {
+                directEdge[segp1].insert(make_pair(segp1, segp0));
+            }
+        }
+        else if(triangleEdge1.ifoverlapSegment(seg)){
+            if(triangleEdge1.getdirect().dot(segdi) > 0){
+                directEdge[segp0].insert(make_pair(segp0, segp1));
+            }
+            else {
+                directEdge[segp1].insert(make_pair(segp1, segp0));
+            }
+        }
+        else if(triangleEdge2.ifoverlapSegment(seg)){
+            if(triangleEdge2.getdirect().dot(segdi) > 0){
+                directEdge[segp0].insert(make_pair(segp0, segp1));
+            }
+            else {
+                directEdge[segp1].insert(make_pair(segp1, segp0));
+            }
+        }
+        else{
+            directEdge[segp0].insert(make_pair(segp0, segp1));
+            directEdge[segp1].insert(make_pair(segp1, segp0));
+        }
+    }
+    while(1){
+        
+    }
+}

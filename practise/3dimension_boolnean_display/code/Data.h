@@ -33,7 +33,6 @@ struct Data {
     static std::map<int, Face> faces;
     static int facesnum;
     static std::map<int, Yinset> yinsets;
-    static int yinsetsnum;
     static void load(Yinset&) ;
     static void clean();
     static Yinset& meet(Yinset&, Yinset&);

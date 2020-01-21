@@ -1,6 +1,7 @@
 #include"YinsetContainTriangle.h"
 #include"Data.h"
 #include"Tol.h"
+#include"DatastructureHead.h"
 #include<vector>
 #include<set>
 #include<map>
@@ -14,9 +15,9 @@ using namespace std;
 
 
 bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& triangle, int overlaptriangle = AddOverlap){
-    Point p0 = Data::points[triangle.getpoints().[0]],
-        p1 = Data::points[triangle.getpoints().[1]],
-        p2 = Data::points[triangle.getpoints().[2]];
+    Point p0 = Data::points[triangle.getpoints()[0]],
+        p1 = Data::points[triangle.getpoints()[1]],
+        p2 = Data::points[triangle.getpoints()[2]];
     Point p((p0[0] + p1[0] + p2[0]) / 3,
             (p0[1] + p1[1] + p2[1]) / 3,
             (p0[2] + p1[2] + p2[2]) / 3,
@@ -24,13 +25,13 @@ bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& trian
     Data::points[Data::pointsnum] = p;
     Data::pointsnum++;
     Point farpoint = Data::farpoint;
-    Segment striaghtLine(p.getid(), fatpoint.getid(), Data::segmentsnum);
+    Segment striaghtLine(p.getid(), farpoint.getid(), Data::segmentsnum);
     Data::segments[Data::segmentsnum] = striaghtLine;
     Data::segmentsnum++;
     Point intersectPoint;
     vector<Planar> intersectPlanar;
-    for(auto i = yinset.getfaces.begin(); i != yinset.getfaces().end(); i++){
-        for(auto j = Data::faces[*i].getplanars().begin();
+    for(auto i = yinset.getfaces().begin(); i != yinset.getfaces().end(); i++){
+        for(auto j = (Data::faces[*i]).getplanars().begin();
             j != Data::faces[*i].getplanars().end(); j++){
             Planar pl = Data::planars[*j];
             if(pl.ifcontainPlanar(triangle)){
@@ -56,12 +57,12 @@ bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& trian
                     cin >> i;
                 }
             }
-            Segment seg0 = Data::segments[pl.getsegments().[0]],
-                seg1 = Data::segments[pl.getsegments().[1]],
-                seg2 = Data::segments[pl.getsegments().[2]];
-            Point p0 = Data::points[pl.getpoints().[0]],
-                p1 = Data::points[pl.getpoints().[1]],
-                p2 = Data::points[pl.getpoints().[2]];
+            Segment seg0 = Data::segments[pl.getsegments()[0]],
+                seg1 = Data::segments[pl.getsegments()[1]],
+                seg2 = Data::segments[pl.getsegments()[2]];
+            Point p0 = Data::points[pl.getpoints()[0]],
+                p1 = Data::points[pl.getpoints()[1]],
+                p2 = Data::points[pl.getpoints()[2]];
             // int t = 0;
             bool ifcloser = false;
             bool ifequal = false;
@@ -162,7 +163,7 @@ bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& trian
     if(intersectPlanar.empty()){
         return yinset.gettype();
     }
-    else if(intersecPlanar.size() == 1){
+    else if(intersectPlanar.size() == 1){
         Planar interpl = intersectPlanar[0];
         Direction d = intersectPoint - p;
         double dou = d.dot(interpl.getnormaldirect());
@@ -186,9 +187,9 @@ bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& trian
         for(auto i = intersectPlanar.begin(); i != intersectPlanar.end(); i++){
             Planar Pl = *i;
             Segment seg,
-                seg0 = Data::segments[Pl.getsegments[0]],
-                seg1 = Data::segments[Pl.getsegments[1]],
-                seg2 = Data::segments[Pl.getsegments[2]];
+                seg0 = Data::segments[Pl.getsegments()[0]],
+                seg1 = Data::segments[Pl.getsegments()[1]],
+                seg2 = Data::segments[Pl.getsegments()[2]];
             if(seg0.ifcontainPoint(intersectPoint)){
                 seg = seg0;
             }
@@ -199,11 +200,17 @@ bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& trian
                 seg = seg2;
             }
             Direction d1;
-            if(find(seg.getinPlanar01().begin(), seg.getinPlanar01().end(), Pl.getid())){
+            if(find(seg.getinPlanar01().begin(), seg.getinPlanar01().end(), Pl.getid())
+               == seg.getinPlanar01().end()){
                 d1 = Data::points[seg[0]] - Data::points[seg[1]];
             }
-            else if(find(seg.getinPlanar10().begin(), seg.getinPlanar10().end(), Pl.getid())){
+            else if(find(seg.getinPlanar10().begin(), seg.getinPlanar10().end(), Pl.getid())
+                    == seg.getinPlanar10().end()){
                 d1 = Data::points[seg[1]] - Data::points[seg[0]];
+            }
+            else {
+                cout << "YinsetContainTriangle::find() smallest angle face wrong : "
+                     << triangle.getid();
             }
             Direction normal = d.cross(d1);
             Flat flat(intersectPoint, normal);

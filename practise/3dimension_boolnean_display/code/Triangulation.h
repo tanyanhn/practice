@@ -10,6 +10,8 @@ using std::map;
 using std::set;
 using std::vector;
 
+class Segment;
+
 class Triangulation {
     //private:
     set<Segment> sweepflat;
