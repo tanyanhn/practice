@@ -34,7 +34,7 @@ vector<Planar> Triangulation::operator()(Planar& p) {
     }
     (*Tol::l) = sweepline;
     makeMonotone();
-    vector<Planar> yMonotones = generatorYMonotone();
+    vector<Planar> yMonotones = generatorPolygen();
     vector<Planar> triangles;
     for(auto i = yMonotones.begin(); i != yMonotones.end(); i++){
         vector<Planar> partTriangle = TriangulateMonotonePolygon(*i);
@@ -324,8 +324,8 @@ void Triangulation::handleRegularRightVertex(Point& p, set<Segment>::iterator& e
 }
 
 
-vector<Planar> Triangulation::generatorYMonotone(){
-    map<Point, set<pair<Point, Point>>> directEdge;
+vector<Planar> Triangulation::generatorPolygen(){
+    map<Point, set<int>> directEdge;
     Segment triangleEdge0 = Data::segments[pl.getsegments()[0]],
         triangleEdge1 = Data::segments[pl.getsegments()[1]],
         triangleEdge2 = Data::segments[pl.getsegments()[2]];
@@ -336,34 +336,87 @@ vector<Planar> Triangulation::generatorYMonotone(){
         Direction segdi = segp1 - segp0;
         if(triangleEdge0.ifoverlapSegment(seg)){
             if(triangleEdge0.getdirect().dot(segdi) > 0){
-                directEdge[segp0].insert(make_pair(segp0, segp1));
+                directEdge[segp0].insert(seg.getid());
             }
             else {
-                directEdge[segp1].insert(make_pair(segp1, segp0));
+                directEdge[segp1].insert(seg.getid());
             }
         }
         else if(triangleEdge1.ifoverlapSegment(seg)){
             if(triangleEdge1.getdirect().dot(segdi) > 0){
-                directEdge[segp0].insert(make_pair(segp0, segp1));
+                directEdge[segp0].insert(seg.getid());
             }
             else {
-                directEdge[segp1].insert(make_pair(segp1, segp0));
+                directEdge[segp1].insert(seg.getid());
             }
         }
         else if(triangleEdge2.ifoverlapSegment(seg)){
             if(triangleEdge2.getdirect().dot(segdi) > 0){
-                directEdge[segp0].insert(make_pair(segp0, segp1));
+                directEdge[segp0].insert(seg.getid());
             }
             else {
-                directEdge[segp1].insert(make_pair(segp1, segp0));
+                directEdge[segp1].insert(seg.getid());
             }
         }
         else{
-            directEdge[segp0].insert(make_pair(segp0, segp1));
-            directEdge[segp1].insert(make_pair(segp1, segp0));
+            directEdge[segp0].insert(seg.getid());
+            directEdge[segp1].insert(seg.getid());
         }
     }
+    set<Point> routeps;
+    set<int> routesegs;
+    vector<Planar> YMonotones;
+    Point routep0, routep1;
+    Segment routeseg;
     while(1){
-        
+        if(routeps.empty()){
+            if(directEdge.empty()){
+                break;
+            }
+            else {
+                auto it = directEdge.begin();
+                auto itsecond = (it->second).begin();
+                routep0 = it->first;
+                routeps.insert(routep0);
+                routeseg = Data::segments[*itsecond];
+                //(it->second).erase(itsecond);
+                //if((it->second).empty()){
+                //    directEdge.erase(it);
+                //}
+                routesegs.insert(routeseg.getid());
+            }
+        }
+        //routep1 = Data::points[routeseg[1]];
+        set<int> nextsegs = directEdge[routep1];
+        double smallangle = 2 * M_PI + 1;
+        int nextseg = -1;
+        Segment seg;
+        Point segp0, segp1;
+        for(auto i = nextsegs.begin(); i != nextsegs.end(); i++){
+            seg = Data::segments[*i];
+            //segp0 = Data::points[seg[0]];
+            //segp1 = Data::points[seg[1]];
+            if(seg[1] == routep1.getid()){
+                segp0 = Data::points[seg[1]];
+                segp1 = Data::points[seg[0]];
+            }
+            else{
+                segp0 = Data::points[seg[0]];
+                segp1 = Data::points[seg[1]];
+            }
+            double angle = (segp1 - segp0).angle(routep0 - routep1, pl.getnormaldirect());
+            if(angle < smallangle){
+                smallangle = angle;
+                nextseg = seg.getid();
+            }
+        }
+        routeseg = Data::segments[nextseg];
+        routep0 = routep1;
+        routeps.insert(routep0);
+        routesegs.insert(nextseg);
+        routep1 = segp1;
+        if(routeps.find(routep1) != routeps.end()){
+            
+        }
     }
 }
