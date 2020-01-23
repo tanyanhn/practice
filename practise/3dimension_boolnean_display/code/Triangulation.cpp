@@ -363,13 +363,17 @@ vector<Planar> Triangulation::generatorPolygen(){
             directEdge[segp1].insert(seg.getid());
         }
     }
-    set<Point> routeps;
-    set<int> routesegs;
+    map<Point, int> route;
+    map<Point, int> preroute;
+    //map<Point, int> routesegs;
     vector<Planar> YMonotones;
     Point routep0, routep1;
     Segment routeseg;
+    vector<Planar> anwser;
+    Planar pl;
+    set<int> existseg;
     while(1){
-        if(routeps.empty()){
+        if(route.empty()){
             if(directEdge.empty()){
                 break;
             }
@@ -377,13 +381,19 @@ vector<Planar> Triangulation::generatorPolygen(){
                 auto it = directEdge.begin();
                 auto itsecond = (it->second).begin();
                 routep0 = it->first;
-                routeps.insert(routep0);
+                route.insert(make_pair(routep0, *itsecond));
                 routeseg = Data::segments[*itsecond];
+                if(routeseg[0] == routep0.getid()){
+                    routep1 = Data::points[routeseg[1]];
+                }
+                else{
+                    routep1 = Data::points[routeseg[0]];
+                }
                 //(it->second).erase(itsecond);
                 //if((it->second).empty()){
                 //    directEdge.erase(it);
                 //}
-                routesegs.insert(routeseg.getid());
+                //routesegs.insert(routeseg.getid());
             }
         }
         //routep1 = Data::points[routeseg[1]];
@@ -410,13 +420,133 @@ vector<Planar> Triangulation::generatorPolygen(){
                 nextseg = seg.getid();
             }
         }
+        preroute.insert(make_pair(routep1, routep0.getid()));
+        //routeseg = Data::segments[nextseg];
+        //routep0 = routep1;
+        route.insert(make_pair(routep1, nextseg));
+        //routesegs.insert(nextseg);
+        //routep1 = segp1;
+        Point p = segp1;
+        int nextp0 = segp0.getid(),
+            nextp1 = segp1.getid();
+        int ifbreak = -1;
+        while(route.find(p) != route.end()){
+            if(!(p == segp1)){
+                preroute.erase(p);
+            }
+            Segment seg = Data::segments[route[p]];
+            int p2;
+            if(seg[0] == p.getid()){
+                p2 = seg[1];
+            }
+            else {
+                p2 = seg[0];
+            }
+            route.erase(p);
+            p = Data::points[p2];
+            existseg.insert(seg.getid());
+            if(route.find(p) == route.end()){
+                pl.setid(Data::planarsnum);
+                Data::planarsnum++;
+                pl.setexistsegments(existseg);
+                existseg.clear();
+                anwser.push_back(pl);
+                if(preroute.empty() && route.empty()){
+                    ifbreak = 1;
+                }
+                else {
+                    nextp0 = preroute[segp1];
+                    nextp1 = segp1.getid();
+                    nextseg = routeseg.getid();
+                }
+                break;
+            }
+        }
+        if(ifbreak == 1){
+            break;
+        }
+        routep0 = Data::points[nextp0];
+        routep1 = Data::points[nextp1];
         routeseg = Data::segments[nextseg];
-        routep0 = routep1;
-        routeps.insert(routep0);
-        routesegs.insert(nextseg);
-        routep1 = segp1;
-        if(routeps.find(routep1) != routeps.end()){
-            
+    }
+    return anwser;
+}
+
+
+void Triangulation::TriangulateMonotonePolygon(Planar& planar){
+    map<Point, vector<int>> nearPoint;
+    set<int> existsegment = pl.getexistsegments(),
+        planarexistsegment = planar.getexistsegments();
+    for(auto i = planarexistsegment.begin(); i != planarexistsegment.end(); i++){
+        Segment seg = Data::segments[*i];
+        Point p0 = Data::points[seg[0]],
+            p1 = Data::points[seg[1]];
+        vector<int> vp0 = nearPoint[p0],
+            vp1 = nearPoint[p1];
+        vp0.push_back(p1.getid());
+        vp1.push_back(p0.getid());
+        nearPoint[p0] = vp0;
+        nearPoint[p1] = vp1;
+    }
+    stack<Point> s;
+    auto it = nearPoint.end();
+    it--;
+    s.push(it->first);
+    it--;
+    s.push(it->first);
+    while(1){
+        if(it == nearPoint.begin()){
+            break;
+        }
+        it--;
+        Point p = it->first;
+        Point topp = s.top();
+        vector<int> nearp = nearPoint[p];
+        if((nearp[0] == topp.getid()) || (nearp[1] == topp.getid())){
+            Point p1 = s.pop(),
+                p2 = s.pop();
+            while(1){
+                if((p2 - p1).angle(p - p1, pl.getnormaldirect()) > M_PI){
+                    break;
+                }
+                Segment seg(p.getid(), p2.getid(), Data::pointsnum);
+                Data::pointsnum++;
+                existsegment.insert(seg.getid());
+                p1 = p2;
+                if(s.empty()){
+                    break;
+                }
+                p2 = s.pop();
+            }
+            if(s.empty()){
+                s.push(p1);
+                s.push(p);
+            }
+            else{
+                s.push(p2);
+                s.push(p1);
+                s.push(p);
+            }
+        }
+        else{
+            Point p1;
+            while(1){
+                p1 = s.pop();
+                if(s.empty()){
+                    break;
+                }
+                Segment seg(p.getid(), p1.getid(), Data::pointsnum);
+                Data::pointsnum++;
+                existsegment.insert(seg.getid());
+            }
+            s.push(p1);
+            s.push(p);
         }
     }
+    pl.setexistsegments(existsegment);
+}
+
+
+vector<Planar> dealexistpoint(vector<Planar>& vpl){
+    
 }

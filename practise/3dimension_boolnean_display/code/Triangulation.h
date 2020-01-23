@@ -28,7 +28,8 @@ class Triangulation {
                                  set<Segment>::iterator& ei2);
     void handleRegularRightVertex(Point&, set<Segment>::iterator& ej);
     vector<Planar> generatorPolygen();
-    vector<Planar> TriangulateMonotonePolygon(Planar&);
+    void TriangulateMonotonePolygon(Planar&);
+    vector<Planar> dealexistpoint(vector<Planar>&);
 public:
     std::vector<Planar> operator()(Planar&);
 };

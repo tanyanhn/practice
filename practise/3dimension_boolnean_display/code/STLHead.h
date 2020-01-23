@@ -5,6 +5,7 @@
 #include<vector>
 #include<set>
 #include<map>
+#include<stack>
 #include<cmath>
 #include<utility>
 #include<iostream>
