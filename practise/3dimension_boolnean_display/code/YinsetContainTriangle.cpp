@@ -37,9 +37,9 @@ bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& trian
             if(pl.ifcontainPlanar(triangle)){
                 if(overlaptriangle == AddOverlap){
                     if(triangle.getnormaldirect().dot(pl.getnormaldirect()) < -Tol::t)
-                        return true;
-                    else if(triangle.getnormaldirect().dot(pl.getnormaldirect()) > Tol::t)
                         return false;
+                    else if(triangle.getnormaldirect().dot(pl.getnormaldirect()) > Tol::t)
+                        return true;
                     else {
                         cout << "YinsetContainTriangle wrong in overlaptriangle == AddOverlap : "
                              << triangle.getid() << " : " << pl.getid();
@@ -168,13 +168,13 @@ bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& trian
         Direction d = intersectPoint - p;
         double dou = d.dot(interpl.getnormaldirect());
         if(dou > 0){
-            return 1;
+            return true;
         }
         else if(dou < 0){
-            return 0;
+            return false;
         }
         else {
-            cout << "YinsetContainTriangle:: intersectPlanar.size() == 1 wrong :"
+            cout << "YinsetContainTriangle: intersectPlanar.size() == 1 wrong :"
                  << interpl.getid() <<" : ";
             int i;
             cin >> i;
@@ -223,10 +223,10 @@ bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& trian
             }
         }
         if(d.dot(closePl.getnormaldirect()) > 0) {
-            return 1;
+            return true;
         }
         else {
-            return 0;
+            return false;
         }
     }
 }

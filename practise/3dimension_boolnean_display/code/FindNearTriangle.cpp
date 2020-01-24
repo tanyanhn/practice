@@ -22,6 +22,7 @@ vector<int> FindNearTriangle::operator()(const Planar& triangle){
     vSeg.push_back(seg0); vSeg.push_back(seg1); vSeg.push_back(seg2);
     for(auto i = vSeg.begin(); i != vSeg.end(); i++){
         double angle = 2 * M_PI + 1;
+        Segment seg = *i;
         if(find(i->getinPlanar01().begin(), i->getinPlanar01().end(), triangle.getid())
            != i->getinPlanar01().end()){
             Direction d = Data::points[(*i)[1]] - Data::points[(*i)[0]];
@@ -38,10 +39,13 @@ vector<int> FindNearTriangle::operator()(const Planar& triangle){
                 int i;
                 cin >> i;
             }
+            set<int> inPlanar10 = seg.getinPlanar10();
+            inPlanar10.erase(k);
+            seg.setinPlanar10(inPlanar10);
             anwser.push_back(k);
         }
         else if(find(i->getinPlanar10().begin(), i->getinPlanar10().end(), triangle.getid())
-                == i->getinPlanar10().end()){
+                != i->getinPlanar10().end()){
             Direction d = Data::points[(*i)[0]] - Data::points[(*i)[1]];
             int k = -1;
             for(auto j = i->getinPlanar01().begin(); j != i->getinPlanar01().end(); j++){
@@ -56,6 +60,9 @@ vector<int> FindNearTriangle::operator()(const Planar& triangle){
                 int i;
                 cin >> i;
             }
+            set<int> inPlanar01 = seg.getinPlanar01();
+            inPlanar01.erase(k);
+            seg.setinPlanar01(inPlanar01);
             anwser.push_back(k);
         }
         else {

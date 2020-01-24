@@ -12,7 +12,11 @@ class Face {
     int type;
 public:
     Face(){}
-    explicit Face(std::vector<int> vpl, int identity = -1, int inY = -1, int t = -1) : planars(vpl), id(identity), inYinset(inY), type(t) {}
+    explicit Face(std::vector<int> vpl, int identity = -1, int inY = -1, int t = -1) : planars(vpl), id(identity), inYinset(inY), type(t) {
+        if(id != -1){
+            Data::faces[id] = *this;
+        }
+    }
     Face(const Face& f) : planars(f.planars), id(f.id), inYinset(f.inYinset), type(f.type) {}
     Face& operator=(const Face& f){
         Face temp(f);
@@ -55,6 +59,7 @@ public:
             Data::faces[id] = *this;
         }
     }
+    Yinset meet(Yinset&);
     //bool ifincludeFace(const Face& f) const;
 };
 

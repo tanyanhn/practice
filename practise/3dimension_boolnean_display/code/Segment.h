@@ -33,7 +33,7 @@ public:
             for(auto i = inP10.begin(); i != inP01.end(); i++){
                 inPlanar.insert(*i);
             }
-            if(p0 != -1 && p1 != -1){
+            if(p0 != -1 && p1 != -1 && p0 != p1){
                 if(Data::points[p0] >
                    Data::points[p1]){
                     points[0] = p1;
@@ -160,7 +160,8 @@ public:
         return points[i];
     }*/
     bool operator==(const Segment& seg1) const {
-        return (points[0] == seg1[0] && points[1] == seg1[1]);
+        return (Data::points[points[0]] == Data::points[seg1[0]] &&
+                Data::points[points[1]] == Data::points[seg1[1]]);
     }
     bool operator<(const Segment& seg2) const ;/*{
         Point p1 = Tol::f.intersectionLine(*this),

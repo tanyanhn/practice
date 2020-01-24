@@ -33,16 +33,18 @@ struct Data {
     static std::map<int, Face> faces;
     static int facesnum;
     static std::map<int, Yinset> yinsets;
+    static int yinsetsnum;
+    static std::map<Point, set<int>> pastpoints;
     static void load(Yinset&) ;
     static void clean();
     static Yinset& meet(Yinset&, Yinset&);
     static Yinset& join(Yinset&, Yinset&);
     static Yinset& complement(Yinset& );
-    static std::vector<Planar> intersection();
-    static std::vector<Planar> triangulation();
-    static std::vector<Planar> meetFace();
-    static std::vector<Face> past();
-    static std::vector<HassNode> generatehassmap();
+    static void intersection();
+    static void triangulation();
+    static void selecttriangles(const Yinset&, const Yinset&);
+    static void past();
+    //static std::vector<HassNode> generatehassmap();
 };
 /*
 Point Data::farpoint;

@@ -19,6 +19,11 @@ using namespace std;
 
 
 vector<Planar> Triangulation::operator()(Planar& p) {
+    vector<Planar> triangles;
+    if(p.getexistsegments().size() == 3){
+        triangles.push_back(p);
+        return triangles;
+    }
     pl = p;
     (*Tol::outside) = p.getnormaldirect();
     Flat f;
@@ -35,11 +40,15 @@ vector<Planar> Triangulation::operator()(Planar& p) {
     (*Tol::l) = sweepline;
     makeMonotone();
     vector<Planar> yMonotones = generatorPolygen();
-    vector<Planar> triangles;
     for(auto i = yMonotones.begin(); i != yMonotones.end(); i++){
-        vector<Planar> partTriangle = TriangulateMonotonePolygon(*i);
-        copy(partTriangle.begin(), partTriangle.end(), triangles.end());
+        TriangulateMonotonePolygon(*i);
     }
+    triangles = generatorPolygen();
+    for(auto i = triangles.begin(), i != triangles.end(), i++){
+        Data::planars[*i].setinYinset(pl.getinYinset());
+    }
+    sweepflatposition.clear();
+    helper.clear;
     return triangles;
 }
 
@@ -547,6 +556,59 @@ void Triangulation::TriangulateMonotonePolygon(Planar& planar){
 }
 
 
-vector<Planar> dealexistpoint(vector<Planar>& vpl){
-    
+/*
+
+vector<Planar> Triangulation::dealexistpoint(vector<Planar>& vpl){
+    set<int> existpoints = pl.getexistpoints();
+    set<int> existsegments = pl.getexistsegments();
+    map<int, set<Point>> segmentcontainPoint;
+    for(auto i = existpoints.begin(); i != existpoints.end(); i++){
+        Point p = Data::points[*i];
+        for(auto j = vpl.begin(); j != vpl.end(); j++){
+            Planar pl = *j;
+            if(pl.ifcontainPoint(p) == true){
+                vector<int> points = pl.getpoints(),
+                    segments = pl.getsegments();
+                Point p0 = Data::points[points[0]],
+                    p1 = Data::points[points[1]],
+                    p2 = Data::points[points[2]];
+                Segment seg0 = Data::segments[segments[0]],
+                    seg1 = Data::segments[segments[1]],
+                    seg2 = Data::segments[segments[2]];
+                if(p == p0){}
+                else if(p == p1){}
+                else if(p == p2){}
+                else if(seg0.ifcontainPoint(p) == true){
+                    Segment segadd(p.getid(), p2.getid(), Data::segmentsnum++);
+                    existsegments.insert(segadd.getid());
+                    Data::existsegments.insert(segadd.getid());
+                    if(exsitsegments.find(seg0.getid()) != existsegments.end()){
+                        segmentcontainPoint[seg0.getid()].insert(p);
+                    }
+                }
+                else if(seg1.ifcontainPoint(p) == true){
+                    Segment segadd(p.getid(), p0.getid(), Data::segmentsnum++);
+                    existsegments.insert(segadd.getid());
+                    Data::existsegments.insert(segadd.getid());
+                    if(exsitsegments.find(seg1.getid()) != existsegments.end()){
+                        segmentcontainPoint[seg1.getid()].insert(p);
+                    }
+                }
+                else if(seg0.ifcontainPoint(p) == true){
+                    Segment segadd(p.getid(), p1.getid(), Data::segmentsnum++);
+                    existsegments.insert(segadd.getid());
+                    Data::existsegments.insert(segadd.getid());
+                    if(exsitsegments.find(seg2.getid()) != existsegments.end()){
+                        segmentcontainPoint[seg2.getid()].insert(p);
+                    }
+                }
+                else {
+                    Segment segadd0(p.getid(), p0.getid(), Data::segmentsnum++),
+                        segadd1(p.getid(), p1.getid(), Data::segmentsnum++),
+                        segadd2(p.getid(), p2.getid(), Data::segmentsnum++);
+                }
+            }
+        }
+    }
 }
+*/
