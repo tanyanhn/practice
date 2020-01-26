@@ -10,5 +10,6 @@
 #include<utility>
 #include<iostream>
 #include<algorithm>
+#include<string>
 
 #endif

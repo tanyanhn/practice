@@ -10,6 +10,7 @@
 #include<map>
 #include<set>
 #include<vector>
+#include"STLHead.h"
 
 class Point;
 class Segment;
@@ -36,7 +37,9 @@ struct Data {
     static int yinsetsnum;
     static std::map<Point, set<int>> pastpoints;
     static void load(Yinset&) ;
-    static void clean();
+    static void clear();
+    static void print(std::ostream&, const Yinset&);
+    static int import(std::istream&);
     static Yinset& meet(Yinset&, Yinset&);
     static Yinset& join(Yinset&, Yinset&);
     static Yinset& complement(Yinset& );

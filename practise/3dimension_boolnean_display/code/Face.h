@@ -4,6 +4,7 @@
 #include"Data.h"
 #include<vector>
 #include<utility>
+#include"STLHead.h"
 
 class Face {
     std::vector<int> planars;
@@ -59,7 +60,7 @@ public:
             Data::faces[id] = *this;
         }
     }
-    Yinset meet(Yinset&);
+    //friend std::ostream& operator<<(ostream& os, const Face& f);
     //bool ifincludeFace(const Face& f) const;
 };
 

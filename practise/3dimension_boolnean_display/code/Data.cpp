@@ -85,6 +85,7 @@ void Data::past(){
         if(s.empty()){
             if(face.size() != 0){
                 Face f(face, facesnum++);
+                existfaces.insert(f.getid());
                 face.clear();
             }
             s.push(*remain.begin());
@@ -105,6 +106,75 @@ void Data::past(){
         if(remain.find(neartriangle[2]) != remain.end()){
             remain.erase(neartriangle[2]);
             s.push(neartriangle[2]);
+        }
+    }
+}
+
+
+void Data::print(ostream& os, const Yinset& y){
+    clear();
+    load(y);
+    map<int, int> printv;
+    map<int, int> printvn;
+    int kv = 0;
+    for(auto i = existpoints.begin(); i != existpoints.end(); i++){
+        os << "v " << points[*i] << endl;
+        printv.insert(make_pair(*i, kv++));
+    }
+    os << endl;
+    int kvn = 0;
+    for(auto i = existplanars.begin(); i != existplanars.end(); i++){
+        Planar pl = planars[*i];
+        os << "vn " << pl.getnormaldirect() << end;
+        printvn.insert(make_pair(*i, kvn++));
+    }
+    os << end;
+    for(auto i = existplanars.begin(); i != existplanars.end(); i++){
+        Planar pl = planars[*i];
+        vector<int> vp = pl.getpoints();
+        os << "f "
+           << printv[vp[0]] << "/" << 1 << "/" << printvn[*i] << " "
+           << printv[vp[1]] << "/" << 1 << "/" << printvn[*i] << " "
+           << printv[vp[2]] << "/" << 1 << "/" << printvn[*i] << endl;
+    }
+}
+
+int Data::import(istream& is){
+    clear();
+    map<int, int> printv;
+    map<int, Direction> printvn;
+    int kvn = 0;
+    string ism,
+        sv("v"),
+        svn("vn"),
+        sf("f"),
+        s;
+    while(is >> ism){
+        if(ism == sv){
+            Point p;
+            p.setid(pointsnum++);
+            is >> p;
+        }
+        else if(ism == svn){
+            Direction d;
+            is >> d;
+            printvn.insert(make_pair(kvn++, d));
+        }
+        else if(ism == sf){
+            vector<int> vp;
+            int i;
+            Direction normal;
+            for(int j = 0; j < 3; j++){
+                is >> s;
+                vp[j] = s[0];
+                if(j == 0)
+                    normal = printvn[s[4]];
+                s.clear();
+            }
+            Segment seg0(vp[0], vp[1], segmentsnum++),
+                seg1(vp[1], vp[2], segmentsnum++),
+                seg2(vp[2], vp[0], segmentsnum++);
+            if()
         }
     }
 }
