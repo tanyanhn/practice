@@ -36,13 +36,13 @@ struct Data {
     static std::map<int, Yinset> yinsets;
     static int yinsetsnum;
     static std::map<Point, set<int>> pastpoints;
-    static void load(Yinset&) ;
+    static void load(const Yinset&) ;
     static void clear();
     static void print(std::ostream&, const Yinset&);
     static int import(std::istream&);
-    static Yinset& meet(Yinset&, Yinset&);
-    static Yinset& join(Yinset&, Yinset&);
-    static Yinset& complement(Yinset& );
+    static Yinset meet(const Yinset&, const Yinset&);
+    static Yinset join(const Yinset&, const Yinset&);
+    static Yinset complement(const Yinset& );
     static void intersection();
     static void triangulation();
     static void selecttriangles(const Yinset&, const Yinset&);

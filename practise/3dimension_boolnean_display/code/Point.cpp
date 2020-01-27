@@ -1,5 +1,26 @@
 #include"Point.h"
 #include"Tol.h"
+#include"Segment.h"
+
+
+void Point::setid(const int i) {
+    for(auto j = inSegment.begin(); j != inSegment.end(); j++){
+        Segment seg = Data::segments[*j];
+        if(seg[0] == id){
+            Data::segments[*j].setendpoints(0, i);
+        }
+        else if(seg[1] == id){
+            Data::segments[*j].setendpoints(1, i);
+        }
+        else {
+            cout << "Point::setid() wrong :" << id;
+        }
+    }
+    id = i;
+    if(id != -1){
+        Data::points[id] = *this;
+    }
+}
 
 
 Point::Point(const double x, const double y, const double z, const int identity, const set<int> &v, const int it) : coord{x, y, z}, id(identity), inSegment(v), inYinset(it) {/*
@@ -9,6 +30,9 @@ Point::Point(const double x, const double y, const double z, const int identity,
     id = identity;
     insegment = v;
     intriangle = it;*/
+    if(id != -1){
+        Data::points[id] = *this;
+    }
 }
 
 Point::Point(const Point& q){
@@ -43,4 +67,20 @@ bool Point::operator<(const Point& q) const {
         return true;
     else
         return false;
+}
+
+
+ostream& operator<<(ostream& os, const Point& p){
+    return os << p[0] << " "
+              << p[1] << " "
+              << p[2] << " ";
+}
+
+istream& operator>>(istream& is, Point& p){
+    double d0, d1, d2;
+    is >> d0 >> d1 >> d2;
+    p[0] = d0;
+    p[1] = d1;
+    p[2] = d2;
+    return is;
 }

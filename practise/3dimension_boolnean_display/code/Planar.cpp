@@ -16,6 +16,9 @@ Planar::Planar(std::vector<int> p, std::vector<int> s, int identity , int inF , 
     for(auto i = segments.begin(); i != segments.end(); i++){
         existsegments.insert(*i);
     }
+    if(id != -1){
+        Data::planars[id] = *this;
+    }
 }
 
 Planar::Planar(const Planar& pl) :

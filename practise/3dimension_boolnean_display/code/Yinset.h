@@ -5,14 +5,18 @@
 #include"HassNode.h"
 #include<vector>
 #include<utility>
+#include<map>
+#include"STLHead.h"
 
 class HassNode;
+class Point;
 
 class Yinset{
     std::vector<int> faces;
     std::vector<HassNode> hassmap;
     int id;
     int type;
+    std::map<Point, set<int>> pastpoints;
 public:
     explicit Yinset(std::vector<int> vf = std::vector<int>(), int identity = -1, int t = -1) : faces(vf), id(identity), type(t) {
         if(identity != -1){
@@ -60,6 +64,12 @@ public:
         if(id != -1){
             Data::yinsets[id] = *this;
         }
+    }
+    std::map<Point, set<int>> getpastpoints() const {
+        return pastpoints;
+    }
+    void setpastpoints(){
+        pastpoints = Data::pastpoints;
     }
     void generatorhassmap();
 };

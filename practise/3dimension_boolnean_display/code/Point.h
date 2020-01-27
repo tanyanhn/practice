@@ -24,12 +24,26 @@ public:
     int getid() const {
         return id;
     }
-    void setid(const int i) {
+    void setid(const int i);
+    /*{
+        for(auto j = inSegment.begin(); j != inSegment.end(); j++){
+            Segment seg = Data::segments[*j];
+            if(seg[0] == id){
+                Data::segments[*j][0] = i;
+            }
+            else if(seg[1] == id){
+                Data::segments[*j][1] = i;
+            }
+            else {
+                cout << "Point::setid() wrong :" << id;
+            }
+        }
         id = i;
         if(id != -1){
             Data::points[id] = *this;
         }
     }
+    */
     int getinYinset() const {
         return inYinset;
     }
@@ -84,6 +98,8 @@ public:
     bool operator>(const Point& q) const {
         return q < *this;
     }
+    friend ostream& operator<<(ostream& os, const Point&);
+    friend istream& operator>>(istream& is, Point&);
 };
 
 #endif

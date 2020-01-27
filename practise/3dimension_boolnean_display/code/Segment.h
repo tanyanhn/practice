@@ -26,7 +26,7 @@ public:
             int inY = -1)
         : points{p0, p1}, id(identity), inPlanar01(inP01),
           inPlanar10(inP10), inYinset(inY) {
-            inPlanar.insert(identity);
+            //inPlanar.insert(identity);
             for(auto i = inP01.begin(); i != inP01.end(); i++){
                 inPlanar.insert(*i);
             }
@@ -82,6 +82,9 @@ public:
         inSegment.erase(id);
         Data::points[points[1]].setinSegment(inSegment);
         id = i;
+        if(id != 1){
+            Data::segments[id] = *this;
+        }
     }
     int getinYinset() const {
         return inYinset;

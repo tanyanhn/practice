@@ -5,6 +5,7 @@
 #include<vector>
 
 class FindNearTriangle {
+public:
     std::vector<int> operator()(const Planar&);
 };
 

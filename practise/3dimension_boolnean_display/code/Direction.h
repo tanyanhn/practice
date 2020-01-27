@@ -77,6 +77,8 @@ public:
                          coord[0] * d2.coord[1] - coord[1] * d2.coord[0]);
     }
     double angle(const Direction& d2, const Direction& di) const;
+    friend ostream& operator<<(ostream& os, const Direction& d);
+    friend istream& operator>>(istream& is, Direction& d);
 };
 
 
