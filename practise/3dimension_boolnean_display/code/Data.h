@@ -35,7 +35,7 @@ struct Data {
     static int facesnum;
     static std::map<int, Yinset> yinsets;
     static int yinsetsnum;
-    static std::map<Point, set<int>> pastpoints;
+    static std::map<Point, std::set<int>> pastpoints;
     static void load(const Yinset&) ;
     static void clear();
     static void print(std::ostream&, const Yinset&);

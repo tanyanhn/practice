@@ -12,7 +12,7 @@
 using namespace std;
 
 
-Point Data::farpoint;
+
 std::set<int> Data::existpoints;
 std::set<int> Data::existsegments;
 std::set<int> Data::existplanars;
@@ -23,11 +23,12 @@ std::map<int, Planar> Data::planars;
 std::map<int, Face> Data::faces;
 std::map<int, Yinset> Data::yinsets;
 std::map<Point, set<int>> Data::pastpoints;
-int Data::pointsnum = 0;
+int Data::pointsnum = 1;
 int Data::segmentsnum = 0;
 int Data::planarsnum = 0;
 int Data::facesnum = 0;
 int Data::yinsetsnum = 0;
+Point Data::farpoint = Point(0, 0, 0, 0);
 
 
 void Data::load(const Yinset& y){
@@ -95,6 +96,7 @@ void Data::load(const Yinset& y){
     }
     for(int k = 0; k < 3; k++){
         farpoint[k] = farpoint[k] + 1;
+        points[0] = farpoint;
     }
 }
 
@@ -177,6 +179,7 @@ void Data::selecttriangles(const Yinset& y1, const Yinset& y2){
 }
 
 void Data::past(){
+    existfaces.clear();
     FindNearTriangle functor;
     vector<int> face;
     set<int> remain = existplanars;

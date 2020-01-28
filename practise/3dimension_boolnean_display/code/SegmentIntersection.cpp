@@ -43,6 +43,8 @@ void SegmentIntersection::operator()(Planar& pl){
                 if(segContainp0[1] == p0.getid()){
                     segContainp0.setendpoints(1, p.getid());
                 }
+                Data::points[p0.getid()].setinSegment(set<int>());
+                Data::points[p0.getid()].setinYinset(-2);
                 Data::existpoints.erase(p0.getid());
                 Data::segments[segContainp0.getid()] = segContainp0;
                 //pinSegment.insert(*j);
@@ -65,6 +67,8 @@ void SegmentIntersection::operator()(Planar& pl){
                 if(segContainp1[1] == p1.getid()){
                     segContainp1.setendpoints(1, p.getid());
                 }
+                Data::points[p1.getid()].setinSegment(set<int>());
+                Data::points[p1.getid()].setinYinset(-2);
                 Data::existpoints.erase(p1.getid());
                 Data::segments[segContainp1.getid()] = segContainp1;
                 //pinSegment.insert(*j);
@@ -107,6 +111,10 @@ void SegmentIntersection::operator()(Planar& pl){
                     pl.setexistsegments(plexistsegment);
                 }
             }
+            Data::segments[seg.getid()].setinYinset(-2);
+            Data::segments[seg.getid()].setinPlanar(set<int>());
+            Data::segments[seg.getid()].setinPlanar01(set<int>());
+            Data::segments[seg.getid()].setinPlanar10(set<int>());
             Data::existsegments.erase(seg.getid());
             //set<int> allPlanar = seg.getinPlanar();
             for(auto j = allPlanar.begin(); j != allPlanar.end(); j++){
@@ -150,6 +158,10 @@ void SegmentIntersection::operator()(Planar& pl){
                 inPlanar10.insert(*j);
             }
             overlapseg.setinPlanar10(inPlanar10);
+            Data::segments[seg.getid()].setinYinset(-2);
+            Data::segments[seg.getid()].setinPlanar(set<int>());
+            Data::segments[seg.getid()].setinPlanar01(set<int>());
+            Data::segments[seg.getid()].setinPlanar10(set<int>());
             Data::existsegments.erase(seg.getid());
             for(auto j = seginPlanar.begin(); j != seginPlanar.end(); j++){
                 Planar pl = Data::planars[*j];

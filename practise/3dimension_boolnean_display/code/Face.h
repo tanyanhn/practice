@@ -60,6 +60,7 @@ public:
             Data::faces[id] = *this;
         }
     }
+    void generatortype();
     //friend std::ostream& operator<<(ostream& os, const Face& f);
     //bool ifincludeFace(const Face& f) const;
 };

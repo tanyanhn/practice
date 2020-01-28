@@ -9,16 +9,14 @@ public:
     int identity;
     int father;
     std::vector<int> children;
-    explicit HassNode(int ident = -2, int f = -2){
+    HassNode(int ident = -2, int f = -2){
         identity = ident;
         father = f;
-        vector<int> children;
+        std::vector<int> children;
     }
     HassNode(const HassNode& h) : identity(h.identity), father(h.father), children(h.children){}
     HassNode& operator=(const HassNode& h){
         identity = h.identity;
-        father = h.father;
-        children = h.children;
         return *this;
     }
     ~HassNode(){}
