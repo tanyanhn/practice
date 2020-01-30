@@ -23,7 +23,8 @@ public:
             Data::yinsets[identity] = *this;
         }
     }
-    Yinset(const Yinset& y) : faces(y.faces), hassmap(y.hassmap), id(y.id), type(y.type) {}
+    Yinset(const Yinset& y) : faces(y.faces), hassmap(y.hassmap),
+                              id(y.id), type(y.type), pastpoints(y.pastpoints) {}
     Yinset& operator=(const Yinset& y){
         Yinset temp(y);
         std::swap(*this, temp);
@@ -73,6 +74,17 @@ public:
     }
     void generatorhassmap();
     Yinset meet(const Yinset&) const;
+    Yinset complement() const;
+    Yinset join(const Yinset&) const;
+    friend std::ostream& operator<<(ostream& os, const Yinset& y){
+        Data::print(os, y);
+        return os;
+    }
+    friend std::istream& operator>>(istream& is, const Yinset& y){
+        int i = Data::import(is);
+        y = Data::yinsets[i];
+        return is;
+    }
 };
 
 #endif

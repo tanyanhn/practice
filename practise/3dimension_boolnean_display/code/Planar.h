@@ -108,6 +108,7 @@ public:
             Data::planars[id] = *this;
         }
     }
+    Planar overturn() const;
     bool ifcontainPoint(const Point&) const;
     bool ifcontainSegment(const Segment&) const;
     bool ifcontainPlanar(const Planar&) const;

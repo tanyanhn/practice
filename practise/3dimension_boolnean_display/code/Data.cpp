@@ -141,6 +141,10 @@ void Data::intersection(){
             functor(pli, plj);
         }
     }
+    SegmentIntersection functor1;
+    for(auto i = existplanars.begin(); i != existplanars.end(); i++){
+        functor1(planars[*i]);
+    }
 }
 
 void Data::triangulation(){
@@ -241,6 +245,7 @@ void Data::print(ostream& os, const Yinset& y){
            << printv[vp[1]] << "/" << 1 << "/" << printvn[*i] << " "
            << printv[vp[2]] << "/" << 1 << "/" << printvn[*i] << endl;
     }
+    clear();
 }
 
 int Data::import(istream& is){

@@ -107,7 +107,7 @@ void SegmentIntersection::operator()(Planar& pl){
                 for(auto j = allPlanar.begin(); j != allPlanar.end(); j++){
                     Planar pl = Data::planars[*j];
                     set<int> plexistsegment = pl.getexistsegments();
-                    plexistsegment.insert(seg.getid());
+                    plexistsegment.insert(s.getid());
                     pl.setexistsegments(plexistsegment);
                 }
             }

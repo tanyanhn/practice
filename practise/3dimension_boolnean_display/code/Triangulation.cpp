@@ -45,10 +45,79 @@ vector<Planar> Triangulation::operator()(Planar& p) {
     }
     triangles = generatorPolygen();
     for(auto i = triangles.begin(), i != triangles.end(), i++){
-        Data::planars[*i].setinYinset(pl.getinYinset());
+        i->setinYinset(pl.getinYinset());
+        Planar triangle = *i;
+        if(triangle.getexistsegments().size() != 3){
+            cout << "trianglulation wrong triangle.id : " << triangle.getid()  << " "
+                 << pl.getid();
+        }
+        else{
+            vector<int> segments = triangle.getexistsegments(),
+                points;
+            points.resize(3);
+            Segment seg0 = Data::segments[segments[0]],
+                seg1 = Data::segments[segments[1]],
+                seg2 = Data::segments[segments[2]];
+            for(int k = 0; k < 3; k++){
+                set<int> inPlanar = Data::segments[segments[k]].getinPlanar();
+                inPlanar.erase(pl.getid());
+                inPlanar.insert(triangle.getid());
+                Data::segments[segments[k]].setinPlanar(inPlanar);
+            }
+            if(seg0[0] == seg1[0]){
+                points[0] = seg0[1];
+                points[1] = seg0[0];
+                points[2] = seg1[1];
+            }
+            else if(seg0[0] == seg1[1]){
+                points[0] = seg0[1];
+                points[1] = seg0[0];
+                points[2] = seg1[0];
+            }
+            else if(seg0[1] == seg1[0]){
+                points[0] = seg0[0];
+                points[1] = seg0[1];
+                points[2] = seg1[1];
+            }
+            else if(seg0[1] == seg1[1]){
+                points[0] = seg0[0];
+                points[1] = seg0[1];
+                points[2] = seg1[0];
+            }
+            if(seg0[0] == points[0]){
+                set<int> inPlanar01 = seg0.getinPlanar01();
+                inPlanar01.insert(triangle.getid());
+                seg0.setinPlanar01(inPlanar01);
+            }
+            else{
+                set<int> inPlanar10 = seg0.getinPlanar10();
+                inPlanar10.insert(triangle.getid());
+                seg0.setinPlanar10(inPlanar10);
+            }
+            if(seg1[0] == points[1]){
+                set<int> inPlanar01 = seg1.getinPlanar01();
+                inPlanar01.insert(triangle.getid());
+                seg1.setinPlanar01(inPlanar01);
+            }
+            else{
+                set<int> inPlanar10 = seg1.getinPlanar10();
+                inPlanar10.insert(triangle.getid());
+                seg1.setinPlanar10(inPlanar10);
+            }
+            if(seg2[0] == points[2]){
+                set<int> inPlanar01 = seg2.getinPlanar01();
+                inPlanar01.insert(triangle.getid());
+                seg2.setinPlanar01(inPlanar01);
+            }
+            else{
+                set<int> inPlanar10 = seg2.getinPlanar10();
+                inPlanar10.insert(triangle.getid());
+                seg2.setinPlanar10(inPlanar10);
+            }
+        }
     }
     sweepflatposition.clear();
-    helper.clear;
+    helper.clear();
     return triangles;
 }
 

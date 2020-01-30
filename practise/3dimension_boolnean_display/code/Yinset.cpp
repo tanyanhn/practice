@@ -18,14 +18,63 @@ Yinset Yinset::meet(const Yinset& y2) const {
     Yinset anwser(faces, Data::yinsetsnum++);
     anwser.generatorhassmap();
     anwser.setpastpoints();
-    return anwser;
     Data::clear();
+    return anwser;
 }
 
+Yinset Yinset::complement() const {
+    Data::clear();
+    Data::load(*this);
+    set<int> existpl;
+    for(auto i = Data::existplanars.begin(); i != Data::existplanars.end(); i++){
+        Planar pl = Data::planars[*i];
+        Planar reversepl = pl.overturn();
+        existpl.insert(reversepl.getid());
+        vector<int> segments = pl.getsegments();
+        for(int k = 0; k < 3; k++){
+            Segment seg = Data::segments[segments[k]];
+            set<int> inPlanar = seg.getinPlanar(),
+                inPlanar01 = seg.getinPlanar01(),
+                inPlanar10 = seg.getinPlanar10();
+            inPlanar.erase(pl.getid());
+            inPlanar.insert(reversepl.getid());
+            if(inPlanar01.erase(pl.getid()) > 0){
+                inPlanar10.insert(reversepl.getid());
+            }
+            else if(inPlanar10.erase(pl.getid()) > 0){
+                inPlanar01.insert(reversepl.getid());
+            }
+            else{
+                cout << "complement wrong : pl.getid() :" << pl.getid() << " " << k;
+            }
+            seg.setinPlanar(inPlanar);
+            seg.setinPlanar01(inPlanar01);
+            seg.setinPlanar10(inPlanar10);
+        }
+    }
+    Data::existplanars = existpl;
+    Data::past();
+    vector<int> faces;
+    copy(Data::existfaces.begin(), Data::existfaces.end(), faces.begin());
+    Yinset anwser(faces, Data::yinsetsnum++);
+    anwser.generatorhassmap();
+    anwser.setpastpoints();
+    Data::clear();
+    return anwser;
+}
+
+
+Yinset Yinset::join(const Yinset& y2){
+    Yinset revery1 = this->complement().
+        revery2 = y2.complement();
+    Yinset reveranwser = revery1.meet(revery2);
+    return reveranwser.complement();
+}
 
 void Yinset::generatorhassmap(){
     int k = faces.size();
     hassmap.clear();
+    hassmap.resize(k);
     int x = 0;
     for(auto i = faces.begin(); i != faces.end(); i++, x++){
         Face f = Data::faces[*i];
@@ -101,6 +150,16 @@ void Yinset::generatorhassmap(){
         }
         if(h.father != -1){
             hassmap[h.father].children.push_back(h.identity);
+        }
+        else if(h.father = -1){
+            static int i = 0;
+            if(i == 0){
+                type = Data::faces[faces[h.identity]].gettype();
+                i = 1;
+            }
+            if(i == 1 && type != Data::faces[faces[h.identity]].gettype()){
+                cout << "Yinset's type has trouble ";
+            }
         }
     }
 }

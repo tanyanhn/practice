@@ -27,6 +27,14 @@ Planar::Planar(const Planar& pl) :
     existpoints(pl.existpoints), existsegments(pl.existsegments),
     id(pl.id), inFace(pl.inFace), inYinset(pl.inYinset) {}
 
+Planar Planar::overturn() const {
+    vector<int> points = this->getpoints(),
+        segments = this->getsegments();
+    swap(points[0], points[1]);
+    swap(segments[1], segments[2]);
+    return Planar(points, segments, Data::planarsnum++);
+}
+
 
 
 bool Planar::ifcontainPoint(const Point& p) const {
