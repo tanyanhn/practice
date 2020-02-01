@@ -76,11 +76,11 @@ public:
     Yinset meet(const Yinset&) const;
     Yinset complement() const;
     Yinset join(const Yinset&) const;
-    friend std::ostream& operator<<(ostream& os, const Yinset& y){
+    friend std::ostream& operator<<(std::ostream& os, const Yinset& y){
         Data::print(os, y);
         return os;
     }
-    friend std::istream& operator>>(istream& is, const Yinset& y){
+    friend std::istream& operator>>(std::istream& is, Yinset& y){
         int i = Data::import(is);
         y = Data::yinsets[i];
         return is;

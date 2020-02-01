@@ -44,7 +44,7 @@ vector<Planar> Triangulation::operator()(Planar& p) {
         TriangulateMonotonePolygon(*i);
     }
     triangles = generatorPolygen();
-    for(auto i = triangles.begin(), i != triangles.end(), i++){
+    for(auto i = triangles.begin(); i != triangles.end(); i++){
         i->setinYinset(pl.getinYinset());
         Planar triangle = *i;
         if(triangle.getexistsegments().size() != 3){
@@ -52,9 +52,11 @@ vector<Planar> Triangulation::operator()(Planar& p) {
                  << pl.getid();
         }
         else{
-            vector<int> segments = triangle.getexistsegments(),
-                points;
+            set<int> ssegments = triangle.getexistsegments();
+            vector<int> points,
+                segments;
             points.resize(3);
+            copy(ssegments.begin(), ssegments.end(), segments.end());
             Segment seg0 = Data::segments[segments[0]],
                 seg1 = Data::segments[segments[1]],
                 seg2 = Data::segments[segments[2]];
@@ -84,6 +86,8 @@ vector<Planar> Triangulation::operator()(Planar& p) {
                 points[1] = seg0[1];
                 points[2] = seg1[0];
             }
+            triangle.setpoints(points);
+            triangle.setsegments(segments);
             if(seg0[0] == points[0]){
                 set<int> inPlanar01 = seg0.getinPlanar01();
                 inPlanar01.insert(triangle.getid());
@@ -581,8 +585,10 @@ void Triangulation::TriangulateMonotonePolygon(Planar& planar){
         Point topp = s.top();
         vector<int> nearp = nearPoint[p];
         if((nearp[0] == topp.getid()) || (nearp[1] == topp.getid())){
-            Point p1 = s.pop(),
-                p2 = s.pop();
+            Point p1 = s.top();
+            s.pop();
+            Point p2 = s.top();
+            s.pop();
             while(1){
                 if((p2 - p1).angle(p - p1, pl.getnormaldirect()) > M_PI){
                     break;
@@ -594,7 +600,8 @@ void Triangulation::TriangulateMonotonePolygon(Planar& planar){
                 if(s.empty()){
                     break;
                 }
-                p2 = s.pop();
+                p2 = s.top();
+                s.pop();
             }
             if(s.empty()){
                 s.push(p1);
@@ -609,7 +616,8 @@ void Triangulation::TriangulateMonotonePolygon(Planar& planar){
         else{
             Point p1;
             while(1){
-                p1 = s.pop();
+                p1 = s.top();
+                s.pop();
                 if(s.empty()){
                     break;
                 }

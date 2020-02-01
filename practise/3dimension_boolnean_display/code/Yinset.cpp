@@ -64,8 +64,8 @@ Yinset Yinset::complement() const {
 }
 
 
-Yinset Yinset::join(const Yinset& y2){
-    Yinset revery1 = this->complement().
+Yinset Yinset::join(const Yinset& y2) const {
+    Yinset revery1 = this->complement(),
         revery2 = y2.complement();
     Yinset reveranwser = revery1.meet(revery2);
     return reveranwser.complement();

@@ -33,9 +33,9 @@ void TriangleIntersection::operator()(Planar& tr1, Planar& tr2){
     set<int> tr2existpoints = tr2.getexistpoints();
     bool tr1notintersect = false, tr1intersectPoint = false, tr1intersectSegment = false,
         tr2notintersect = false, tr2intersectPoint = false, tr2intersectSegment = false;
-    if(tr1.Flat::ifcontainPoint(p0) &&
-       tr1.Flat::ifcontainPoint(p1) &&
-       tr1.Flat::ifcontainPoint(p2)) {
+    if(tr1.Flat::ifcontainPoint(tr2p0) &&
+       tr1.Flat::ifcontainPoint(tr2p1) &&
+       tr1.Flat::ifcontainPoint(tr2p2)) {
         /* if(tr1.ifcontainSegment(seg0)){
            for(auto i = existsegments.begin(); i != existsegments.end(0); i++){
            Segment seg = Data::segments[*i];
@@ -171,7 +171,7 @@ void TriangleIntersection::operator()(Planar& tr1, Planar& tr2){
                 intersectseg.setinPlanar(inPlanar);
                 intersectseg.setid(Data::segmentsnum);
                 Data::segments[Data::segmentsnum] = intersectseg;
-                Data::existsegments.insert(Data::segmentnum);
+                Data::existsegments.insert(Data::segmentsnum);
                 Data::segmentsnum++;
                 tr1existsegments.insert(intersectseg.getid());
                 tr2existsegments.insert(intersectseg.getid());
