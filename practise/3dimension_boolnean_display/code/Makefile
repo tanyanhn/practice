@@ -5,14 +5,14 @@ CC = g++
 
 
 .cpp.o:
-	$(CC) -o $@ -c $<
+	$(CC) -o $@ -c $< -g
 .o.ex:
-	$(CC) -o $@ $^
+	$(CC) -o $@ $^ -g
 
 main.ex: main.o Data.o Direction.o Face.o FaceContainFace.o FindNearTriangle.o Flat.o Line.o \
 Planar.o TriangleIntersection.o \
 Point.o Segment.o SegmentIntersection.o Tol.o Triangulation.o Yinset.o YinsetContainTriangle.o
-	$(CC) $^ -o $@
+	$(CC) $^ -o $@ -g
 
 #main : main.o
 #	$(CC) -o $@ $<
@@ -51,7 +51,10 @@ YinsetContainTriangle.o: YinsetContainTriangle.cpp
 TriangleIntersection.o: TriangleIntersection.cpp
 
 run: main.ex
-	./main.ex ./Data/cube.obj
+	./main.ex ./Data/cube.obj -g
+
+clear:
+	rm main.ex
 
 clean:
-	-rm -f main *.output *o *.h.gch
+	-rm -f main.ex *.output *o *.h.gch

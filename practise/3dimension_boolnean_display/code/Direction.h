@@ -9,13 +9,14 @@ using namespace std;
 class Direction{
     double coord[3];
 public:
-    Direction() : coord{1, 1, 1} {}
-    Direction(const double x, const double y, const double z) : coord{x, y, z} {
+    Direction() : coord{0, 0, 0} {}
+    Direction(const double x, const double y, const double z) : coord{x, y, z} {/*
          if(fabs(x) < Tol::t && fabs(y) < Tol::t && fabs(z) < Tol::t){
             cout << "Direction too close to 0\n";
             char a;
             cin >> a;
             }
+                                                                                */
     }
     Direction(const Direction& d2) : coord{d2.coord[0], d2.coord[1], d2.coord[2]} {}
     Direction& operator=(const Direction& d2) {

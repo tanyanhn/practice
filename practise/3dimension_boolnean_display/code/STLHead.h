@@ -6,6 +6,7 @@
 #include<set>
 #include<map>
 #include<stack>
+#include<cstdlib>
 #include<cmath>
 #include<utility>
 #include<iostream>

@@ -259,14 +259,18 @@ int Data::import(istream& is){
         sv("v"),
         svn("vn"),
         sf("f"),
+        sm("#"),
         s;
     while(is >> ism){
+        if(ism == sm){
+            is.ignore(256, '\n');
+        }
         if(ism == sv){
             Point p;
+            is >> p;
             p.setid(pointsnum++);
             printv[kv++] = p.getid();
             existpoints.insert(p.getid());
-            is >> p;
         }
         else if(ism == svn){
             Direction d;
@@ -275,12 +279,13 @@ int Data::import(istream& is){
         }
         else if(ism == sf){
             vector<int> vp;
+            vp.resize(3);
             int i;
             Direction normal;
             for(int j = 0; j < 3; j++){
                 is >> s;
-                vp[j] = printv[s[0]];
-                normal = normal + printvn[s[4]];
+                vp[j] = printv[s[0] - static_cast<int>('0')];
+                normal = normal + printvn[s[4] -  static_cast<int>('0')];
                 s.clear();
             }
             Direction d1 = points[vp[1]] - points[vp[0]],
@@ -293,7 +298,7 @@ int Data::import(istream& is){
             Segment seg0(vp[0], vp[1]),
                 seg1(vp[1], vp[2]),
                 seg2(vp[2], vp[0]);
-            set<int> s;
+            //set<int> s;
             auto it = printseg.find(make_pair(seg0[0], seg0[1]));
             if(it != printseg.end()){
                 int id = it->second;
