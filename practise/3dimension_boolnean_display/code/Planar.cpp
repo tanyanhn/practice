@@ -21,11 +21,13 @@ Planar::Planar(std::vector<int> p, std::vector<int> s, int identity , int inF , 
     }
 }
 
-Planar::Planar(const Planar& pl) :
+Planar::Planar(const Planar& pl) /*:
     Flat(pl),
     points(pl.points), segments(pl.segments),
     existpoints(pl.existpoints), existsegments(pl.existsegments),
-    id(pl.id), inFace(pl.inFace), inYinset(pl.inYinset) {}
+    id(pl.id), inFace(pl.inFace), inYinset(pl.inYinset) */{
+    *this = pl;
+}
 
 Planar Planar::overturn() const {
     vector<int> points = this->getpoints(),

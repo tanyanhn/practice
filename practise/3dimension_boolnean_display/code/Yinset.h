@@ -23,12 +23,23 @@ public:
             Data::yinsets[identity] = *this;
         }
     }
-    Yinset(const Yinset& y) : faces(y.faces), hassmap(y.hassmap),
-                              id(y.id), type(y.type), pastpoints(y.pastpoints) {}
+    Yinset(const Yinset& y) //: faces(y.faces), hassmap(y.hassmap),
+    // id(y.id), type(y.type), pastpoints(y.pastpoints)
+        {
+            *this = y;
+        }
     Yinset& operator=(const Yinset& y){
+        faces = y.faces;
+        hassmap = y.hassmap;
+        id = y.id;
+        type = y.type;
+        pastpoints = y.pastpoints;
+        return *this;
+/*
         Yinset temp(y);
         std::swap(*this, temp);
         return *this;
+        */
     }
     std::vector<int> getfaces() const {
         return faces;

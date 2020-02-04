@@ -36,12 +36,15 @@ Point::Point(const double x, const double y, const double z, const int identity,
 }
 
 Point::Point(const Point& q){
+    /*
     coord[0] = q.coord[0];
     coord[1] = q.coord[1];
     coord[2] = q.coord[2];
     id = q.id;
     inSegment = q.inSegment;
     inYinset = q.inYinset;
+    */
+    *this = q;
 }
 
 Point& Point::operator=(const Point& q){

@@ -26,7 +26,10 @@ public:
         normaldirect = d1.cross(d2).unit();
         fixpoint = p1;
     }
-    Flat(const Flat& f) : fixpoint(f.fixpoint), normaldirect(f.normaldirect){}
+    Flat(const Flat& f) //: fixpoint(f.fixpoint), normaldirect(f.normaldirect)
+        {
+            *this = f;
+        }
     Flat& operator=(const Flat& f) {
         fixpoint = f.fixpoint;
         normaldirect = f.normaldirect;

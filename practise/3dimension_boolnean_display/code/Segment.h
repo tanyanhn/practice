@@ -30,7 +30,7 @@ public:
             for(auto i = inP01.begin(); i != inP01.end(); i++){
                 inPlanar.insert(*i);
             }
-            for(auto i = inP10.begin(); i != inP01.end(); i++){
+            for(auto i = inP10.begin(); i != inP10.end(); i++){
                 inPlanar.insert(*i);
             }
             if(p0 != -1 && p1 != -1 && p0 != p1){
@@ -41,27 +41,42 @@ public:
                     inPlanar01 = inP10;
                     inPlanar10 = inP01;
                 }
-                std::set<int> inSegment = Data::points[points[0]].getinSegment();
-                inSegment.insert(id);
-                Data::points[points[0]].setinSegment(inSegment);
-                inSegment = Data::points[points[1]].getinSegment();
-                inSegment.insert(id);
-                Data::points[points[1]].setinSegment(inSegment);
+                if(id != -1){
+                    std::set<int> inSegment = Data::points[points[0]].getinSegment();
+                    inSegment.insert(id);
+                    Data::points[points[0]].setinSegment(inSegment);
+                    inSegment = Data::points[points[1]].getinSegment();
+                    inSegment.insert(id);
+                    Data::points[points[1]].setinSegment(inSegment);
+                }
+                Line::fixpoint = Data::points[points[0]];
+                Line::direct = (Data::points[points[1]] - Data::points[points[0]]).unit();
             }
-            Line::fixpoint = Data::points[points[0]];
-            Line::direct = (Data::points[points[1]] - Data::points[points[0]]).unit();
             if(id != -1){
                 Data::segments[id] = *this;
             }
         }
-    Segment(const Segment& seg) : Line(seg), points{seg[0], seg[1]}, id(seg.id),
+    Segment(const Segment& seg) /*: Line(seg), points{seg[0], seg[1]}, id(seg.id),
                                   inPlanar(seg.inPlanar),
                                   inPlanar01(seg.inPlanar01), inPlanar10(seg.inPlanar10),
-                                  inYinset(seg.inYinset) {}
+                                  inYinset(seg.inYinset)*/ {
+        *this = seg;
+    }
     Segment& operator=(const Segment& seg){
+        this->Line::operator=(seg);
+        points[0] = seg.points[0];
+        points[1] = seg.points[1];
+        id = seg.id;
+        inPlanar = seg.inPlanar;
+        inPlanar01 = seg.inPlanar01;
+        inPlanar10 = seg.inPlanar10;
+        inYinset = seg.inYinset;
+        return *this;
+        /*
         Segment temp(seg);
         std::swap(*this, temp);
         return *this;
+        */
     }
     ~Segment(){}
     int getid() const {
@@ -75,11 +90,13 @@ public:
         }
         std::set<int> inSegment = Data::points[points[0]].getinSegment();
         inSegment.insert(i);
-        inSegment.erase(id);
+        if(id != -1)
+            inSegment.erase(id);
         Data::points[points[0]].setinSegment(inSegment);
         inSegment = Data::points[points[1]].getinSegment();
         inSegment.insert(i);
-        inSegment.erase(id);
+        if(id != -1)
+            inSegment.erase(id);
         Data::points[points[1]].setinSegment(inSegment);
         id = i;
         if(id != 1){

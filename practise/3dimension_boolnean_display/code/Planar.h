@@ -41,9 +41,20 @@ public:
         id(pl.id), inFace(pl.inFace), inYinset(pl.inYinset) {}
                              */
     Planar& operator=(const Planar& pl) {
+        Flat::operator=(pl);
+        points = pl.points;
+        segments = pl.segments;
+        existpoints = pl.existpoints;
+        existsegments = pl.existsegments;
+        id = pl.id;
+        inFace = pl.inFace;
+        inYinset = pl.inYinset;
+        return *this;
+/*
         Planar temp(pl);
         std::swap(*this, temp);
         return *this;
+        */
     }
     std::vector<int> getpoints() const {
         return points;

@@ -14,7 +14,10 @@ public:
     Line(){}
     Line(const Point& p, const Direction& d) : fixpoint(p), direct(d.unit()) {}
     Line(const Point& p1, const Point& p2) : fixpoint(p1), direct((p2 - p1).unit()){}
-    Line(const Line& l) : fixpoint(l.fixpoint), direct(l.direct) {}
+    Line(const Line& l) //: fixpoint(l.fixpoint), direct(l.direct)
+        {
+            *this = l;
+        }
     Line& operator=(const Line& l) {
         fixpoint = l.fixpoint;
         direct = l.direct;

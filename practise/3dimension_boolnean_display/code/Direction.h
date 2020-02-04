@@ -67,7 +67,7 @@ public:
         return *this / this->norm();
     }
     double norm() const {
-        return coord[0] * coord[0] + coord[1] * coord[1] + coord[2] * coord[2];
+        return sqrt(coord[0] * coord[0] + coord[1] * coord[1] + coord[2] * coord[2]);
     }
     double dot(const Direction& d2) const {
         return coord[0] * d2.coord[0] + coord[1] * d2.coord[1] + coord[2] * d2.coord[2];

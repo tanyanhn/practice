@@ -18,11 +18,21 @@ public:
             Data::faces[id] = *this;
         }
     }
-    Face(const Face& f) : planars(f.planars), id(f.id), inYinset(f.inYinset), type(f.type) {}
+    Face(const Face& f)// : planars(f.planars), id(f.id), inYinset(f.inYinset), type(f.type)
+        {
+            *this = f;
+        }
     Face& operator=(const Face& f){
+        planars = f.planars;
+        id = f.id;
+        inYinset = f.inYinset;
+        type = f.type;
+        return *this;
+        /*
         Face temp(f);
         std::swap(*this, temp);
         return *this;
+        */
     }
     std::vector<int> getplanars() const {
         return planars;
