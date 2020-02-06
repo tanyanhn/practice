@@ -23,46 +23,48 @@ vector<int> FindNearTriangle::operator()(const Planar& triangle){
     for(auto i = vSeg.begin(); i != vSeg.end(); i++){
         double angle = 2 * M_PI + 1;
         Segment seg = *i;
-        if(find(i->getinPlanar01().begin(), i->getinPlanar01().end(), triangle.getid())
-           != i->getinPlanar01().end()){
+        set<int> inPlanar01 = seg.getinPlanar01(),
+            inPlanar10 = seg.getinPlanar10();
+        if(find(inPlanar01.begin(), inPlanar01.end(), triangle.getid())
+           != inPlanar01.end()){
             Direction d = Data::points[(*i)[1]] - Data::points[(*i)[0]];
             int k = -1;
-            for(auto j = i->getinPlanar10().begin(); j != i->getinPlanar10().end(); j++){
+            for(auto j = inPlanar10.begin(); j != inPlanar10.end(); j++){
                 double a = triangle.angleBetweenFlats(Data::planars[*j], d);
                 if(a < angle){
                     angle = a;
                     k = *j;
                 }
             }
-            if(k = -1){
+            if(k == -1){
                 cout << "FindNearTriangle wrong   k = -1: " << triangle.getid();
                 int i;
                 cin >> i;
             }
-            set<int> inPlanar10 = seg.getinPlanar10();
-            inPlanar10.erase(k);
-            seg.setinPlanar10(inPlanar10);
+            //set<int> inPlanar10 = seg.getinPlanar10();
+            //inPlanar10.erase(k);
+            //seg.setinPlanar10(inPlanar10);
             anwser.push_back(k);
         }
-        else if(find(i->getinPlanar10().begin(), i->getinPlanar10().end(), triangle.getid())
-                != i->getinPlanar10().end()){
+        else if(find(inPlanar10.begin(), inPlanar10.end(), triangle.getid())
+                != inPlanar10.end()){
             Direction d = Data::points[(*i)[0]] - Data::points[(*i)[1]];
             int k = -1;
-            for(auto j = i->getinPlanar01().begin(); j != i->getinPlanar01().end(); j++){
+            for(auto j = inPlanar01.begin(); j != inPlanar01.end(); j++){
                 double a = triangle.angleBetweenFlats(Data::planars[*j], d);
                 if(a < angle){
                     angle = a;
                     k = *j;
                 }
             }
-            if(k = -1){
+            if(k == -1){
                 cout << "FindNearTriangle wrong : " << triangle.getid();
                 int i;
                 cin >> i;
             }
-            set<int> inPlanar01 = seg.getinPlanar01();
-            inPlanar01.erase(k);
-            seg.setinPlanar01(inPlanar01);
+            //set<int> inPlanar01 = seg.getinPlanar01();
+            //inPlanar01.erase(k);
+            //seg.setinPlanar01(inPlanar01);
             anwser.push_back(k);
         }
         else {

@@ -79,6 +79,7 @@ void Yinset::generatorhassmap(){
     for(auto i = faces.begin(); i != faces.end(); i++, x++){
         Face f = Data::faces[*i];
         hassmap[x].identity = x;
+        hassmap[x].father = -2;
         f.generatortype();
     }
     vector<vector<int>> matrix;
@@ -120,7 +121,7 @@ void Yinset::generatorhassmap(){
             hassmap[j].father = -1;
         }
     }
-    set<int> temproot;
+    set<int> temproot = root;
     while(1){
         root = temproot;
         temproot.clear();
@@ -161,5 +162,8 @@ void Yinset::generatorhassmap(){
                 cout << "Yinset's type has trouble ";
             }
         }
+    }
+    if(id != -1){
+        Data::yinsets[id] = *this;
     }
 }

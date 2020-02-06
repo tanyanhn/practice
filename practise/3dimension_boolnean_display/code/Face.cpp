@@ -115,4 +115,7 @@ void Face::generatortype(){
     else {
         type = 0;
     }
+    if(id != -1){
+        Data::faces[id] = *this;
+    }
 }

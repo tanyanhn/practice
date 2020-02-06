@@ -215,6 +215,18 @@ void Data::past(){
             remain.erase(neartriangle[2]);
             s.push(neartriangle[2]);
         }
+        if(remain.empty()){
+            while(!s.empty()){
+                int temp = s.top();
+                s.pop();
+                face.push_back(temp);
+            }
+            if(face.size() != 0){
+                Face f(face, facesnum++);
+                existfaces.insert(f.getid());
+                face.clear();
+            }
+        }
     }
 }
 
@@ -229,14 +241,14 @@ void Data::print(ostream& os, const Yinset& y){
         os << "v " << points[*i] << endl;
         printv.insert(make_pair(*i, kv++));
     }
-    os << endl;
+    //os << endl;
     int kvn = 1;
     for(auto i = existplanars.begin(); i != existplanars.end(); i++){
         Planar pl = planars[*i];
         os << "vn " << pl.getnormaldirect() << endl;
         printvn.insert(make_pair(*i, kvn++));
     }
-    os << endl;
+    //os << endl;
     for(auto i = existplanars.begin(); i != existplanars.end(); i++){
         Planar pl = planars[*i];
         vector<int> vp = pl.getpoints();
@@ -386,8 +398,8 @@ int Data::import(istream& is){
         }
     }
     past();
-    vector<int> faces;
-    copy(Data::existfaces.begin(), Data::existfaces.end(), faces.begin());
+    vector<int> faces(existfaces.size());
+    copy(Data::existfaces.begin(), Data::existfaces.end(), faces.end());
     Yinset anwser(faces, Data::yinsetsnum++);
     anwser.generatorhassmap();
     clear();
