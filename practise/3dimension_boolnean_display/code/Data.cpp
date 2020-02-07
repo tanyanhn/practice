@@ -399,7 +399,7 @@ int Data::import(istream& is){
     }
     past();
     vector<int> faces(existfaces.size());
-    copy(Data::existfaces.begin(), Data::existfaces.end(), faces.end());
+    copy(Data::existfaces.begin(), Data::existfaces.end(), faces.begin());
     Yinset anwser(faces, Data::yinsetsnum++);
     anwser.generatorhassmap();
     clear();

@@ -2,14 +2,25 @@ CC = g++
 
 #TARGET=main
 
+.PHONY: clean clear test run all doxygen
+.SUFFIXES: .o .cpp .ex
 
+#doxygen: doxygen.cfg
+#	doxygen doxygen.cfg
 
 .cpp.o:
 	$(CC) -o $@ -c $< -g
 .o.ex:
-	$(CC) -o $@ $^ -g
+	$(CC) -o $@ $^
+
+all: main.ex test.ex
 
 main.ex: main.o Data.o Direction.o Face.o FaceContainFace.o FindNearTriangle.o Flat.o Line.o \
+Planar.o TriangleIntersection.o \
+Point.o Segment.o SegmentIntersection.o Tol.o Triangulation.o Yinset.o YinsetContainTriangle.o
+#	$(CC) $^ -o $@ -g
+
+test.ex: test.o Data.o Direction.o Face.o FaceContainFace.o FindNearTriangle.o Flat.o Line.o \
 Planar.o TriangleIntersection.o \
 Point.o Segment.o SegmentIntersection.o Tol.o Triangulation.o Yinset.o YinsetContainTriangle.o
 	$(CC) $^ -o $@ -g
@@ -17,6 +28,8 @@ Point.o Segment.o SegmentIntersection.o Tol.o Triangulation.o Yinset.o YinsetCon
 #main : main.o
 #	$(CC) -o $@ $<
 main.o: main.cpp
+
+test.o: test.cpp
 
 Data.o: Data.cpp
 
@@ -50,11 +63,15 @@ YinsetContainTriangle.o: YinsetContainTriangle.cpp
 
 TriangleIntersection.o: TriangleIntersection.cpp
 
+test: test.ex
+	./test.ex
+
 run: main.ex
-	./main.ex ./Data/cube.obj -g
+	./main.ex ./Data/cube.obj
 
 clear:
-	rm main.ex
+	-rm main.ex
 
 clean:
-	-rm -f main.ex *.output *o *.h.gch
+	-rm -f main.ex *.output *o *.h.gch *.obj
+	-rm -rf ./doxygen/

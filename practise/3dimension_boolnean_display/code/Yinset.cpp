@@ -144,6 +144,7 @@ void Yinset::generatorhassmap(){
             }
         }
     }
+    int a = 0;
     for(auto i = hassmap.begin(); i != hassmap.end(); i++){
         HassNode h = *i;
         if(h.father == -2){
@@ -153,12 +154,11 @@ void Yinset::generatorhassmap(){
             hassmap[h.father].children.push_back(h.identity);
         }
         else if(h.father = -1){
-            static int i = 0;
-            if(i == 0){
+            if(a == 0){
                 type = Data::faces[faces[h.identity]].gettype();
-                i = 1;
+                a = 1;
             }
-            if(i == 1 && type != Data::faces[faces[h.identity]].gettype()){
+            if(a == 1 && type != Data::faces[faces[h.identity]].gettype()){
                 cout << "Yinset's type has trouble ";
             }
         }
