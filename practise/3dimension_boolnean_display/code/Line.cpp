@@ -19,8 +19,8 @@ bool Line::ifintersectionLine(const Line& l2) const {
 Point Line::intersectionLine(const Line& l2) const {
     if(ifintersectionLine(l2) == false){
         cout << "Line did't intersection \n";
-        int i;
-        cin >> i;
+        int* pi = 0;
+        cout << *pi;
         //exit(0);
     }
     Direction d0 = direct.cross(l2.getdirect());

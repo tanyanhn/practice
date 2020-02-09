@@ -14,6 +14,8 @@ void Point::setid(const int i) {
         }
         else {
             cout << "Point::setid() wrong :" << id;
+            int* pi = 0;
+            cout << *pi;
         }
     }
     id = i;

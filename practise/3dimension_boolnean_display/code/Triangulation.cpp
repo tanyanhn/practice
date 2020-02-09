@@ -168,8 +168,8 @@ void Triangulation::makeMonotone(){
         if(nearSegment.empty()){
             cout << "Triangulation::makeMonotone nearSegment.empty is true : " << pl.getid()
                  << " : " << p.getid();
-            int k;
-            cin >> k;
+            int* pi = 0;
+            std::cout << *pi;
         }
         bool leftmost = false;
         set<Segment>::iterator lsegit;
@@ -200,8 +200,8 @@ void Triangulation::makeMonotone(){
                 else{
                     cout << "shouldn't exist situation segment exist outside triangle :"
                          << pl.getid() << " : " << p.getid();
-                    int k;
-                    cin >> k;
+                    int* pi = 0;
+                    std::cout << *pi;
                 }
             }
             else {
@@ -211,8 +211,8 @@ void Triangulation::makeMonotone(){
                 else{
                     cout << "shouldn't exist situation segment exist outside triangle :"
                          << pl.getid() << " : " << p.getid();
-                    int k;
-                    cin >> k;
+                    int* pi = 0;
+                    std::cout << *pi;
                 }
             }
             if(j->first < M_PI){
@@ -294,8 +294,8 @@ void Triangulation::makeMonotone(){
                 else {
                     cout << "shouldn't exist situation not noraml point :"
                          << pl.getid() << " : " << p.getid();
-                    int k;
-                    cin >> k;
+                    int* pi = 0;
+                    std::cout << *pi;
                 }
             }
         }

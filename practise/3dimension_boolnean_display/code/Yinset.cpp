@@ -46,6 +46,8 @@ Yinset Yinset::complement() const {
             }
             else{
                 cout << "complement wrong : pl.getid() :" << pl.getid() << " " << k;
+                int* pi = 0;
+                std::cout << *pi;
             }
             seg.setinPlanar(inPlanar);
             seg.setinPlanar01(inPlanar01);
@@ -149,6 +151,8 @@ void Yinset::generatorhassmap(){
         HassNode h = *i;
         if(h.father == -2){
             cout << "generatorhassmap wrong -2";
+            int* pi = 0;
+            std::cout << *pi;
         }
         if(h.father != -1){
             hassmap[h.father].children.push_back(h.identity);
@@ -160,6 +164,8 @@ void Yinset::generatorhassmap(){
             }
             if(a == 1 && type != Data::faces[faces[h.identity]].gettype()){
                 cout << "Yinset's type has trouble ";
+                int* pi = 0;
+                std::cout << *pi;
             }
         }
     }

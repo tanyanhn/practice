@@ -65,16 +65,16 @@ public:
     const double operator[](const int i) const {
         if(i < 0 || i > 2){
             cout << id << " : " << i << " out of range";
-            char a;
-            cin >> a;
+            int* a;
+            cout << *a;
         }
         return coord[i];
     }
     double& operator[](const int i){
         if(i < 0 || i > 2){
             cout << id << " : " << i << " out of range";
-            char a;
-            cin >> a;
+            int* a;
+            cout << *a;
         }
         return coord[i];
     }

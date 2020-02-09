@@ -128,8 +128,8 @@ void SegmentIntersection::operator()(Planar& pl){
         else {
             cout << "SegmentIntersection::operator() pinseg < 2 : "
                  << pl.getid();
-            int i;
-            cin >> i;
+            int* pi = 0;
+            std::cout << *pi;
         }
     }
     existsegments = Data::planars[pl.getid()].getexistsegments();

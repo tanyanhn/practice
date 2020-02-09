@@ -85,8 +85,8 @@ public:
     void setid(const int i) {
         if((points[0] == -1) || (points[1] == -1)){
             std::cout << "Segment::setid() : " << id;
-            int j;
-            std::cin >> j;
+            int* pi = 0;
+            std::cout << *pi;
         }
         std::set<int> inSegment = Data::points[points[0]].getinSegment();
         inSegment.insert(i);
@@ -169,8 +169,8 @@ public:
         }
         else{
             std::cout << "setendpoints wrong:" << id << "\n";
-            int k;
-            std::cin >> k;
+            int* pi = 0;
+            std::cout << *pi;
         }
         if(id != -1){
             Data::segments[id] = *this;

@@ -36,8 +36,8 @@ public:
     void setdirect(const Direction& d) {
         if(d.norm() > (1 + Tol::t) || d.norm() < (1 - Tol::t)){
             std::cout << "set wrong Line::direct .";
-            int i;
-            std::cin >> i;
+            int* pi = 0;
+            std::cout << *pi;
         }
         direct = d;
     }

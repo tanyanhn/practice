@@ -38,8 +38,8 @@ vector<int> FindNearTriangle::operator()(const Planar& triangle){
             }
             if(k == -1){
                 cout << "FindNearTriangle wrong   k = -1: " << triangle.getid();
-                int i;
-                cin >> i;
+                char* a = 0;
+                cout << *a;
             }
             //set<int> inPlanar10 = seg.getinPlanar10();
             //inPlanar10.erase(k);
@@ -59,8 +59,8 @@ vector<int> FindNearTriangle::operator()(const Planar& triangle){
             }
             if(k == -1){
                 cout << "FindNearTriangle wrong : " << triangle.getid();
-                int i;
-                cin >> i;
+                char* a = 0;
+                cout << *a;
             }
             //set<int> inPlanar01 = seg.getinPlanar01();
             //inPlanar01.erase(k);
@@ -69,8 +69,8 @@ vector<int> FindNearTriangle::operator()(const Planar& triangle){
         }
         else {
             cout << "FindNearTriangle wrong   else: " << triangle.getid();
-            int i;
-            cin >> i;
+            char* a = 0;
+            cout << *a;
         }
     }
     return anwser;

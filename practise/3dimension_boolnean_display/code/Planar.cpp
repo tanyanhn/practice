@@ -110,8 +110,8 @@ Point Planar::intersectionSegment(const Segment& seg) const {
     if(ifintersectionSegment(seg) == false){
         std::cout << "Planar intersectionSegment wrong :" << id <<
             " :" << seg.getid() << std::endl;
-        int i;
-        cin >> i;
+        int* pi = 0;
+        cout << *pi;
     }
     Point p(Flat::intersectionLine(seg));
     return p;

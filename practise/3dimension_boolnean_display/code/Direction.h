@@ -29,16 +29,16 @@ public:
     const double operator[](const int i) const {
         if(i < 0 || i > 2){
             cout << "Direction" << " : " << i << " out of range";
-            char a;
-            cin >> a;
+            char* a = 0;
+            cout << *a;
         }
         return coord[i];
     }
     double& operator[](const int i){
         if(i < 0 || i > 2){
             cout << "Direction" << " : " << i << " out of range";
-            char a;
-            cin >> a;
+            char* a = 0;
+            cout << *a;
         }
         return coord[i];
     }

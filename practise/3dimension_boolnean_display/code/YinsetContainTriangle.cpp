@@ -43,8 +43,8 @@ bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& trian
                     else {
                         cout << "YinsetContainTriangle wrong in overlaptriangle == AddOverlap : "
                              << triangle.getid() << " : " << pl.getid();
-                        int i;
-                        cin >> i;
+                        int* pi = 0;
+                        std::cout << *pi;
                     }
                 }
                 else if(overlaptriangle == notAddOverlap){
@@ -53,8 +53,8 @@ bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& trian
                 else {
                     cout << "YinsetContainTriangle wrong in overlaptriangle : "
                          << triangle.getid() << " : " << pl.getid();
-                    int i;
-                    cin >> i;
+                    int* pi = 0;
+                    std::cout << *pi;
                 }
             }
             Segment seg0 = Data::segments[pl.getsegments()[0]],
@@ -176,8 +176,8 @@ bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& trian
         else {
             cout << "YinsetContainTriangle: intersectPlanar.size() == 1 wrong :"
                  << interpl.getid() <<" : ";
-            int i;
-            cin >> i;
+            int* pi = 0;
+            std::cout << *pi;
         }
     }
     else {
@@ -211,6 +211,8 @@ bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& trian
             else {
                 cout << "YinsetContainTriangle::find() smallest angle face wrong : "
                      << triangle.getid();
+                int* pi = 0;
+                std::cout << *pi;
             }
             Direction normal = d.cross(d1);
             Flat flat(intersectPoint, normal);

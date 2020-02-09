@@ -2,6 +2,7 @@
 #include<cmath>
 //#include"Point.h"
 //#include"Line.h"
+using namespace std;
 
 
 bool Segment::ifcontainPoint(const Point& p) const {
@@ -34,8 +35,8 @@ bool Segment::ifintersectionSegment(const Segment& seg2) const {
 Point Segment::intersectionSegment(const Segment& seg2) const {
     if(!ifintersectionSegment(seg2)){
         std::cout << "Segment don't intersect :" << id << " : " << seg2.id;
-        int i;
-        std::cin >> i;
+        int* i = 0;
+        cout << *i;
     }
     return Point(intersectionLine(seg2));
 }
@@ -70,8 +71,8 @@ Segment Segment::overlapSegment(const Segment& seg2) const {
     if(ifoverlapSegment(seg2) == false){
         cout << "Segment::overlapSegment wrong : " << id <<
             " : " << seg2.getid() ;
-        int i;
-        cin >> i;
+        int* i = 0;
+        cout << *i;
     }
     Point p10 = Data::points[points[0]], p11 = Data::points[points[1]],
         p20 = Data::points[seg2[0]], p21 = Data::points[seg2[1]],

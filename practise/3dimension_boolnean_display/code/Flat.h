@@ -48,8 +48,8 @@ public:
     void setnormaldirect(const Direction& d) {
         if(d.norm() < (1 - Tol::t) || d.norm() > (1 + Tol::t)){
             std::cout << "Flat::setnormaldirect not unit.";
-            int i;
-            std::cin >> i;
+            int* pi = 0;
+            cout << *pi;
         }
         normaldirect = d;
     }

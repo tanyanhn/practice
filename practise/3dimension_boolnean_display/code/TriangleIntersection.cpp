@@ -220,8 +220,8 @@ void TriangleIntersection::operator()(Planar& tr1, Planar& tr2){
             }
             else {
                 cout << "Functor.cpp TriangleIntersection:: intersectseg insert findtr1 and findtr2 all true and findid different : " << tr1.getid() << " : " << tr2.getid();
-                int i;
-                cin >> i;
+                int* pi = 0;
+                std::cout << *pi;
             }
         }
     }

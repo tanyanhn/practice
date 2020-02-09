@@ -47,6 +47,10 @@ struct Data {
     static void triangulation();
     static void selecttriangles(const Yinset&, const Yinset&);
     static void past();
+    static void f(){
+        int* pi = 0;
+        std::cout << *pi;
+    }
     //static std::vector<HassNode> generatehassmap();
 };
 /*
