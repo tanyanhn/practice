@@ -63,8 +63,8 @@ Point& Point::operator=(const Point& q){
 bool Point::operator<(const Point& q) const {
     if(coord[2] < q.coord[2] - Tol::t)
         return true;
-    else if((coord[2] < q.coord[2] + Tol::t)
-            && (coord[1] < q.coord[1] - Tol::t))
+    else if((coord[2] < q.coord[2] + Tol::t) &&
+            (coord[1] < q.coord[1] - Tol::t))
         return true;
     else if((coord[2] < q.coord[2] + Tol::t) &&
             (coord[1] < q.coord[1] + Tol::t) &&

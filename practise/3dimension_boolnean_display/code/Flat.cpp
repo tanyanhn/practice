@@ -114,6 +114,7 @@ bool Flat::ifcontainSegment(const Segment& seg) const {
 }
 
 double Flat::angleBetweenFlats(const Flat& pl2,const Direction& di) const {
+    //di is edge direction in *this.
     Direction d1 = Flat::normaldirect,
         d2 = pl2.getnormaldirect();
     if(d1.cross(d2).dot(di) < -Tol::t)

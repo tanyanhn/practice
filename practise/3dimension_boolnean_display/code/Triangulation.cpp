@@ -25,7 +25,7 @@ vector<Planar> Triangulation::operator()(Planar& p) {
         return triangles;
     }
     pl = p;
-    (*Tol::outside) = p.getnormaldirect();
+    //Direction outside = p.getnormaldirect();
     Flat f;
     if(p.getnormaldirect().cross(Direction(0, 0, 1)).norm() < (Tol::t)){
         f.setnormaldirect(Direction(0, 1, 0));
@@ -38,6 +38,7 @@ vector<Planar> Triangulation::operator()(Planar& p) {
         sweepline.setdirect(sweepline.getdirect() * (-1));
     }
     (*Tol::l) = sweepline;
+    (*Tol::outside) = f.getnormaldirect();
     makeMonotone();
     vector<Planar> yMonotones = generatorPolygen();
     for(auto i = yMonotones.begin(); i != yMonotones.end(); i++){
@@ -174,7 +175,7 @@ void Triangulation::makeMonotone(){
         bool leftmost = false;
         set<Segment>::iterator lsegit;
         int leftseg = -1;
-        double leftsegangle = 0;
+        double leftsegangle = -1;
         for(auto j = nearSegment.begin(); j != nearSegment.end(); j++){
             if(j->first >= 0 && j->first < M_PI && j->first > leftsegangle){
                 leftsegangle = j->first;
@@ -315,7 +316,7 @@ void Triangulation::makeMonotone(){
     pl = Data::planars[pl.getid()];
 }
 
-
+need rewrite ei.
 void Triangulation::handleStartVertex(Point& p, set<Segment>::iterator& ei){
     helper[ei->getid()] = make_pair(start, p.getid());
 }
