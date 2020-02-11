@@ -20,13 +20,21 @@ class Triangulation {
     map<int, pair<PointType, int>> helper;
     Planar pl;
     void makeMonotone();
-    void handleStartVertex(Point&, set<Segment>::iterator& ei);
-    void handleEndVertex(Point&, set<Segment>::iterator& ei);
-    void handleSplitVertex(Point&, set<Segment>::iterator& ei, set<Segment>::iterator& ej);
-    void handleMergeVertex(Point&, set<Segment>::iterator& ei, set<Segment>::iterator& ej);
-    void handleRegularLeftVertex(Point&, set<Segment>::iterator& ei1,
-                                 set<Segment>::iterator& ei2);
-    void handleRegularRightVertex(Point&, set<Segment>::iterator& ej);
+    void handleStartVertex(Point&, //set<Segment>::iterator&
+                           int ei);
+    void handleEndVertex(Point&, //set<Segment>::iterator&
+                         int ei);
+    void handleSplitVertex(Point&, //set<Segment>::iterator&
+                           int ei, //set<Segment>::iterator&
+                           int ej);
+    void handleMergeVertex(Point&, //set<Segment>::iterator&
+                           int ei, //set<Segment>::iterator&
+                           int ej);
+    void handleRegularLeftVertex(Point&, //set<Segment>::iterator&
+                                 int ei1, //set<Segment>::iterator&
+                                 int ei2);
+    void handleRegularRightVertex(Point&, //set<Segment>::iterator&
+                                  int ej);
     vector<Planar> generatorPolygen();
     void TriangulateMonotonePolygon(Planar&);
     // vector<Planar> dealexistpoint(vector<Planar>&);

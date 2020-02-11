@@ -38,7 +38,7 @@ vector<Planar> Triangulation::operator()(Planar& p) {
         sweepline.setdirect(sweepline.getdirect() * (-1));
     }
     (*Tol::l) = sweepline;
-    (*Tol::outside) = f.getnormaldirect();
+    (*Tol::outside) = sweepline.getdirect().cross(f.getnormaldirect()).unit();
     makeMonotone();
     vector<Planar> yMonotones = generatorPolygen();
     for(auto i = yMonotones.begin(); i != yMonotones.end(); i++){
@@ -173,7 +173,8 @@ void Triangulation::makeMonotone(){
             std::cout << *pi;
         }
         bool leftmost = false;
-        set<Segment>::iterator lsegit;
+        //set<Segment>::iterator lsegit;
+        int lsegid = -1;
         int leftseg = -1;
         double leftsegangle = -1;
         for(auto j = nearSegment.begin(); j != nearSegment.end(); j++){
@@ -182,21 +183,39 @@ void Triangulation::makeMonotone(){
                 leftseg = j->second;
             }
         }
-        auto lit = sweepflatposition[leftseg];
+        set<Segment>::iterator lit;
+        int insertid = -1;
+        if(leftseg == -1){
+            insertid = nearSegment.begin()->second;
+            auto it = sweepflat.insert(Data::segments[insertid]).first;
+            sweepflatposition[insertid] = it;
+            lit = it;
+        }
+        else {
+            lit = sweepflatposition[leftseg];
+        }
+        //auto lit = sweepflatposition[leftseg];
         if(lit == sweepflat.begin()){
             leftmost = true;
         }
         else{
             lit--;
-            lsegit = lit;
+            //lsegit = lit;
+            lsegid = lit->getid();
+        }
+        if(leftseg == -1){
+            auto it = sweepflatposition[insertid];
+            sweepflat.erase(it);
+            sweepflatposition.erase(insertid);
         }
         if(nearSegment.size() == 1){
             auto j = nearSegment.begin();
-            set<Segment>::iterator segit = sweepflat.insert(Data::segments[j->second]).first;
-            sweepflatposition[j->second] = segit;
+            //set<Segment>::iterator segit = sweepflat.insert(Data::segments[j->second]).first;
+            //sweepflatposition[j->second] = segit;
+            int segid = j->second;
             if(!(j->first >= M_PI)){
                 if(leftmost == false){
-                    handleSplitVertex(p, segit, lsegit);
+                    handleSplitVertex(p, segid, lsegid);
                 }
                 else{
                     cout << "shouldn't exist situation segment exist outside triangle :"
@@ -207,7 +226,7 @@ void Triangulation::makeMonotone(){
             }
             else {
                 if(leftmost == false){
-                    handleMergeVertex(p, segit, lsegit);
+                    handleMergeVertex(p, segid, lsegid);
                 }
                 else{
                     cout << "shouldn't exist situation segment exist outside triangle :"
@@ -217,24 +236,32 @@ void Triangulation::makeMonotone(){
                 }
             }
             if(j->first < M_PI){
-                sweepflatposition.erase(j->second);
+                //sweepflatposition.erase(j->second);
+                //sweepflat.erase(segit);
+                auto segit = sweepflatposition[segid];
                 sweepflat.erase(segit);
-                helper.erase(j->second);
+                sweepflatposition.erase(segid);
+                helper.erase(segid);
             }
             else{
-                helper[j->second] = make_pair(split, p.getid());
+                set<Segment>::iterator segit = sweepflat.insert(Data::segments[j->second]).first;
+                sweepflatposition[segid] = segit;
+                helper[segid] = make_pair(split, p.getid());
             }
         }
         else {
+            /*
             for(auto j = nearSegment.begin(); j != nearSegment.end(); j++){
                 if(j->first >= M_PI){
                     auto it = sweepflat.insert(Data::segments[j->second]).first;
                     sweepflatposition[j->second] = it;
                 }
             }
+            */
             for(auto j = nearSegment.begin(); j != nearSegment.end(); j++){
-                set<Segment>::iterator seg1it, seg2it;
-                seg1it = sweepflatposition[j->second];
+                //set<Segment>::iterator seg1it, seg2it;
+                int seg1id = j->second;
+                //seg1it = sweepflatposition[j->second];
                 /*
                   if(sweepflatposition.find(j->second) != sweepflat.end()){
                   seg1it = sweepflatposition[j->second];
@@ -248,7 +275,8 @@ void Triangulation::makeMonotone(){
                 if(j2 == nearSegment.end()){
                     j2 = nearSegment.begin();
                 }
-                seg2it = sweepflatposition[j2->second];
+                int seg2id = j2->second;
+                //seg2it = sweepflatposition[j2->second];
                 /*
                   if(sweepflatposition.find(j2->second) != sweepflat.end()){
                   seg2it = sweepflatposition[j2->second];
@@ -259,20 +287,23 @@ void Triangulation::makeMonotone(){
                   }
                 */
                 if((j->first >= M_PI) && (j2->first > M_PI) && (j2->first > j->first)){
-                    handleStartVertex(p, seg1it);
+                    //handleStartVertex(p, seg1it);
+                    handleStartVertex(p, seg1id);
                     //helper[j->second] = make_pair(start, p.getid());
                     //sweepflat.erase(seg2it);
                     //sweepflatposition.erase(j2->second);
                 }
                 else if((j->first < M_PI) && (j2->first < M_PI) && (j2->first > j->first)){
-                    handleEndVertex(p, seg2it);
+                    //handleEndVertex(p, seg2it);
+                    handleEndVertex(p, seg2id);
                     //sweepflat.erase(seg2it);
                     //sweepflatposition.erase(j2->second);
                     //helper.erase(j2->second);
                 }
                 else if((j->first > M_PI) && (j2->first >= M_PI) && (j2->first < j->first)){
                     if(leftmost == false){
-                        handleSplitVertex(p, seg1it, lsegit);
+                        //handleSplitVertex(p, seg1it, lsegit);
+                        handleSplitVertex(p, seg1id, lsegid);
                         //helper[j->second] = make_pair(split, p.getid());
                     }
                     //sweepflat.erase(seg2it);
@@ -280,16 +311,19 @@ void Triangulation::makeMonotone(){
                 }
                 else if((j->first < M_PI) && (j2->first < M_PI) && (j2->first < j->first)){
                     if(leftmost == false){
-                        handleMergeVertex(p, seg2it, lsegit);
+                        //handleMergeVertex(p, seg2it, lsegit);
+                        handleMergeVertex(p, seg2id, lsegid);
                     }
                 }
                 else if((j->first >= M_PI) && (j2->first < M_PI)){
-                    handleRegularLeftVertex(p, seg1it, seg2it);
+                    //handleRegularLeftVertex(p, seg1it, seg2it);
+                    handleRegularLeftVertex(p, seg1id, seg2id);
                     helper[j->second] = make_pair(regular, p.getid());
                 }
                 else if((j->first < M_PI) && (j2->first >= M_PI)){
                     if(leftmost == false){
-                        handleRegularRightVertex(p, lsegit);
+                        //handleRegularRightVertex(p, lsegit);
+                        handleRegularRightVertex(p, lsegid);
                     }
                 }
                 else {
@@ -308,6 +342,12 @@ void Triangulation::makeMonotone(){
                 helper.erase(j->second);
             }
         }
+        for(auto j = nearSegment.begin(); j != nearSegment.end(); j++){
+            if(j->first >= M_PI){
+                auto it = sweepflat.insert(Data::segments[j->second]).first;
+                sweepflatposition[j->second] = it;
+            }
+        }
         if(i == allPoints.begin()){
             break;
         }
@@ -316,15 +356,19 @@ void Triangulation::makeMonotone(){
     pl = Data::planars[pl.getid()];
 }
 
-need rewrite ei.
-void Triangulation::handleStartVertex(Point& p, set<Segment>::iterator& ei){
-    helper[ei->getid()] = make_pair(start, p.getid());
+
+void Triangulation::handleStartVertex(Point& p, int ei){
+    //helper[ei->getid()] = make_pair(start, p.getid());
+    helper[ei] = make_pair(start, p.getid());
 }
 
-void Triangulation::handleEndVertex(Point& p, set<Segment>::iterator& ei){
-    PointType t = helper[ei->getid()].first;
+void Triangulation::handleEndVertex(Point& p, //set<Segment>::iterator&
+                                    int ei){
+    //PointType t = helper[ei->getid()].first;
+    PointType t = helper[ei].first;
     if(t == merge){
-        Point p2 = Data::points[helper[ei->getid()].second];
+        //Point p2 = Data::points[helper[ei->getid()].second];
+        Point p2 = Data::points[helper[ei].second];
         set<int> inPlanar;
         inPlanar.insert(pl.getid());
         Segment newseg(p.getid(), p2.getid(), Data::segmentsnum, inPlanar);
@@ -335,9 +379,12 @@ void Triangulation::handleEndVertex(Point& p, set<Segment>::iterator& ei){
     }
 }
 
-void Triangulation::handleSplitVertex(Point& p, set<Segment>::iterator& ei,
-                                      set<Segment>::iterator& ej){
-    Point p2 = Data::points[helper[ei->getid()].second];
+void Triangulation::handleSplitVertex(Point& p, //set<Segment>::iterator&
+                                      int ei,
+                                      //set<Segment>::iterator&
+                                      int ej){
+    //Point p2 = Data::points[helper[ei->getid()].second];
+    Point p2 = Data::points[helper[ei].second];
     set<int> inPlanar;
     inPlanar.insert(pl.getid());
     Segment newseg(p.getid(), p2.getid(), Data::segmentsnum, inPlanar);
@@ -345,19 +392,24 @@ void Triangulation::handleSplitVertex(Point& p, set<Segment>::iterator& ei,
     set<int> plexistsegments = pl.getexistsegments();
     plexistsegments.insert(newseg.getid());
     pl.setexistsegments(plexistsegments);
-    helper[ej->getid()] = make_pair(split, p.getid());
-    helper[ei->getid()] = make_pair(split, p.getid());
+    //helper[ej->getid()] = make_pair(split, p.getid());
+    helper[ej] = make_pair(split, p.getid());
+    //helper[ei->getid()] = make_pair(split, p.getid());
+    helper[ei] = make_pair(split, p.getid());
 }
 
-void Triangulation::handleMergeVertex(Point& p, set<Segment>::iterator& ei,
-                                      set<Segment>::iterator& ej){
-    PointType ti = helper[ei->getid()].first,
-        tj = helper[ej->getid()].first;
+void Triangulation::handleMergeVertex(Point& p, //set<Segment>::iterator&
+                                      int ei,
+                                      //set<Segment>::iterator&
+                                      int ej){
+    //PointType ti = helper[ei->getid()].first, tj = helper[ej->getid()].first;
+    PointType ti = helper[ei].first, tj = helper[ej].first;
     set<int> plexistsegments = pl.getexistsegments();
     set<int> inPlanar;
     inPlanar.insert(pl.getid());
     if(ti == merge){
-        Point p2 = Data::points[helper[ei->getid()].second];
+        //Point p2 = Data::points[helper[ei->getid()].second];
+        Point p2 = Data::points[helper[ei].second];
         Segment newseg(p.getid(), p2.getid(), Data::segmentsnum, inPlanar);
         Data::segmentsnum++;
         //set<int> plexistsegments = pl.getexistsegments();
@@ -365,7 +417,8 @@ void Triangulation::handleMergeVertex(Point& p, set<Segment>::iterator& ei,
         //pl.setexistsegments(plexistsegments);
     }
     if(tj == merge){
-        Point p2 = Data::points[helper[ej->getid()].second];
+        //Point p2 = Data::points[helper[ej->getid()].second];
+        Point p2 = Data::points[helper[ej].second];
         Segment newseg(p.getid(), p2.getid(), Data::segmentsnum, inPlanar);
         Data::segmentsnum++;
         //set<int> plexistsegments = pl.getexistsegments();
@@ -373,14 +426,19 @@ void Triangulation::handleMergeVertex(Point& p, set<Segment>::iterator& ei,
         //pl.setexistsegments(plexistsegments);
     }
     pl.setexistsegments(plexistsegments);
-    helper[ej->getid()] = make_pair(split, p.getid());
+    //helper[ej->getid()] = make_pair(split, p.getid());
+    helper[ej] = make_pair(split, p.getid());
 }
 
-void Triangulation::handleRegularLeftVertex(Point& p, set<Segment>::iterator& ei1,
-                                            set<Segment>::iterator& ei2){
-    PointType t = helper[ei2->getid()].first;
+void Triangulation::handleRegularLeftVertex(Point& p, //set<Segment>::iterator&
+                                            int ei1,
+                                            //set<Segment>::iterator&
+                                            int ei2){
+    //PointType t = helper[ei2->getid()].first;
+    PointType t = helper[ei2].first;
     if(t == merge){
-        Point p2 = Data::points[helper[ei2->getid()].second];
+        //Point p2 = Data::points[helper[ei2->getid()].second];
+        Point p2 = Data::points[helper[ei2].second];
         set<int> inPlanar;
         inPlanar.insert(pl.getid());
         Segment newseg(p.getid(), p2.getid(), Data::segmentsnum, inPlanar);
@@ -389,13 +447,17 @@ void Triangulation::handleRegularLeftVertex(Point& p, set<Segment>::iterator& ei
         plexistsegments.insert(newseg.getid());
         pl.setexistsegments(plexistsegments);
     }
-    helper[ei1->getid()] = make_pair(regular, p.getid());
+    //helper[ei1->getid()] = make_pair(regular, p.getid());
+    helper[ei1] = make_pair(regular, p.getid());
 }
 
-void Triangulation::handleRegularRightVertex(Point& p, set<Segment>::iterator& ej){
-    PointType t = helper[ej->getid()].first;
+void Triangulation::handleRegularRightVertex(Point& p, //set<Segment>::iterator&
+                                             int ej){
+    //PointType t = helper[ej->getid()].first;
+    PointType t = helper[ej].first;
     if(t == merge){
-        Point p2 = Data::points[helper[ej->getid()].second];
+        //Point p2 = Data::points[helper[ej->getid()].second];
+        Point p2 = Data::points[helper[ej].second];
         set<int> inPlanar;
         inPlanar.insert(pl.getid());
         Segment newseg(p.getid(), p2.getid(), Data::segmentsnum, inPlanar);

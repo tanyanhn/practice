@@ -13,8 +13,11 @@ Direction Direction::operator/(const double i) const {
 }
 
 
-double Direction::angle(const Direction& d2, const Direction& di) const {
-    Direction d1 = *this;
+double Direction::angle(const Direction& dd2, const Direction& di) const {
+    Direction d1 = *this,
+        d2 = dd2;
+    d1 = d1.unit();
+    d2 = d2.unit();
     if(d1.cross(d2).dot(di) < -Tol::t)
         return 2 * M_PI - acos(d2.dot(d1));
     else if(d1.cross(d2).dot(di) > Tol::t)

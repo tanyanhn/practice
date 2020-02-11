@@ -6,11 +6,11 @@ using namespace std;
 
 
 int main(int argc, char* argv[]){
-    ifstream fis0("data/cube.obj");
-    ifstream fis1("data/tetrahedron.obj");
-    Yinset y1, y2;
-    fis0 >> y1;
-    fis1 >> y2;
+    //ifstream fis0("data/cube.obj");
+    //ifstream fis1("data/tetrahedron.obj");
+    //Yinset y1, y2;
+    //fis0 >> y1;
+    //fis1 >> y2;
     /*
     Segment seg = Data::segments[23];
     Point p0 = Data::points[seg[0]],
@@ -18,6 +18,59 @@ int main(int argc, char* argv[]){
         p;
     p = p0 + (p1 - p0)/2;
     */
+    Line l(Point(0, 0, 2), Direction(0, 1, 0));
+    (*Tol::l) = l;
+    (*Tol::outside) = l.getdirect().cross(Direction(0, 0, 1)).unit();
+    Point p1(0, 0, 4, 1),
+        p2(0, 6, 4, 2),
+        p3(0, 7, 4, 3),
+        p4(0, 9, 4, 4),
+        p5(0, 2, 2, 5),
+        p6(0, 5, 2, 6),
+        p7(0, 8, 2, 7),
+        p8(0, 2, 0, 8),
+        p9(0, 3, 0, 9),
+        p10(0, 5, 0, 10),
+        p11(0, 7, 0, 11),
+        p12(0, 10, 0, 12);
+    Segment seg1(3, 6, 1),
+        seg2(7, 11, 2),
+        seg3(9, 6, 3),
+        seg4(6, 7, 4),
+        seg5(8, 1, 5),
+        seg6(7, 12, 6),
+        seg7(4, 7, 7),
+        seg8(5, 6, 8),
+        seg9(6, 10, 9),
+        seg10(2, 6, 10),
+        seg11(3, 9, 11),
+        seg12(7, 5, 12);
+    cout << seg11.ifcontainPoint(p11) << endl
+         << seg11.ifcontainPoint(p6) << endl
+         << seg12.ifcontainPoint(p6) << endl
+         << seg12.ifcontainPoint(p5) << endl
+         << seg11.ifintersectionSegment(seg5) << endl
+         << seg11.ifintersectionSegment(seg12) << endl
+         << seg11.ifoverlapSegment(seg12) << endl
+         << seg11.ifoverlapSegment(seg1) << endl
+         << seg11.intersectionSegment(seg12) << endl;
+    Segment overlap = seg11.overlapSegment(seg3);
+    set<Segment> sweep;
+    for(auto i = 1; i < 11; i++){
+        sweep.insert(Data::segments[i]);
+    }
+    for(auto i = sweep.begin(); i != sweep.end(); i++){
+        cout << i->getid() << endl;
+    }
+    /*
+    double x = M_PI,
+        y = M_PI;
+    x /= 17;
+    x *= 17;
+    cout << (y >= M_PI) << endl
+         << (y > M_PI) << endl
+         << (y == M_PI) << endl
+         << (y < x) << endl;
     Planar f = Data::planars[14],
         pl0 = Data::planars[15],
         pl1 = Data::planars[7];
@@ -37,7 +90,8 @@ int main(int argc, char* argv[]){
         l2(seg0.getfixpoint(), seg0.getdirect() +  Direction(0.1, 0.1, 0.1));
     Point pp0 = p0 + (p1 - p0) / 3,
         pp1 = p0 + (p1 - p0) * 3,
-        pp2 = p0 + (p0 - p1) * 3
+        pp2 = p0 + (p0 - p1) * 3;
+    */
     /*
     cout << f.ifintersectionLine(seg0) << endl
          << f.ifintersectionLine(l1) << endl
@@ -59,7 +113,7 @@ int main(int argc, char* argv[]){
          << f.angleBetweenFlats(pl1, d2) << endl;
     //d1 = Direction() - d1;
     //d2 = Direction() - d2;
-    cout << pl0.angleBetweenFlats(f, d1) << endl
+    //cout << pl0.angleBetweenFlats(f, d1) << endl
          << pl1.angleBetweenFlats(f, d2) << endl;
     */
     //cout << seg.ifcontainPoint(p) << endl;
