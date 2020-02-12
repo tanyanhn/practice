@@ -56,7 +56,7 @@ Yinset Yinset::complement() const {
     }
     Data::existplanars = existpl;
     Data::past();
-    vector<int> faces;
+    vector<int> faces(Data::existfaces.size());
     copy(Data::existfaces.begin(), Data::existfaces.end(), faces.begin());
     Yinset anwser(faces, Data::yinsetsnum++);
     anwser.generatorhassmap();

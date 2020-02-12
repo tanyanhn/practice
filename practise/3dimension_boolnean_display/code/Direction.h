@@ -82,7 +82,7 @@ public:
     friend istream& operator>>(istream& is, Direction& d);
 };
 
-
+/*
 class Direction2D {
 public:
     double d[2];
@@ -109,5 +109,5 @@ public:
         return Direction2D(d[0] + p[0], d[1] + p[1]);
     }
 };
-
+*/
 #endif

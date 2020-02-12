@@ -75,5 +75,10 @@ public:
     //bool ifincludeFace(const Face& f) const;
 };
 
+class PlanarCompare{
+public:
+    bool operator()(const Planar&, const Planar&) const;
+};
+
 
 #endif

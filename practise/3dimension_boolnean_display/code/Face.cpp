@@ -5,12 +5,14 @@
 #include"STLHead.h"
 using namespace std;
 
+/*
 class PlanarCompare{
 public:
     bool operator()(const Planar&, const Planar&);
 };
+*/
 
-bool PlanarCompare::operator()(const Planar& pl0, const Planar& pl1){
+bool PlanarCompare::operator()(const Planar& pl0, const Planar& pl1) const {
     vector<int> vp1 = pl1.getpoints(),
         vp0 = pl0.getpoints();
     Point p00 = Data::points[vp0[0]],
@@ -61,7 +63,8 @@ bool PlanarCompare::operator()(const Planar& pl0, const Planar& pl1){
             k1 = 0;
         }
     }
-    if(p0.getid() != p1.getid()){
+    if(//p0.getid() != p1.getid()
+        !(p0 == p1)){
         return p0 < p1;
     }
     else{

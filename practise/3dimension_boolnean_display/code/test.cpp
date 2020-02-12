@@ -4,13 +4,18 @@
 
 using namespace std;
 
+template<class T>
+void print(T i){
+    cout << i << endl;
+}
+class PlanarCompare;
 
 int main(int argc, char* argv[]){
-    //ifstream fis0("data/cube.obj");
-    //ifstream fis1("data/tetrahedron.obj");
-    //Yinset y1, y2;
-    //fis0 >> y1;
-    //fis1 >> y2;
+    ifstream fis0("data/cube.obj");
+    ifstream fis1("data/tetrahedron.obj");
+    Yinset y1, y2;
+    fis0 >> y1;
+    fis1 >> y2;
     /*
     Segment seg = Data::segments[23];
     Point p0 = Data::points[seg[0]],
@@ -18,6 +23,59 @@ int main(int argc, char* argv[]){
         p;
     p = p0 + (p1 - p0)/2;
     */
+    Yinset y3 = y2.complement();
+    set<Planar, PlanarCompare> planars;
+    for(auto i = Data::planars.begin(); i != Data::planars.end(); i++){
+        planars.insert(i->second);
+    }
+    for(auto i = planars.begin(); i != planars.end(); i++){
+        print(i->getid());
+    }
+    Planar pl = Data::planars[15];
+    Planar pl0 = pl.overturn(),
+        pl1 = Data::planars[5].overturn();
+    vector<int> points = pl0.getpoints();
+    Point p0 = Data::points[points[0]],
+        p1 = Data::points[points[1]],
+        p2 = Data::points[points[2]];
+    Direction d1 = p1 - p0,
+        d2 = p2 - p0,
+        d3 = pl.getnormaldirect()*(Tol::t - 1e-5 * Tol::t),
+        d4(Tol::t/2, Tol::t/2, Tol::t/2);
+    Point p3 = p0 + d1 * 0.5 + d2 * 0.2,
+        p4 = p0 + d1 * -4 + d2 * 0.7,
+        p5 = p0 + d1 * 0 + d2 * 0.3;
+    /*
+    print(pl.ifcontainPoint(p0));
+    print(pl.ifcontainPoint(p3));
+    print(pl.ifcontainPoint(p4));
+    print(pl.ifcontainPoint(p5));
+    print(pl.ifcontainPoint(p5 + d3));
+    print(pl.ifcontainPoint(p5 + d4));
+    print(pl.ifcontainPoint(p5));
+    print(pl0.ifcontainPoint(p0));
+    print(pl0.ifcontainPoint(p3));
+    print(pl0.ifcontainPoint(p3 + d3));
+    print(pl0.ifcontainPoint(p3 + d4));
+    print(pl0.ifcontainPoint(p4));
+    print(pl0.ifcontainPoint(p5));
+    print(pl1.ifcontainPoint(p3));
+    Point pk(2, 1, -1, Data::pointsnum++);
+    Segment seg0(2, 6),
+        seg1(2, 5),
+        seg2(2, 8),
+        seg3(pk.getid(), 2);
+    print(pl.ifintersectionSegment(seg0));
+    print(pl.ifintersectionSegment(seg1));
+    print(pl.ifintersectionSegment(seg2));
+    print(pl.ifintersectionSegment(seg3));
+    print(pl0.ifintersectionSegment(seg2));
+    print(pl0.ifintersectionSegment(seg3));
+    print(pl0.intersectionSegment(seg2));
+    print(pl0.intersectionSegment(seg1));
+    print(pl0.intersectionSegment(seg0));
+    */
+    /*
     Line l(Point(0, 0, 2), Direction(0, 1, 0));
     (*Tol::l) = l;
     (*Tol::outside) = l.getdirect().cross(Direction(0, 0, 1)).unit();
@@ -62,6 +120,7 @@ int main(int argc, char* argv[]){
     for(auto i = sweep.begin(); i != sweep.end(); i++){
         cout << i->getid() << endl;
     }
+    */
     /*
     double x = M_PI,
         y = M_PI;

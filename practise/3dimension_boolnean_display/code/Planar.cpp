@@ -58,9 +58,9 @@ bool Planar::ifcontainPoint(const Point& p) const {
         return true;
     Direction d0 = p - p0, d1 = p - p1, d2 = p - p2;
     Direction d01 = p1 - p0, d12 = p2 - p1, d20 = p0 - p2;
-    if((d0.cross(d01).dot(normaldirect) < 0) ||
-       (d1.cross(d12).dot(normaldirect) < 0) ||
-       (d2.cross(d20).dot(normaldirect) < 0))
+    if((d0.cross(d01).dot(normaldirect) > 0) ||
+       (d1.cross(d12).dot(normaldirect) > 0) ||
+       (d2.cross(d20).dot(normaldirect) > 0))
         return false;
     return true;
 }
