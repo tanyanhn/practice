@@ -102,7 +102,7 @@ void Data::load(const Yinset& y){
 
 
 void Data::clear(){
-    farpoint = Point();
+    farpoint = Point(0, 0, 0, 0);
     for(auto i = existpoints.begin(); i != existpoints.end(); i++){
         points[*i].setinYinset(-2);
         points[*i].setinSegment(set<int>());
@@ -271,8 +271,8 @@ int Data::import(istream& is){
         sv("v"),
         svn("vn"),
         sf("f"),
-        sm("#"),
-        s;
+        sm("#");
+    int s;
     while(is >> ism){
         if(ism == sm){
             is.ignore(256, '\n');
@@ -281,6 +281,11 @@ int Data::import(istream& is){
             Point p;
             is >> p;
             p.setid(pointsnum++);
+            if(p > farpoint){
+                farpoint[0] = p[0];
+                farpoint[1] = p[1];
+                farpoint[2] = p[2];
+            }
             printv[kv++] = p.getid();
             existpoints.insert(p.getid());
         }
@@ -296,9 +301,15 @@ int Data::import(istream& is){
             Direction normal;
             for(int j = 0; j < 3; j++){
                 is >> s;
-                vp[j] = printv[s[0] - static_cast<int>('0')];
-                normal = normal + printvn[s[4] -  static_cast<int>('0')];
-                s.clear();
+                //vp[j] = printv[s[0] - static_cast<int>('0')];
+                vp[j] = s;
+                char x;
+                is >> x;
+                is >> s;
+                is >> x;
+                is >> s;
+                normal = normal + //printvn[s[4] -  static_cast<int>('0')];
+                    printvn[s];
             }
             Direction d1 = points[vp[1]] - points[vp[0]],
                 d2 = points[vp[2]] - points[vp[1]];
@@ -397,6 +408,7 @@ int Data::import(istream& is){
             existplanars.insert(pl.getid());
         }
     }
+    farpoint = farpoint + Direction(1, 1, 1);
     past();
     vector<int> faces(existfaces.size());
     copy(Data::existfaces.begin(), Data::existfaces.end(), faces.begin());

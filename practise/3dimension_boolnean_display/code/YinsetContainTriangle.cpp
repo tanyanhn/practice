@@ -30,7 +30,8 @@ bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& trian
     Data::segmentsnum++;
     Point intersectPoint;
     vector<Planar> intersectPlanar;
-    for(auto i = yinset.getfaces().begin(); i != yinset.getfaces().end(); i++){
+    vector<int> yinsetfaces = yinset.getfaces();
+    for(auto i = yinsetfaces.begin(); i != yinsetfaces.end(); i++){
         for(auto j = (Data::faces[*i]).getplanars().begin();
             j != Data::faces[*i].getplanars().end(); j++){
             Planar pl = Data::planars[*j];
@@ -149,7 +150,7 @@ bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& trian
                 }
             }
             else {
-                if(pl.ifintersectionLine(striaghtLine)){
+                if(pl.ifintersectionSegment(striaghtLine)){
                     interP = pl.intersectionSegment(striaghtLine);
                     if((interP - p).norm() < (intersectPoint - p).norm() - Tol::t){
                         intersectPoint = interP;

@@ -86,7 +86,8 @@ public:
     Point operator+(const Direction& d) const {
         return Point(coord[0] + d[0],
                      coord[1] + d[1],
-                     coord[2] + d[2]);
+                     coord[2] + d[2],
+                     id);
     }
     bool operator==(const Point& q) const {
         return
