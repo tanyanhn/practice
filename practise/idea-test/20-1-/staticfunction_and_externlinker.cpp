@@ -17,18 +17,16 @@ namespace{
     }
 }
 
-namespace{
-    static void stnameFun(){
+void Global::stnameFun(){
         cout << "stnameFun()" << endl;
     }
-}
-
+*/
 namespace Global {
     void nameglobalFun(){
         cout << "nameglobalFun()" << endl;
     }
 }
-*/
+
 
 
 
@@ -39,5 +37,5 @@ int main(){
     A<Global::nameglobalFun>();
     A<::stnameFun>();
     //A<Local::localnameFun>();
-    //A<Global::stnameglobalFun>();
+    A<Global::stnameglobalFun>();
 }

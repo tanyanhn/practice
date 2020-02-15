@@ -13,9 +13,12 @@ class PlanarCompare;
 int main(int argc, char* argv[]){
     ifstream fis0("data/cube.obj");
     ifstream fis1("data/tetrahedron.obj");
-    Yinset y1, y2;
+    ifstream fis2("data/tetrahedron2.obj");
+    Yinset y1, y2, y3;
     fis0 >> y1;
     fis1 >> y2;
+    fis2 >> y3;
+    y1.meet(y2);
     /*
     Segment seg = Data::segments[23];
     Point p0 = Data::points[seg[0]],
@@ -23,6 +26,7 @@ int main(int argc, char* argv[]){
         p;
     p = p0 + (p1 - p0)/2;
     */
+    /*
     Yinset y3 = y2.complement();
     set<Planar, PlanarCompare> planars;
     for(auto i = Data::planars.begin(); i != Data::planars.end(); i++){
@@ -45,6 +49,7 @@ int main(int argc, char* argv[]){
     Point p3 = p0 + d1 * 0.5 + d2 * 0.2,
         p4 = p0 + d1 * -4 + d2 * 0.7,
         p5 = p0 + d1 * 0 + d2 * 0.3;
+    */
     /*
     print(pl.ifcontainPoint(p0));
     print(pl.ifcontainPoint(p3));

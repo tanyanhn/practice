@@ -62,7 +62,7 @@ public:
             Data::points[id] = *this;
         }
     }
-    const double operator[](const int i) const {
+    double operator[](const int i) const {
         if(i < 0 || i > 2){
             cout << id << " : " << i << " out of range";
             int* a;
@@ -86,8 +86,14 @@ public:
     Point operator+(const Direction& d) const {
         return Point(coord[0] + d[0],
                      coord[1] + d[1],
-                     coord[2] + d[2],
-                     id);
+                     coord[2] + d[2]);
+    }
+    Point& operator+=(const Direction& d){
+        Point p = *this + d;
+        coord[0] = p[0];
+        coord[1] = p[1];
+        coord[2] = p[2];
+        return *this;
     }
     bool operator==(const Point& q) const {
         return

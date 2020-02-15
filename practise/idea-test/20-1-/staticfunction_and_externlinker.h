@@ -2,7 +2,9 @@
 using namespace std;
 //static void stFun();
 
-void Fun();
+void Fun(){
+    cout << "Fun()" <<endl;
+};
 
 //namespace{
 //    void nameFun();
@@ -32,7 +34,13 @@ namespace{
 
 namespace Global {
 void nameglobalFun();
-static void stnameglobalFun();
+static void stnameglobalFun()//{
+//    cout << "stnameglobalFun()" << endl;
+//}
+    ;
+}
+void Global::stnameglobalFun(){
+    cout << "stnameglobalFun()" << endl;
 }
 
 typedef void (*FUN)();

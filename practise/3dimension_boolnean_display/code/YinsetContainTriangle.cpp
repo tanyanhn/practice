@@ -32,8 +32,9 @@ bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& trian
     vector<Planar> intersectPlanar;
     vector<int> yinsetfaces = yinset.getfaces();
     for(auto i = yinsetfaces.begin(); i != yinsetfaces.end(); i++){
-        for(auto j = (Data::faces[*i]).getplanars().begin();
-            j != Data::faces[*i].getplanars().end(); j++){
+        vector<int> iplanars = Data::faces[*i].getplanars();
+        for(auto j = iplanars.begin();
+            j != iplanars.end(); j++){
             Planar pl = Data::planars[*j];
             if(pl.ifcontainPlanar(triangle)){
                 if(overlaptriangle == AddOverlap){

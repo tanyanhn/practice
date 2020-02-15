@@ -262,6 +262,7 @@ void Data::print(ostream& os, const Yinset& y){
 
 int Data::import(istream& is){
     clear();
+    int startpointsid = Data::pointsnum;
     map<int, int> printv;
     map<int, Direction> printvn;
     map<pair<int, int>, int> printseg;
@@ -281,6 +282,7 @@ int Data::import(istream& is){
             Point p;
             is >> p;
             p.setid(pointsnum++);
+            existpoints.insert(p.getid());
             if(p > farpoint){
                 farpoint[0] = p[0];
                 farpoint[1] = p[1];
@@ -302,7 +304,7 @@ int Data::import(istream& is){
             for(int j = 0; j < 3; j++){
                 is >> s;
                 //vp[j] = printv[s[0] - static_cast<int>('0')];
-                vp[j] = s;
+                vp[j] = s + startpointsid - 1;
                 char x;
                 is >> x;
                 is >> s;
@@ -330,6 +332,7 @@ int Data::import(istream& is){
             else{
                 seg0.setid(segmentsnum++);
                 printseg[make_pair(seg0[0], seg0[1])] = seg0.getid();
+                //existsegments.insert(seg0.getid());
             }
             it = printseg.find(make_pair(seg1[0], seg1[1]));
             if(it != printseg.end()){
@@ -339,6 +342,7 @@ int Data::import(istream& is){
             else{
                 seg1.setid(segmentsnum++);
                 printseg[make_pair(seg1[0], seg1[1])] = seg1.getid();
+                //existsegments.insert(seg1.getid());
             }
             it = printseg.find(make_pair(seg2[0], seg2[1]));
             if(it != printseg.end()){
@@ -348,6 +352,7 @@ int Data::import(istream& is){
             else{
                 seg2.setid(segmentsnum++);
                 printseg[make_pair(seg2[0], seg2[1])] = seg2.getid();
+                //existsegments.insert(seg2.getid());
             }
             if(seg0[0] == vp[0]){
                 set<int> inPlanar = seg0.getinPlanar(),
@@ -408,7 +413,7 @@ int Data::import(istream& is){
             existplanars.insert(pl.getid());
         }
     }
-    farpoint = farpoint + Direction(1, 1, 1);
+    farpoint += Direction(1, 1, 1);
     past();
     vector<int> faces(existfaces.size());
     copy(Data::existfaces.begin(), Data::existfaces.end(), faces.begin());

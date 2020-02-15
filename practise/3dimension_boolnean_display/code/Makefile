@@ -1,4 +1,5 @@
 CC = g++
+CPPFLAGS = -g -D_GLIBCXX_DEBUG
 
 #TARGET=main
 
@@ -9,9 +10,9 @@ CC = g++
 #	doxygen doxygen.cfg
 
 .cpp.o:
-	$(CC) -o $@ -c $< -g
+	$(CC) -o $@ -c $< $(CPPFLAGS)
 .o.ex:
-	$(CC) -o $@ $^
+	$(CC) -o $@ $^ $(CPPFLAGS)
 
 all: main.ex test.ex
 
@@ -23,7 +24,7 @@ Point.o Segment.o SegmentIntersection.o Tol.o Triangulation.o Yinset.o YinsetCon
 test.ex: test.o Data.o Direction.o Face.o FaceContainFace.o FindNearTriangle.o Flat.o Line.o \
 Planar.o TriangleIntersection.o \
 Point.o Segment.o SegmentIntersection.o Tol.o Triangulation.o Yinset.o YinsetContainTriangle.o
-	$(CC) $^ -o $@ -g
+#	$(CC) $^ -o $@ -g
 
 #main : main.o
 #	$(CC) -o $@ $<
@@ -67,11 +68,14 @@ test: test.ex
 	./test.ex
 
 run: main.ex
-	./main.ex ./Data/cube.obj
+	./main.ex 
+
+doxygen: doxygen.cfg
+	doxygen doxygen.cfg
 
 clear:
-	-rm main.ex
+	-rm main.ex *.o
 
 clean:
-	-rm -f main.ex *.output *o *.h.gch *.obj
+	-rm -f main.ex *.output *.o *.h.gch *.obj
 	-rm -rf ./doxygen/

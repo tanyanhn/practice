@@ -50,16 +50,17 @@ public:
                     Data::points[points[1]].setinSegment(inSegment);
                 }
                 Line::fixpoint = Data::points[points[0]];
-                Line::direct = (Data::points[points[1]] - Data::points[points[0]]).unit();
+                if(p0 != p1)
+                    Line::direct = (Data::points[points[1]] - Data::points[points[0]]).unit();
             }
             if(id != -1){
                 Data::segments[id] = *this;
             }
         }
-    Segment(const Segment& seg) /*: Line(seg), points{seg[0], seg[1]}, id(seg.id),
-                                  inPlanar(seg.inPlanar),
-                                  inPlanar01(seg.inPlanar01), inPlanar10(seg.inPlanar10),
-                                  inYinset(seg.inYinset)*/ {
+    Segment(const Segment& seg) : Line(seg)/*: Line(seg), points{seg[0], seg[1]}, id(seg.id),
+                                             inPlanar(seg.inPlanar),
+                                             inPlanar01(seg.inPlanar01), inPlanar10(seg.inPlanar10),
+                                             inYinset(seg.inYinset)*/ {
         *this = seg;
     }
     Segment& operator=(const Segment& seg){
@@ -73,9 +74,9 @@ public:
         inYinset = seg.inYinset;
         return *this;
         /*
-        Segment temp(seg);
-        std::swap(*this, temp);
-        return *this;
+          Segment temp(seg);
+          std::swap(*this, temp);
+          return *this;
         */
     }
     ~Segment(){}

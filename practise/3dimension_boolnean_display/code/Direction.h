@@ -26,7 +26,7 @@ public:
         return *this;
     }
     ~Direction(){}
-    const double operator[](const int i) const {
+    double operator[](const int i) const {
         if(i < 0 || i > 2){
             cout << "Direction" << " : " << i << " out of range";
             char* a = 0;
