@@ -28,7 +28,7 @@ bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& trian
     Segment striaghtLine(p.getid(), farpoint.getid(), Data::segmentsnum);
     Data::segments[Data::segmentsnum] = striaghtLine;
     Data::segmentsnum++;
-    Point intersectPoint;
+    Point intersectPoint = farpoint;
     vector<Planar> intersectPlanar;
     vector<int> yinsetfaces = yinset.getfaces();
     for(auto i = yinsetfaces.begin(); i != yinsetfaces.end(); i++){
@@ -36,6 +36,9 @@ bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& trian
         for(auto j = iplanars.begin();
             j != iplanars.end(); j++){
             Planar pl = Data::planars[*j];
+            if(pl.ifintersectionSegment(striaghtLine) == false){
+                continue;
+            }
             if(pl.ifcontainPlanar(triangle)){
                 if(overlaptriangle == AddOverlap){
                     if(triangle.getnormaldirect().dot(pl.getnormaldirect()) < -Tol::t)

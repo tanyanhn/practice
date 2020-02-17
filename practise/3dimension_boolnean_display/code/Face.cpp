@@ -113,10 +113,10 @@ void Face::generatortype(){
         }
     }
     if(biggestpl.getnormaldirect().dot(Direction(0, 0, 1)) > 0){
-        type = 1;
+        type = 0;
     }
     else {
-        type = 0;
+        type = 1;
     }
     if(id != -1){
         Data::faces[id] = *this;

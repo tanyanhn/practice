@@ -50,7 +50,7 @@ public:
                     Data::points[points[1]].setinSegment(inSegment);
                 }
                 Line::fixpoint = Data::points[points[0]];
-                if(p0 != p1)
+                if(!(Data::points[p0] == Data::points[p1]))
                     Line::direct = (Data::points[points[1]] - Data::points[points[0]]).unit();
             }
             if(id != -1){

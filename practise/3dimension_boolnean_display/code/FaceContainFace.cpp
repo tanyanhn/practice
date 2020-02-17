@@ -7,6 +7,9 @@ using namespace std;
 
 
 bool FaceContainFace::operator()(const Face& f1, const Face& f2){
+    if(f1.gettype() == 1){
+        return false;
+    }
     vector<int> f2Pls = f2.getplanars();
     Planar f2Pl = Data::planars[f2Pls[0]];
     YinsetContainTriangle functor;

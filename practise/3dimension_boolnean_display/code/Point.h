@@ -93,6 +93,9 @@ public:
         coord[0] = p[0];
         coord[1] = p[1];
         coord[2] = p[2];
+        if(id != -1){
+            Data::points[id] = *this;
+        }
         return *this;
     }
     bool operator==(const Point& q) const {
