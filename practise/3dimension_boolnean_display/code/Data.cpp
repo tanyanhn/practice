@@ -135,7 +135,7 @@ void Data::clear(){
 void Data::intersection(){
     TriangleIntersection functor;
     for(auto i = existplanars.begin(); i != --existplanars.end(); i++){
-        for(auto j = ++i; j != existplanars.end(); j++){
+        for(auto j = next(i); j != existplanars.end(); j++){
             Planar pli = planars[*i],
                 plj = planars[*j];
             functor(pli, plj);

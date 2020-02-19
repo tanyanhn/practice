@@ -88,7 +88,7 @@ void SegmentIntersection::operator()(Planar& pl){
         }
         if(pinseg.size() > 2){
             set<int> allPlanar = seg.getinPlanar();
-            for(auto j = pinseg.begin(); j != (--pinseg.end()); j++){
+            for(auto j = pinseg.begin(); j != prev(pinseg.end()); j++){
                 Point p0 = *j, p1 = *(++j);
                 Segment s(p0.getid(), p1.getid(), Data::segmentsnum,
                           seg.getinPlanar01(), seg.getinPlanar10(), seg.getinYinset());

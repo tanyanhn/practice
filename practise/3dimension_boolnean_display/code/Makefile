@@ -68,7 +68,7 @@ test: test.ex
 	./test.ex
 
 run: main.ex
-	./main.ex 
+	./main.ex
 
 doxygen: doxygen.cfg
 	doxygen doxygen.cfg
