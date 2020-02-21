@@ -371,8 +371,8 @@ void Triangulation::handleEndVertex(Point& p, //set<Segment>::iterator&
         Point p2 = Data::points[helper[ei].second];
         set<int> inPlanar;
         inPlanar.insert(pl.getid());
-        Segment newseg(p.getid(), p2.getid(), Data::segmentsnum, inPlanar);
-        Data::segmentsnum++;
+        Segment newseg(p.getid(), p2.getid(), Data::segmentsnum++, inPlanar);
+        //Data::segmentsnum++;
         set<int> plexistsegments = pl.getexistsegments();
         plexistsegments.insert(newseg.getid());
         pl.setexistsegments(plexistsegments);
@@ -387,8 +387,8 @@ void Triangulation::handleSplitVertex(Point& p, //set<Segment>::iterator&
     Point p2 = Data::points[helper[ei].second];
     set<int> inPlanar;
     inPlanar.insert(pl.getid());
-    Segment newseg(p.getid(), p2.getid(), Data::segmentsnum, inPlanar);
-    Data::segmentsnum++;
+    Segment newseg(p.getid(), p2.getid(), Data::segmentsnum++, inPlanar);
+    //Data::segmentsnum++;
     set<int> plexistsegments = pl.getexistsegments();
     plexistsegments.insert(newseg.getid());
     pl.setexistsegments(plexistsegments);
@@ -410,8 +410,8 @@ void Triangulation::handleMergeVertex(Point& p, //set<Segment>::iterator&
     if(ti == merge){
         //Point p2 = Data::points[helper[ei->getid()].second];
         Point p2 = Data::points[helper[ei].second];
-        Segment newseg(p.getid(), p2.getid(), Data::segmentsnum, inPlanar);
-        Data::segmentsnum++;
+        Segment newseg(p.getid(), p2.getid(), Data::segmentsnum++, inPlanar);
+        //Data::segmentsnum++;
         //set<int> plexistsegments = pl.getexistsegments();
         plexistsegments.insert(newseg.getid());
         //pl.setexistsegments(plexistsegments);
@@ -419,8 +419,8 @@ void Triangulation::handleMergeVertex(Point& p, //set<Segment>::iterator&
     if(tj == merge){
         //Point p2 = Data::points[helper[ej->getid()].second];
         Point p2 = Data::points[helper[ej].second];
-        Segment newseg(p.getid(), p2.getid(), Data::segmentsnum, inPlanar);
-        Data::segmentsnum++;
+        Segment newseg(p.getid(), p2.getid(), Data::segmentsnum++, inPlanar);
+        //Data::segmentsnum++;
         //set<int> plexistsegments = pl.getexistsegments();
         plexistsegments.insert(newseg.getid());
         //pl.setexistsegments(plexistsegments);
@@ -441,8 +441,8 @@ void Triangulation::handleRegularLeftVertex(Point& p, //set<Segment>::iterator&
         Point p2 = Data::points[helper[ei2].second];
         set<int> inPlanar;
         inPlanar.insert(pl.getid());
-        Segment newseg(p.getid(), p2.getid(), Data::segmentsnum, inPlanar);
-        Data::segmentsnum++;
+        Segment newseg(p.getid(), p2.getid(), Data::segmentsnum++, inPlanar);
+        //Data::segmentsnum++;
         set<int> plexistsegments = pl.getexistsegments();
         plexistsegments.insert(newseg.getid());
         pl.setexistsegments(plexistsegments);
@@ -460,8 +460,8 @@ void Triangulation::handleRegularRightVertex(Point& p, //set<Segment>::iterator&
         Point p2 = Data::points[helper[ej].second];
         set<int> inPlanar;
         inPlanar.insert(pl.getid());
-        Segment newseg(p.getid(), p2.getid(), Data::segmentsnum, inPlanar);
-        Data::segmentsnum++;
+        Segment newseg(p.getid(), p2.getid(), Data::segmentsnum++, inPlanar);
+        //Data::segmentsnum++;
         set<int> plexistsegments = pl.getexistsegments();
         plexistsegments.insert(newseg.getid());
         pl.setexistsegments(plexistsegments);
@@ -591,8 +591,8 @@ vector<Planar> Triangulation::generatorPolygen(){
             p = Data::points[p2];
             existseg.insert(seg.getid());
             if(route.find(p) == route.end()){
-                pl.setid(Data::planarsnum);
-                Data::planarsnum++;
+                pl.setid(Data::planarsnum++);
+                //Data::planarsnum++;
                 pl.setexistsegments(existseg);
                 existseg.clear();
                 anwser.push_back(pl);
@@ -656,8 +656,8 @@ void Triangulation::TriangulateMonotonePolygon(Planar& planar){
                 if((p2 - p1).angle(p - p1, pl.getnormaldirect()) > M_PI){
                     break;
                 }
-                Segment seg(p.getid(), p2.getid(), Data::pointsnum);
-                Data::pointsnum++;
+                Segment seg(p.getid(), p2.getid(), Data::segmentsnum++);
+                //Data::pointsnum++;
                 existsegment.insert(seg.getid());
                 p1 = p2;
                 if(s.empty()){
@@ -684,8 +684,8 @@ void Triangulation::TriangulateMonotonePolygon(Planar& planar){
                 if(s.empty()){
                     break;
                 }
-                Segment seg(p.getid(), p1.getid(), Data::pointsnum);
-                Data::pointsnum++;
+                Segment seg(p.getid(), p1.getid(), Data::segmentsnum++);
+                //Data::pointsnum++;
                 existsegment.insert(seg.getid());
             }
             s.push(p1);

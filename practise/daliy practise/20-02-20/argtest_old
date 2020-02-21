@@ -1,0 +1,14 @@
+# test first line condition
+#! /bin/bash
+# Write the number of arguments
+echo I got $# arguments
+# Write the arguments as a single line
+echo $*
+echo $* | xargs -n 1
+echo $* | xargs -n 1 | sort
+# Write the arguments one line at a time
+echo Line by line:
+echo $@
+echo $@ | xargs -n 1
+echo $@ | xargs -n 1 | sort
+

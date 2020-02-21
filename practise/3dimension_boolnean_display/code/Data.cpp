@@ -17,11 +17,11 @@ std::set<int> Data::existpoints;
 std::set<int> Data::existsegments;
 std::set<int> Data::existplanars;
 std::set<int> Data::existfaces;
-std::map<int, Point> Data::points;
-std::map<int, Segment> Data::segments;
-std::map<int, Planar> Data::planars;
-std::map<int, Face> Data::faces;
-std::map<int, Yinset> Data::yinsets;
+std::vector<Point> Data::points;
+std::vector<Segment> Data::segments;
+std::vector<Planar> Data::planars;
+std::vector<Face> Data::faces;
+std::vector<Yinset> Data::yinsets;
 std::map<Point, set<int>> Data::pastpoints;
 int Data::pointsnum = 1;
 int Data::segmentsnum = 0;
@@ -148,16 +148,20 @@ void Data::intersection(){
 }
 
 void Data::triangulation(){
-    vector<Planar> triangles;
+    vector<vector<Planar>> triangles;
     for(auto i = existplanars.begin(); i != existplanars.end(); i++){
         Triangulation functor;
         Planar pl = Data::planars[*i];
         vector<Planar> parttriangles = functor(pl);
-        copy(parttriangles.begin(), parttriangles.end(), triangles.end());
+        // copy(parttriangles.begin(), parttriangles.end(), triangles.end());
+        triangles.push_back(parttriangles);
     }
     existplanars.clear();
     for(auto i = triangles.begin(); i != triangles.end(); i++){
-        existplanars.insert((*i).getid());
+        vector<Planar> vpl = *i;
+        for(auto j = vpl.begin(); j != vpl.end(); j++){
+            existplanars.insert((*j).getid());
+        }
     }
 }
 
@@ -262,6 +266,7 @@ void Data::print(ostream& os, const Yinset& y){
 
 int Data::import(istream& is){
     clear();
+    int yinsetid = yinsetsnum++;
     int startpointsid = Data::pointsnum;
     map<int, int> printv;
     map<int, Direction> printvn;
@@ -297,6 +302,7 @@ int Data::import(istream& is){
             printvn.insert(make_pair(kvn++, d));
         }
         else if(ism == sf){
+            int id = planarsnum++;
             vector<int> vp;
             vp.resize(3);
             int i;
@@ -357,48 +363,48 @@ int Data::import(istream& is){
             if(seg0[0] == vp[0]){
                 set<int> inPlanar = seg0.getinPlanar(),
                     inPlanar01 = seg0.getinPlanar01();
-                inPlanar.insert(planarsnum);
-                inPlanar01.insert(planarsnum);
+                inPlanar.insert(id);
+                inPlanar01.insert(id);
                 seg0.setinPlanar(inPlanar);
                 seg0.setinPlanar01(inPlanar01);
             }
             else{
                 set<int> inPlanar = seg0.getinPlanar(),
                     inPlanar10 = seg0.getinPlanar10();
-                inPlanar.insert(planarsnum);
-                inPlanar10.insert(planarsnum);
+                inPlanar.insert(id);
+                inPlanar10.insert(id);
                 seg0.setinPlanar(inPlanar);
                 seg0.setinPlanar10(inPlanar10);
             }
             if(seg1[0] == vp[1]){
                 set<int> inPlanar = seg1.getinPlanar(),
                     inPlanar01 = seg1.getinPlanar01();
-                inPlanar.insert(planarsnum);
-                inPlanar01.insert(planarsnum);
+                inPlanar.insert(id);
+                inPlanar01.insert(id);
                 seg1.setinPlanar(inPlanar);
                 seg1.setinPlanar01(inPlanar01);
             }
             else{
                 set<int> inPlanar = seg1.getinPlanar(),
                     inPlanar10 = seg1.getinPlanar10();
-                inPlanar.insert(planarsnum);
-                inPlanar10.insert(planarsnum);
+                inPlanar.insert(id);
+                inPlanar10.insert(id);
                 seg1.setinPlanar(inPlanar);
                 seg1.setinPlanar10(inPlanar10);
             }
             if(seg2[0] == vp[2]){
                 set<int> inPlanar = seg2.getinPlanar(),
                     inPlanar01 = seg2.getinPlanar01();
-                inPlanar.insert(planarsnum);
-                inPlanar01.insert(planarsnum);
+                inPlanar.insert(id);
+                inPlanar01.insert(id);
                 seg2.setinPlanar(inPlanar);
                 seg2.setinPlanar01(inPlanar01);
             }
             else{
                 set<int> inPlanar = seg2.getinPlanar(),
                     inPlanar10 = seg2.getinPlanar10();
-                inPlanar.insert(planarsnum);
-                inPlanar10.insert(planarsnum);
+                inPlanar.insert(id);
+                inPlanar10.insert(id);
                 seg2.setinPlanar(inPlanar);
                 seg2.setinPlanar10(inPlanar10);
             }
@@ -409,7 +415,7 @@ int Data::import(istream& is){
             existsegments.insert(seg0.getid());
             existsegments.insert(seg1.getid());
             existsegments.insert(seg2.getid());
-            Planar pl(vp, vseg, planarsnum++, -1, yinsetsnum);
+            Planar pl(vp, vseg, id, -1, yinsetsnum);
             existplanars.insert(pl.getid());
         }
     }
@@ -417,7 +423,7 @@ int Data::import(istream& is){
     past();
     vector<int> faces(existfaces.size());
     copy(Data::existfaces.begin(), Data::existfaces.end(), faces.begin());
-    Yinset anwser(faces, Data::yinsetsnum++);
+    Yinset anwser(faces, yinsetid);
     anwser.generatorhassmap();
     clear();
     return anwser.getid();

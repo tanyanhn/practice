@@ -1,5 +1,5 @@
-CC = g++
-CPPFLAGS = -g -D_GLIBCXX_DEBUG
+CC := g++
+CPPFLAGS = -O0 -g -D_GLIBCXX_DEBUG
 
 #TARGET=main
 
@@ -74,8 +74,8 @@ doxygen: doxygen.cfg
 	doxygen doxygen.cfg
 
 clear:
-	-rm main.ex *.o
+	-rm main.ex *.o test.ex
 
 clean:
-	-rm -f main.ex *.output *.o *.h.gch *.obj
+	-rm -f main.ex *.output *.o *.h.gch *.obj core test.ex
 	-rm -rf ./doxygen/

@@ -54,6 +54,8 @@ public:
                     Line::direct = (Data::points[points[1]] - Data::points[points[0]]).unit();
             }
             if(id != -1){
+                if(id >= Data::segments.size())
+                    Data::segments.resize(++id);
                 Data::segments[id] = *this;
             }
         }
@@ -101,6 +103,8 @@ public:
         Data::points[points[1]].setinSegment(inSegment);
         id = i;
         if(id != 1){
+            if(id >= Data::segments.size())
+                Data::segments.resize(++id);
             Data::segments[id] = *this;
         }
     }
@@ -110,6 +114,8 @@ public:
     void setinYinset(const int i) {
         inYinset = i;
         if(id != -1){
+            if(id >= Data::segments.size())
+                Data::segments.resize(++id);
             Data::segments[id] = *this;
         }
     }
@@ -119,6 +125,8 @@ public:
     void setinPlanar(const std::set<int>& v){
         inPlanar = v;
         if(id != -1){
+            if(id >= Data::segments.size())
+                Data::segments.resize(++id);
             Data::segments[id] = *this;
         }
     }
@@ -128,6 +136,8 @@ public:
     void setinPlanar01(const std::set<int>& v){
         inPlanar01 = v;
         if(id != -1){
+            if(id >= Data::segments.size())
+                Data::segments.resize(++id);
             Data::segments[id] = *this;
         }
     }
@@ -137,6 +147,8 @@ public:
     void setinPlanar10(const std::set<int>& v){
         inPlanar10 = v;
         if(id != -1){
+            if(id >= Data::segments.size())
+                Data::segments.resize(++id);
             Data::segments[id] = *this;
         }
     }
@@ -156,7 +168,7 @@ public:
                 return;
             }
         }
-        if(i = 1){
+        else if(i = 1){
             if(Data::points[p] > Data::points[points[0]]){
                 std::set<int> inSegment = Data::points[points[1]].getinSegment();
                 inSegment.erase(id);
@@ -174,6 +186,8 @@ public:
             std::cout << *pi;
         }
         if(id != -1){
+            if(id >= Data::segments.size())
+                Data::segments.resize(++id);
             Data::segments[id] = *this;
         }
     }

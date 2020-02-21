@@ -62,6 +62,8 @@ public:
     void setpoints(const std::vector<int>& vp) {
         points = vp;
         if(id != -1){
+            if(id >= Data::planars.size())
+                Data::planars.resize(++id);
             Data::planars[id] = *this;
         }
     }
@@ -71,6 +73,8 @@ public:
     void setsegments(const std::vector<int>& vs) {
         segments = vs;
         if(id != -1){
+            if(id >= Data::planars.size())
+                Data::planars.resize(++id);
             Data::planars[id] = *this;
         }
     }
@@ -80,6 +84,8 @@ public:
     void setexistpoints(const std::set<int>& sp) {
         existpoints = sp;
         if(id != -1){
+            if(id >= Data::planars.size())
+                Data::planars.resize(++id);
             Data::planars[id] = *this;
         }
     }
@@ -89,6 +95,8 @@ public:
     void setexistsegments(const std::set<int>& ss) {
         existsegments = ss;
         if(id != -1){
+            if(id >= Data::planars.size())
+                Data::planars.resize(++id);
             Data::planars[id] = *this;
         }
     }
@@ -98,6 +106,8 @@ public:
     void setid(const int i){
         id = i;
         if(id != -1){
+            if(id >= Data::planars.size())
+                Data::planars.resize(++id);
             Data::planars[id] = *this;
         }
     }
@@ -107,6 +117,8 @@ public:
     void setinFace(const int i){
         inFace = i;
         if(id != -1){
+            if(id >= Data::planars.size())
+                Data::planars.resize(++id);
             Data::planars[id] = *this;
         }
     }
@@ -116,6 +128,8 @@ public:
     void setinYinset(const int i){
         inYinset = i;
         if(id != -1){
+            if(id >= Data::planars.size())
+                Data::planars.resize(++id);
             Data::planars[id] = *this;
         }
     }

@@ -22,12 +22,12 @@ bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& trian
             (p0[1] + p1[1] + p2[1]) / 3,
             (p0[2] + p1[2] + p2[2]) / 3,
             Data::pointsnum);
-    Data::points[Data::pointsnum] = p;
-    Data::pointsnum++;
+    Data::points[Data::pointsnum++] = p;
+    //Data::pointsnum++;
     Point farpoint = Data::farpoint;
-    Segment striaghtLine(p.getid(), farpoint.getid(), Data::segmentsnum);
-    Data::segments[Data::segmentsnum] = striaghtLine;
-    Data::segmentsnum++;
+    Segment striaghtLine(p.getid(), farpoint.getid(), Data::segmentsnum++);
+    //Data::segments[Data::segmentsnum] = striaghtLine;
+    //Data::segmentsnum++;
     Point intersectPoint = farpoint;
     vector<Planar> intersectPlanar;
     vector<int> yinsetfaces = yinset.getfaces();

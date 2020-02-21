@@ -50,6 +50,8 @@ public:
     void setinYinset(const int i) {
         inYinset = i;
         if(id != -1){
+            if(id >= Data::points.size())
+                Data::points.resize(++id);
             Data::points[id] = *this;
         }
     }
@@ -59,6 +61,8 @@ public:
     void setinSegment(const set<int>& v) {
         inSegment = v;
         if(id != -1){
+            if(id >= Data::points.size())
+                Data::points.resize(++id);
             Data::points[id] = *this;
         }
     }
@@ -94,6 +98,8 @@ public:
         coord[1] = p[1];
         coord[2] = p[2];
         if(id != -1){
+            if(id >= Data::points.size())
+                Data::points.resize(++id);
             Data::points[id] = *this;
         }
         return *this;

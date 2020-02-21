@@ -174,10 +174,10 @@ void TriangleIntersection::operator()(Planar& tr1, Planar& tr2){
                 inPlanar.insert(tr1.getid());
                 inPlanar.insert(tr2.getid());
                 intersectseg.setinPlanar(inPlanar);
-                intersectseg.setid(Data::segmentsnum);
-                Data::segments[Data::segmentsnum] = intersectseg;
-                Data::existsegments.insert(Data::segmentsnum);
-                Data::segmentsnum++;
+                intersectseg.setid(Data::segmentsnum++);
+                //Data::segments[Data::segmentsnum] = intersectseg;
+                Data::existsegments.insert(intersectseg.getid());
+                //Data::segmentsnum++;
                 tr1existsegments.insert(intersectseg.getid());
                 tr2existsegments.insert(intersectseg.getid());
                 tr1.setexistsegments(tr1existsegments);
@@ -277,9 +277,9 @@ Segment TriangleIntersection::PlanarIntersectLine(const Planar& tr1, const Line&
                     tr1intersectPoint = true;
                 }
                 else {
-                    p.setid(Data::pointsnum);
-                    Data::points[Data::pointsnum] = p;
-                    Data::pointsnum++;
+                    p.setid(Data::pointsnum++);
+                    //Data::points[Data::pointsnum] = p;
+                    //Data::pointsnum++;
                     tr1segp1 = p;
                 }
             }
@@ -305,9 +305,9 @@ Segment TriangleIntersection::PlanarIntersectLine(const Planar& tr1, const Line&
                     tr1intersectPoint = true;
                 }
                 else {
-                    p.setid(Data::pointsnum);
-                    Data::points[Data::pointsnum] = p;
-                    Data::pointsnum++;
+                    p.setid(Data::pointsnum++);
+                    //Data::points[Data::pointsnum] = p;
+                    //Data::pointsnum++;
                     tr1segp1 = p;
                 }
             }
@@ -333,9 +333,9 @@ Segment TriangleIntersection::PlanarIntersectLine(const Planar& tr1, const Line&
                     tr1intersectPoint = true;
                 }
                 else {
-                    p.setid(Data::pointsnum);
-                    Data::points[Data::pointsnum] = p;
-                    Data::pointsnum++;
+                    p.setid(Data::pointsnum++);
+                    //Data::points[Data::pointsnum] = p;
+                    //Data::pointsnum++;
                     tr1segp1 = p;
                 }
             }
@@ -348,15 +348,15 @@ Segment TriangleIntersection::PlanarIntersectLine(const Planar& tr1, const Line&
             if(tr1seg0.ifcontainPoint(p)){
                 if(firstintersect == false){
                     firstintersect = true;
-                    p.setid(Data::pointsnum);
-                    Data::points[Data::pointsnum] = p;
-                    Data::pointsnum++;
+                    p.setid(Data::pointsnum++);
+                    //Data::points[Data::pointsnum] = p;
+                    //Data::pointsnum++;
                     tr1segp0 = p;
                 }
                 else {
-                    p.setid(Data::pointsnum);
-                    Data::points[Data::pointsnum] = p;
-                    Data::pointsnum++;
+                    p.setid(Data::pointsnum++);
+                    //Data::points[Data::pointsnum] = p;
+                    //Data::pointsnum++;
                     tr1segp1 = p;
                 }
             }
@@ -366,15 +366,15 @@ Segment TriangleIntersection::PlanarIntersectLine(const Planar& tr1, const Line&
             if(tr1seg1.ifcontainPoint(p)){
                 if(firstintersect == false){
                     firstintersect = true;
-                    p.setid(Data::pointsnum);
-                    Data::points[Data::pointsnum] = p;
-                    Data::pointsnum++;
+                    p.setid(Data::pointsnum++);
+                    //Data::points[Data::pointsnum] = p;
+                    //Data::pointsnum++;
                     tr1segp0 = p;
                 }
                 else {
-                    p.setid(Data::pointsnum);
-                    Data::points[Data::pointsnum] = p;
-                    Data::pointsnum++;
+                    p.setid(Data::pointsnum++);
+                    //Data::points[Data::pointsnum] = p;
+                    //Data::pointsnum++;
                     tr1segp1 = p;
                 }
             }
@@ -384,15 +384,15 @@ Segment TriangleIntersection::PlanarIntersectLine(const Planar& tr1, const Line&
             if(tr1seg2.ifcontainPoint(p)){
                 if(firstintersect == false){
                     firstintersect = true;
-                    p.setid(Data::pointsnum);
-                    Data::points[Data::pointsnum] = p;
-                    Data::pointsnum++;
+                    p.setid(Data::pointsnum++);
+                    //Data::points[Data::pointsnum] = p;
+                    //Data::pointsnum++;
                     tr1segp0 = p;
                 }
                 else {
-                    p.setid(Data::pointsnum);
-                    Data::points[Data::pointsnum] = p;
-                    Data::pointsnum++;
+                    p.setid(Data::pointsnum++);
+                    //Data::points[Data::pointsnum] = p;
+                    //Data::pointsnum++;
                     tr1segp1 = p;
                 }
             }

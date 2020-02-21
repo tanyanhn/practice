@@ -170,6 +170,8 @@ void Yinset::generatorhassmap(){
         }
     }
     if(id != -1){
+        if(id >= Data::yinsets.size())
+            Data::yinsets.resize(++id);
         Data::yinsets[id] = *this;
     }
 }
