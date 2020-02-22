@@ -1,0 +1,14 @@
+#! /bin/bash
+# Write "Hello World" to "myfile"
+# Use "myfile" for reading writing
+exec 3<>myfile
+#echo Hello World myfile >& 3
+#echo Hello World 3 >& 3
+# Read the first line of "myfile" into an array
+read -a myarray <&3
+read -a myarray1 <&3
+#Close the file
+exec 3>&-
+# Write the arguments one line at a time
+echo ${myarray[@]} | xargs -n 1
+echo ${myarray1[*]} | xargs -n 1

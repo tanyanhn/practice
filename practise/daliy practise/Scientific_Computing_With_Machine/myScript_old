@@ -1,0 +1,4 @@
+#!/bin/bash
+#Print "Hello, world!" and exit
+echo Hello, world!
+exit 3
