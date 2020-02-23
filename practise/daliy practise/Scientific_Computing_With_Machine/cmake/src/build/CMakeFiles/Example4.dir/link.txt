@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/Example4.dir/example.cpp.o  -o Example4 Rand/libRand.a 

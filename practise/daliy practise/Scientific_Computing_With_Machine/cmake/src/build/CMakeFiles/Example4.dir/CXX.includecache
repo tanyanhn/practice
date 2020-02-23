@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../Rand/myrand.h
+
+/home/yan/Desktop/svn/git/practise/daliy practise/Scientific_Computing_With_Machine/cmake/src/example.cpp
+iostream
+-
+ExampleConfig.h
+/home/yan/Desktop/svn/git/practise/daliy practise/Scientific_Computing_With_Machine/cmake/src/ExampleConfig.h
+myrand.h
+/home/yan/Desktop/svn/git/practise/daliy practise/Scientific_Computing_With_Machine/cmake/src/myrand.h
+
+ExampleConfig.h
+

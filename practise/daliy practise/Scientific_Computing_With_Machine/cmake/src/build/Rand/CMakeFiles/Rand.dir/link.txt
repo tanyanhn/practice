@@ -1,0 +1,2 @@
+/usr/bin/ar qc libRand.a  CMakeFiles/Rand.dir/myrand.cpp.o
+/usr/bin/ranlib libRand.a

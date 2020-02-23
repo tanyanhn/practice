@@ -16,7 +16,7 @@ program fortran_program
   print *, "c_function returns val = ", val
   print *, "c_function returns return_val = ", return_val
   return_val = cpp_function(val);
-  print *, "cpp_function returns val = ", val
+  print*,"cpp_function returns val = ", val
   print *, "cpp_function returns return_val = ", return_val
   return_val = cpp_class_method_wrapper(val);
   print *, "cpp_class_method_wrapper returns val = ", val;

@@ -1,0 +1,23 @@
+Start testing: Feb 23 20:40 CST
+----------------------------------------------------------
+1/1 Testing: CheckSeed
+1/1 Test: CheckSeed
+Command: "/home/yan/Desktop/svn/git/practise/daliy practise/Scientific_Computing_With_Machine/cmake/src/build/Example4" "0"
+Directory: /home/yan/Desktop/svn/git/practise/daliy practise/Scientific_Computing_With_Machine/cmake/src/build
+"CheckSeed" start time: Feb 23 20:40 CST
+Output:
+----------------------------------------------------------
+Version: 1
+0
+3 2 5 4 7 6 1 0 3 2 5 4 7 6 
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Pass Reason:
+Required regular expression found.Regex=[3 2 5 4 7 6 1 0
+]
+"CheckSeed" end time: Feb 23 20:40 CST
+"CheckSeed" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Feb 23 20:40 CST
