@@ -74,7 +74,7 @@ doxygen: doxygen.cfg
 	doxygen doxygen.cfg
 
 clear:
-	-rm main.ex *.o test.ex
+	-rm main.ex *.o test.ex core
 
 clean:
 	-rm -f main.ex *.output *.o *.h.gch *.obj core test.ex

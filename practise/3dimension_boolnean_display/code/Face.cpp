@@ -119,6 +119,8 @@ void Face::generatortype(){
         type = 1;
     }
     if(id != -1){
+        if(id >= Data::faces.size())
+            Data::faces.resize(1 + id);
         Data::faces[id] = *this;
     }
 }

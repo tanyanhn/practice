@@ -26,6 +26,10 @@ double Direction::angle(const Direction& dd2, const Direction& di) const {
         return 0;
     else if(d1.dot(d2) < 0)
         return M_PI;
+    cout << "Direction::angle wrong";
+    int* a = 0;
+    cout << *a;
+    return 100000000;
 }
 
 

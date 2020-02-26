@@ -18,7 +18,7 @@ Planar::Planar(std::vector<int> p, std::vector<int> s, int identity , int inF , 
     }
     if(id != -1){
         if(id >= Data::planars.size())
-            Data::planars.resize(++id);
+            Data::planars.resize(1 + id);
         Data::planars[id] = *this;
     }
 }

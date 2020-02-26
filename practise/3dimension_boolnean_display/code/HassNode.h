@@ -17,6 +17,8 @@ public:
     HassNode(const HassNode& h) : identity(h.identity), father(h.father), children(h.children){}
     HassNode& operator=(const HassNode& h){
         identity = h.identity;
+        father = h.father;
+        children = h.children;
         return *this;
     }
     ~HassNode(){}

@@ -21,8 +21,8 @@ class Segment : public Line {
     int inYinset;
 public:
     explicit Segment(int p0 = -1, int p1 = -1, int identity = -1,
-                     const std::set<int> inP01 = std::set<int>(),
-                     const std::set<int> inP10 = std::set<int>(),
+                     const std::set<int>& inP01 = std::set<int>(),
+                     const std::set<int>& inP10 = std::set<int>(),
             int inY = -1)
         : points{p0, p1}, id(identity), inPlanar01(inP01),
           inPlanar10(inP10), inYinset(inY) {
@@ -50,12 +50,13 @@ public:
                     Data::points[points[1]].setinSegment(inSegment);
                 }
                 Line::fixpoint = Data::points[points[0]];
-                if(!(Data::points[p0] == Data::points[p1]))
+                if(//!(Data::points[p0] == Data::points[p1]
+                       p0 != p1)
                     Line::direct = (Data::points[points[1]] - Data::points[points[0]]).unit();
             }
             if(id != -1){
                 if(id >= Data::segments.size())
-                    Data::segments.resize(++id);
+                    Data::segments.resize(1 + id);
                 Data::segments[id] = *this;
             }
         }
@@ -102,9 +103,9 @@ public:
             inSegment.erase(id);
         Data::points[points[1]].setinSegment(inSegment);
         id = i;
-        if(id != 1){
+        if(id != -1){
             if(id >= Data::segments.size())
-                Data::segments.resize(++id);
+                Data::segments.resize(1 + id);
             Data::segments[id] = *this;
         }
     }
@@ -115,7 +116,7 @@ public:
         inYinset = i;
         if(id != -1){
             if(id >= Data::segments.size())
-                Data::segments.resize(++id);
+                Data::segments.resize(1 + id);
             Data::segments[id] = *this;
         }
     }
@@ -126,7 +127,7 @@ public:
         inPlanar = v;
         if(id != -1){
             if(id >= Data::segments.size())
-                Data::segments.resize(++id);
+                Data::segments.resize(1 + id);
             Data::segments[id] = *this;
         }
     }
@@ -137,7 +138,7 @@ public:
         inPlanar01 = v;
         if(id != -1){
             if(id >= Data::segments.size())
-                Data::segments.resize(++id);
+                Data::segments.resize(1 + id);
             Data::segments[id] = *this;
         }
     }
@@ -148,7 +149,7 @@ public:
         inPlanar10 = v;
         if(id != -1){
             if(id >= Data::segments.size())
-                Data::segments.resize(++id);
+                Data::segments.resize(1 + id);
             Data::segments[id] = *this;
         }
     }
@@ -156,7 +157,7 @@ public:
         return points[i];
     }
     void setendpoints(int i, int p) {
-        if(i = 0){
+        if(i == 0){
             if(Data::points[p] < Data::points[points[1]]){
                 std::set<int> inSegment = Data::points[points[0]].getinSegment();
                 inSegment.erase(id);
@@ -168,7 +169,7 @@ public:
                 return;
             }
         }
-        else if(i = 1){
+        else if(i == 1){
             if(Data::points[p] > Data::points[points[0]]){
                 std::set<int> inSegment = Data::points[points[1]].getinSegment();
                 inSegment.erase(id);
@@ -187,7 +188,7 @@ public:
         }
         if(id != -1){
             if(id >= Data::segments.size())
-                Data::segments.resize(++id);
+                Data::segments.resize(1 + id);
             Data::segments[id] = *this;
         }
     }

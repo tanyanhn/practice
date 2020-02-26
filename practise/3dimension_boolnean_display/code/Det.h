@@ -5,7 +5,7 @@ class Det {
 //    double a0[3], a1[3], a2[3];
 public:
     //det(){}
-    const double operator()(
+    double operator()(
         const double a00, const double a01, const double a02,
         const double a10, const double a11, const double a12,
         const double a20, const double a21, const double a22){

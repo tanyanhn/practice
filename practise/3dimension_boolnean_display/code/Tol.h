@@ -2,6 +2,7 @@
 #define TOLERANCE_BOOLEAN
 //#include"Flat.h"
 #include<memory>
+#include<cmath>
 class Line;
 class Direction;
 
@@ -21,10 +22,10 @@ public:
 class DoubleComparer : public std::binary_function<double,double,bool>
 {
 public:
-	DoubleComparer( double arg_ = Tol::t ) : epsilon(arg_) {}
+	explicit DoubleComparer( double arg_ = Tol::t ) : epsilon(arg_) {}
 	bool operator()( const double &left, const double &right  ) const
         {
-            return (abs(left - right) > epsilon) && (left < right);
+            return (fabs(left - right) > epsilon) && (left < right);
         }
 	~DoubleComparer(){}
 private:

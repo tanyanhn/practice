@@ -13,6 +13,10 @@ using namespace std;
 
 
 void TriangleIntersection::operator()(Planar& tr1, Planar& tr2){
+    if(IdentityE(tr1, tr2)){
+        return;
+    }
+    IdentityPoint(tr1, tr2);
     Point tr2p0 = Data::points[tr2.getpoints()[0]],
         tr2p1 = Data::points[tr2.getpoints()[1]],
         tr2p2 = Data::points[tr2.getpoints()[2]],
@@ -33,11 +37,11 @@ void TriangleIntersection::operator()(Planar& tr1, Planar& tr2){
     set<int> tr2existpoints = tr2.getexistpoints();
     bool tr1notintersect = false, tr1intersectPoint = false, tr1intersectSegment = false,
         tr2notintersect = false, tr2intersectPoint = false, tr2intersectSegment = false;
-    if(IdentityEdge(tr1seg0, tr2seg0) || IdentityEdge(tr1seg0, tr2seg1) || IdentityEdge(tr1seg0, tr2seg2) ||
-       IdentityEdge(tr1seg1, tr2seg0) || IdentityEdge(tr1seg1, tr2seg1) || IdentityEdge(tr1seg1, tr2seg2) ||
-       IdentityEdge(tr1seg2, tr2seg0) || IdentityEdge(tr1seg2, tr2seg1) || IdentityEdge(tr1seg2, tr2seg2)){
-        return;
-    }
+    // if(IdentityEdge(tr1seg0, tr2seg0) || IdentityEdge(tr1seg0, tr2seg1) || IdentityEdge(tr1seg0, tr2seg2) ||
+    //   IdentityEdge(tr1seg1, tr2seg0) || IdentityEdge(tr1seg1, tr2seg1) || IdentityEdge(tr1seg1, tr2seg2) ||
+    //   IdentityEdge(tr1seg2, tr2seg0) || IdentityEdge(tr1seg2, tr2seg1) || IdentityEdge(tr1seg2, tr2seg2)){
+    //    return;
+    //}
     if(tr1.Flat::ifcontainPoint(tr2p0) &&
        tr1.Flat::ifcontainPoint(tr2p1) &&
        tr1.Flat::ifcontainPoint(tr2p2)) {
@@ -75,28 +79,29 @@ void TriangleIntersection::operator()(Planar& tr1, Planar& tr2){
         Point p1 = Data::points[(tr1IntersectSegment[0] == -1) ? tr1IntersectSegment[1] : tr1IntersectSegment[0]];
         if(tr2IntersectSegment.ifcontainPoint(p1)){
             Data::pastpoints[p1].insert(tr2.getid());
+            Data::pastpoints[p1].insert(tr1.getid());
             /*
-            bool find = false;
-            //p1.setid(Data::pointsnum);
-            //p1.setinSegment(set<int>());
-            //Data::pointsnum++;
-            //Data::existpoints.insert(p1.getid());
-            for(auto i = tr2existpoints.begin(); i != tr2existpoints.end(); i++){
-                if(p1 == Data::points[*i])
-                    find = true;
-            }
-            if(find == false){
-                //p1.setid(Data::pointsnum);
-                //Data::points[Data::pointsnum] = p1;
-                //Data::existpoints.push_back(Data::pointsnum);
-                //Data::pointsnum++;
-                p1.setid(Data::pointsnum);
-                p1.setinSegment(set<int>());
-                Data::pointsnum++;
-                Data::existpoints.insert(p1.getid());
-                tr2existpoints.insert(p1.getid());
-            }
-            tr2.setexistpoints(tr2existpoints);
+              bool find = false;
+              //p1.setid(Data::pointsnum);
+              //p1.setinSegment(set<int>());
+              //Data::pointsnum++;
+              //Data::existpoints.insert(p1.getid());
+              for(auto i = tr2existpoints.begin(); i != tr2existpoints.end(); i++){
+              if(p1 == Data::points[*i])
+              find = true;
+              }
+              if(find == false){
+              //p1.setid(Data::pointsnum);
+              //Data::points[Data::pointsnum] = p1;
+              //Data::existpoints.push_back(Data::pointsnum);
+              //Data::pointsnum++;
+              p1.setid(Data::pointsnum);
+              p1.setinSegment(set<int>());
+              Data::pointsnum++;
+              Data::existpoints.insert(p1.getid());
+              tr2existpoints.insert(p1.getid());
+              }
+              tr2.setexistpoints(tr2existpoints);
             */
             return;
         }
@@ -108,25 +113,26 @@ void TriangleIntersection::operator()(Planar& tr1, Planar& tr2){
         Point p2 = Data::points[(tr2IntersectSegment[0] == -1) ? tr2IntersectSegment[1] : tr2IntersectSegment[0]];
         if(tr1IntersectSegment.ifcontainPoint(p2)){
             Data::pastpoints[p2].insert(tr1.getid());
+            Data::pastpoints[p2].insert(tr2.getid());
             /*
-            bool find = false;
-            //Data::existpoints.insert(p2.getid());
-            for(auto i = tr1existpoints.begin(); i != tr1existpoints.end(); i++){
-                if(p2 == Data::points[*i])
-                    find = true;
-            }
-            if(find == false){
-                //p2.setid(Data::pointsnum);
-                //Data::points[Data::pointsnum] = p2;
-                //Data::existpoints.push_back(Data::pointsnum);
-                //Data::pointsnum++;
-                p1.setid(Data::pointsnum);
-                p1.setinSegment(set<int>());
-                Data::pointsnum++;
-                Data::existpoints.insert(p1.getid());
-                tr1existpoints.insert(p2.getid());
-            }
-            tr1.setexistpoints(tr1existpoints);
+              bool find = false;
+              //Data::existpoints.insert(p2.getid());
+              for(auto i = tr1existpoints.begin(); i != tr1existpoints.end(); i++){
+              if(p2 == Data::points[*i])
+              find = true;
+              }
+              if(find == false){
+              //p2.setid(Data::pointsnum);
+              //Data::points[Data::pointsnum] = p2;
+              //Data::existpoints.push_back(Data::pointsnum);
+              //Data::pointsnum++;
+              p1.setid(Data::pointsnum);
+              p1.setinSegment(set<int>());
+              Data::pointsnum++;
+              Data::existpoints.insert(p1.getid());
+              tr1existpoints.insert(p2.getid());
+              }
+              tr1.setexistpoints(tr1existpoints);
             */
             return;
         }
@@ -141,15 +147,15 @@ void TriangleIntersection::operator()(Planar& tr1, Planar& tr2){
         else {
             Segment intersectseg = tr1IntersectSegment.overlapSegment(tr2IntersectSegment);
             if(Data::points[intersectseg[0]] == Data::points[intersectseg[1]]){
-                Point p = Data::points[intersectseg[0]];
-                Data::pastpoints[p].insert(tr1.getid());
-                Data::pastpoints[p].insert(tr2.getid());
+                // Point p = Data::points[intersectseg[0]];
+                //Data::pastpoints[p].insert(tr1.getid());
+                //Data::pastpoints[p].insert(tr2.getid());
                 /*
-                Data::existpoints.insert(intersectseg[0]);
-                tr1existpoints.insert(intersectseg[0]);
-                tr2existpoints.insert(intersectseg[0]);
-                tr1.setexistpoints(tr1existpoints);
-                tr2.setexistpoints(tr2existpoints);
+                  Data::existpoints.insert(intersectseg[0]);
+                  tr1existpoints.insert(intersectseg[0]);
+                  tr2existpoints.insert(intersectseg[0]);
+                  tr1.setexistpoints(tr1existpoints);
+                  tr2.setexistpoints(tr2existpoints);
                 */
                 return;
             }
@@ -224,18 +230,18 @@ void TriangleIntersection::operator()(Planar& tr1, Planar& tr2){
                 return;
             }
             /*
-            else if(findidtr1 != findidtr2){
-                Segment seg1 = Data::segments[findidtr1],
-                    seg2 = Data::segments[findidtr2];
-                set<int> inPlanar1 = seg1.getinPlanar(),
-                    inPlanar2 = seg2.getinPlanar();
-                for_each(inPlanar2.begin(), inPlanar2.end(), [&inPlanar1](auto i){
-                                                                 inPlanar1.insert(i);
-                                                                 return;
-                                                             });
-                seg1.setinPlanar(inPlanar1);
-                if(findidtr2 == tr)
-            }
+              else if(findidtr1 != findidtr2){
+              Segment seg1 = Data::segments[findidtr1],
+              seg2 = Data::segments[findidtr2];
+              set<int> inPlanar1 = seg1.getinPlanar(),
+              inPlanar2 = seg2.getinPlanar();
+              for_each(inPlanar2.begin(), inPlanar2.end(), [&inPlanar1](auto i){
+              inPlanar1.insert(i);
+              return;
+              });
+              seg1.setinPlanar(inPlanar1);
+              if(findidtr2 == tr)
+              }
             */
             else {
                 cout << "Functor.cpp TriangleIntersection:: intersectseg insert findtr1 and findtr2 all true and findid different : " << tr1.getid() << " : " << tr2.getid();
@@ -398,20 +404,54 @@ Segment TriangleIntersection::PlanarIntersectLine(const Planar& tr1, const Line&
             }
         }
         if(firstintersect == false){
-            tr1notintersect == true;
+            tr1notintersect = true;
         }
     }
     /*
-    if(tr1segp0 > tr1segp1){
-        Point temp = tr1segp0;
-        tr1segp0 = tr1segp1;
-        tr1segp1 = temp;
-    }
+      if(tr1segp0 > tr1segp1){
+      Point temp = tr1segp0;
+      tr1segp0 = tr1segp1;
+      tr1segp1 = temp;
+      }
     */
     return Segment(tr1segp0.getid(), tr1segp1.getid());
 }
 
-class PastEdge;
+bool TriangleIntersection::IdentityPoint(Planar& tr1, Planar& tr2){
+    bool ifPast = false;
+    vector<int> points1 = tr1.getpoints(),
+        points2 = tr2.getpoints();
+    PastPoint functor;
+    for(auto i = points1.begin(); i != points1.end(); i++){
+        for(auto j = points2.begin(); j != points2.end(); j++){
+            if(Data::points[*i] == Data::points[*j]){
+                functor(*i, *j);
+                ifPast = true;
+            }
+        }
+    }
+    tr1 = Data::planars[tr1.getid()];
+    tr2 = Data::planars[tr2.getid()];
+    return ifPast;
+}
+
+bool TriangleIntersection::IdentityE(Planar& tr1, Planar& tr2){
+    Point tr2p0 = Data::points[tr2.getpoints()[0]],
+        tr2p1 = Data::points[tr2.getpoints()[1]],
+        tr2p2 = Data::points[tr2.getpoints()[2]],
+        tr1p0 = Data::points[tr1.getpoints()[0]],
+        tr1p1 = Data::points[tr1.getpoints()[1]],
+        tr1p2 = Data::points[tr1.getpoints()[2]];
+    Segment tr2seg0 = Data::segments[tr2.getsegments()[0]],
+        tr2seg1 = Data::segments[tr2.getsegments()[1]],
+        tr2seg2 = Data::segments[tr2.getsegments()[2]],
+        tr1seg0 = Data::segments[tr1.getsegments()[0]],
+        tr1seg1 = Data::segments[tr1.getsegments()[1]],
+        tr1seg2 = Data::segments[tr1.getsegments()[2]];
+    return (IdentityEdge(tr1seg0, tr2seg0) || IdentityEdge(tr1seg0, tr2seg1) || IdentityEdge(tr1seg0, tr2seg2) ||
+            IdentityEdge(tr1seg1, tr2seg0) || IdentityEdge(tr1seg1, tr2seg1) || IdentityEdge(tr1seg1, tr2seg2) ||
+            IdentityEdge(tr1seg2, tr2seg0) || IdentityEdge(tr1seg2, tr2seg1) || IdentityEdge(tr1seg2, tr2seg2));
+}
 
 bool TriangleIntersection::IdentityEdge(Segment& seg1, Segment& seg2){
     if(seg1 == seg2 && seg1.getid() != seg2.getid()){
@@ -449,7 +489,7 @@ void PastEdge::operator()(int i){
     }
     for(auto i = segments.begin(); i != segments.end(); i++){
         if(*i == seg2id){
-            *i == seg1id;
+            *i = seg1id;
         }
     }
     existsegments.erase(seg2id);
@@ -457,4 +497,8 @@ void PastEdge::operator()(int i){
     pl.setpoints(points);
     pl.setsegments(segments);
     pl.setexistsegments(existsegments);
+}
+
+void PastPoint::operator()(int p1, int p2){
+    
 }

@@ -19,7 +19,8 @@ class Face;
 class Yinset;
 class HassNode;
 
-struct Data {
+class Data {
+public:
     static Point farpoint;
     static std::set<int> existpoints;
     static std::set<int> existsegments;

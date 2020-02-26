@@ -13,8 +13,12 @@ class Face {
     int type;
 public:
     Face(){}
-    explicit Face(std::vector<int> vpl, int identity = -1, int inY = -1, int t = -1) : planars(vpl), id(identity), inYinset(inY), type(t) {
+    explicit Face(const std::vector<int>& vpl, int identity = -1,
+                  int inY = -1, int t = -1)
+        : planars(vpl), id(identity), inYinset(inY), type(t) {
         if(id != -1){
+            if(id >= Data::faces.size())
+                Data::faces.resize(1 + id);
             Data::faces[id] = *this;
         }
     }
@@ -40,6 +44,8 @@ public:
     void setplanars(const std::vector<int>& vp) {
         planars = vp;
         if(id != -1){
+            if(id >= Data::faces.size())
+                Data::faces.resize(1 + id);
             Data::faces[id] = *this;
         }
     }
@@ -49,6 +55,8 @@ public:
     void setid(const int i) {
         id = i;
         if(id != -1){
+            if(id >= Data::faces.size())
+                Data::faces.resize(1 + id);
             Data::faces[id] = *this;
         }
     }
@@ -58,6 +66,8 @@ public:
     void setinYinset(const int i) {
         inYinset = i;
         if(id != -1){
+            if(id >= Data::faces.size())
+                Data::faces.resize(1 + id);
             Data::faces[id] = *this;
         }
     }
@@ -67,6 +77,8 @@ public:
     void settype(const int i) {
         type = i;
         if(id != -1){
+            if(id >= Data::faces.size())
+                Data::faces.resize(1 + id);
             Data::faces[id] = *this;
         }
     }

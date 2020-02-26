@@ -51,7 +51,7 @@ public:
         inYinset = i;
         if(id != -1){
             if(id >= Data::points.size())
-                Data::points.resize(++id);
+                Data::points.resize(1 + id);
             Data::points[id] = *this;
         }
     }
@@ -62,14 +62,14 @@ public:
         inSegment = v;
         if(id != -1){
             if(id >= Data::points.size())
-                Data::points.resize(++id);
+                Data::points.resize(1 + id);
             Data::points[id] = *this;
         }
     }
     double operator[](const int i) const {
         if(i < 0 || i > 2){
             cout << id << " : " << i << " out of range";
-            int* a;
+            int* a = 0;
             cout << *a;
         }
         return coord[i];
@@ -77,7 +77,7 @@ public:
     double& operator[](const int i){
         if(i < 0 || i > 2){
             cout << id << " : " << i << " out of range";
-            int* a;
+            int* a = 0;
             cout << *a;
         }
         return coord[i];
@@ -99,7 +99,7 @@ public:
         coord[2] = p[2];
         if(id != -1){
             if(id >= Data::points.size())
-                Data::points.resize(++id);
+                Data::points.resize(1 + id);
             Data::points[id] = *this;
         }
         return *this;

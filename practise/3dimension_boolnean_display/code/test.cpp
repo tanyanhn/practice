@@ -11,6 +11,8 @@ void print(T i){
 class PlanarCompare;
 
 int main(int argc, char* argv[]){
+    //int* a = 0;
+    // *a = 1;
     ifstream fis0("data/cube.obj");
     ifstream fis1("data/tetrahedron.obj");
     ifstream fis2("data/tetrahedron2.obj");

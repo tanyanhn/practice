@@ -236,4 +236,8 @@ bool YinsetContainTriangle::operator()(const Yinset& yinset, const Planar& trian
             return false;
         }
     }
+    cout << "YinsetContainTriangle wrong at end";
+    int* a = 0;
+    *a = 0;
+    return 100;
 }

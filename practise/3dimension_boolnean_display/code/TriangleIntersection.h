@@ -8,7 +8,9 @@ class TriangleIntersection {
 public:
     Segment PlanarIntersectLine(const Planar&, const Line& l,
                                 bool&, bool&, bool&);
+    bool IdentityPoint(Planar&, Planar&);
     bool IdentityEdge(Segment&, Segment&);
+    bool IdentityE(Planar&, Planar&);
     void operator()(Planar&, Planar&);
 };
 
@@ -54,6 +56,11 @@ public:
     set<int> getinPlanar1() const{
         return inPlanar1;
     }
+};
+
+class PastPoint{
+public:
+    void operator()(int, int);
 };
 
 #endif

@@ -17,7 +17,7 @@ std::set<int> Data::existpoints;
 std::set<int> Data::existsegments;
 std::set<int> Data::existplanars;
 std::set<int> Data::existfaces;
-std::vector<Point> Data::points;
+std::vector<Point> Data::points(1);
 std::vector<Segment> Data::segments;
 std::vector<Planar> Data::planars;
 std::vector<Face> Data::faces;
@@ -305,7 +305,7 @@ int Data::import(istream& is){
             int id = planarsnum++;
             vector<int> vp;
             vp.resize(3);
-            int i;
+            //int i;
             Direction normal;
             for(int j = 0; j < 3; j++){
                 is >> s;

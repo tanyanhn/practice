@@ -375,7 +375,7 @@ void Sweepline::inter(const Line& l1, const Line& l2, const Point& p1){
                         orderlinemark.add(make_pair(l1.getidentity(), orderlinemarkp));
                     }
                 }
-                else if(lines[vi[k]][1] = lp0.getidentity()){
+                else if(lines[vi[k]][1] == lp0.getidentity()){
                     //points[lp0.getidentity()].delnearline(lines[vi[k]]);
                     // lines[vi[k]][1] = prevlp0.getidentity();
                     int f = lines.size();

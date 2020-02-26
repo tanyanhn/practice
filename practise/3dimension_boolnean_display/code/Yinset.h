@@ -21,7 +21,7 @@ public:
     explicit Yinset(std::vector<int> vf = std::vector<int>(), int identity = -1, int t = -1) : faces(vf), id(identity), type(t) {
         if(identity != -1){
             if(id >= Data::yinsets.size())
-                Data::yinsets.resize(++id);
+                Data::yinsets.resize(1 + id);
             Data::yinsets[identity] = *this;
         }
     }
@@ -50,7 +50,7 @@ public:
         faces = vf;
         if(id != -1){
             if(id >= Data::yinsets.size())
-                Data::yinsets.resize(++id);
+                Data::yinsets.resize(1 + id);
             Data::yinsets[id] = *this;
         }
     }
@@ -61,7 +61,7 @@ public:
         hassmap = vh;
         if(id != -1){
             if(id >= Data::yinsets.size())
-                Data::yinsets.resize(++id);
+                Data::yinsets.resize(1 + id);
             Data::yinsets[id] = *this;
         }
     }
@@ -72,7 +72,7 @@ public:
         id = i;
         if(id != -1){
             if(id >= Data::yinsets.size())
-                Data::yinsets.resize(++id);
+                Data::yinsets.resize(1 + id);
             Data::yinsets[id] = *this;
         }
     }
@@ -83,7 +83,7 @@ public:
         type = i;
         if(id != -1){
             if(id >= Data::yinsets.size())
-                Data::yinsets.resize(++id);
+                Data::yinsets.resize(1 + id);
             Data::yinsets[id] = *this;
         }
     }

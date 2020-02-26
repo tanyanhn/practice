@@ -21,7 +21,7 @@ void Point::setid(const int i) {
     id = i;
     if(id != -1){
         if(id >= Data::points.size())
-            Data::points.resize(++id);
+            Data::points.resize(id + 1);
         Data::points[id] = *this;
     }
 }
@@ -36,7 +36,7 @@ Point::Point(const double x, const double y, const double z, const int identity,
     intriangle = it;*/
     if(id != -1){
         if(id >= Data::points.size())
-            Data::points.resize(++id);
+            Data::points.resize(1 + id);
         Data::points[id] = *this;
     }
 }

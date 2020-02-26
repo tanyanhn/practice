@@ -63,7 +63,7 @@ public:
         points = vp;
         if(id != -1){
             if(id >= Data::planars.size())
-                Data::planars.resize(++id);
+                Data::planars.resize(1 + id);
             Data::planars[id] = *this;
         }
     }
@@ -74,7 +74,7 @@ public:
         segments = vs;
         if(id != -1){
             if(id >= Data::planars.size())
-                Data::planars.resize(++id);
+                Data::planars.resize(1 + id);
             Data::planars[id] = *this;
         }
     }
@@ -85,7 +85,7 @@ public:
         existpoints = sp;
         if(id != -1){
             if(id >= Data::planars.size())
-                Data::planars.resize(++id);
+                Data::planars.resize(1 + id);
             Data::planars[id] = *this;
         }
     }
@@ -96,7 +96,7 @@ public:
         existsegments = ss;
         if(id != -1){
             if(id >= Data::planars.size())
-                Data::planars.resize(++id);
+                Data::planars.resize(1 + id);
             Data::planars[id] = *this;
         }
     }
@@ -107,7 +107,7 @@ public:
         id = i;
         if(id != -1){
             if(id >= Data::planars.size())
-                Data::planars.resize(++id);
+                Data::planars.resize(1 + id);
             Data::planars[id] = *this;
         }
     }
@@ -115,10 +115,10 @@ public:
         return inFace;
     }
     void setinFace(const int i){
-        inFace = i;
+         inFace = i;
         if(id != -1){
             if(id >= Data::planars.size())
-                Data::planars.resize(++id);
+                Data::planars.resize(1 + id);
             Data::planars[id] = *this;
         }
     }
@@ -128,8 +128,8 @@ public:
     void setinYinset(const int i){
         inYinset = i;
         if(id != -1){
-            if(id >= Data::planars.size())
-                Data::planars.resize(++id);
+            if(id >= static_cast<int>(Data::planars.size()))
+                Data::planars.resize(1 + id);
             Data::planars[id] = *this;
         }
     }

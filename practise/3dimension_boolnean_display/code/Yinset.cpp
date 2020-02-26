@@ -157,7 +157,7 @@ void Yinset::generatorhassmap(){
         if(h.father != -1){
             hassmap[h.father].children.push_back(h.identity);
         }
-        else if(h.father = -1){
+        else if(h.father == -1){
             if(a == 0){
                 type = Data::faces[faces[h.identity]].gettype();
                 a = 1;
@@ -171,7 +171,7 @@ void Yinset::generatorhassmap(){
     }
     if(id != -1){
         if(id >= Data::yinsets.size())
-            Data::yinsets.resize(++id);
+            Data::yinsets.resize(1 + id);
         Data::yinsets[id] = *this;
     }
 }
