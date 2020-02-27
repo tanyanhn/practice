@@ -59,8 +59,12 @@ public:
 };
 
 class PastPoint{
+    int p1id;
+    int p2id;
 public:
-    void operator()(int, int);
+    PastPoint(int p1, int p2) : p1id(p1), p2id(p2) {}
+    ~PastPoint(){};
+    void operator()();
 };
 
 #endif

@@ -17,6 +17,7 @@ void SegmentIntersection::operator()(Planar& pl){
     set<int> existsegments = pl.getexistsegments();
     set<Point> allPoint;
     for(auto i = existsegments.begin(); i != existsegments.end(); i++){
+        
         Segment seg = Data::segments[*i];
         Point p0 = Data::points[seg[0]],
             p1 = Data::points[seg[1]];

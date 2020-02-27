@@ -93,7 +93,10 @@ Segment Segment::overlapSegment(const Segment& seg2) const {
     else{
         p0 = p20;
     }
-    return Segment(p0.getid(), p1.getid());
+    if(p0 == p1)
+        return Segment(p0.getid(), -1);
+    else
+        return Segment(p0.getid(), p1.getid());
 }
 
 bool Segment::operator<(const Segment& seg2) const {
