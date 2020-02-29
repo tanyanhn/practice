@@ -1,4 +1,5 @@
 #include"SegmentIntersection.h"
+#include"TriangleIntersection.h"
 #include"Data.h"
 #include"Tol.h"
 #include<vector>
@@ -17,7 +18,6 @@ void SegmentIntersection::operator()(Planar& pl){
     set<int> existsegments = pl.getexistsegments();
     set<Point> allPoint;
     for(auto i = existsegments.begin(); i != existsegments.end(); i++){
-        
         Segment seg = Data::segments[*i];
         Point p0 = Data::points[seg[0]],
             p1 = Data::points[seg[1]];
@@ -25,8 +25,10 @@ void SegmentIntersection::operator()(Planar& pl){
             it1 = allPoint.find(p1);
         if(it0 != allPoint.end()){
             Point p = *it0;
-            set<int> pinSegment = p.getinSegment(),
-                p0inSegment = p0.getinSegment();
+            PastPoint functor(p.getid(), p0.getid());
+            functor();
+            //set<int> pinSegment = p.getinSegment(),
+            //    p0inSegment = p0.getinSegment();
             /*
               if(pinSegment.size() < p0inSegment.size()){
               allPoint.erase(it0);
@@ -35,7 +37,6 @@ void SegmentIntersection::operator()(Planar& pl){
               pinSegment = p.getinSegment();
               p0inSegment = p0.getinSegment();
               }
-            */
             for(auto j = p0inSegment.begin(); j != p0inSegment.end(); j++){
                 Segment segContainp0 = Data::segments[*j];
                 if(segContainp0[0] == p0.getid()){
@@ -47,9 +48,9 @@ void SegmentIntersection::operator()(Planar& pl){
                 Data::points[p0.getid()].setinSegment(set<int>());
                 Data::points[p0.getid()].setinYinset(-2);
                 Data::existpoints.erase(p0.getid());
-                Data::segments[segContainp0.getid()] = segContainp0;
                 //pinSegment.insert(*j);
             }
+            */
             //p.setinSegment(pinSegment);
             //Data::points[p.getid()] = p;
         }
@@ -58,6 +59,9 @@ void SegmentIntersection::operator()(Planar& pl){
         }
         if(it1 != allPoint.end()){
             Point p = *it1;
+            PastPoint functor(p.getid(), p1.getid());
+            functor();
+            /*
             set<int> pinSegment = p.getinSegment(),
                 p1inSegment = p1.getinSegment();
             for(auto j = p1inSegment.begin(); j != p1inSegment.end(); j++){
@@ -74,6 +78,7 @@ void SegmentIntersection::operator()(Planar& pl){
                 Data::segments[segContainp1.getid()] = segContainp1;
                 //pinSegment.insert(*j);
             }
+            */
         }
         else {
             allPoint.insert(p1);

@@ -183,8 +183,8 @@ public:
         }
         else{
             std::cout << "setendpoints wrong:" << id << "\n";
-            int* pi = 0;
-            std::cout << *pi;
+            int* a = 0;
+            *a = 1;
         }
         if(id != -1){
             if(id >= Data::segments.size())
