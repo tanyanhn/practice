@@ -463,6 +463,8 @@ bool TriangleIntersection::IdentityEdge(Segment& seg1, Segment& seg2){
             p11 = seg1[1],
             p20 = seg2[0],
             p21 = seg2[1];
+        Segment newseg(p10, p11, Data::segmentsnum++);
+        
         PastEdge functor(inPlanar1, seg1id, seg2id,
                          p10, p11, p20, p21);
         for_each(inPlanar2.begin(), inPlanar2.end(), functor);
