@@ -25,8 +25,8 @@ void SegmentIntersection::operator()(Planar& pl){
             it1 = allPoint.find(p1);
         if(it0 != allPoint.end()){
             Point p = *it0;
-            PastPoint functor(p.getid(), p0.getid());
-            functor();
+            PastPoint functor;
+            functor(p.getid(), p0.getid());
             //set<int> pinSegment = p.getinSegment(),
             //    p0inSegment = p0.getinSegment();
             /*
@@ -59,8 +59,8 @@ void SegmentIntersection::operator()(Planar& pl){
         }
         if(it1 != allPoint.end()){
             Point p = *it1;
-            PastPoint functor(p.getid(), p1.getid());
-            functor();
+            PastPoint functor;
+            functor(p.getid(), p1.getid());
             /*
             set<int> pinSegment = p.getinSegment(),
                 p1inSegment = p1.getinSegment();

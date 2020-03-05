@@ -166,6 +166,10 @@ public:
                 inSegment.insert(id);
                 Data::points[p].setinSegment(inSegment);
                 points[0] = p;
+                if(points[0] > -1 && points[1] > -1){
+                    Line::direct = (Data::points[points[1]] - Data::points[points[0]]).unit();
+                    Line::fixpoint = Data::points[points[0]];
+                }
                 return;
             }
         }
@@ -178,6 +182,10 @@ public:
                 inSegment.insert(id);
                 Data::points[p].setinSegment(inSegment);
                 points[1] = p;
+                if(points[0] > -1 && points[1] > -1){
+                    Line::direct = (Data::points[points[1]] - Data::points[points[0]]).unit();
+                    Line::fixpoint = Data::points[points[0]];
+                }
                 return;
             }
         }
