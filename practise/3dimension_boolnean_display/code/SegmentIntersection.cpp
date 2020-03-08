@@ -23,7 +23,7 @@ void SegmentIntersection::operator()(Planar& pl){
             p1 = Data::points[seg[1]];
         set<Point>::iterator it0 = allPoint.find(p0),
             it1 = allPoint.find(p1);
-        if(it0 != allPoint.end()){
+        if(it0 != allPoint.end() && (it0->getid() != p0.getid())){
             Point p = *it0;
             PastPoint functor;
             functor(p.getid(), p0.getid());
@@ -57,7 +57,7 @@ void SegmentIntersection::operator()(Planar& pl){
         else {
             allPoint.insert(p0);
         }
-        if(it1 != allPoint.end()){
+        if(it1 != allPoint.end() && (it1->getid() != p1.getid())){
             Point p = *it1;
             PastPoint functor;
             functor(p.getid(), p1.getid());

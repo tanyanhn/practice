@@ -77,14 +77,31 @@ void TriangleIntersection::operator()(Planar& tr1, Planar& tr2){
         Point p1 = Data::points[(tr1IntersectSegment[0] == -1) ? tr1IntersectSegment[1] : tr1IntersectSegment[0]];
         Point p2 = Data::points[(tr2IntersectSegment[0] == -1) ? tr2IntersectSegment[1] : tr2IntersectSegment[0]];
         if(p1 == p2){
-            Point newp(p1[0], p1[1], p1[2], Data::pointsnum++);
-            newp.setinYinset(Data::yinsetsnum);
-            set<int> existpoints1 = tr1.getexistpoints(),
-                existpoints2 = tr2.getexistpoints();
-            existpoints1.insert(newp.getid());
-            existpoints2.insert(newp.getid());
-            tr1.setexistpoints(existpoints1);
-            tr2.setexistpoints(existpoints2);
+            auto it = Data::pastpoints.find(p1);
+            if(it == Data::pastpoints.end()){
+                Point newp(p1[0], p1[1], p1[2], Data::pointsnum++);
+                newp.setinYinset(Data::yinsetsnum);
+                Data::existpoints.insert(newp.getid());
+                set<int> existpoints1 = tr1.getexistpoints(),
+                    existpoints2 = tr2.getexistpoints();
+                existpoints1.insert(newp.getid());
+                existpoints2.insert(newp.getid());
+                tr1.setexistpoints(existpoints1);
+                tr2.setexistpoints(existpoints2);
+                Data::pastpoints[newp].insert(tr1.getid());
+                Data::pastpoints[newp].insert(tr2.getid());
+            }
+            else{
+                Point newp = it->first;
+                set<int> existpoints1 = tr1.getexistpoints(),
+                    existpoints2 = tr2.getexistpoints();
+                existpoints1.insert(newp.getid());
+                existpoints2.insert(newp.getid());
+                tr1.setexistpoints(existpoints1);
+                tr2.setexistpoints(existpoints2);
+                Data::pastpoints[newp].insert(tr1.getid());
+                Data::pastpoints[newp].insert(tr2.getid());
+            }
         }
         return;
         /*
@@ -95,14 +112,31 @@ void TriangleIntersection::operator()(Planar& tr1, Planar& tr2){
     else if(tr1intersectPoint){
         Point p1 = Data::points[(tr1IntersectSegment[0] == -1) ? tr1IntersectSegment[1] : tr1IntersectSegment[0]];
         if(tr2IntersectSegment.ifcontainPoint(p1)){
-            Point newp(p1[0], p1[1], p1[2], Data::pointsnum++);
-            newp.setinYinset(Data::yinsetsnum);
-            set<int> existpoints1 = tr1.getexistpoints(),
-                existpoints2 = tr2.getexistpoints();
-            existpoints1.insert(newp.getid());
-            existpoints2.insert(newp.getid());
-            tr1.setexistpoints(existpoints1);
-            tr2.setexistpoints(existpoints2);
+            auto it = Data::pastpoints.find(p1);
+            if(it == Data::pastpoints.end()){
+                Point newp(p1[0], p1[1], p1[2], Data::pointsnum++);
+                newp.setinYinset(Data::yinsetsnum);
+                Data::existpoints.insert(newp.getid());
+                set<int> existpoints1 = tr1.getexistpoints(),
+                    existpoints2 = tr2.getexistpoints();
+                existpoints1.insert(newp.getid());
+                existpoints2.insert(newp.getid());
+                tr1.setexistpoints(existpoints1);
+                tr2.setexistpoints(existpoints2);
+                Data::pastpoints[newp].insert(tr1.getid());
+                Data::pastpoints[newp].insert(tr2.getid());
+            }
+            else{
+                Point newp = it->first;
+                set<int> existpoints1 = tr1.getexistpoints(),
+                    existpoints2 = tr2.getexistpoints();
+                existpoints1.insert(newp.getid());
+                existpoints2.insert(newp.getid());
+                tr1.setexistpoints(existpoints1);
+                tr2.setexistpoints(existpoints2);
+                Data::pastpoints[newp].insert(tr1.getid());
+                Data::pastpoints[newp].insert(tr2.getid());
+            }
             //Data::pastpoints[p1].insert(tr2.getid());
             //Data::pastpoints[p1].insert(tr1.getid());
             /*
@@ -137,14 +171,31 @@ void TriangleIntersection::operator()(Planar& tr1, Planar& tr2){
     else if(tr2intersectPoint){
         Point p2 = Data::points[(tr2IntersectSegment[0] == -1) ? tr2IntersectSegment[1] : tr2IntersectSegment[0]];
         if(tr1IntersectSegment.ifcontainPoint(p2)){
-            Point newp(p2[0], p2[1], p2[2], Data::pointsnum++);
-            newp.setinYinset(Data::yinsetsnum);
-            set<int> existpoints1 = tr1.getexistpoints(),
-                existpoints2 = tr2.getexistpoints();
-            existpoints1.insert(newp.getid());
-            existpoints2.insert(newp.getid());
-            tr1.setexistpoints(existpoints1);
-            tr2.setexistpoints(existpoints2);
+            auto it = Data::pastpoints.find(p2);
+            if(it == Data::pastpoints.end()){
+                Point newp(p2[0], p2[1], p2[2], Data::pointsnum++);
+                newp.setinYinset(Data::yinsetsnum);
+                Data::existpoints.insert(newp.getid());
+                set<int> existpoints1 = tr1.getexistpoints(),
+                    existpoints2 = tr2.getexistpoints();
+                existpoints1.insert(newp.getid());
+                existpoints2.insert(newp.getid());
+                tr1.setexistpoints(existpoints1);
+                tr2.setexistpoints(existpoints2);
+                Data::pastpoints[newp].insert(tr1.getid());
+                Data::pastpoints[newp].insert(tr2.getid());
+            }
+            else{
+                Point newp = it->first;
+                set<int> existpoints1 = tr1.getexistpoints(),
+                    existpoints2 = tr2.getexistpoints();
+                existpoints1.insert(newp.getid());
+                existpoints2.insert(newp.getid());
+                tr1.setexistpoints(existpoints1);
+                tr2.setexistpoints(existpoints2);
+                Data::pastpoints[newp].insert(tr1.getid());
+                Data::pastpoints[newp].insert(tr2.getid());
+            }
             //Data::pastpoints[p2].insert(tr1.getid());
             //Data::pastpoints[p2].insert(tr2.getid());
             /*
@@ -182,14 +233,31 @@ void TriangleIntersection::operator()(Planar& tr1, Planar& tr2){
             if(//Data::points[intersectseg[0]] == Data::points[intersectseg[1]]
                 intersectseg[1] == -1){
                 Point p0 = Data::points[intersectseg[0]];
-                Point newp(p0[0], p0[1], p0[2], Data::pointsnum++);
-                newp.setinYinset(Data::yinsetsnum);
-                set<int> existpoints1 = tr1.getexistpoints(),
-                    existpoints2 = tr2.getexistpoints();
-                existpoints1.insert(newp.getid());
-                existpoints2.insert(newp.getid());
-                tr1.setexistpoints(existpoints1);
-                tr2.setexistpoints(existpoints2);
+                auto it = Data::pastpoints.find(p0);
+                if(it == Data::pastpoints.end()){
+                    Point newp(p0[0], p0[1], p0[2], Data::pointsnum++);
+                    newp.setinYinset(Data::yinsetsnum);
+                    Data::existpoints.insert(newp.getid());
+                    set<int> existpoints1 = tr1.getexistpoints(),
+                        existpoints2 = tr2.getexistpoints();
+                    existpoints1.insert(newp.getid());
+                    existpoints2.insert(newp.getid());
+                    tr1.setexistpoints(existpoints1);
+                    tr2.setexistpoints(existpoints2);
+                    Data::pastpoints[newp].insert(tr1.getid());
+                    Data::pastpoints[newp].insert(tr2.getid());
+                }
+                else{
+                    Point newp = it->first;
+                    set<int> existpoints1 = tr1.getexistpoints(),
+                        existpoints2 = tr2.getexistpoints();
+                    existpoints1.insert(newp.getid());
+                    existpoints2.insert(newp.getid());
+                    tr1.setexistpoints(existpoints1);
+                    tr2.setexistpoints(existpoints2);
+                    Data::pastpoints[newp].insert(tr1.getid());
+                    Data::pastpoints[newp].insert(tr2.getid());
+                }
                 // Point p = Data::points[intersectseg[0]];
                 //Data::pastpoints[p].insert(tr1.getid());
                 //Data::pastpoints[p].insert(tr2.getid());

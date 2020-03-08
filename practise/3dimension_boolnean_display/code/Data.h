@@ -39,6 +39,7 @@ public:
     static std::map<Point, std::set<int>> pastpoints;
     static void load(const Yinset&) ;
     static void clear();
+    static void structcopy();
     static void print(std::ostream&, const Yinset&);
     static int import(std::istream&);
     static Yinset meet(const Yinset&, const Yinset&);

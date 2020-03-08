@@ -9,6 +9,7 @@ Yinset Yinset::meet(const Yinset& y2) const {
     Data::clear();
     Data::load(*this);
     Data::load(y2);
+    Data::structcopy();
     Data::intersection();
     Data::triangulation();
     Data::selecttriangles(*this, y2);

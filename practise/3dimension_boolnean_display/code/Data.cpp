@@ -130,6 +130,112 @@ void Data::clear(){
     pastpoints.clear();
 }
 
+void Data::structcopy(){
+    map<int, int> cypoints;
+    map<int, int> cysegments;
+    map<int, int> cyplanars;
+    map<int, int> cyfaces;
+    Point cyfarpoint = farpoint;
+    for(auto i = existpoints.begin(); i != existpoints.end(); i++){
+        Point p = points[*i];
+        Point newp(p[0], p[1], p[2], pointsnum++);
+        newp.setinYinset(p.getinYinset());
+        cypoints[*i] = newp.getid();
+    }
+    for(auto i = existsegments.begin(); i != existsegments.end(); i++){
+        Segment newseg = segments[*i];
+        newseg.setid(segmentsnum++);
+        cysegments[*i] = newseg.getid();
+    }
+    for(auto i = existplanars.begin(); i != existplanars.end(); i++){
+        Planar newpl = planars[*i];
+        newpl.setid(planarsnum++);
+        cyplanars[*i] = newpl.getid();
+    }
+    for(auto i = existfaces.begin(); i != existfaces.end(); i++){
+        Face newf = faces[*i];
+        newf.setid(facesnum++);
+        cyfaces[*i] = newf.getid();
+    }
+    /*
+    for(auto i = cypoints.begin(); i != cypoints.end(); i++){
+        Point newp = points[i->second];
+        set<int> inSegment = newp.getinSegment(),
+            newinSegment;
+        for(auto j = inSegment.begin(); j != inSegment.end(); j++){
+            newinSegment.insert(cysegments[*j]);
+        }
+        newp.setinSegment();
+    }
+    */
+    for(auto i = cysegments.begin(); i != cysegments.end(); i++){
+        Segment newseg = segments[i->second];
+        newseg.setendpoints(0, cypoints[newseg[0]]);
+        newseg.setendpoints(1, cypoints[newseg[1]]);
+        set<int> inPlanar = newseg.getinPlanar(), newinPlanar,
+            inPlanar10 = newseg.getinPlanar10(), newinPlanar10,
+            inPlanar01 = newseg.getinPlanar01(), newinPlanar01;
+        for(auto j = inPlanar.begin(); j != inPlanar.end(); j++){
+            newinPlanar.insert(cyplanars[*j]);
+        }
+        for(auto j = inPlanar10.begin(); j != inPlanar10.end(); j++){
+            newinPlanar10.insert(cyplanars[*j]);
+        }
+        for(auto j = inPlanar01.begin(); j != inPlanar01.end(); j++){
+            newinPlanar01.insert(cyplanars[*j]);
+        }
+        newseg.setinPlanar(newinPlanar);
+        newseg.setinPlanar01(newinPlanar01);
+        newseg.setinPlanar10(newinPlanar10);
+    }
+    for(auto i = cyplanars.begin(); i != cyplanars.end(); i++){
+        Planar newpl = planars[i->second];
+        vector<int> points = newpl.getpoints(), newpoints,
+            segments = newpl.getsegments(), newsegments;
+        set<int> existpoints = newpl.getexistpoints(), newexistpoints,
+            existsegments = newpl.getexistsegments(), newexistsegments;
+        for(auto j = points.begin(); j != points.end(); j++){
+            newpoints.push_back(cypoints[*j]);
+        }
+        for(auto j = segments.begin(); j != segments.end(); j++){
+            newsegments.push_back(cysegments[*j]);
+        }
+        for(auto j = existpoints.begin(); j != existpoints.end(); j++){
+            newexistpoints.insert(cypoints[*j]);
+        }
+        for(auto j = existsegments.begin(); j != existsegments.end(); j++){
+            newexistsegments.insert(cysegments[*j]);
+        }
+        newpl.setpoints(newpoints);
+        newpl.setsegments(newsegments);
+        newpl.setexistpoints(newexistpoints);
+        newpl.setexistsegments(newexistsegments);
+        newpl.setinFace(cyfaces[newpl.getinFace()]);
+    }
+    for(auto i = cyfaces.begin(); i != cyfaces.end(); i++){
+        Face newf = faces[i->second];
+        vector<int> planars = newf.getplanars(), newplanars;
+        for(auto j = planars.begin(); j != planars.end(); j++){
+            newplanars.push_back(cyplanars[*j]);
+        }
+        newf.setplanars(newplanars);
+    }
+    clear();
+    for(auto i = cypoints.begin(); i != cypoints.end(); i++){
+        existpoints.insert(i->second);
+    }
+    for(auto i = cysegments.begin(); i != cysegments.end(); i++){
+        existsegments.insert(i->second);
+    }
+    for(auto i = cyplanars.begin(); i != cyplanars.end(); i++){
+        existplanars.insert(i->second);
+    }
+    for(auto i = cyfaces.begin(); i != cyfaces.end(); i++){
+        existfaces.insert(i->second);
+    }
+    farpoint = cyfarpoint;
+    points[0] = farpoint;
+}
 
 
 void Data::intersection(){
