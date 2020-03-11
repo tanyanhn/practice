@@ -15,9 +15,22 @@ using namespace std;
 
 
 void SegmentIntersection::operator()(Planar& pl){
-    set<int> existsegments = pl.getexistsegments();
+    set<int> existsegments = pl.getexistsegments(),
+        existpoints = pl.getexistpoints();
+    vector<int> edges = pl.getsegments();
     set<Point> allPoint;
     for(auto i = existsegments.begin(); i != existsegments.end(); i++){
+        if(*i != edges[0] && *i != edges[1] && *i != edges[2]){
+            Segment seg = Data::segments[*i];
+            Point p0 = Data::points[seg[0]],
+                p1 = Data::points[seg[1]];
+            for(auto j = existpoints.begin(); j != existpoints.end(); j++){
+                Point p = Data::points[*j];
+                if(p == p0 || p == p1){
+                    Data::pastpoints[p].erase(pl.getinFace());
+                }
+            }
+        }
         Segment seg = Data::segments[*i];
         Point p0 = Data::points[seg[0]],
             p1 = Data::points[seg[1]];

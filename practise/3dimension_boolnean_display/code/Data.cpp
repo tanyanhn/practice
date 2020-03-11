@@ -288,6 +288,46 @@ void Data::selecttriangles(const Yinset& y1, const Yinset& y2){
         }
     }
     for(auto i = delpl.begin(); i != delpl.end(); i++){
+        Planar pl = planars[*i];
+        vector<int> plsegments = pl.getsegments();
+        assert(segments.size() == 3 && "selecttriangles assert");
+        for(auto j = plsegments.begin(); j != plsegments.end(); j++){
+            Segment plseg = segments[*j];
+            set<int> inplanar = plseg.getinPlanar(),
+                inplanar01 = plseg.getinPlanar01(),
+                inplanar10 = plseg.getinPlanar10();
+            inplanar.erase(pl.getid());
+            inplanar01.erase(pl.getid());
+            inplanar10.erase(pl.getid());
+            plseg.setinPlanar(inplanar);
+            plseg.setinPlanar01(inplanar01);
+            plseg.setinPlanar10(inplanar10);
+            plseg.setinYinset(-2);
+            Point p0 = points[plseg[0]],
+                p1 = points[plseg[1]];
+            set<int> inSegment0 = p0.getinSegment(),
+                inSegment1 = p1.getinSegment();
+            inSegment0.erase(plseg.getid());
+            inSegment1.erase(plseg.getid());
+            p0.setinSegment(inSegment0);
+            p1.setinSegment(inSegment1);
+            if(inSegment0.empty()){
+                p0.setinYinset(-2);
+                existpoints.erase(p0.getid());
+            }
+            if(inSegment1.empty()){
+                p1.setinYinset(-2);
+                existpoints.erase(p1.getid());
+            }
+            if(inplanar.empty()){
+                plseg.setinYinset(-2);
+                existsegments.erase(plseg.getid());
+            }
+        }
+        planars[*i].setinYinset(-2);
+        planars[*i].setinFace(-2);
+        planars[*i].setexistpoints(set<int>());
+        planars[*i].setexistsegments(set<int>());
         existplanars.erase(*i);
     }
 }
