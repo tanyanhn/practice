@@ -1,5 +1,5 @@
 #include"Face.h"
-#include"Planar.h"
+//#include"Planar.h"
 #include"Point.h"
 #include"Planar.h"
 #include"STLHead.h"
