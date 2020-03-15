@@ -97,7 +97,7 @@ double Newtonm(int steps, double it, gsl_function& F, double epsilon = 1e-10, do
         gsl_deriv_central(&F, -1, 0.1, &fprime, &error);
         cout << "f :" << fvalue << " it :" << it <<
             " f/fp: " << fvalue/fprime << endl;
-        if(fabs(fvalue/fprime) < eta || fvalue < epsilon)
+        if(fabs(fvalue/fprime) < eta || fabs(fvalue) < epsilon)
             return it;
         it = it - fvalue/fprime;
     }
