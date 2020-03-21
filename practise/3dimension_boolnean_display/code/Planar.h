@@ -23,7 +23,7 @@ class Planar : public Flat {
     int inFace;
     int inYinset;
 public:
-    Planar(){}
+    Planar() : id(-2), inFace(-2), inYinset(-2){}
     Planar(std::vector<int> p, std::vector<int> s, int identity = -1, int inF = -1, int inY = -1);
     /*     : Flat(Data::points[p[0]], Data::points[p[1]], Data::points[p[2]]),
           points(p), segments(s), id(identity), inFace(inF), inYinset(inY) {

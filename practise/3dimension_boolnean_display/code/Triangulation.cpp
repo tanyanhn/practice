@@ -57,7 +57,8 @@ vector<Planar> Triangulation::operator()(Planar& p) {
             vector<int> points,
                 segments;
             points.resize(3);
-            copy(ssegments.begin(), ssegments.end(), segments.end());
+            segments.resize(3);
+            copy(ssegments.begin(), ssegments.end(), segments.begin());
             Segment seg0 = Data::segments[segments[0]],
                 seg1 = Data::segments[segments[1]],
                 seg2 = Data::segments[segments[2]];
@@ -557,6 +558,9 @@ vector<Planar> Triangulation::generatorPolygen(){
         //Segment seg;
         //Point segp0, segp1;
         for(auto i = nextsegs.begin(); i != nextsegs.end(); i++){
+            if(*i == routeseg.getid()){
+                continue;
+            }
             Segment seg = Data::segments[*i];
             Point segp0, segp1;
             //segp0 = Data::points[seg[0]];
@@ -685,6 +689,8 @@ void Triangulation::TriangulateMonotonePolygon(Planar& planar){
                 if((p2 - p1).angle(p - p1, pl.getnormaldirect()) > M_PI){
                     break;
                 }
+                if(nearPoint[p][0] == p2.getid() || nearPoint[p][1] == p2.getid())
+                    break;
                 Segment seg(p.getid(), p2.getid(), Data::segmentsnum++);
                 //Data::pointsnum++;
                 existsegment.insert(seg.getid());
@@ -713,6 +719,8 @@ void Triangulation::TriangulateMonotonePolygon(Planar& planar){
                 if(s.empty()){
                     break;
                 }
+                if(nearPoint[p][0] == p1.getid() || nearPoint[p][1] == p1.getid())
+                    break;
                 Segment seg(p.getid(), p1.getid(), Data::segmentsnum++);
                 //Data::pointsnum++;
                 existsegment.insert(seg.getid());
