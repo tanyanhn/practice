@@ -5,6 +5,15 @@
 using namespace std;
 
 
+void Planar::print() const {
+    Data::points[points[0]].print();
+    cout << " , ";
+    Data::points[points[1]].print();
+    cout << " , ";
+    Data::points[points[2]].print();
+    cout << endl;
+}
+
 Planar::Planar(std::vector<int> p, std::vector<int> s, int identity , int inF , int inY )
     : Flat(Data::points[p[0]], Data::points[p[1]], Data::points[p[2]]),
       points(p), segments(s), id(identity), inFace(inF), inYinset(inY) {

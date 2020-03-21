@@ -2,6 +2,9 @@
 #include"Tol.h"
 #include"Segment.h"
 
+void Point::print() const{
+    cout << "(" << coord[0] << "," << coord[1] << "," << coord[2] << ")";
+}
 
 void Point::setid(const int i) {
     for(auto j = inSegment.begin(); j != inSegment.end(); j++){

@@ -13,13 +13,13 @@ class PlanarCompare;
 int main(int argc, char* argv[]){
     //int* a = 0;
     // *a = 1;
-    ifstream fis0("data/cube.obj");
+    ifstream fis0("data/cube2.obj");
     ifstream fis1("data/tetrahedron.obj");
     ifstream fis2("data/tetrahedron2.obj");
     Yinset y1, y2, y3;
     fis0 >> y1;
     fis1 >> y2;
-    fis2 >> y3;
+    //fis2 >> y3;
     y1.meet(y2);
     /*
     Segment seg = Data::segments[23];

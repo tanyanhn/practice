@@ -56,6 +56,7 @@ public:
         return *this;
         */
     }
+    void print() const ;
     std::vector<int> getpoints() const {
         return points;
     }

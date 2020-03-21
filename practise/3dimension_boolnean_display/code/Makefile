@@ -1,5 +1,5 @@
 CC := g++
-CPPFLAGS = -O0 -g -D_GLIBCXX_DEBUG
+CPPFLAGS = -O0 -g -D_GLIBCXX_DEBUG --std=c++11
 
 #TARGET=main
 
@@ -73,7 +73,7 @@ TriangleIntersection.o: TriangleIntersection.cpp TriangleIntersection.h Data.h T
 Planar.h
 
 test: test.ex
-	rm -f core-test.ex*
+	-rm -f core-test.ex* core
 	./test.ex
 
 run: main.ex

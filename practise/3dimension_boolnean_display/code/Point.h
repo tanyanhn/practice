@@ -24,6 +24,7 @@ public:
     int getid() const {
         return id;
     }
+    void print() const;
     void setid(const int i);
     /*{
         for(auto j = inSegment.begin(); j != inSegment.end(); j++){

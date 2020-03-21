@@ -24,18 +24,22 @@ void SegmentIntersection::operator()(Planar& pl){
             Segment seg = Data::segments[*i];
             Point p0 = Data::points[seg[0]],
                 p1 = Data::points[seg[1]];
+            //set<int> newexistpoints;
             for(auto j = existpoints.begin(); j != existpoints.end(); j++){
                 Point p = Data::points[*j];
                 if(p == p0 || p == p1){
                     Data::pastpoints[p].erase(pl.getinFace());
                 }
+                //else{
+                //    newexistpoints.insert(*j);
+                //}
             }
+            //pl.setexistpoints(newexistpoints);
         }
         Segment seg = Data::segments[*i];
         Point p0 = Data::points[seg[0]],
             p1 = Data::points[seg[1]];
-        set<Point>::iterator it0 = allPoint.find(p0),
-            it1 = allPoint.find(p1);
+        set<Point>::iterator it0 = allPoint.find(p0);
         if(it0 != allPoint.end() && (it0->getid() != p0.getid())){
             Point p = *it0;
             PastPoint functor;
@@ -68,33 +72,36 @@ void SegmentIntersection::operator()(Planar& pl){
             //Data::points[p.getid()] = p;
         }
         else {
-            allPoint.insert(p0);
+            if(it0 == allPoint.end())
+                allPoint.insert(p0);
         }
+        set<Point>::iterator it1 = allPoint.find(p1);
         if(it1 != allPoint.end() && (it1->getid() != p1.getid())){
             Point p = *it1;
             PastPoint functor;
             functor(p.getid(), p1.getid());
             /*
-            set<int> pinSegment = p.getinSegment(),
-                p1inSegment = p1.getinSegment();
-            for(auto j = p1inSegment.begin(); j != p1inSegment.end(); j++){
-                Segment segContainp1 = Data::segments[*j];
-                if(segContainp1[0] == p1.getid()){
-                    segContainp1.setendpoints(0, p.getid());
-                }
-                if(segContainp1[1] == p1.getid()){
-                    segContainp1.setendpoints(1, p.getid());
-                }
-                Data::points[p1.getid()].setinSegment(set<int>());
-                Data::points[p1.getid()].setinYinset(-2);
-                Data::existpoints.erase(p1.getid());
-                Data::segments[segContainp1.getid()] = segContainp1;
-                //pinSegment.insert(*j);
-            }
+              set<int> pinSegment = p.getinSegment(),
+              p1inSegment = p1.getinSegment();
+              for(auto j = p1inSegment.begin(); j != p1inSegment.end(); j++){
+              Segment segContainp1 = Data::segments[*j];
+              if(segContainp1[0] == p1.getid()){
+              segContainp1.setendpoints(0, p.getid());
+              }
+              if(segContainp1[1] == p1.getid()){
+              segContainp1.setendpoints(1, p.getid());
+              }
+              Data::points[p1.getid()].setinSegment(set<int>());
+              Data::points[p1.getid()].setinYinset(-2);
+              Data::existpoints.erase(p1.getid());
+              Data::segments[segContainp1.getid()] = segContainp1;
+              //pinSegment.insert(*j);
+              }
             */
         }
         else {
-            allPoint.insert(p1);
+            if(it1 == allPoint.end())
+                allPoint.insert(p1);
         }
     }
     for(auto i = existsegments.begin(); i != existsegments.end(); i++){
@@ -109,9 +116,10 @@ void SegmentIntersection::operator()(Planar& pl){
             set<int> allPlanar = seg.getinPlanar();
             for(auto j = pinseg.begin(); j != prev(pinseg.end()); j++){
                 Point p0 = *j, p1 = *next(j);
-                Segment s(p0.getid(), p1.getid(), Data::segmentsnum,
+                Segment s(p0.getid(), p1.getid(), Data::segmentsnum++,
                           seg.getinPlanar01(), seg.getinPlanar10(), seg.getinYinset());
-                Data::segmentsnum++;
+                p0 = Data::points[p0.getid()];
+                p1 = Data::points[p1.getid()];
                 s.setinPlanar(seg.getinPlanar());
                 set<int> inSegment;
                 inSegment = p0.getinSegment();

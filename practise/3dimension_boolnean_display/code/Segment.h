@@ -170,7 +170,7 @@ public:
                     Line::direct = (Data::points[points[1]] - Data::points[points[0]]).unit();
                     Line::fixpoint = Data::points[points[0]];
                 }
-                return;
+                //return;
             }
         }
         else if(i == 1){
@@ -186,7 +186,7 @@ public:
                     Line::direct = (Data::points[points[1]] - Data::points[points[0]]).unit();
                     Line::fixpoint = Data::points[points[0]];
                 }
-                return;
+                //return;
             }
         }
         else{
@@ -203,7 +203,7 @@ public:
     /*int& operator[](const int i) {
         return points[i];
     }*/
-    bool operator==(const Segment& seg1) const {
+    bool overload(const Segment& seg1) const {
         return (Data::points[points[0]] == Data::points[seg1[0]] &&
                 Data::points[points[1]] == Data::points[seg1[1]]);
     }
@@ -215,6 +215,7 @@ public:
     bool operator>(const Segment& seg2) const {
         return seg2 < *this;
     }
+    void print() const;
     bool ifcontainPoint(const Point& p) const ;
     bool ifintersectionSegment(const Segment& seg2) const ;
     Point intersectionSegment(const Segment& seg2) const ;

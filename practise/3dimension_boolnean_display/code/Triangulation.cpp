@@ -162,7 +162,7 @@ void Triangulation::makeMonotone(){
             Direction segdirect = p1 - p0;
             set<int> inPlanar = seg.getinPlanar();
             if(inPlanar.find(pl.getid()) != inPlanar.end()){
-                nearSegment[sweepline.getdirect().angle(segdirect, pl.getnormaldirect())]
+                nearSegment[sweepline.getdirect().angle(segdirect, *Tol::outside)]
                     = seg.getid();
             }
         }
@@ -199,7 +199,7 @@ void Triangulation::makeMonotone(){
             leftmost = true;
         }
         else{
-            lit--;
+            --lit;
             //lsegit = lit;
             lsegid = lit->getid();
         }
@@ -271,7 +271,7 @@ void Triangulation::makeMonotone(){
                   sweepflatposition[j->second] = seg1it;
                   }
                 */
-                auto j2 = ++j;
+                auto j2 = next(j);
                 if(j2 == nearSegment.end()){
                     j2 = nearSegment.begin();
                 }
@@ -474,13 +474,17 @@ vector<Planar> Triangulation::generatorPolygen(){
     Segment triangleEdge0 = Data::segments[pl.getsegments()[0]],
         triangleEdge1 = Data::segments[pl.getsegments()[1]],
         triangleEdge2 = Data::segments[pl.getsegments()[2]];
-    for(auto i = pl.getexistsegments().begin(); i != pl.getexistsegments().end(); i++){
+    Point endPoint0 = Data::points[pl.getpoints()[0]],
+        endPoint1 = Data::points[pl.getpoints()[1]],
+        endPoint2 = Data::points[pl.getpoints()[2]];
+    set<int> existsegments = pl.getexistsegments();
+    for(auto i = existsegments.begin(); i != existsegments.end(); i++){
         Segment seg = Data::segments[*i];
         Point segp0 = Data::points[seg[0]],
             segp1 = Data::points[seg[1]];
         Direction segdi = segp1 - segp0;
         if(triangleEdge0.ifoverlapSegment(seg)){
-            if(triangleEdge0.getdirect().dot(segdi) > 0){
+            if(segdi.cross(endPoint2 - endPoint1).dot(*Tol::outside) > 0){
                 directEdge[segp0].insert(seg.getid());
             }
             else {
@@ -488,7 +492,7 @@ vector<Planar> Triangulation::generatorPolygen(){
             }
         }
         else if(triangleEdge1.ifoverlapSegment(seg)){
-            if(triangleEdge1.getdirect().dot(segdi) > 0){
+            if(segdi.cross(endPoint0 - endPoint2).dot(*Tol::outside) > 0){
                 directEdge[segp0].insert(seg.getid());
             }
             else {
@@ -496,7 +500,7 @@ vector<Planar> Triangulation::generatorPolygen(){
             }
         }
         else if(triangleEdge2.ifoverlapSegment(seg)){
-            if(triangleEdge2.getdirect().dot(segdi) > 0){
+            if(segdi.cross(endPoint1 - endPoint0).dot(*Tol::outside) > 0){
                 directEdge[segp0].insert(seg.getid());
             }
             else {
@@ -513,9 +517,9 @@ vector<Planar> Triangulation::generatorPolygen(){
     //map<Point, int> routesegs;
     vector<Planar> YMonotones;
     Point routep0, routep1;
-    Segment routeseg;
+    Segment routeseg, nextseg;
     vector<Planar> anwser;
-    Planar pl;
+    Planar polygen;
     set<int> existseg;
     while(1){
         if(route.empty()){
@@ -534,6 +538,10 @@ vector<Planar> Triangulation::generatorPolygen(){
                 else{
                     routep1 = Data::points[routeseg[0]];
                 }
+                directEdge[routep0].erase(routeseg.getid());
+                if(directEdge[routep0].empty()){
+                    directEdge.erase(routep0);
+                }
                 //(it->second).erase(itsecond);
                 //if((it->second).empty()){
                 //    directEdge.erase(it);
@@ -544,11 +552,13 @@ vector<Planar> Triangulation::generatorPolygen(){
         //routep1 = Data::points[routeseg[1]];
         set<int> nextsegs = directEdge[routep1];
         double smallangle = 2 * M_PI + 1;
-        int nextseg = -1;
-        Segment seg;
-        Point segp0, segp1;
+        nextseg = routeseg;
+        //int nextseg = -1;
+        //Segment seg;
+        //Point segp0, segp1;
         for(auto i = nextsegs.begin(); i != nextsegs.end(); i++){
-            seg = Data::segments[*i];
+            Segment seg = Data::segments[*i];
+            Point segp0, segp1;
             //segp0 = Data::points[seg[0]];
             //segp1 = Data::points[seg[1]];
             if(seg[1] == routep1.getid()){
@@ -559,24 +569,36 @@ vector<Planar> Triangulation::generatorPolygen(){
                 segp0 = Data::points[seg[0]];
                 segp1 = Data::points[seg[1]];
             }
-            double angle = (segp1 - segp0).angle(routep0 - routep1, pl.getnormaldirect());
+            double angle = (segp1 - segp0).angle(routep0 - routep1, *Tol::outside);
             if(angle < smallangle){
                 smallangle = angle;
-                nextseg = seg.getid();
+                nextseg = seg;
             }
         }
-        preroute.insert(make_pair(routep1, routep0.getid()));
+        preroute.insert(make_pair(routep1, routeseg.getid()));
         //routeseg = Data::segments[nextseg];
         //routep0 = routep1;
-        route.insert(make_pair(routep1, nextseg));
+        route.insert(make_pair(routep1, nextseg.getid()));
         //routesegs.insert(nextseg);
         //routep1 = segp1;
-        Point p = segp1;
-        int nextp0 = segp0.getid(),
-            nextp1 = segp1.getid();
-        int ifbreak = -1;
+        //Point p = Data::segments[nextseg].[];
+        directEdge[routep1].erase(nextseg.getid());
+        if(directEdge[routep1].empty()){
+            directEdge.erase(routep1);
+        }
+        int nextp0, nextp1;
+        if(nextseg[0] == routep1.getid()){
+            nextp0 = nextseg[0];
+            nextp1 = nextseg[1];
+        }
+        else {
+            nextp0 = nextseg[1];
+            nextp1 = nextseg[0];
+        }
+        Point p = Data::points[nextp1];
+        int route_empty = -1;
         while(route.find(p) != route.end()){
-            if(!(p == segp1)){
+            if(!(p.getid() == nextp1)){
                 preroute.erase(p);
             }
             Segment seg = Data::segments[route[p]];
@@ -591,28 +613,35 @@ vector<Planar> Triangulation::generatorPolygen(){
             p = Data::points[p2];
             existseg.insert(seg.getid());
             if(route.find(p) == route.end()){
-                pl.setid(Data::planarsnum++);
+                polygen.setid(Data::planarsnum++);
                 //Data::planarsnum++;
-                pl.setexistsegments(existseg);
+                polygen.setexistsegments(existseg);
                 existseg.clear();
-                anwser.push_back(pl);
+                anwser.push_back(polygen);
                 if(preroute.empty() && route.empty()){
-                    ifbreak = 1;
+                    route_empty = 1;
                 }
                 else {
-                    nextp0 = preroute[segp1];
-                    nextp1 = segp1.getid();
-                    nextseg = routeseg.getid();
+                    nextseg = Data::segments[preroute[Data::points[nextp1]]];
+                    if(nextseg[0] == nextp1){
+                        nextp0 = nextseg[1];
+                    }
+                    else if(nextseg[1] == nextp1){
+                        nextp0 = nextseg[0];
+                    }
+                    //nextseg = routeseg.getid();
                 }
                 break;
             }
         }
-        if(ifbreak == 1){
-            break;
+        //if(ifbreak == 1){
+        //    break;
+        //}
+        if(route_empty == -1){
+            routep0 = Data::points[nextp0];
+            routep1 = Data::points[nextp1];
+            routeseg = nextseg;
         }
-        routep0 = Data::points[nextp0];
-        routep1 = Data::points[nextp1];
-        routeseg = Data::segments[nextseg];
     }
     return anwser;
 }

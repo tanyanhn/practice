@@ -275,13 +275,13 @@ void TriangleIntersection::operator()(Planar& tr1, Planar& tr2){
             bool findtr1 = false, findtr2 = false;
             int findidtr1 = -1, findidtr2 = -1;
             for(auto i = tr1existsegments.begin(); i != tr1existsegments.end(); i++){
-                if(intersectseg == Data::segments[*i]){
+                if(intersectseg.overload(Data::segments[*i])){
                     findtr1 = true;
                     findidtr1 = *i;
                 }
             }
             for(auto i = tr2existsegments.begin(); i != tr2existsegments.end(); i++){
-                if(intersectseg == Data::segments[*i]){
+                if(intersectseg.overload(Data::segments[*i])){
                     findtr2 = true;
                     findidtr2 = *i;
                 }
@@ -582,7 +582,7 @@ bool TriangleIntersection::IdentityEdge(Planar& tr1, Planar& tr2){
     PastEdge functor;
     for(auto i = segments1.begin(); i != segments1.end(); i++){
         for(auto j = segments2.begin(); j != segments2.end(); j++){
-            if(Data::segments[*i] == Data::segments[*j] && *i != *j){
+            if(Data::segments[*i].overload(Data::segments[*j]) && *i != *j){
                 //PastPoint functor(*i, *j);
                 //functor(*i, *j);
                 Segment seg = Data::segments[*i];
@@ -635,7 +635,7 @@ void PastEdge::operator()(int seg1id, int seg2id){
     //inPlanar1.insert(i);
     Segment seg1 = Data::segments[seg1id];
     Segment seg2 = Data::segments[seg2id];
-    if(!(seg1 == seg2) || seg1id == seg2id){
+    if(!(seg1.overload(seg2)) || seg1id == seg2id){
         int* a = 0;
         *a = 1;
     }
@@ -697,10 +697,10 @@ void PastPoint::operator()(int p1id, int p2id){
         int *a = 0;
         *a = 1;
     }
-    set<int> inSegment1 = p1.getinSegment(),
-        inSegment2 = p2.getinSegment();
+    //set<int> inSegment1 = p1.getinSegment(),
+    set<int> inSegment2 = p2.getinSegment();
     map<int, vector<int>> plseg;
-    map<int, int> replaceseg;
+    //map<int, int> replaceseg;
     set<int>::iterator it = inSegment2.begin();
     while(it != inSegment2.end()){
         Segment seg = Data::segments[*it];
@@ -708,17 +708,19 @@ void PastPoint::operator()(int p1id, int p2id){
         for(auto i = inPlanar.begin(); i != inPlanar.end(); i++){
             plseg[*i].push_back(*it);
         }
-        Segment newseg(seg[0], seg[1], Data::segmentsnum++,
-                       seg.getinPlanar01(), seg.getinPlanar10());
-        newseg.setinYinset(seg.getinYinset());
+        //Segment newseg(seg[0], seg[1], Data::segmentsnum++,
+        //               seg.getinPlanar01(), seg.getinPlanar10());
+        //newseg.setinYinset(seg.getinYinset());
         if(seg[0] == p2.getid()){
-            newseg.setendpoints(0, p1.getid());
+            //newseg.setendpoints(0, p1.getid());
+            seg.setendpoints(0, p1.getid());
         }
         else{
-            newseg.setendpoints(1, p1.getid());
+            //newseg.setendpoints(1, p1.getid());
+            seg.setendpoints(1, p1.getid());
         }
         //Data::existsegments.insert(newseg.getid());
-        replaceseg[seg.getid()] = newseg.getid();
+        //replaceseg[seg.getid()] = newseg.getid();
         ++it;
     }
     for(auto k = plseg.begin(); k != plseg.end(); k++){
@@ -735,7 +737,7 @@ void PastPoint::operator()(int p1id, int p2id){
         }
         //bool inedge = false;
         //vector<int>::iterator replaceedgeit;
-        for(auto i = segments.begin(); i != segments.end(); i++){
+        /*for(auto i = segments.begin(); i != segments.end(); i++){
             for(auto j = oldsegs.begin(); j != oldsegs.end(); j++){
                 if(*i == *j){
                     //inedge = true;
@@ -743,9 +745,11 @@ void PastPoint::operator()(int p1id, int p2id){
                 }
             }
         }
+        */
         if(existpoints.erase(p2.getid()) != 0){
             existpoints.insert(p1.getid());
         };
+        /*
         for(auto i = oldsegs.begin(); i != oldsegs.end(); i++){
             Data::existsegments.insert(replaceseg[*i]);
             Data::existsegments.erase(*i);
@@ -757,6 +761,7 @@ void PastPoint::operator()(int p1id, int p2id){
             existsegments.erase(seg.getid());
             existsegments.insert(replaceseg[seg.getid()]);
         }
+        */
         //Planar newpl(points, segments, Data::planarsnum++, pl.getinFace(), pl.getinYinset());
         pl.setpoints(points);
         pl.setsegments(segments);

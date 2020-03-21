@@ -4,6 +4,15 @@
 //#include"Line.h"
 using namespace std;
 
+void Segment::print() const{
+    Data::points[points[0]].print();
+    cout << " , ";
+    Data::points[points[1]].print();
+    //cout << " , ";
+    //Data::points[points[2]].print();
+    cout << endl;
+
+}
 
 bool Segment::ifcontainPoint(const Point& p) const {
     Point p0 = Data::points[points[0]],
@@ -48,6 +57,9 @@ Point Segment::intersectionSegment(const Segment& seg2) const {
 bool Segment::ifoverlapSegment(const Segment& seg2) const {
     //  if((direct.unit() - seg2.getdirect().unit).norm() > Tol::t)
     //  return false;
+    if(Line::ifoverlapLine(seg2) == false){
+        return false;
+    }
     Point p10 = Data::points[points[0]], p11 = Data::points[points[1]],
         p20 = Data::points[seg2[0]], p21 = Data::points[seg2[1]];
     if((p11 < p20) || (p21 < p10))
