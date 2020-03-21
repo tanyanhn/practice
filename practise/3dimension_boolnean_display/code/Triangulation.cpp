@@ -51,6 +51,8 @@ vector<Planar> Triangulation::operator()(Planar& p) {
         if(triangle.getexistsegments().size() != 3){
             cout << "trianglulation wrong triangle.id : " << triangle.getid()  << " "
                  << pl.getid();
+            int* pi = 0;
+            std::cout << *pi;
         }
         else{
             set<int> ssegments = triangle.getexistsegments();
@@ -145,11 +147,11 @@ void Triangulation::makeMonotone(){
         Tol::l->setfixpoint(p);
         Line sweepline = *Tol::l;
         /*
-        if(sweepline.getdirect()
-           .cross(Tol::f.getnormaldirect())
-           .dot(pl.getnormaldirect()) < 0) {
-            sweepline.setdirect(sweepline.getdirect() * (-1));
-        }
+          if(sweepline.getdirect()
+          .cross(Tol::f.getnormaldirect())
+          .dot(pl.getnormaldirect()) < 0) {
+          sweepline.setdirect(sweepline.getdirect() * (-1));
+          }
         */
         nearSegment.clear();
         set<int> inSegments = p.getinSegment();
@@ -252,12 +254,12 @@ void Triangulation::makeMonotone(){
         }
         else {
             /*
-            for(auto j = nearSegment.begin(); j != nearSegment.end(); j++){
-                if(j->first >= M_PI){
-                    auto it = sweepflat.insert(Data::segments[j->second]).first;
-                    sweepflatposition[j->second] = it;
-                }
-            }
+              for(auto j = nearSegment.begin(); j != nearSegment.end(); j++){
+              if(j->first >= M_PI){
+              auto it = sweepflat.insert(Data::segments[j->second]).first;
+              sweepflatposition[j->second] = it;
+              }
+              }
             */
             for(auto j = nearSegment.begin(); j != nearSegment.end(); j++){
                 //set<Segment>::iterator seg1it, seg2it;
@@ -522,6 +524,7 @@ vector<Planar> Triangulation::generatorPolygen(){
     vector<Planar> anwser;
     Planar polygen;
     set<int> existseg;
+    vector<int> polygensegments;
     while(1){
         if(route.empty()){
             if(directEdge.empty()){
@@ -616,11 +619,14 @@ vector<Planar> Triangulation::generatorPolygen(){
             route.erase(p);
             p = Data::points[p2];
             existseg.insert(seg.getid());
+            polygensegments.push_back(seg.getid());
             if(route.find(p) == route.end()){
                 polygen.setid(Data::planarsnum++);
                 //Data::planarsnum++;
                 polygen.setexistsegments(existseg);
+                polygen.setsegments(polygensegments);
                 existseg.clear();
+                polygensegments.clear();
                 anwser.push_back(polygen);
                 if(preroute.empty() && route.empty()){
                     route_empty = 1;
@@ -652,19 +658,46 @@ vector<Planar> Triangulation::generatorPolygen(){
 
 
 void Triangulation::TriangulateMonotonePolygon(Planar& planar){
-    map<Point, vector<int>> nearPoint;
+    map<Point, pair<int,int>> nearPoint;
     set<int> existsegment = pl.getexistsegments(),
         planarexistsegment = planar.getexistsegments();
-    for(auto i = planarexistsegment.begin(); i != planarexistsegment.end(); i++){
-        Segment seg = Data::segments[*i];
-        Point p0 = Data::points[seg[0]],
-            p1 = Data::points[seg[1]];
-        vector<int> vp0 = nearPoint[p0],
-            vp1 = nearPoint[p1];
-        vp0.push_back(p1.getid());
-        vp1.push_back(p0.getid());
-        nearPoint[p0] = vp0;
-        nearPoint[p1] = vp1;
+    vector<int> planarsegments = planar.getsegments();
+    for(auto i = planarsegments.begin(); i != planarsegments.end(); i++){
+        auto j = next(i);
+        if(j == planarsegments.end()){
+            j = planarsegments.begin();
+        }
+        Segment seg0 = Data::segments[*i],
+            seg1 = Data::segments[*j];
+        int p0 = seg0[0],
+            p1 = seg0[1],
+            p2;
+        if(seg1[0] == p0){
+            p0 = p1;
+            p1 = seg1[0];
+            p2 = seg1[1];
+        }
+        else if(seg1[1] == p0){
+            p0 = p1;
+            p1 = seg1[1];
+            p2 = seg1[0];
+        }
+        else if(seg1[0] == p1){
+            p2 = seg1[1];
+        }
+        else if(seg1[1] == p1){
+            p2 = seg1[0];
+        }
+        else {
+            p2 = -2;
+            cout << "void Triangulation::TriangulateMonotonePolygon(Planar& planar) wrong" <<endl;
+            int* p = 0;
+            *p = 0;
+        }
+        auto vp = nearPoint[Data::points[p1]];
+        vp.first = p0;
+        vp.second = p2;
+        nearPoint[Data::points[p1]] = vp;
     }
     stack<Point> s;
     auto it = nearPoint.end();
@@ -679,21 +712,36 @@ void Triangulation::TriangulateMonotonePolygon(Planar& planar){
         it--;
         Point p = it->first;
         Point topp = s.top();
-        vector<int> nearp = nearPoint[p];
-        if((nearp[0] == topp.getid()) || (nearp[1] == topp.getid())){
+        auto nearp = nearPoint[p];
+        if((nearp.first == topp.getid()) || (nearp.second == topp.getid())){
             Point p1 = s.top();
             s.pop();
             Point p2 = s.top();
             s.pop();
             while(1){
-                if((p2 - p1).angle(p - p1, pl.getnormaldirect()) > M_PI){
+                char side = 'n';
+                pair<int, int> prevnext = nearPoint[p];
+                if(prevnext.first == p1.getid()){
+                    side = 'l';
+                }
+                else if(prevnext.second == p1.getid()){
+                    side = 'r';
+                }
+                if(((p2 - p1).angle(p - p1, *Tol::outside) >= M_PI && side == 'r') ||
+                   ((p2 - p1).angle(p - p1, *Tol::outside) <= M_PI && side == 'l')){
                     break;
                 }
-                if(nearPoint[p][0] == p2.getid() || nearPoint[p][1] == p2.getid())
-                    break;
-                Segment seg(p.getid(), p2.getid(), Data::segmentsnum++);
-                //Data::pointsnum++;
-                existsegment.insert(seg.getid());
+                if(nearPoint[p].first != p2.getid() && nearPoint[p].second != p2.getid()){
+                    Segment seg(p.getid(), p2.getid(), Data::segmentsnum++);
+                    //Data::pointsnum++;
+                    existsegment.insert(seg.getid());
+                    if(nearPoint[p].first == p1.getid()){
+                        nearPoint[p].first = p2.getid();
+                    }
+                    else if(nearPoint[p].second == p1.getid()){
+                        nearPoint[p].second = p2.getid();
+                    }
+                }
                 p1 = p2;
                 if(s.empty()){
                     break;
@@ -701,7 +749,7 @@ void Triangulation::TriangulateMonotonePolygon(Planar& planar){
                 p2 = s.top();
                 s.pop();
             }
-            if(s.empty()){
+            if(p1 == p2){
                 s.push(p1);
                 s.push(p);
             }
@@ -712,20 +760,26 @@ void Triangulation::TriangulateMonotonePolygon(Planar& planar){
             }
         }
         else{
-            Point p1;
+            Point p2 = s.top(), p1;
             while(1){
                 p1 = s.top();
                 s.pop();
                 if(s.empty()){
                     break;
                 }
-                if(nearPoint[p][0] == p1.getid() || nearPoint[p][1] == p1.getid())
-                    break;
-                Segment seg(p.getid(), p1.getid(), Data::segmentsnum++);
-                //Data::pointsnum++;
-                existsegment.insert(seg.getid());
+                if(nearPoint[p].first != p1.getid() && nearPoint[p].second != p1.getid()){
+                    Segment seg(p.getid(), p1.getid(), Data::segmentsnum++);
+                    //Data::pointsnum++;
+                    existsegment.insert(seg.getid());
+                }
             }
-            s.push(p1);
+            if(nearPoint[p].first == p1.getid()){
+                nearPoint[p].first = p2.getid();
+            }
+            else if(nearPoint[p].second == p1.getid()){
+                nearPoint[p].second = p2.getid();
+            }
+            s.push(p2);
             s.push(p);
         }
     }
