@@ -1,0 +1,8 @@
+Matlab codes of Chapter 5, hyperbolic PDEs.
+
+upwind.m, upwinding method for solving advection equation u_t + u_x = 0, a<x<b.
+Matlab functions involved: u0.m: the initial condition; bc.m: the boundary 
+condition at x=a; uexact.m: an exact solution for testing purpose.
+
+lax_fred.m, Lax-Friendrichs Matlab code for solving the same problem above.
+

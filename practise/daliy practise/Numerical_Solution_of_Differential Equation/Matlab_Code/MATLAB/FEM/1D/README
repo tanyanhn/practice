@@ -1,0 +1,95 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                    %
+%  Matlab program for one-dimensional finite element method for       %
+%                                                                    %
+%    -(k(x)u_x)_x + c(x) u_x + b(x) u(x) = f(x)                      %
+%                                                                    %
+%  with different boundary condition at x =0, and x = l              %
+%                                                                    %
+%--------------------------------------------------------------------%
+
+fem1d.m: The main drive program.
+
+setint.m: Set the nodal points and weights for the Gaussian Quadrature
+          formula in the interval [0,1] of order 1, 2, 3, 4.
+
+propset.m: Input the data, form the partition.
+
+	   a, b: a < b, the two end points.
+
+           inf_ele = 1, or 2, or 3. The basis function of linear,
+                        quadratic, or cubic. Could be modified as
+	                kind(i) for i-th element.
+           nnode: The number of nodal points. If inf_ele = 1, nnode
+                  can be any number >=2. If inf_ele = 2, nnode should 
+                  be any number, 2k+1, k >=1. If inf_ele = 3, nnode
+	          should be a number 3k + 1.
+	   The stiffness matrix gk has the dimension nnode by nnode.
+
+	   nelem = (nnode - 1)/inf_ele; The number of elements.
+	   x: xcoordinates of all nodal points numbered consecutively
+              from 1 through nnode.
+	   nint(i), i=1, ..., nelem = 1, or 2, or 3, or 4. The order 
+                    of Gaussian quadrature in the i-th element.
+           kind(i), i=1, ..., nelem, = 1, or 2, or 3. The basis 
+                    function in the i-th element. For uniform
+                    triangulation, kind(i) = inf_ele.
+           nodes(j,i), i=1, ..., nelem, j=1, ..., kind(i) + 1, nodal
+                      point number of nodes in element, for example,
+                      if we use quadratic element, in the second 
+
+	   Boundary conditions:
+             kbc(1): BC at x=a, 1: Dirichlet BC, 2: Neumann BC. 
+	             3: Mixed BC.
+	     kbc(2): BC at x=b, has the same meaning as above.
+	 
+	     ua: The solution at x=a if Dirichlet BC is chosen.
+	     ub: The solution at x=b if Dirichlet BC is chosen.
+
+	     uxa: -k(a) u_x(a) for the Neumann BC at x=a.
+             uxb:   k(b) u_x(b) for the Neumann BC at x=b.
+
+             uxma, uaa for the mixed BC at x = a. It should have the
+                  form: k(a) u_x(a) = uxma (u(a) - uaa).
+
+	     uxmb, ubb for the mixed BC at x = b. It should have the
+                  form: -k(b) u_x(b) = uxmb (u(b) - ubb).	
+      
+            
+                      element, we have nodes(1,2)=2, nodes(2,2)=3,
+                      nodes(3,i).
+
+%------------------------------------------------------------------------
+
+formkf.m     Form the discrete linear system by calling elem.m and 
+	     assemb.m through each element.
+
+elem.m	     Form the local stiffness matrix and load vector.
+
+assemb.m     Assemble the global stiffness matrix and load vector.
+
+shape.m      Calculate the values of the basis functions and their
+	     derivatives at a point xi.
+
+getmat.m     Access the material parameters of the differential 
+	     equation.
+
+aplybc.m     Adjust the boundary conditions at two end points. If it has a
+	     Dirichlet BC at x = a, it will call drchlta.m. If it has a
+	     Dirichlet BC at x = b, it will call drchltb.m.
+
+drchlta.m    
+
+drchlta.m
+
+%---------------------------------------------------------------------
+
+Note: The oder of the Gaussian integration rule should equal or greater
+      than the order of the basis function. That is
+		nint(i) >= kind(i)
+      Such restriction is due to the choice of the shape function which
+      has uniform expressions in elements but not between two nodal 
+      points. 
+
+      Try to use non-uniform grid.

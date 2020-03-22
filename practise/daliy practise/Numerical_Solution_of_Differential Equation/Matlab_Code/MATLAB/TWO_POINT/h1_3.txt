@@ -1,0 +1,36 @@
+> u:=exp(-x)*(x-1)^2;
+
+                                            2
+                        u := exp(-x) (x - 1)
+
+> beta:=1 + x^2;
+
+                                         2
+                            beta := 1 + x
+
+> mgamma:=x;
+
+                             mgamma := x
+
+> 
+> diff( beta *diff(u,x),x) - mgamma*u;
+
+                       2
+  2 x (-exp(-x) (x - 1)  + 2 exp(-x) (x - 1)) +
+
+              2                  2
+        (1 + x ) (exp(-x) (x - 1)  - 4 exp(-x) (x - 1) + 2 exp(-x))
+
+                            2
+         - x exp(-x) (x - 1)
+
+> simplify(%);
+> 
+
+              3               2
+  -9 exp(-x) x  + 18 exp(-x) x  - 13 exp(-x) x + 7 exp(-x)
+
+            4
+         + x  exp(-x)
+
+> 

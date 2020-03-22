@@ -270,8 +270,6 @@ void TriangleIntersection::operator()(Planar& tr1, Planar& tr2){
                 */
                 return;
             }
-            Data::existpoints.insert(intersectseg[0]);
-            Data::existpoints.insert(intersectseg[1]);
             bool findtr1 = false, findtr2 = false;
             int findidtr1 = -1, findidtr2 = -1;
             for(auto i = tr1existsegments.begin(); i != tr1existsegments.end(); i++){
@@ -287,6 +285,8 @@ void TriangleIntersection::operator()(Planar& tr1, Planar& tr2){
                 }
             }
             if((findtr1 == false) && (findtr2 == false)) {
+                Data::existpoints.insert(intersectseg[0]);
+                Data::existpoints.insert(intersectseg[1]);
                 set<int> inPlanar = intersectseg.getinPlanar();
                 inPlanar.insert(tr1.getid());
                 inPlanar.insert(tr2.getid());
@@ -418,7 +418,7 @@ Segment TriangleIntersection::PlanarIntersectLine(const Planar& tr1, const Line&
             }
             else {
                 Point p = l.intersectionLine(tr1seg2);
-                if(tr1seg1.ifcontainPoint(p) == false){
+                if(tr1seg2.ifcontainPoint(p) == false){
                     tr1intersectPoint = true;
                 }
                 else {
@@ -446,7 +446,7 @@ Segment TriangleIntersection::PlanarIntersectLine(const Planar& tr1, const Line&
             }
             else {
                 Point p = l.intersectionLine(tr1seg0);
-                if(tr1seg1.ifcontainPoint(p) == false){
+                if(tr1seg0.ifcontainPoint(p) == false){
                     tr1intersectPoint = true;
                 }
                 else {
@@ -684,6 +684,25 @@ void PastEdge::operator()(int seg1id, int seg2id){
     }
     seg1.setinPlanar(inPlanar1);
     Data::existsegments.erase(seg2.getid());
+    Point seg2p0 = Data::points[seg2[0]],
+        seg2p1 = Data::points[seg2[1]];
+    set<int> inSegment;
+    inSegment = seg2p0.getinSegment();
+    inSegment.erase(seg2.getid());
+    //inSegment.insert(s.getid());
+    seg2p0.setinSegment(inSegment);
+    if(inSegment.empty()){
+        seg2p0.setinYinset(-2);
+        Data::existpoints.erase(seg2p0.getid());
+    }
+    inSegment = seg2p1.getinSegment();
+    inSegment.erase(seg2.getid());
+    //inSegment.insert(s.getid());
+    seg2p1.setinSegment(inSegment);
+    if(inSegment.empty()){
+        seg2p1.setinYinset(-2);
+        Data::existpoints.erase(seg2p1.getid());
+    }
     seg2.setinYinset(-2);
     seg2.setinPlanar(set<int>());
     seg2.setinPlanar01(set<int>());

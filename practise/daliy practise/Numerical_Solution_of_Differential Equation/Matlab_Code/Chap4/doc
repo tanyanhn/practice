@@ -1,0 +1,15 @@
+
+EULER
+
+   FW_Euler_heat.m: Forward Euler's method. Files include uexact.m, f.m.
+
+MOL
+
+   Method of lines for solving 1D heat equations. Files include: mol.m, ux_mol.m, the true solution, yfun_mol.m (define the ODE system).
+
+CRANK
+
+   crank.m: Crank-Nicolson method for 1D heat equations with $\beta=1$. Files include: crank.m, f.m, uexact.m, g1.m, g2.m (BC) 
+
+
+ADI: ADI method for 2D heat equations with $\beta=1$. Files include: adi.m, f.m, uexact.m.

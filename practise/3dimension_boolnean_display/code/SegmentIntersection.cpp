@@ -29,6 +29,10 @@ void SegmentIntersection::operator()(Planar& pl){
                 Point p = Data::points[*j];
                 if(p == p0 || p == p1){
                     Data::pastpoints[p].erase(pl.getinFace());
+                    if(Data::pastpoints[p].empty()){
+                        Data::pastpoints.erase(p);
+                        Data::existpoints.erase(p.getid());
+                    }
                 }
                 //else{
                 //    newexistpoints.insert(*j);
@@ -167,6 +171,9 @@ void SegmentIntersection::operator()(Planar& pl){
         it = segmentmap.find(make_pair(seg[0], seg[1]));
         if(it != segmentmap.end()){
             Segment overlapseg = it->second;
+            PastEdge functor;
+            functor(overlapseg.getid(), seg.getid());
+            /*
             set<int> seginPlanar = seg.getinPlanar(),
                 inPlanar = overlapseg.getinPlanar();
             for(auto j = seginPlanar.begin(); j != seginPlanar.end(); j++){
@@ -185,6 +192,17 @@ void SegmentIntersection::operator()(Planar& pl){
                 inPlanar10.insert(*j);
             }
             overlapseg.setinPlanar10(inPlanar10);
+            Point segp0 = Data::points[seg[0]],
+                segp1 = Data::points[seg[1]];
+            set<int> inSegment;
+            inSegment = segp0.getinSegment();
+            inSegment.erase(seg.getid());
+            //inSegment.insert(s.getid());
+            segp0.setinSegment(inSegment);
+            inSegment = segp1.getinSegment();
+            inSegment.erase(seg.getid());
+            //inSegment.insert(s.getid());
+            segp1.setinSegment(inSegment);
             Data::segments[seg.getid()].setinYinset(-2);
             Data::segments[seg.getid()].setinPlanar(set<int>());
             Data::segments[seg.getid()].setinPlanar01(set<int>());
@@ -197,6 +215,7 @@ void SegmentIntersection::operator()(Planar& pl){
                 pl.setexistsegments(plexistsegment);
                 Data::planars[*j] = pl;
             }
+            */
         }
         else {
             segmentmap[make_pair(seg[0], seg[1])] = seg;

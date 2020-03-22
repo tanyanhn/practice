@@ -128,6 +128,18 @@ Point Planar::intersectionSegment(const Segment& seg) const {
     return p;
 }
 
+void Planar::remove_not_pastpoints(){
+    set<int> tempexistpoints = existpoints;
+    for(auto i = tempexistpoints.begin(); i != tempexistpoints.end(); i++){
+        Point p = Data::points[*i];
+        //set<int> fases_past = Data::pastpoints[p];
+        if(Data::pastpoints[p].find(inFace) == Data::pastpoints[p].end()){
+            existpoints.erase(*i);
+            //Data::existpoints.erase(*i);
+        }
+    }
+}
+
 /*
 double Planar::angleBetweenPlanars(const Planar& pl2,const Direction& di) const {
     Direction d1 = Flat::normaldirect,

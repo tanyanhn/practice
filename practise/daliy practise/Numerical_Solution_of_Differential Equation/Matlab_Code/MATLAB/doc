@@ -1,0 +1,41 @@
+
+compare.m: Matlab code of grid refinement analysis for Forward, Central,
+	   and Backward difference to approximate the derivatives.
+
+main.m, two_point.m: 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    This matlab function two_point solvers the following two-point    %
+%    boundary value problem: u''(x) = f(x) using center difference     %
+%    scheme.                                                           %  
+%    Input:                                                            %
+%     a, b: Two end points.                                            %
+%     ua, ub: Dirichlet boundary conditions at a and b                 %
+%     f: external function f(x).                                       %
+%     n: number of grid points.                                        %
+%    Output:                                                           %
+%     x: x(1),x(2),...x(n-1) are grid points                           %
+%     U: U(1),U(2),...U(n-1) are approximate solution at grid points   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+main_h1_3.m, gama.m, beta.m, rhs.m, mixed.m: HW#1 Problem 3.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  Matlab Code for HW#1 Problem 3.
+%  Files involved: main_h1_3.m, this file.
+%      mixed.m: the main Matlab function for the problem.
+%      rhs.m:   the f(x)
+%      beta.m, gama.m, the coefficients
+%
+%  Test results in the infinity norm.
+%       n = 10,         e = 0.0077
+%         = 20,         e = 0.0019      4.0526
+%         = 40,         e = 4.8300e-04  3.9337
+%         = 80,         e = 1.2077e-04  3.9993
+%         = 160,        e = 3.0195e-05  3.9997
+%
+%%%%%%%% Clear all unwanted variable and graphs.
+
+poisson_matlab.m, ue_h2_3.m, ux_h2_3.m: HW#2 Problem 3.
+

@@ -1,0 +1,31 @@
+{VERSION 4 0 "SUN SPARC SOLARIS" "4.0" }
+{USTYLETAB {CSTYLE "Maple Input" -1 0 "Courier" 0 1 255 0 0 1 0 1 0 0 
+1 0 0 0 0 1 }{CSTYLE "2D Math" -1 2 "Times" 0 1 0 0 0 0 0 0 2 0 0 0 0 
+0 0 1 }{CSTYLE "2D Output" 2 20 "" 0 1 0 0 255 1 0 0 0 0 0 0 0 0 0 1 }
+{PSTYLE "Normal" -1 0 1 {CSTYLE "" -1 -1 "" 0 1 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 }0 0 0 -1 -1 -1 0 0 0 0 0 0 -1 0 }{PSTYLE "Maple Output" 0 11 1 
+{CSTYLE "" -1 -1 "" 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 }3 3 0 -1 -1 -1 0 
+0 0 0 0 0 -1 0 }{PSTYLE "" 11 12 1 {CSTYLE "" -1 -1 "" 0 1 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 }1 0 0 -1 -1 -1 0 0 0 0 0 0 -1 0 }}
+{SECT 0 {EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 19 "u:=exp(-x)*(x-1)^2;
+" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%\"uG*&-%$expG6#,$%\"xG!\"\"\"\"
+\"),&F*F,F,F+\"\"#F," }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 14 "bet
+a:=1 + x^2;" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%%betaG,&\"\"\"F&*$)%
+\"xG\"\"#F&F&" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 10 "mgamma:=x;
+" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%'mgammaG%\"xG" }}}{EXCHG {PARA 
+0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 
+0 36 "diff( beta *diff(u,x),x) - mgamma*u;" }}{PARA 12 "" 1 "" 
+{XPPMATH 20 "6#,(*&%\"xG\"\"\",&*&-%$expG6#,$F%!\"\"F&),&F%F&F&F-\"\"#
+F&F-*(F0F&F)F&F/F&F&F&F0*&,&F&F&*$)F%F0F&F&F&,(F(F&*(\"\"%F&F)F&F/F&F-
+*&F0F&F)F&F&F&F&*(F%F&F)F&F.F&F-" }}}{EXCHG {PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 12 "simplify(%);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }
+}{PARA 11 "" 1 "" {XPPMATH 20 "6#,,*&-%$expG6#,$%\"xG!\"\"\"\"\")F)\"
+\"$F+!\"**(\"#=F+F%F+)F)\"\"#F+F+*(\"#8F+F%F+F)F+F**&\"\"(F+F%F+F+*&)F
+)\"\"%F+F%F+F+" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 20 "c:=2*u- 3
+*diff(u,x);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%\"cG,&*&-%$expG6#,$%
+\"xG!\"\"\"\"\"),&F+F-F-F,\"\"#F-\"\"&*(\"\"'F-F'F-F/F-F," }}}{EXCHG 
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 5 "x:=1;" }}{PARA 11 "" 1 "" {XPPMATH 
+20 "6#>%\"xG\"\"\"" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 2 "c;" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#
+\"\"!" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}}{MARK "7 0 0
+" 5 }{VIEWOPTS 1 1 0 1 1 1803 1 1 1 1 }{PAGENUMBERS 0 1 2 33 1 1 }

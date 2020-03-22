@@ -1,0 +1,191 @@
+::::::::::::::
+drive.m
+::::::::::::::
+
+clear all; close all;   % Clear every thing so it won't mess up with other
+                        % existing variables.
+
+%%%%%% Generate a triangulation
+
+x(1)=0; x(2)=0.1; x(3)=0.3; x(4)=0.333; x(5)=0.5; x(6)=0.75;x(7)=1;
+
+%%%%%% Call fem1d function to get the FEM solution at nodal points.
+
+U = fem1d(x);
+
+%%%%%% Compare errors:
+
+x2 = 0:0.01:1; k2 = length(x2);
+for i=1:k2,
+  u_exact(i) = soln(x2(i));
+  u_fem(i) = fem_soln(x,U,x2(i));  % Compute FEM solution at x2(i)
+end
+
+error = norm(u_fem-u_exact,inf)  % Compute the infinity error
+   
+plot(x2,u_fem,':', x2,u_exact)   % Solid: the exact, %dotted: FEM solution
+hold; plot(x,U,'o')              % Mark the solution at nodal points.
+xlabel('x'); ylabel('u(x) & u_{fem}(x)'); 
+title('Solid line: Exact solution, Dotted line: FEM solution')
+
+figure(2); plot(x2,u_fem-u_exact); title('Error plot')   
+xlabel('x'); ylabel('u-u_{fem}');  title('Error Plot')
+::::::::::::::
+f.m
+::::::::::::::
+
+function y = f(x)
+
+   y = 1;
+
+return
+::::::::::::::
+fem1d.m
+::::::::::::::
+
+function U = fem1d(x)        
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                    %
+%                   Simple Matlab code for 1D FEM for                %
+%                                                                    %
+%                    -u'' = f(x),   a <= x <= b, u(a)=u(b)=0         %
+%    Input: x, Nodal points                                          %
+%    Output: U, FEM solution at nodal points                         %
+%                                                                    %
+%    Function needed: f(x).                                          %
+%                                                                    % 
+%    Matlab functions used:                                          %
+%                                                                    %
+%     hat1(x,x1,x2), hat function in [x1,x2] that is 1 at x2; and    %
+%     0 at x1.                                                       %
+%                                                                    %
+%     hat2(x,x1,x2), hat function in [x1,x2] that is 0 at x1; and    %
+%     1 at x1.                                                       %
+%                                                                    %
+%     int_hat1_f(x1,x2): Contribution to the load vector from hat1   %
+%     int_hat2_f(x1,x2): Contribution to the load vector from hat2   %
+%                                                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                    
+M = length(x);
+for i=1:M-1,
+  h(i) = x(i+1)-x(i);
+end
+ 
+A = sparse(M,M); F=zeros(M,1);           % Initialize
+A(1,1) = 1; F(1)=0;
+A(M,M) = 1; F(M)=0;
+A(2,2) = 1/h(1); F(2) = int_hat1_f(x(1),x(2));
+
+for i=2:M-2,
+  A(i,i) = A(i,i) + 1/h(i);
+  A(i,i+1)   = A(i,i+1) - 1/h(i);
+  A(i+1,i)   = A(i+1,i) - 1/h(i);
+  A(i+1,i+1) = A(i+1,i+1) + 1/h(i);
+  F(i)       = F(i) + int_hat2_f(x(i),x(i+1));
+  F(i+1)     = F(i+1) + int_hat1_f(x(i),x(i+1));
+end
+
+  A(M-1,M-1) = A(M-1,M-1) + 1/h(M-1);
+  F(M-1)     = F(M-1) + int_hat2_f(x(M-1),x(M));
+
+  U = A\F;
+
+  return
+
+::::::::::::::
+fem_soln.m
+::::::::::::::
+
+function y = fem_soln(x,U,xp)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                    %
+%                  Evaluate the finite element solution              %
+%    Input: x, Nodal points                                          %
+%           U, The computed coefficients of FEM solution using       %
+%              the hat functions                                     %
+%           xp,The x coordinate whether the solution will be         %
+%              evaluated.                                            %
+%    Output: y, The computed FEM solution                            %
+%                                                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+M = length(x);
+for i=1:M-1,
+  if xp >=x(i) & xp <= x(i+1)
+     y = hat2(xp,x(i),x(i+1))*U(i) + hat1(xp,x(i),x(i+1))*U(i+1);
+     return
+  end
+end
+::::::::::::::
+hat1.m
+::::::::::::::
+
+function y = hat1(x,x1,x2)
+
+% This function evaluate the hat function of the form
+
+    y = (x-x1)/(x2-x1);
+
+  return
+::::::::::::::
+hat2.m
+::::::::::::::
+
+function y = hat2(x,x1,x2)
+
+% This function evaluate the hat function of the form
+
+    y = (x2-x)/(x2-x1);
+
+  return
+::::::::::::::
+int_hat1_f.m
+::::::::::::::
+
+function y = int_hata1_f(x1,x2)
+
+% This function evaluate \int_{x1}^{x2} f(x) \phi(x) dx,
+% where   \phi(x) = (x-x1)/(x2-x1), using the Simpson rule
+
+  xm = (x1+x2)*0.5;
+  y = (x2-x1)*(f(x1)*hat1(x1,x1,x2) + 4*f(xm)*hat1(xm,x1,x2)...
+               + f(x2)*hat1(x2,x1,x2) )/6;
+
+  return
+
+  
+
+
+
+
+::::::::::::::
+int_hat2_f.m
+::::::::::::::
+
+function y = int_hat2_f(x1,x2)
+
+% This function evaluate \int_{x1}^{x2} f(x) \phi(x) dx,
+% where   \phi(x) = (x-x1)/(x2-x1), using the Simpson rule
+
+  xm = (x1+x2)*0.5;
+  y = (x2-x1)*(f(x1)*hat2(x1,x1,x2) + 4*f(xm)*hat2(xm,x1,x2)...
+               + f(x2)*hat2(x2,x1,x2) )/6;
+
+  return
+
+  
+
+
+
+
+::::::::::::::
+soln.m
+::::::::::::::
+
+function u = soln(x)
+
+  u = x*(1-x)/2;
+

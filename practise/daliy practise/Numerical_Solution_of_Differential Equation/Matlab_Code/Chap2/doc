@@ -1,0 +1,23 @@
+
+Documentation Matlab codes for Chapter 2.
+
+two_point.m: Matlab function for solving 1D two-point BVP u''=f(x) with Dirichlet BC at x=a and x=b.
+It is called by the driver Matlab script file main.m to generate Figure 2.1 (a)-(b). 
+Files involved: two_point.m, f.m, main.m. 
+
+compare.m: Generate Figure 2.3, also show the effect of round-off errors.
+
+bw_at_b.m: Matlab function for solving 1D two-point BVP u''=f(x) with Dirichlet BC at x=a and a
+Neumann BC at x=b using 1-st order backward FD.
+
+ghost_at_b.m: Matlab function for solving 1D two-point BVP u''=f(x) with Dirichlet BC at x=a and a
+Neumann BC at x=b using the ghost point method. 
+
+ghost_and_bw.m: Matlab script file oo generate Figiure 2.4. It calls bw_at_b.m and ghost_at_b.m. Matlab 
+function f.m is used.
+
+Nonlinear: non_tp.m: A Matlab code for a non-linear two-point boundary value problem.
+
+
+Note in title '&' may cause latex problem.
+

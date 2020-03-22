@@ -1,0 +1,115 @@
+%% Created by Maple 6 (SUN SPARC SOLARIS)
+%% Source Worksheet: Untitled (1)
+%% Generated: Mon Sep  9 16:18:43 2002
+\documentclass{article}
+\usepackage{maple2e}
+ \def\emptyline{\vspace{12pt}}
+\DefineParaStyle{Maple Output}
+\DefineCharStyle{2D Math}
+\DefineCharStyle{2D Output}
+\begin{document}
+\pagestyle{empty}
+\begin{maplegroup}
+\begin{mapleinput}
+\mapleinline{active}{1d}{u:=exp(-x)*(x-1)^2;}{%
+}
+\end{mapleinput}
+
+\mapleresult
+\begin{maplelatex}
+\mapleinline{inert}{2d}{u := exp(-x)*(x-1)^2;}{%
+\[
+u := e^{( - x)}\,(x - 1)^{2}
+\]
+%
+}
+\end{maplelatex}
+
+\end{maplegroup}
+\begin{maplegroup}
+\begin{mapleinput}
+\mapleinline{active}{1d}{beta:=1 + x^2;}{%
+}
+\end{mapleinput}
+
+\mapleresult
+\begin{maplelatex}
+\mapleinline{inert}{2d}{beta := 1+x^2;}{%
+\[
+\beta  := 1 + x^{2}
+\]
+%
+}
+\end{maplelatex}
+
+\end{maplegroup}
+\begin{maplegroup}
+\begin{mapleinput}
+\mapleinline{active}{1d}{mgamma:=x;}{%
+}
+\end{mapleinput}
+
+\mapleresult
+\begin{maplelatex}
+\mapleinline{inert}{2d}{mgamma := x;}{%
+\[
+\mathit{mgamma} := x
+\]
+%
+}
+\end{maplelatex}
+
+\end{maplegroup}
+\begin{maplegroup}
+\begin{mapleinput}
+\end{mapleinput}
+
+\end{maplegroup}
+\begin{maplegroup}
+\begin{mapleinput}
+\mapleinline{active}{1d}{diff( beta *diff(u,x),x) - mgamma*u;}{%
+}
+\end{mapleinput}
+
+\mapleresult
+\begin{maplelatex}
+\mapleinline{inert}{2d}{2*x*(-exp(-x)*(x-1)^2+2*exp(-x)*(x-1))+(1+x^2)*(exp(-x)*(x-1)^2-4*exp
+(-x)*(x-1)+2*exp(-x))-x*exp(-x)*(x-1)^2;}{%
+\maplemultiline{
+2\,x\,( - e^{( - x)}\,(x - 1)^{2} + 2\,e^{( - x)}\,(x - 1)) + (1
+ + x^{2})\,(e^{( - x)}\,(x - 1)^{2} - 4\,e^{( - x)}\,(x - 1) + 2
+\,e^{( - x)}) \\
+\mbox{} - x\,e^{( - x)}\,(x - 1)^{2} }
+%
+}
+\end{maplelatex}
+
+\end{maplegroup}
+\begin{maplegroup}
+\begin{mapleinput}
+\mapleinline{active}{1d}{simplify(\%);}{%
+}
+\end{mapleinput}
+
+\begin{mapleinput}
+\end{mapleinput}
+
+\mapleresult
+\begin{maplelatex}
+\mapleinline{inert}{2d}{-9*exp(-x)*x^3+18*exp(-x)*x^2-13*exp(-x)*x+7*exp(-x)+x^4*exp(-x);}{%
+\[
+ - 9\,e^{( - x)}\,x^{3} + 18\,e^{( - x)}\,x^{2} - 13\,e^{( - x)}
+\,x + 7\,e^{( - x)} + x^{4}\,e^{( - x)}
+\]
+%
+}
+\end{maplelatex}
+
+\end{maplegroup}
+\begin{maplegroup}
+\begin{mapleinput}
+\end{mapleinput}
+
+\end{maplegroup}
+\end{document}
+%% End of Maple 6 Output

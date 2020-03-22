@@ -134,6 +134,7 @@ public:
             Data::planars[id] = *this;
         }
     }
+    void remove_not_pastpoints();
     Planar overturn() const;
     bool ifcontainPoint(const Point&) const;
     bool ifcontainSegment(const Segment&) const;

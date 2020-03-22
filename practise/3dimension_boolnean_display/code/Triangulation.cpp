@@ -90,6 +90,20 @@ vector<Planar> Triangulation::operator()(Planar& p) {
                 points[1] = seg0[1];
                 points[2] = seg1[0];
             }
+            Point p0 = Data::points[points[0]],
+                p1 = Data::points[points[1]],
+                p2 = Data::points[points[2]];
+            if((p2 - p1).cross(p0 - p1).dot(pl.getnormaldirect()) < 0){
+                int temp = points[0];
+                points[0] = points[2];
+                points[2] = temp;
+                temp = segments[0];
+                segments[0] = segments[1];
+                segments[1] = temp;
+                seg0 = Data::segments[segments[0]];
+                seg1 = Data::segments[segments[1]];
+                seg2 = Data::segments[segments[2]];
+            }
             triangle.setpoints(points);
             triangle.setsegments(segments);
             if(seg0[0] == points[0]){
@@ -659,8 +673,8 @@ vector<Planar> Triangulation::generatorPolygen(){
 
 void Triangulation::TriangulateMonotonePolygon(Planar& planar){
     map<Point, pair<int,int>> nearPoint;
-    set<int> existsegment = pl.getexistsegments(),
-        planarexistsegment = planar.getexistsegments();
+    set<int> existsegment = pl.getexistsegments();
+    //  planarexistsegment = planar.getexistsegments();
     vector<int> planarsegments = planar.getsegments();
     for(auto i = planarsegments.begin(); i != planarsegments.end(); i++){
         auto j = next(i);

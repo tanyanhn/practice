@@ -1,0 +1,6 @@
+two_point.m: Generate Figure 2.1 (a)-(b)
+
+compareb.m: Generate Figure 2.3, also show the effect of round-off errors.
+
+Note in title '&' may cause latex problem
+

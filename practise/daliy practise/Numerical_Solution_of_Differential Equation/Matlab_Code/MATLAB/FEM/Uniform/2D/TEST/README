@@ -1,0 +1,96 @@
+
+This directory contains two dimensional Matlab code for solving the 
+Poisson equation:
+
+	-(u_xx + u_yy) = f(x,y)
+
+on a rectangular domain:    a <= x <= b,    c <= y <= d. The boundary 
+condition can be Dirichlet type or homogeneous Neumann type, u_n =0.
+
+datain.m:  The testing problem from the book: An introdunction to the 
+	 finite element with applications to non-linear problems by
+         R. E. White. The purpose is to make sure that the code is
+         bug-free.
+
+	 This code specifies all the parameters to describe the problem.
+
+f.m	 This code specifies the right hand side of the Poisson equation
+         at a given point (x,y).
+
+assemb.m: The finite element code. No changes are required.
+
+datain1.m   Test problem with u(x,y) = exp(-pi y) cos(pi x) on the unit
+	    square.  The computed errors are listed below:  
+
+		 n		  e_n	      e_n/e_{2*n}
+
+		 5		0.0108
+		 10		0.0029		3.7241
+	  	 20		7.2712e-04	3.9883
+	  	 40		1.8210e-04	3.9930
+
+	    The error is measure as the infinity error
+
+		e_n = max(max(abs(u(x_i,y_j)-U_ij)))
+
+	    where u(x_i,y_j) is the exact solution and U_ij is the
+	    computed solution.
+
+	    soln.eps:    The plot of the computed solution.
+	    error.eps:   The plot of the error against the exact solution.
+
+datain2.m   Test problem with u(x,y) = x^2 + y^2 on the unit square with
+	    Dirichlet boundary condition on the entire boundary. The FEM 
+            method gives the exact solution up to the machine constant,
+	    9.9920e-16. f(x,y) = -4 in this problem.
+
+analysis.m  Matlab code to analyze the computed solution. It convert the 
+	    solution at the nodal points to the rectangular domain again.
+
+
+Testing Problem 2:   -(u_xx + u_yy) = pi^2 cos(pi*x)
+
+Exact Solution:		cos(pi*x(k))
+
+
+                 n                e_n         e_n/e_{2*n}
+
+                 5		0.0182
+		 10		0.0049		3.7143
+                 20          	0.0012		4.0833
+                 40          	3.0893e-04	3.8844
+
+
+assemb.mbk	datain.mbk:  Back-up files.
+
+------------------------------------------------------------
+
+Input parameters and files:
+
+datain1.m    a, b, c, d, nx, ny
+
+	     npres, the number of node points where Dirichlet BC is
+	            prescribed.
+
+	     g1(k): The prescribed Dirichlet value at the k-th node point.
+
+analysis.m   The error analysis code. If the exact solution is known, it
+	     can be stored as uexac(i,j) to against the computed solution. 
+
+f.m	     The source term f(x,y).
+
+------------------------------------------------------------
+ 
+Usage after invoking Matlab:	
+
+>>  datain1		% Input 
+>>  assemb		% FEM computation u, u(1), ..., u(nnodes)
+			% are the computed solution.
+>>  analysis		% Analysis of the computed solution:
+		        % Convert the computad solution to a 2D 
+ 		        % mesh grid; Plot the computed solution
+			% If the exact solution is known, computed
+			% and plot the error. 
+
+%---- The files are created by Zhilin Li.
+

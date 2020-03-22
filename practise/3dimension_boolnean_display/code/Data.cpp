@@ -251,6 +251,9 @@ void Data::intersection(){
     for(auto i = existplanars.begin(); i != existplanars.end(); i++){
         functor1(planars[*i]);
     }
+    for(auto i = existplanars.begin(); i != existplanars.end(); i++){
+        Data::planars[*i].remove_not_pastpoints();
+    }
 }
 
 void Data::triangulation(){
@@ -321,6 +324,9 @@ void Data::selecttriangles(const Yinset& y1, const Yinset& y2){
             }
             if(inplanar.empty()){
                 plseg.setinYinset(-2);
+                plseg.setinPlanar01(set<int>());
+                plseg.setinPlanar10(set<int>());
+                plseg.setinPlanar(set<int>());
                 existsegments.erase(plseg.getid());
             }
         }

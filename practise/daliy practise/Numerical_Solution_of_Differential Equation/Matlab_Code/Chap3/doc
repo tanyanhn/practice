@@ -1,0 +1,24 @@
+
+Documentation Matlab codes for Chapter 3.
+
+In the director Poisson_Matlab:
+
+poisson_matlab.m: Matlab code for solving Poisson equations on a rectangular domain by
+forming the coefficient matrxi. The derivative BC is given at x=a, and Dirichlet BC is
+given along other sides.
+
+poisson_matlab_BigF.m: Plot with bigger fond.
+
+Matfunction used: ue.m, the true solution; ux.m: derivative BC is given at x=a.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Poisson_SOR: Iterative schemes for solving Poisson equations on a rectangular domain.
+
+poisson_jacobi.m: Jacobi method
+poisson_sor.m: SOR(w) method, when w=1, it is the Gauss-Seidel method.
+
+uexact.m: Matlab function of the true solution.
+fcn.m: Matlab function of the source term f(x,y).
+
+

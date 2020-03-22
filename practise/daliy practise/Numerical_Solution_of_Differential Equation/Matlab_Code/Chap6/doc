@@ -1,0 +1,7 @@
+Matlab code for Section 6.4. Files include:
+
+drive.m		fem1d.m		hat1.m		int_hat1_f.m	soln.m
+f.m		fem_soln.m	hat2.m		int_hat2_f.m
+
+
+
