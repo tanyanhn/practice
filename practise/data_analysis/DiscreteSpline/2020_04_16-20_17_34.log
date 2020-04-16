@@ -1,0 +1,16 @@
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2019 The MathWorks, Inc.
+              R2019b Update 3 (9.7.0.1261785) 64-bit (glnxa64)
+                             November 27, 2019
+
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+{Error using dlmread (line 62)
+The file 'output/Heart0' could not be opened because: No such file or directory
+
+Error in Heartplot (line 14)
+    data = dlmread(filename);
+} 
