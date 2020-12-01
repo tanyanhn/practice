@@ -52,10 +52,10 @@ std::vector<Real> ForwardEulersolver<func>::solver(Real T, Real stepsize){
             );
         init = anwser;
     }
-    // rightf.sett(stepsize*(step));
-    // std::transform(init.begin(),init.end(),anwser.begin(),[&](Real Un){
-    //     return Un + (Time - stepsize*(step))*rightf(Un);}
-    //     );
+    rightf.sett(stepsize*(step));
+    std::transform(init.begin(),init.end(),anwser.begin(),[&](Real Un){
+        return Un + (Time - stepsize*(step))*rightf(Un);}
+        );
     return anwser;
 }
 

@@ -18,9 +18,9 @@ int main(int argc, char *argv[])
     fsolver->setrightf(rightf(lambda));
     Real stepsize[] = {0.001, 0.000976, 0.000950, 0.0008};
     cout.setf(ios::scientific);
-    for(int itest = 1; itest <= int(sizeof(stepsize)/sizeof(Real)); ++itest){
-        vector<Real> anwser = fsolver->solver(2,stepsize[itest-1]);
-        cout << "k = " << stepsize[itest-1] << ", E(T) = " << anwser[0] - cos(2) << endl;
+    for(int itest = 0; itest < int(sizeof(stepsize)/sizeof(Real)); ++itest){
+        vector<Real> anwser = fsolver->solver(2,stepsize[itest]);
+        cout << "k = " << stepsize[itest] << ", E(T) = " << anwser[0] - cos(2) << endl;
     }
     return 0;
 }
