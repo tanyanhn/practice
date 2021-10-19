@@ -183,49 +183,10 @@ WITH ARBITRARILY COMPLEX TOPOLOGY》中定义的殷集和殷集集合
 上的布尔运算。
 
 \section{\heiti 数学定义}
-\subsection{殷集的表示}
-\subsubsection{连通区域的边界 Jordan Curve}
-Jordan Curve是首尾相连并且没有自相交的简单闭合曲线，详细见论文 \textbf{Theorem 3.5}，
-\textbf{Definition 3.6}和\textbf{Definition 3.7}.
 
-\subsubsection{殷集边界 Spadjor}
-Spadjor是Jordan Curve的集合，并且Jordan Curves之间包好关系可以
-表示成哈斯图。详见论文 \textbf{Definition 3.15 - 3.17}.
-并且由 \textbf{Corollary 3.22.} 殷集与殷集边界一一对应，即每个Spadjor可以
-唯一表示一个殷集。
 
-\subsection{殷集集合上的布尔运算}
-\subsubsection{切运算}	
-从Jordan Curve之间的恰当交点和不恰当交点将所有Jordan Curves切
-成有向曲线（折线）集合。\textbf{Definition 4.1.}
-\subsubsection{粘运算}
-将有向折线集合沿着端点恰当的粘合得到两两之间没有恰当交点的Jordan Curve集合。
-\textbf{Lemma 4.2.}
-\subsubsection{判断点和Spadjor之间的包含关系}
-Spadjor将平面划分为殷集的内部和外部，输出点在Spadjor表示的殷集的内部
-或外部。
-\subsubsection{补运算}
-若殷集边界Spadjor s非空，
-\begin{itemize}
-	\item 计算s中的Jordan Curve之间的交点。
-	\item 表示殷集的s和交点调用切运算.
-	\item 调换所有有向线段的方向.
-	\item 使用粘运算得到新的Spadjor表示补运算的殷集结果的Spadjor。
-\end{itemize}
-\textbf{Definition 4.4.}
 
-\subsubsection{交运算}
-若殷集边界Spadjor s1, s2非空，
-\begin{itemize}
-	\item 计算s1, s2之间的所有交点。
-	\item 调用切运算得到有向折线集合l1, l2。
-	\item 移除l1中内部点在s2表示的殷集外部的折线，l2中同理。
-	\item 将l1,l2中剩余的折线粘合得到表示交运算的殷集结果的Spadjor。
-\end{itemize}
-\textbf{Definition 4.8.}
-
-\subsubsection{并运算}
-并运算可以通过补运算和交运算实现。\textbf{Definition 4.10.}
+	Jordan Curve 见论文 \textbf{Theorem 3.5} 
 
 
 \section{\heiti 数学概念的c++包装}
@@ -293,23 +254,23 @@ Spadjor将平面划分为殷集的内部和外部，输出点在Spadjor表示的
 固有操作 :
 \begin{itemize}
 	\item  返回身份标识 ： identity() : int
-	\item  更新leftmostline，leftjordanline等数据，为generator()生成spadjor提供数据 ： update() : void
-	\item  static 函数从已有的Jordan线集合Jordanlines生成spadjor ： generator() : spadjor 
+	\item  更新leftmostline，leftjordanline等数据，为generator()生成Spajor提供数据 ： update() : void
+	\item  static 函数从已有的Jordan线集合Jordanlines生成Spajor ： generator() : Spajor 
 \end{itemize}
-\subsection{spadjor 与殷集一一对应 class spadjor}
+\subsection{Spajor 与殷集一一对应 class Spajor}
 固有属性 ：
 \begin{itemize}
 	\item  殷集的边界集合，是一组Jordan线 ： jordanline ： vector<int> (到Jordanline的static成员jordanlines中取出相应的Jordan线集合)
 	\item  树结构的哈斯图，表现jordanline中的jordan线的包含关系 ：hassmap ： HassNode* 
-	\item  spadjor的类型，若无穷远处属于它，type为true，否则为false ： type : bool
+	\item  Spajor的类型，若无穷远处属于它，type为true，否则为false ： type : bool
 	\item  身份标识 ： identity : int
 \end{itemize}
 固有操作 ：
 \begin{itemize}
-	\item  布尔运算求补 ： complement() : spadjor
-	\item  布尔运算求交 ： meet(const spadjor) : spadjor
-	\item  布尔运算求并 ： join(const spadjor) : spadjor
-	\item  输出输入数据，依次输出Jordan线，按线段的方向依次输出点的坐标 ： friend operator<<(ostream\&, spadjor) : ostream\&  friend operator>>(istream\&, spadjor)
+	\item  布尔运算求补 ： complement() : Spajor
+	\item  布尔运算求交 ： meet(const Spajor) : Spajor
+	\item  布尔运算求并 ： join(const Spajor) : Spajor
+	\item  输出输入数据，依次输出Jordan线，按线段的方向依次输出点的坐标 ： friend operator<<(ostream\&, Spajor) : ostream\&  friend operator>>(istream\&, Spajor)
 \end{itemize}
 \subsection{哈斯图存储结构 HassNode}
 固有属性 ：
@@ -351,7 +312,7 @@ Spadjor将平面划分为殷集的内部和外部，输出点在Spadjor表示的
 	\item  static成员，存储所有还在图上的点和线的identity。 existpoints : AVLTree<int> ; existlines : AVLTree<int>;
 	\item  static成员，存储所有Jordanline。 jordanlines : vector<Jordanline>
 	\item  static成员，存储所有还在图形上的Jordanline的identity。 existjordanlines : vector<int>
-	\item  static成员，存储所有spadjor。  spadjors : vector<spadjor>
+	\item  static成员，存储所有Spajor。  spajors : vector<Spajor>
 \end{itemize}
 固有操作：
 \begin{itemize}
@@ -1042,17 +1003,17 @@ Sweepline::lines内的每个Line l的端点Point的nearline集合已全部更新
 \subparagraph{input}
 输入所有Jordanline的集合jordanlines。
 \subparagraph{output}
-输出一个spadjor。
+输出一个Spajor。
 \subparagraph{precondition}
 jordanlines内的所有Jordanline jl都已经调用update()更新过数据。
 \subparagraph{postcondition}
-输出的spadjor能一一对应到殷集，殷集的边界Jordan线集合由jordanlines确定，需要在spadjor中完成哈斯图体现jordan线之间的包含关系。
+输出的Spajor能一一对应到殷集，殷集的边界Jordan线集合由jordanlines确定，需要在Spajor中完成哈斯图体现jordan线之间的包含关系。
 \paragraph{算法实现}
 \begin{lstlisting}
 	vector<int> existjordanlines = Sweepline::existjordanlines;
 	AVLTree<pair<int,int>> mark;
 	vector<Jordanline>& jordanlines = Sweepline::jordanlines; 
-	vector<spadjor>& spadjors = Sweepline::spadjors;
+	vector<Spajor>& spajors = Sweepline::spajors;
 	Jordanline jl;
 	vector<HassNode> vhn(existjordanlines.size() + 1);
 	for(int i = 0; i < existjordanlines.size() + 1; i++){
@@ -1079,18 +1040,18 @@ jordanlines内的所有Jordanline jl都已经调用update()更新过数据。
 			vhn[j].children.push_back(i);
 		}
 	}
-	int k = spadjors.size();
+	int k = spajors.size();
 	jl = jordanlines[vhn[*(vhn.end()--).children[0]].identity];
 	bool b;
 	if(jl.type == 1) b = false;
 	else b = true;
-	return spadjor(vhn, existjordanlines, b, k);
+	return Spajor(vhn, existjordanlines, b, k);
 \end{lstlisting}
 \paragraph{证明}
-主要是更新jordan线的包含关系，定义最后一个hassnode对应无穷远处依情况定方向的Jordan线。对每一个jordan线l，因为每次调用leftjordanline转移到下一个Jordan曲线都会使得左下点在字典排序上更小所以不会循环，又因为Jordan线数量有限。所以要么是找到合适的和l方向相反的jordan线l2包含l，此时更新l对应的hassnode的father为l2的identity，并且添加l.identity到l2对应的hassnode的children中。要么不存在l2符合要求，则更新l对应的hassnode的father为无穷远处jordan线，并且加入到最后一个hassnode的children中添加l.identity。由于每个hassnode(除了无穷远处jordan线对应的hassnode)只有唯一的子父关系对应于被包含关系，并且每个hassnode都会更新一次father，所以spadjor所有的包含关系都保存到hassnode中了。
+主要是更新jordan线的包含关系，定义最后一个hassnode对应无穷远处依情况定方向的Jordan线。对每一个jordan线l，因为每次调用leftjordanline转移到下一个Jordan曲线都会使得左下点在字典排序上更小所以不会循环，又因为Jordan线数量有限。所以要么是找到合适的和l方向相反的jordan线l2包含l，此时更新l对应的hassnode的father为l2的identity，并且添加l.identity到l2对应的hassnode的children中。要么不存在l2符合要求，则更新l对应的hassnode的father为无穷远处jordan线，并且加入到最后一个hassnode的children中添加l.identity。由于每个hassnode(除了无穷远处jordan线对应的hassnode)只有唯一的子父关系对应于被包含关系，并且每个hassnode都会更新一次father，所以Spajor所有的包含关系都保存到hassnode中了。
 
-\subsection{spadjor}
-\subsubsection{spadjor::complement()}
+\subsection{Spajor}
+\subsubsection{Spajor::complement()}
 \paragraph{契约}
 \subparagraph{input}
 输入Sparjor。Sweepline::points，Sweepline::lines，Sweepline::jordanlines。
@@ -1118,12 +1079,12 @@ jordanlines内的所有Jordanline jl都已经调用update()更新过数据。
 \paragraph{证明}
 首先调换A边界上所有lines中存储的所有线段的方向，即遍历所有边并交换端点顺序。其次，还要调换殷集边界的边的存储顺序，因为jordan线是按线段方向存储的，所以要随着边的变向一起变向。通过对Sweeplines::jordanlines中所有Jordanline::line中的Line类identity的顺序换向，同时改变这些边的方向。
 
-\subsubsection{spadjor::meet(spadjor)}
+\subsubsection{Spajor::meet(Spajor)}
 \paragraph{契约}
 \subparagraph{input}
-输入两个spadjor A和B。Sweepline::points，Sweepline::lines，Sweepline::jordanlines。
+输入两个Spajor A和B。Sweepline::points，Sweepline::lines，Sweepline::jordanlines。
 \subparagraph{output}
-输出一个spadjor C，并更新Sweepline::points,Sweepline::lines，Sweepline::jordanlines中的Point类,Line类和Jordanline类的数据。
+输出一个Spajor C，并更新Sweepline::points,Sweepline::lines，Sweepline::jordanlines中的Point类,Line类和Jordanline类的数据。
 \subparagraph{precondition}
 A和B的边界上的Point类，Line类和Jordanline类都已经初始化并输入到Sweepline::points，Sweepline::lines，Sweepline::jordanlines中。
 \subparagraph{postcondition}
@@ -1134,7 +1095,7 @@ C是A,B的交，Sweepline::points添加新的交点，Sweepline::lines添加新�
 	遍历lines中所有Line l，若l.IfInOtherYinset为false将l.lp[]对应的Point p 中删除p.nearline中代表l的数据，当IfInOtherYinset为true时跳过。
 	调用Line::generator()生成新的vector<Jordanline> 替换原jordanlines。
 	遍历jordanlines中所有Jordanline类分别调用Jordanline::update()更新内部数据。
-	调用Jordanline::gennerator()生成一个spadjor类C，输出C。
+	调用Jordanline::gennerator()生成一个Spajor类C，输出C。
 \end{lstlisting}
 \paragraph{证明}
 	intersection()算出了所有交点，并将新产生的有向线段都插入到lines中。因此A和B中所有边还在lines中或被划分为多条Line(原Line的Point中的访问路径已被删除约等于懒惰删除，只保留了可能是C的边的所有Line类)。
@@ -1143,9 +1104,9 @@ C是A,B的交，Sweepline::points添加新的交点，Sweepline::lines添加新�
 	
 	Line::generator()从现存的Line中生成一组只更新了Jordanline::line的Jordanline类的vector<Jordanline>，每个Jordanline类代表一个jordan线而且两两之间没有不合适的交点。因此这组jordan线就是C的边界集合。
 	
-	最后生成spadjor还需要jordan线之间的包含关系，因此从line中的leftline信息调用Jordanline::update()更新leftjordanline数据。调用Jordanline::generator()生成唯一的spadjor由spadjor和Jordanline的一一对应关系知所得的spadjor即是C。
+	最后生成Spajor还需要jordan线之间的包含关系，因此从line中的leftline信息调用Jordanline::update()更新leftjordanline数据。调用Jordanline::generator()生成唯一的Spajor由Spajor和Jordanline的一一对应关系知所得的Spajor即是C。
 	
-\subsubsection{spadjor::join(spadjor)}
+\subsubsection{Spajor::join(Spajor)}
 \paragraph{契约}
 \subparagraph{input}
 同 meet();
@@ -1165,16 +1126,16 @@ C是A和B的交
 \paragraph{证明}
 	由布尔运算的交并补关系得。
 	
-\subsubsection{friend operator<<(ostream\&, spadjor)}
+\subsubsection{friend operator<<(ostream\&, Spajor)}
 \paragraph{契约}
 \subparagraph{input}
-spadjor C。
+Spajor C。
 \subparagraph{output}
 点坐标输入到ostream中。
 \subparagraph{precondition}
 C是Jordanline::generator()生成的。
 \subparagraph{postcondition}
-首先输出spadjor::jordanline.size(),再依次输出C边界上的jordan线，即jordanline中存储的Jordanline类。输出Jordanline类时先输出Jordanline::line.size()再依次输出line中的Line类。输出line类时只输出起点Point的坐标。
+首先输出Spajor::jordanline.size(),再依次输出C边界上的jordan线，即jordanline中存储的Jordanline类。输出Jordanline类时先输出Jordanline::line.size()再依次输出line中的Line类。输出line类时只输出起点Point的坐标。
 \paragraph{算法实现}
 \begin{lstlisting}
 	for(auto i = 0; i < jordanline.size(); i++){
@@ -1185,16 +1146,16 @@ C是Jordanline::generator()生成的。
 \paragraph{证明}
 依次调用符合条件的重载operator<<操作符。
 
-\subsubsection{friend operator>>(istream\&, spadjor)}
+\subsubsection{friend operator>>(istream\&, Spajor)}
 \paragraph{契约}
 \subparagraph{input}
 首先输入读入殷集Y边界的Jordan线的数量，然后以Jordan线的方向依次读入jordan线上的点。
 \subparagraph{output}
-spadjor类，lines，points，jordanlines中加入新的类。
+Spajor类，lines，points，jordanlines中加入新的类。
 \subparagraph{precondition}
 输入的数据是一组jordan线上按jordan线方向输入的点的坐标，这些jordan线是Y的所有边界。
 \subparagraph{postcondition}
-输出的spadjor内的hassmap体现了所有jordan线的包含关系，jordanline是Y的所有jordan线边界的identity的集合。
+输出的Spajor内的hassmap体现了所有jordan线的包含关系，jordanline是Y的所有jordan线边界的identity的集合。
 \paragraph{算法实现}
 \begin{lstlisting}
 	int i;
@@ -1286,10 +1247,10 @@ eventpoint,orderline1,orderline2,orderline3都为空，existlines和existpoints�
 			orderline.del(orderlinemark.find(make_pair(nextline.identity(),NULL))->data.second);
 			orderlinemark.del(make_pair(nextline.identity(),NULL));
 			int k = lines.size();
-			Line l1(nextline[0], p.identity(), k, nextline.inspadjor());
+			Line l1(nextline[0], p.identity(), k, nextline.inspajor());
 			lines.push_back(l1);
 			k++;
-			Line l2(p.identity(), nextline[1], k, nextline.inspadjor());
+			Line l2(p.identity(), nextline[1], k, nextline.inspajor());
 			lines.push_back(l2);
 			points[p.identity()].addnearline(l1);
 			points[p.identity()].addnearline(l2);
@@ -1305,10 +1266,10 @@ eventpoint,orderline1,orderline2,orderline3都为空，existlines和existpoints�
 			orderline.del(orderlinemark.find(make_pair(prevline.identity(),NULL))->data.second);
 			orderlinemark.del(make_pair(prevline.identity(),NULL));
 			int k = lines.size();
-			Line l1(prevline[0], p.identity(), k, prevline.inspadjor());
+			Line l1(prevline[0], p.identity(), k, prevline.inspajor());
 			lines.push_back(l1);
 			k++;
-			Line l2(p.identity(), prevline[1], k, prevline.inspadjor());
+			Line l2(p.identity(), prevline[1], k, prevline.inspajor());
 			lines.push_back(l2);
 			points[p.identity()].addnearline(l1);
 			points[p.identity()].addnearline(l2);
@@ -1394,10 +1355,10 @@ Line l1，l2初始化并已在lines，existlines等集合中。
 	}
 	else if(prevl.ifintheline(lp0)){
 		int k = lines.size();
-		Line l1(prevl[0], lp0.identity(), k, prevl.inspadjor());
+		Line l1(prevl[0], lp0.identity(), k, prevl.inspajor());
 		lines.push_back(l1);
 		k++;
-		Line l2(lp0.identity(), prevl[1], k, prevl.inspadjor());
+		Line l2(lp0.identity(), prevl[1], k, prevl.inspajor());
 		lines.push_back(l2);
 		existlines.del(prevl.identity());
 		existlines.add(l1.identity());
@@ -1422,10 +1383,10 @@ Line l1，l2初始化并已在lines，existlines等集合中。
 	}
 	else if(l.ifintheline(prevlp0)){
 		int k = lines.size();
-		Line l1(l[0], prevlp0.identity(), k, l.inspadjor());
+		Line l1(l[0], prevlp0.identity(), k, l.inspajor());
 		lines.push_back(l1);
 		k++;
-		Line l2(prevlp0.identity(), l[1], k, l.inspadjor());
+		Line l2(prevlp0.identity(), l[1], k, l.inspajor());
 		lines.push_back(l2);
 		existlines.del(l.identity());
 		existlines.add(l1.identity());
@@ -1457,10 +1418,10 @@ Line l1，l2初始化并已在lines，existlines等集合中。
 			points.push_back(p);
 			existpoints.add(k);
 			k = lines.size();
-			Line l1(p.identity(), prevl[1], k, prevl.inspadjor());k++;
-			Line l2(prevl[0], p.identity(), k, prevl.inspadjor());k++;
-			Line l3(l[0], p.identity(), k, l.inspadjor());k++;
-			Line l4(p.identity(), l[1], k, l.inspadjor());
+			Line l1(p.identity(), prevl[1], k, prevl.inspajor());k++;
+			Line l2(prevl[0], p.identity(), k, prevl.inspajor());k++;
+			Line l3(l[0], p.identity(), k, l.inspajor());k++;
+			Line l4(p.identity(), l[1], k, l.inspajor());
 			lines.push_back(l1);lines.push_back(l2);lines.push_back(l3);lines.push_back(l4);
 			existlines.del(prevl.identity());
 			existlines.del(l.identity());
@@ -1509,7 +1470,7 @@ Line l1，l2初始化并已在lines，existlines等集合中。
 \subsubsection{Sweepline::update(int, bool, int = -1, bool = true)}
 \paragraph{契约}
 \subparagraph{input}
-输入lines，points等。算两个交点的spadjor::identity int spadjor2,spadjor3,和type，spadjortype2，spadjortype3。还有一个标记m,是meet或complement决定是否更新IfInOtherYinset。
+输入lines，points等。算两个交点的Spajor::identity int spajor2,spajor3,和type，spajortype2，spajortype3。还有一个标记m,是meet或complement决定是否更新IfInOtherYinset。
 \subparagraph{output}
 更新lines中Line的Line::leftline,Line::IfInOtherYinset。
 \subparagraph{precondition}
@@ -1522,7 +1483,7 @@ intersection()函数调用后调用。
 		eventpoint.add(points[existpoints[i]]);
 	}
 	int m = 0;
-	if(spadjor3 != -1) m = 1;
+	if(spajor3 != -1) m = 1;
 	AVLTreeNode<Line>* orderlinemarkp;
 	AVLTreeNode<Line>* prev = NULL;
 	AVLTreeNode<Point>* atnp = eventpoint.findfirstnode();
@@ -1541,13 +1502,13 @@ intersection()函数调用后调用。
 					orderline.del(orderlinemarkp);
 					orderlinemark.del(make_pair(l.identity(),NULL));
 					if(m == 1){
-						if(l.inspadjor() != spadjor2) {
+						if(l.inspajor() != spajor2) {
 							orderline3.del(orderlinemark3.find(make_pair(l.identity(),NULL))->data.second);
 							orderlinemark3.del(make_pair(l.identity(),NULL));
 							orderlinemarkp = orderline2.add(l);
 							prev = orderline2.findprevnode(orderlinemarkp);
 							if(prev == NULL) {
-								lines[l.identity()].setIfInOtherYinset(spadjortype2);
+								lines[l.identity()].setIfInOtherYinset(spajortype2);
 							}
 							else {
 								Point p0 = points[(prev->data)[0]],p1 = points[(prev->data)[1]];
@@ -1562,7 +1523,7 @@ intersection()函数调用后调用。
 							orderlinemarkp = orderline3.add(l);
 							prev = orderline3.findprevnode(orderlinemarkp);
 							if(prev == NULL) {
-								lines[l.identity()].setIfInOtherYinset(spadjortype3);
+								lines[l.identity()].setIfInOtherYinset(spajortype3);
 							}
 							else {
 								Point p0 = points[(prev->data)[0]],p1 = points[(prev->data)[1]];
@@ -1577,7 +1538,7 @@ intersection()函数调用后调用。
 					if(orderlinemark.find(make_pair(l.identity(), NULL)) != NULL) cout << "orderlinemark wrong\n";
 					orderlinemarkp = orderline.add(l);
 					orderlinemark.add(make_pair(l.identity(),orderlinemarkp));
-					if(l.inspadjor() == spadjor2){
+					if(l.inspajor() == spajor2){
 						orderlinemarkp = orderline2.add(l);
 						if(m == 1) orderlinemark2.add(make_pair(l.identity(),orderlinemarkp));
 					}

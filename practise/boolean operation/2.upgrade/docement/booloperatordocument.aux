@@ -1,304 +1,316 @@
 \relax 
-\providecommand\tcolorbox@label[2]{}
-\@writefile{toc}{\contentsline {chapter}{\numberline {0}Preliminaries}{1}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {0}二维殷集程序实现文档}{1}{}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {0.1}\heiti 数学概念的c++包装}{1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {0.1.1}点 class Point}{1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {0.1.2}线段 class Line}{2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {0.1.3}Jordan线 class Jordanline}{2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {0.1.4}Spajor 与Yin集一一对应 class Spajor}{3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {0.1.5}哈斯图存储结构 HassNode}{3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {0.1.6}数据存储结构平衡二叉树 template<class T> class AVLTree}{3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {0.1.7}扫描线 class sweepline}{4}}
-\@writefile{toc}{\contentsline {section}{\numberline {0.2}\heiti 类之间的关系，UML类图}{4}}
-\@writefile{toc}{\contentsline {section}{\numberline {0.3}\heiti 算法设计与证明}{4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {0.3.1}Point}{4}}
-\@writefile{toc}{\contentsline {subsubsection}{Point::operator[](const int)}{4}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{4}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{4}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces 以上所有类的关系的UML图}}{5}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{6}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{6}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{6}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{6}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{6}}
-\@writefile{toc}{\contentsline {subsubsection}{Point::norm()}{6}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{6}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{6}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{6}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{6}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{6}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{6}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{6}}
-\@writefile{toc}{\contentsline {subsubsection}{Point::operator-(const Point)}{6}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{6}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{6}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{6}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{6}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{6}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{6}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{7}}
-\@writefile{toc}{\contentsline {subsubsection}{Point::operator<(const Point)}{7}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{7}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{7}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{7}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{7}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{7}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{7}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{7}}
-\@writefile{toc}{\contentsline {subsubsection}{Point::operator>(const Point)}{7}}
-\@writefile{toc}{\contentsline {subsubsection}{Point::dot(const Point)}{7}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{7}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{7}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{7}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{7}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{8}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{8}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{8}}
-\@writefile{toc}{\contentsline {subsubsection}{Point::cross(const Point)}{8}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{8}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{8}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{8}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{8}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{8}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{8}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{8}}
-\@writefile{toc}{\contentsline {subsubsection}{friend template<> operator<(const pair<double, int>,const pair<double,int>)}{8}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{8}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{8}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{8}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{8}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{8}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{8}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{8}}
-\@writefile{toc}{\contentsline {subsubsection}{Point::nextline(const Line)}{9}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{9}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{9}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{9}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{9}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{9}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{9}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{11}}
-\@writefile{toc}{\contentsline {subsubsection}{Point::addnearline(const Line)}{11}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{11}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{11}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{11}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{11}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{11}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{11}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{11}}
-\@writefile{toc}{\contentsline {subsubsection}{Point::delnearline(const Line)}{11}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{11}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{11}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{11}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{11}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{12}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{12}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{13}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {0.3.2}Line}{14}}
-\@writefile{toc}{\contentsline {subsubsection}{Line::operator[](const int)}{14}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{14}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{14}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{14}}
-\@writefile{toc}{\contentsline {subsubsection}{precondition}{14}}
-\@writefile{toc}{\contentsline {subsubsection}{postcondition}{14}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{14}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{14}}
-\@writefile{toc}{\contentsline {subsubsection}{Line::operator<(const Line)}{14}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{14}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{14}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{14}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{14}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{14}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{14}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{15}}
-\@writefile{toc}{\contentsline {subsubsection}{Line::operator>(const Line)}{15}}
-\@writefile{toc}{\contentsline {subsubsection}{Line::ifintheline(const Point)}{15}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{15}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{15}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{15}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{15}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{15}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{15}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{16}}
-\@writefile{toc}{\contentsline {subsubsection}{Line::coincide(const Line)}{16}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{16}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{16}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{16}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{16}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{16}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{16}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{16}}
-\@writefile{toc}{\contentsline {subsubsection}{Line::ifintersection(const Line)}{17}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{17}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{17}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{17}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{17}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{17}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{17}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{17}}
-\@writefile{toc}{\contentsline {subsubsection}{Line::intersection(const Line)}{17}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{17}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{17}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{17}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{17}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{17}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{17}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{18}}
-\@writefile{toc}{\contentsline {subsubsection}{Line::angle(const Point)}{18}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{18}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{18}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{18}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{18}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{18}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{18}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{18}}
-\@writefile{toc}{\contentsline {subsubsection}{Line类中还有一些访问和修改私有成员：identity，leftline，IfinOtherYinset的成员函数，例如identity()和setidentity()等。}{18}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{18}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{18}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{18}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{19}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{19}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{19}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{19}}
-\@writefile{toc}{\contentsline {subsubsection}{static Line::generator()}{19}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{19}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{19}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{19}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{19}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{19}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{19}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{21}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {0.3.3}Jordanline}{21}}
-\@writefile{toc}{\contentsline {subsubsection}{Jordanline的私有数据：identity，leftjordanline，type的更新函数Jordanline::update()}{21}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{21}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{21}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{21}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{21}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{21}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{21}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{22}}
-\@writefile{toc}{\contentsline {subsubsection}{static Jordanline::generator()}{22}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{22}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{22}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{22}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{22}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{22}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{22}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{23}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {0.3.4}Spajor}{23}}
-\@writefile{toc}{\contentsline {subsubsection}{Spajor::complement()}{23}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{23}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{23}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{23}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{23}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{23}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{23}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{24}}
-\@writefile{toc}{\contentsline {subsubsection}{Spajor::meet(Spajor)}{24}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{24}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{24}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{24}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{24}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{24}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{24}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{25}}
-\@writefile{toc}{\contentsline {subsubsection}{Spajor::join(Spajor)}{25}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{25}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{25}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{25}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{25}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{25}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{25}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{25}}
-\@writefile{toc}{\contentsline {subsubsection}{friend operator<<(ostream\&, Spajor)}{25}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{25}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{25}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{25}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{25}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{25}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{26}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{26}}
-\@writefile{toc}{\contentsline {subsubsection}{friend operator>>(istream\&, Spajor)}{26}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{26}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{26}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{26}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{26}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{26}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{26}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{26}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {0.3.5}Sweepline}{26}}
-\@writefile{toc}{\contentsline {subsubsection}{Sweepline::intersection()}{26}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{26}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{26}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{27}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{27}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{27}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{27}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{30}}
-\@writefile{toc}{\contentsline {subsubsection}{Sweepline::inter()}{30}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{30}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{30}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{30}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{30}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{30}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{30}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{34}}
-\@writefile{toc}{\contentsline {subsubsection}{Sweepline::update(int, bool, int = -1, bool = true)}{34}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{34}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{34}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{34}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{34}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{34}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{35}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{38}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {0.3.6}template<class T> Class AVLTree}{38}}
-\@writefile{toc}{\contentsline {subsubsection}{AVLTree::add(T)}{39}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{39}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{39}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{39}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{39}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{39}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{39}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{39}}
-\@writefile{toc}{\contentsline {subsubsection}{AVLTree::del(T)}{39}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{39}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{39}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{39}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{39}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{39}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{39}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{39}}
-\@writefile{toc}{\contentsline {subsubsection}{AVLTree::del(AVLTreeNode<T>*)}{39}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{39}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{39}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{39}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{39}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{39}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{40}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{40}}
-\@writefile{toc}{\contentsline {subsubsection}{AVLTree::find(T)}{40}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{40}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{40}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{40}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{40}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{40}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{40}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{40}}
-\@writefile{toc}{\contentsline {subsubsection}{AVLTree::findprevnode(AVLTreeNode<T>*)}{40}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{40}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{40}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{40}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{40}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{40}}
-\@writefile{toc}{\contentsline {paragraph}{算法实现}{40}}
-\@writefile{toc}{\contentsline {paragraph}{证明}{40}}
-\@writefile{toc}{\contentsline {subsubsection}{AVLTree::findnextnode(AVLTreeNode<T>*)}{40}}
-\@writefile{toc}{\contentsline {subsubsection}{AVLTree::findfirstnode()}{40}}
-\@writefile{toc}{\contentsline {paragraph}{契约}{40}}
-\@writefile{toc}{\contentsline {subparagraph}{input}{41}}
-\@writefile{toc}{\contentsline {subparagraph}{output}{41}}
-\@writefile{toc}{\contentsline {subparagraph}{precondition}{41}}
-\@writefile{toc}{\contentsline {subparagraph}{postcondition}{41}}
-\@writefile{toc}{\contentsline {subsubsection}{AVLTree::findlastnode()}{41}}
+\@writefile{toc}{\contentsline {section}{\numberline {0.1}\heiti 作业题目}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {0.2}\heiti 数学定义}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {0.2.1}殷集的表示}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{连通区域的边界 Jordan Curve}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{殷集边界 Spadjor}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {0.2.2}殷集集合上的布尔运算}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{切运算}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{粘运算}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{判断点和Spadjor之间的包含关系}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{补运算}{2}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{交运算}{2}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{并运算}{2}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {0.3}\heiti 数学概念的c++包装}{2}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {0.3.1}点 class Point}{2}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {0.3.2}线段 class Line}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {0.3.3}Jordan线 class Jordanline}{4}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {0.3.4}spadjor 与殷集一一对应 class spadjor}{4}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {0.3.5}哈斯图存储结构 HassNode}{4}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {0.3.6}数据存储结构平衡二叉树 template<class T> class AVLTree}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {0.3.7}扫描线 class sweepline}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {0.4}\heiti 类之间的关系，UML类图}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {0.5}\heiti 算法设计与证明}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {0.5.1}Point}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Point::operator[](const int)}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Point::norm()}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{6}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces 以上所有类的关系的UML图}}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Point::operator-(const Point)}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Point::operator<(const Point)}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Point::operator>(const Point)}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Point::dot(const Point)}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Point::cross(const Point)}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{friend template<> operator<(const pair<double, int>,const pair<double,int>)}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Point::nextline(const Line)}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{12}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Point::addnearline(const Line)}{12}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{12}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{12}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{12}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{12}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{12}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{12}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{13}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Point::delnearline(const Line)}{13}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{13}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{13}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{13}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{13}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{13}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{13}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {0.5.2}Line}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Line::operator[](const int)}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{precondition}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{postcondition}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Line::operator<(const Line)}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{16}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{16}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{16}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{16}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{16}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{16}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{16}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Line::operator>(const Line)}{16}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Line::ifintheline(const Point)}{17}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{17}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{17}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{17}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{17}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{17}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{17}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{17}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Line::coincide(const Line)}{17}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{17}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{17}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{17}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Line::ifintersection(const Line)}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Line::intersection(const Line)}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{19}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{19}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{19}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{19}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Line::angle(const Point)}{19}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{19}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{19}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{19}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{19}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{19}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{19}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Line类中还有一些访问和修改私有成员：identity，leftline，IfinOtherYinset的成员函数，例如identity()和setidentity()等。}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{static Line::generator()}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{22}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {0.5.3}Jordanline}{22}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Jordanline的私有数据：identity，leftjordanline，type的更新函数Jordanline::update()}{22}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{22}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{22}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{22}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{22}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{22}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{22}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{23}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{static Jordanline::generator()}{23}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{23}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{23}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{23}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{23}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{23}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{23}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{24}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {0.5.4}spadjor}{24}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{spadjor::complement()}{24}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{24}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{25}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{25}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{25}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{25}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{25}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{25}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{spadjor::meet(spadjor)}{25}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{25}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{25}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{25}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{25}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{25}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{26}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{26}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{spadjor::join(spadjor)}{26}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{26}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{26}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{26}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{26}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{26}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{26}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{26}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{friend operator<<(ostream\&, spadjor)}{26}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{26}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{27}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{27}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{27}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{27}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{27}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{27}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{friend operator>>(istream\&, spadjor)}{27}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{27}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{27}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{27}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{27}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{27}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{27}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{28}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {0.5.5}Sweepline}{28}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Sweepline::intersection()}{28}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{28}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{28}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{28}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{28}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{28}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{28}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{31}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Sweepline::inter()}{31}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{31}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{31}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{31}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{32}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{32}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{32}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{35}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Sweepline::update(int, bool, int = -1, bool = true)}{35}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{35}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{36}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{36}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{36}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{36}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{36}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {0.5.6}template<class T> Class AVLTree}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{AVLTree::add(T)}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{AVLTree::del(T)}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{AVLTree::del(AVLTreeNode<T>*)}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{AVLTree::find(T)}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{AVLTree::findprevnode(AVLTreeNode<T>*)}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{算法实现}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{证明}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{AVLTree::findnextnode(AVLTreeNode<T>*)}{42}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{AVLTree::findfirstnode()}{42}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{契约}{42}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{input}{42}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{output}{42}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{precondition}{42}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{postcondition}{42}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{AVLTree::findlastnode()}{42}{}\protected@file@percent }
+\gdef \@abspage@last{43}

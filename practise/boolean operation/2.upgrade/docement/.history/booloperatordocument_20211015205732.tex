@@ -191,41 +191,18 @@ Jordan Curve是首尾相连并且没有自相交的简单闭合曲线，详细�
 \subsubsection{殷集边界 Spadjor}
 Spadjor是Jordan Curve的集合，并且Jordan Curves之间包好关系可以
 表示成哈斯图。详见论文 \textbf{Definition 3.15 - 3.17}.
-并且由 \textbf{Corollary 3.22.} 殷集与殷集边界一一对应，即每个Spadjor可以
+并且由 \textbf{Lemma 3.18.} 殷集与殷集边界一一对应，即每个Spadjor可以
 唯一表示一个殷集。
 
-\subsection{殷集集合上的布尔运算}
+\subsection{殷集上的布尔运算}
 \subsubsection{切运算}	
 从Jordan Curve之间的恰当交点和不恰当交点将所有Jordan Curves切
-成有向曲线（折线）集合。\textbf{Definition 4.1.}
+成曲线（折线）集合。\textbf{Definition 4.1.}
 \subsubsection{粘运算}
-将有向折线集合沿着端点恰当的粘合得到两两之间没有恰当交点的Jordan Curve集合。
+将折线集合沿着端点恰当的粘合得到两两之间没有恰当交点的Jordan Curve集合。
 \textbf{Lemma 4.2.}
-\subsubsection{判断点和Spadjor之间的包含关系}
-Spadjor将平面划分为殷集的内部和外部，输出点在Spadjor表示的殷集的内部
-或外部。
-\subsubsection{补运算}
-若殷集边界Spadjor s非空，
-\begin{itemize}
-	\item 计算s中的Jordan Curve之间的交点。
-	\item 表示殷集的s和交点调用切运算.
-	\item 调换所有有向线段的方向.
-	\item 使用粘运算得到新的Spadjor表示补运算的殷集结果的Spadjor。
-\end{itemize}
-\textbf{Definition 4.4.}
 
-\subsubsection{交运算}
-若殷集边界Spadjor s1, s2非空，
-\begin{itemize}
-	\item 计算s1, s2之间的所有交点。
-	\item 调用切运算得到有向折线集合l1, l2。
-	\item 移除l1中内部点在s2表示的殷集外部的折线，l2中同理。
-	\item 将l1,l2中剩余的折线粘合得到表示交运算的殷集结果的Spadjor。
-\end{itemize}
-\textbf{Definition 4.8.}
 
-\subsubsection{并运算}
-并运算可以通过补运算和交运算实现。\textbf{Definition 4.10.}
 
 
 \section{\heiti 数学概念的c++包装}

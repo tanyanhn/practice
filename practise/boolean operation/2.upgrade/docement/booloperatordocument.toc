@@ -1,299 +1,311 @@
-\contentsline {chapter}{\numberline {0}Preliminaries}{1}
-\contentsline {section}{\numberline {0.1}\heiti 数学概念的c++包装}{1}
-\contentsline {subsection}{\numberline {0.1.1}点 class Point}{1}
-\contentsline {subsection}{\numberline {0.1.2}线段 class Line}{2}
-\contentsline {subsection}{\numberline {0.1.3}Jordan线 class Jordanline}{2}
-\contentsline {subsection}{\numberline {0.1.4}Spajor 与Yin集一一对应 class Spajor}{3}
-\contentsline {subsection}{\numberline {0.1.5}哈斯图存储结构 HassNode}{3}
-\contentsline {subsection}{\numberline {0.1.6}数据存储结构平衡二叉树 template<class T> class AVLTree}{3}
-\contentsline {subsection}{\numberline {0.1.7}扫描线 class sweepline}{4}
-\contentsline {section}{\numberline {0.2}\heiti 类之间的关系，UML类图}{4}
-\contentsline {section}{\numberline {0.3}\heiti 算法设计与证明}{4}
-\contentsline {subsection}{\numberline {0.3.1}Point}{4}
-\contentsline {subsubsection}{Point::operator[](const int)}{4}
-\contentsline {paragraph}{契约}{4}
-\contentsline {subparagraph}{input}{4}
-\contentsline {subparagraph}{output}{6}
-\contentsline {subparagraph}{precondition}{6}
-\contentsline {subparagraph}{postcondition}{6}
-\contentsline {paragraph}{算法实现}{6}
-\contentsline {paragraph}{证明}{6}
-\contentsline {subsubsection}{Point::norm()}{6}
-\contentsline {paragraph}{契约}{6}
-\contentsline {subparagraph}{input}{6}
-\contentsline {subparagraph}{output}{6}
-\contentsline {subparagraph}{precondition}{6}
-\contentsline {subparagraph}{postcondition}{6}
-\contentsline {paragraph}{算法实现}{6}
-\contentsline {paragraph}{证明}{6}
-\contentsline {subsubsection}{Point::operator-(const Point)}{6}
-\contentsline {paragraph}{契约}{6}
-\contentsline {subparagraph}{input}{6}
-\contentsline {subparagraph}{output}{6}
-\contentsline {subparagraph}{precondition}{6}
-\contentsline {subparagraph}{postcondition}{6}
-\contentsline {paragraph}{算法实现}{6}
-\contentsline {paragraph}{证明}{7}
-\contentsline {subsubsection}{Point::operator<(const Point)}{7}
-\contentsline {paragraph}{契约}{7}
-\contentsline {subparagraph}{input}{7}
-\contentsline {subparagraph}{output}{7}
-\contentsline {subparagraph}{precondition}{7}
-\contentsline {subparagraph}{postcondition}{7}
-\contentsline {paragraph}{算法实现}{7}
-\contentsline {paragraph}{证明}{7}
-\contentsline {subsubsection}{Point::operator>(const Point)}{7}
-\contentsline {subsubsection}{Point::dot(const Point)}{7}
-\contentsline {paragraph}{契约}{7}
-\contentsline {subparagraph}{input}{7}
-\contentsline {subparagraph}{output}{7}
-\contentsline {subparagraph}{precondition}{7}
-\contentsline {subparagraph}{postcondition}{8}
-\contentsline {paragraph}{算法实现}{8}
-\contentsline {paragraph}{证明}{8}
-\contentsline {subsubsection}{Point::cross(const Point)}{8}
-\contentsline {paragraph}{契约}{8}
-\contentsline {subparagraph}{input}{8}
-\contentsline {subparagraph}{output}{8}
-\contentsline {subparagraph}{precondition}{8}
-\contentsline {subparagraph}{postcondition}{8}
-\contentsline {paragraph}{算法实现}{8}
-\contentsline {paragraph}{证明}{8}
-\contentsline {subsubsection}{friend template<> operator<(const pair<double, int>,const pair<double,int>)}{8}
-\contentsline {paragraph}{契约}{8}
-\contentsline {subparagraph}{input}{8}
-\contentsline {subparagraph}{output}{8}
-\contentsline {subparagraph}{precondition}{8}
-\contentsline {subparagraph}{postcondition}{8}
-\contentsline {paragraph}{算法实现}{8}
-\contentsline {paragraph}{证明}{8}
-\contentsline {subsubsection}{Point::nextline(const Line)}{9}
-\contentsline {paragraph}{契约}{9}
-\contentsline {subparagraph}{input}{9}
-\contentsline {subparagraph}{output}{9}
-\contentsline {subparagraph}{precondition}{9}
-\contentsline {subparagraph}{postcondition}{9}
-\contentsline {paragraph}{算法实现}{9}
-\contentsline {paragraph}{证明}{11}
-\contentsline {subsubsection}{Point::addnearline(const Line)}{11}
-\contentsline {paragraph}{契约}{11}
-\contentsline {subparagraph}{input}{11}
-\contentsline {subparagraph}{output}{11}
-\contentsline {subparagraph}{precondition}{11}
-\contentsline {subparagraph}{postcondition}{11}
-\contentsline {paragraph}{算法实现}{11}
-\contentsline {paragraph}{证明}{11}
-\contentsline {subsubsection}{Point::delnearline(const Line)}{11}
-\contentsline {paragraph}{契约}{11}
-\contentsline {subparagraph}{input}{11}
-\contentsline {subparagraph}{output}{11}
-\contentsline {subparagraph}{precondition}{11}
-\contentsline {subparagraph}{postcondition}{12}
-\contentsline {paragraph}{算法实现}{12}
-\contentsline {paragraph}{证明}{13}
-\contentsline {subsection}{\numberline {0.3.2}Line}{14}
-\contentsline {subsubsection}{Line::operator[](const int)}{14}
-\contentsline {paragraph}{契约}{14}
-\contentsline {subparagraph}{input}{14}
-\contentsline {subparagraph}{output}{14}
-\contentsline {subsubsection}{precondition}{14}
-\contentsline {subsubsection}{postcondition}{14}
-\contentsline {paragraph}{算法实现}{14}
-\contentsline {paragraph}{证明}{14}
-\contentsline {subsubsection}{Line::operator<(const Line)}{14}
-\contentsline {paragraph}{契约}{14}
-\contentsline {subparagraph}{input}{14}
-\contentsline {subparagraph}{output}{14}
-\contentsline {subparagraph}{precondition}{14}
-\contentsline {subparagraph}{postcondition}{14}
-\contentsline {paragraph}{算法实现}{14}
-\contentsline {paragraph}{证明}{15}
-\contentsline {subsubsection}{Line::operator>(const Line)}{15}
-\contentsline {subsubsection}{Line::ifintheline(const Point)}{15}
-\contentsline {paragraph}{契约}{15}
-\contentsline {subparagraph}{input}{15}
-\contentsline {subparagraph}{output}{15}
-\contentsline {subparagraph}{precondition}{15}
-\contentsline {subparagraph}{postcondition}{15}
-\contentsline {paragraph}{算法实现}{15}
-\contentsline {paragraph}{证明}{16}
-\contentsline {subsubsection}{Line::coincide(const Line)}{16}
-\contentsline {paragraph}{契约}{16}
-\contentsline {subparagraph}{input}{16}
-\contentsline {subparagraph}{output}{16}
-\contentsline {subparagraph}{precondition}{16}
-\contentsline {subparagraph}{postcondition}{16}
-\contentsline {paragraph}{算法实现}{16}
-\contentsline {paragraph}{证明}{16}
-\contentsline {subsubsection}{Line::ifintersection(const Line)}{17}
-\contentsline {paragraph}{契约}{17}
-\contentsline {subparagraph}{input}{17}
-\contentsline {subparagraph}{output}{17}
-\contentsline {subparagraph}{precondition}{17}
-\contentsline {subparagraph}{postcondition}{17}
-\contentsline {paragraph}{算法实现}{17}
-\contentsline {paragraph}{证明}{17}
-\contentsline {subsubsection}{Line::intersection(const Line)}{17}
-\contentsline {paragraph}{契约}{17}
-\contentsline {subparagraph}{input}{17}
-\contentsline {subparagraph}{output}{17}
-\contentsline {subparagraph}{precondition}{17}
-\contentsline {subparagraph}{postcondition}{17}
-\contentsline {paragraph}{算法实现}{17}
-\contentsline {paragraph}{证明}{18}
-\contentsline {subsubsection}{Line::angle(const Point)}{18}
-\contentsline {paragraph}{契约}{18}
-\contentsline {subparagraph}{input}{18}
-\contentsline {subparagraph}{output}{18}
-\contentsline {subparagraph}{precondition}{18}
-\contentsline {subparagraph}{postcondition}{18}
-\contentsline {paragraph}{算法实现}{18}
-\contentsline {paragraph}{证明}{18}
-\contentsline {subsubsection}{Line类中还有一些访问和修改私有成员：identity，leftline，IfinOtherYinset的成员函数，例如identity()和setidentity()等。}{18}
-\contentsline {paragraph}{契约}{18}
-\contentsline {subparagraph}{input}{18}
-\contentsline {subparagraph}{output}{18}
-\contentsline {subparagraph}{precondition}{19}
-\contentsline {subparagraph}{postcondition}{19}
-\contentsline {paragraph}{算法实现}{19}
-\contentsline {paragraph}{证明}{19}
-\contentsline {subsubsection}{static Line::generator()}{19}
-\contentsline {paragraph}{契约}{19}
-\contentsline {subparagraph}{input}{19}
-\contentsline {subparagraph}{output}{19}
-\contentsline {subparagraph}{precondition}{19}
-\contentsline {subparagraph}{postcondition}{19}
-\contentsline {paragraph}{算法实现}{19}
-\contentsline {paragraph}{证明}{21}
-\contentsline {subsection}{\numberline {0.3.3}Jordanline}{21}
-\contentsline {subsubsection}{Jordanline的私有数据：identity，leftjordanline，type的更新函数Jordanline::update()}{21}
-\contentsline {paragraph}{契约}{21}
-\contentsline {subparagraph}{input}{21}
-\contentsline {subparagraph}{output}{21}
-\contentsline {subparagraph}{precondition}{21}
-\contentsline {subparagraph}{postcondition}{21}
-\contentsline {paragraph}{算法实现}{21}
-\contentsline {paragraph}{证明}{22}
-\contentsline {subsubsection}{static Jordanline::generator()}{22}
-\contentsline {paragraph}{契约}{22}
-\contentsline {subparagraph}{input}{22}
-\contentsline {subparagraph}{output}{22}
-\contentsline {subparagraph}{precondition}{22}
-\contentsline {subparagraph}{postcondition}{22}
-\contentsline {paragraph}{算法实现}{22}
-\contentsline {paragraph}{证明}{23}
-\contentsline {subsection}{\numberline {0.3.4}Spajor}{23}
-\contentsline {subsubsection}{Spajor::complement()}{23}
-\contentsline {paragraph}{契约}{23}
-\contentsline {subparagraph}{input}{23}
-\contentsline {subparagraph}{output}{23}
-\contentsline {subparagraph}{precondition}{23}
-\contentsline {subparagraph}{postcondition}{23}
-\contentsline {paragraph}{算法实现}{23}
-\contentsline {paragraph}{证明}{24}
-\contentsline {subsubsection}{Spajor::meet(Spajor)}{24}
-\contentsline {paragraph}{契约}{24}
-\contentsline {subparagraph}{input}{24}
-\contentsline {subparagraph}{output}{24}
-\contentsline {subparagraph}{precondition}{24}
-\contentsline {subparagraph}{postcondition}{24}
-\contentsline {paragraph}{算法实现}{24}
-\contentsline {paragraph}{证明}{25}
-\contentsline {subsubsection}{Spajor::join(Spajor)}{25}
-\contentsline {paragraph}{契约}{25}
-\contentsline {subparagraph}{input}{25}
-\contentsline {subparagraph}{output}{25}
-\contentsline {subparagraph}{precondition}{25}
-\contentsline {subparagraph}{postcondition}{25}
-\contentsline {paragraph}{算法实现}{25}
-\contentsline {paragraph}{证明}{25}
-\contentsline {subsubsection}{friend operator<<(ostream\&, Spajor)}{25}
-\contentsline {paragraph}{契约}{25}
-\contentsline {subparagraph}{input}{25}
-\contentsline {subparagraph}{output}{25}
-\contentsline {subparagraph}{precondition}{25}
-\contentsline {subparagraph}{postcondition}{25}
-\contentsline {paragraph}{算法实现}{26}
-\contentsline {paragraph}{证明}{26}
-\contentsline {subsubsection}{friend operator>>(istream\&, Spajor)}{26}
-\contentsline {paragraph}{契约}{26}
-\contentsline {subparagraph}{input}{26}
-\contentsline {subparagraph}{output}{26}
-\contentsline {subparagraph}{precondition}{26}
-\contentsline {subparagraph}{postcondition}{26}
-\contentsline {paragraph}{算法实现}{26}
-\contentsline {paragraph}{证明}{26}
-\contentsline {subsection}{\numberline {0.3.5}Sweepline}{26}
-\contentsline {subsubsection}{Sweepline::intersection()}{26}
-\contentsline {paragraph}{契约}{26}
-\contentsline {subparagraph}{input}{26}
-\contentsline {subparagraph}{output}{27}
-\contentsline {subparagraph}{precondition}{27}
-\contentsline {subparagraph}{postcondition}{27}
-\contentsline {paragraph}{算法实现}{27}
-\contentsline {paragraph}{证明}{30}
-\contentsline {subsubsection}{Sweepline::inter()}{30}
-\contentsline {paragraph}{契约}{30}
-\contentsline {subparagraph}{input}{30}
-\contentsline {subparagraph}{output}{30}
-\contentsline {subparagraph}{precondition}{30}
-\contentsline {subparagraph}{postcondition}{30}
-\contentsline {paragraph}{算法实现}{30}
-\contentsline {paragraph}{证明}{34}
-\contentsline {subsubsection}{Sweepline::update(int, bool, int = -1, bool = true)}{34}
-\contentsline {paragraph}{契约}{34}
-\contentsline {subparagraph}{input}{34}
-\contentsline {subparagraph}{output}{34}
-\contentsline {subparagraph}{precondition}{34}
-\contentsline {subparagraph}{postcondition}{34}
-\contentsline {paragraph}{算法实现}{35}
-\contentsline {paragraph}{证明}{38}
-\contentsline {subsection}{\numberline {0.3.6}template<class T> Class AVLTree}{38}
-\contentsline {subsubsection}{AVLTree::add(T)}{39}
-\contentsline {paragraph}{契约}{39}
-\contentsline {subparagraph}{input}{39}
-\contentsline {subparagraph}{output}{39}
-\contentsline {subparagraph}{precondition}{39}
-\contentsline {subparagraph}{postcondition}{39}
-\contentsline {paragraph}{算法实现}{39}
-\contentsline {paragraph}{证明}{39}
-\contentsline {subsubsection}{AVLTree::del(T)}{39}
-\contentsline {paragraph}{契约}{39}
-\contentsline {subparagraph}{input}{39}
-\contentsline {subparagraph}{output}{39}
-\contentsline {subparagraph}{precondition}{39}
-\contentsline {subparagraph}{postcondition}{39}
-\contentsline {paragraph}{算法实现}{39}
-\contentsline {paragraph}{证明}{39}
-\contentsline {subsubsection}{AVLTree::del(AVLTreeNode<T>*)}{39}
-\contentsline {paragraph}{契约}{39}
-\contentsline {subparagraph}{input}{39}
-\contentsline {subparagraph}{output}{39}
-\contentsline {subparagraph}{precondition}{39}
-\contentsline {subparagraph}{postcondition}{39}
-\contentsline {paragraph}{算法实现}{40}
-\contentsline {paragraph}{证明}{40}
-\contentsline {subsubsection}{AVLTree::find(T)}{40}
-\contentsline {paragraph}{契约}{40}
-\contentsline {subparagraph}{input}{40}
-\contentsline {subparagraph}{output}{40}
-\contentsline {subparagraph}{precondition}{40}
-\contentsline {subparagraph}{postcondition}{40}
-\contentsline {paragraph}{算法实现}{40}
-\contentsline {paragraph}{证明}{40}
-\contentsline {subsubsection}{AVLTree::findprevnode(AVLTreeNode<T>*)}{40}
-\contentsline {paragraph}{契约}{40}
-\contentsline {subparagraph}{input}{40}
-\contentsline {subparagraph}{output}{40}
-\contentsline {subparagraph}{precondition}{40}
-\contentsline {subparagraph}{postcondition}{40}
-\contentsline {paragraph}{算法实现}{40}
-\contentsline {paragraph}{证明}{40}
-\contentsline {subsubsection}{AVLTree::findnextnode(AVLTreeNode<T>*)}{40}
-\contentsline {subsubsection}{AVLTree::findfirstnode()}{40}
-\contentsline {paragraph}{契约}{40}
-\contentsline {subparagraph}{input}{41}
-\contentsline {subparagraph}{output}{41}
-\contentsline {subparagraph}{precondition}{41}
-\contentsline {subparagraph}{postcondition}{41}
-\contentsline {subsubsection}{AVLTree::findlastnode()}{41}
+\contentsline {chapter}{\numberline {0}二维殷集程序实现文档}{1}{}%
+\contentsline {section}{\numberline {0.1}\heiti 作业题目}{1}{}%
+\contentsline {section}{\numberline {0.2}\heiti 数学定义}{1}{}%
+\contentsline {subsection}{\numberline {0.2.1}殷集的表示}{1}{}%
+\contentsline {subsubsection}{连通区域的边界 Jordan Curve}{1}{}%
+\contentsline {subsubsection}{殷集边界 Spadjor}{1}{}%
+\contentsline {subsection}{\numberline {0.2.2}殷集集合上的布尔运算}{1}{}%
+\contentsline {subsubsection}{切运算}{1}{}%
+\contentsline {subsubsection}{粘运算}{1}{}%
+\contentsline {subsubsection}{判断点和Spadjor之间的包含关系}{1}{}%
+\contentsline {subsubsection}{补运算}{2}{}%
+\contentsline {subsubsection}{交运算}{2}{}%
+\contentsline {subsubsection}{并运算}{2}{}%
+\contentsline {section}{\numberline {0.3}\heiti 数学概念的c++包装}{2}{}%
+\contentsline {subsection}{\numberline {0.3.1}点 class Point}{2}{}%
+\contentsline {subsection}{\numberline {0.3.2}线段 class Line}{3}{}%
+\contentsline {subsection}{\numberline {0.3.3}Jordan线 class Jordanline}{4}{}%
+\contentsline {subsection}{\numberline {0.3.4}spadjor 与殷集一一对应 class spadjor}{4}{}%
+\contentsline {subsection}{\numberline {0.3.5}哈斯图存储结构 HassNode}{4}{}%
+\contentsline {subsection}{\numberline {0.3.6}数据存储结构平衡二叉树 template<class T> class AVLTree}{5}{}%
+\contentsline {subsection}{\numberline {0.3.7}扫描线 class sweepline}{5}{}%
+\contentsline {section}{\numberline {0.4}\heiti 类之间的关系，UML类图}{6}{}%
+\contentsline {section}{\numberline {0.5}\heiti 算法设计与证明}{6}{}%
+\contentsline {subsection}{\numberline {0.5.1}Point}{6}{}%
+\contentsline {subsubsection}{Point::operator[](const int)}{6}{}%
+\contentsline {paragraph}{契约}{6}{}%
+\contentsline {subparagraph}{input}{6}{}%
+\contentsline {subparagraph}{output}{6}{}%
+\contentsline {subparagraph}{precondition}{6}{}%
+\contentsline {subparagraph}{postcondition}{6}{}%
+\contentsline {paragraph}{算法实现}{6}{}%
+\contentsline {paragraph}{证明}{6}{}%
+\contentsline {subsubsection}{Point::norm()}{6}{}%
+\contentsline {paragraph}{契约}{6}{}%
+\contentsline {subparagraph}{input}{6}{}%
+\contentsline {subparagraph}{output}{6}{}%
+\contentsline {subparagraph}{precondition}{6}{}%
+\contentsline {subparagraph}{postcondition}{6}{}%
+\contentsline {paragraph}{算法实现}{6}{}%
+\contentsline {paragraph}{证明}{8}{}%
+\contentsline {subsubsection}{Point::operator-(const Point)}{8}{}%
+\contentsline {paragraph}{契约}{8}{}%
+\contentsline {subparagraph}{input}{8}{}%
+\contentsline {subparagraph}{output}{8}{}%
+\contentsline {subparagraph}{precondition}{8}{}%
+\contentsline {subparagraph}{postcondition}{8}{}%
+\contentsline {paragraph}{算法实现}{8}{}%
+\contentsline {paragraph}{证明}{8}{}%
+\contentsline {subsubsection}{Point::operator<(const Point)}{8}{}%
+\contentsline {paragraph}{契约}{8}{}%
+\contentsline {subparagraph}{input}{8}{}%
+\contentsline {subparagraph}{output}{8}{}%
+\contentsline {subparagraph}{precondition}{8}{}%
+\contentsline {subparagraph}{postcondition}{8}{}%
+\contentsline {paragraph}{算法实现}{8}{}%
+\contentsline {paragraph}{证明}{9}{}%
+\contentsline {subsubsection}{Point::operator>(const Point)}{9}{}%
+\contentsline {subsubsection}{Point::dot(const Point)}{9}{}%
+\contentsline {paragraph}{契约}{9}{}%
+\contentsline {subparagraph}{input}{9}{}%
+\contentsline {subparagraph}{output}{9}{}%
+\contentsline {subparagraph}{precondition}{9}{}%
+\contentsline {subparagraph}{postcondition}{9}{}%
+\contentsline {paragraph}{算法实现}{9}{}%
+\contentsline {paragraph}{证明}{9}{}%
+\contentsline {subsubsection}{Point::cross(const Point)}{9}{}%
+\contentsline {paragraph}{契约}{9}{}%
+\contentsline {subparagraph}{input}{9}{}%
+\contentsline {subparagraph}{output}{9}{}%
+\contentsline {subparagraph}{precondition}{9}{}%
+\contentsline {subparagraph}{postcondition}{9}{}%
+\contentsline {paragraph}{算法实现}{9}{}%
+\contentsline {paragraph}{证明}{9}{}%
+\contentsline {subsubsection}{friend template<> operator<(const pair<double, int>,const pair<double,int>)}{9}{}%
+\contentsline {paragraph}{契约}{10}{}%
+\contentsline {subparagraph}{input}{10}{}%
+\contentsline {subparagraph}{output}{10}{}%
+\contentsline {subparagraph}{precondition}{10}{}%
+\contentsline {subparagraph}{postcondition}{10}{}%
+\contentsline {paragraph}{算法实现}{10}{}%
+\contentsline {paragraph}{证明}{10}{}%
+\contentsline {subsubsection}{Point::nextline(const Line)}{10}{}%
+\contentsline {paragraph}{契约}{10}{}%
+\contentsline {subparagraph}{input}{10}{}%
+\contentsline {subparagraph}{output}{10}{}%
+\contentsline {subparagraph}{precondition}{10}{}%
+\contentsline {subparagraph}{postcondition}{10}{}%
+\contentsline {paragraph}{算法实现}{10}{}%
+\contentsline {paragraph}{证明}{12}{}%
+\contentsline {subsubsection}{Point::addnearline(const Line)}{12}{}%
+\contentsline {paragraph}{契约}{12}{}%
+\contentsline {subparagraph}{input}{12}{}%
+\contentsline {subparagraph}{output}{12}{}%
+\contentsline {subparagraph}{precondition}{12}{}%
+\contentsline {subparagraph}{postcondition}{12}{}%
+\contentsline {paragraph}{算法实现}{12}{}%
+\contentsline {paragraph}{证明}{13}{}%
+\contentsline {subsubsection}{Point::delnearline(const Line)}{13}{}%
+\contentsline {paragraph}{契约}{13}{}%
+\contentsline {subparagraph}{input}{13}{}%
+\contentsline {subparagraph}{output}{13}{}%
+\contentsline {subparagraph}{precondition}{13}{}%
+\contentsline {subparagraph}{postcondition}{13}{}%
+\contentsline {paragraph}{算法实现}{13}{}%
+\contentsline {paragraph}{证明}{15}{}%
+\contentsline {subsection}{\numberline {0.5.2}Line}{15}{}%
+\contentsline {subsubsection}{Line::operator[](const int)}{15}{}%
+\contentsline {paragraph}{契约}{15}{}%
+\contentsline {subparagraph}{input}{15}{}%
+\contentsline {subparagraph}{output}{15}{}%
+\contentsline {subsubsection}{precondition}{15}{}%
+\contentsline {subsubsection}{postcondition}{15}{}%
+\contentsline {paragraph}{算法实现}{15}{}%
+\contentsline {paragraph}{证明}{15}{}%
+\contentsline {subsubsection}{Line::operator<(const Line)}{15}{}%
+\contentsline {paragraph}{契约}{16}{}%
+\contentsline {subparagraph}{input}{16}{}%
+\contentsline {subparagraph}{output}{16}{}%
+\contentsline {subparagraph}{precondition}{16}{}%
+\contentsline {subparagraph}{postcondition}{16}{}%
+\contentsline {paragraph}{算法实现}{16}{}%
+\contentsline {paragraph}{证明}{16}{}%
+\contentsline {subsubsection}{Line::operator>(const Line)}{16}{}%
+\contentsline {subsubsection}{Line::ifintheline(const Point)}{17}{}%
+\contentsline {paragraph}{契约}{17}{}%
+\contentsline {subparagraph}{input}{17}{}%
+\contentsline {subparagraph}{output}{17}{}%
+\contentsline {subparagraph}{precondition}{17}{}%
+\contentsline {subparagraph}{postcondition}{17}{}%
+\contentsline {paragraph}{算法实现}{17}{}%
+\contentsline {paragraph}{证明}{17}{}%
+\contentsline {subsubsection}{Line::coincide(const Line)}{17}{}%
+\contentsline {paragraph}{契约}{17}{}%
+\contentsline {subparagraph}{input}{17}{}%
+\contentsline {subparagraph}{output}{17}{}%
+\contentsline {subparagraph}{precondition}{18}{}%
+\contentsline {subparagraph}{postcondition}{18}{}%
+\contentsline {paragraph}{算法实现}{18}{}%
+\contentsline {paragraph}{证明}{18}{}%
+\contentsline {subsubsection}{Line::ifintersection(const Line)}{18}{}%
+\contentsline {paragraph}{契约}{18}{}%
+\contentsline {subparagraph}{input}{18}{}%
+\contentsline {subparagraph}{output}{18}{}%
+\contentsline {subparagraph}{precondition}{18}{}%
+\contentsline {subparagraph}{postcondition}{18}{}%
+\contentsline {paragraph}{算法实现}{18}{}%
+\contentsline {paragraph}{证明}{18}{}%
+\contentsline {subsubsection}{Line::intersection(const Line)}{18}{}%
+\contentsline {paragraph}{契约}{18}{}%
+\contentsline {subparagraph}{input}{18}{}%
+\contentsline {subparagraph}{output}{18}{}%
+\contentsline {subparagraph}{precondition}{19}{}%
+\contentsline {subparagraph}{postcondition}{19}{}%
+\contentsline {paragraph}{算法实现}{19}{}%
+\contentsline {paragraph}{证明}{19}{}%
+\contentsline {subsubsection}{Line::angle(const Point)}{19}{}%
+\contentsline {paragraph}{契约}{19}{}%
+\contentsline {subparagraph}{input}{19}{}%
+\contentsline {subparagraph}{output}{19}{}%
+\contentsline {subparagraph}{precondition}{19}{}%
+\contentsline {subparagraph}{postcondition}{19}{}%
+\contentsline {paragraph}{算法实现}{19}{}%
+\contentsline {paragraph}{证明}{20}{}%
+\contentsline {subsubsection}{Line类中还有一些访问和修改私有成员：identity，leftline，IfinOtherYinset的成员函数，例如identity()和setidentity()等。}{20}{}%
+\contentsline {paragraph}{契约}{20}{}%
+\contentsline {subparagraph}{input}{20}{}%
+\contentsline {subparagraph}{output}{20}{}%
+\contentsline {subparagraph}{precondition}{20}{}%
+\contentsline {subparagraph}{postcondition}{20}{}%
+\contentsline {paragraph}{算法实现}{20}{}%
+\contentsline {paragraph}{证明}{20}{}%
+\contentsline {subsubsection}{static Line::generator()}{20}{}%
+\contentsline {paragraph}{契约}{20}{}%
+\contentsline {subparagraph}{input}{20}{}%
+\contentsline {subparagraph}{output}{20}{}%
+\contentsline {subparagraph}{precondition}{20}{}%
+\contentsline {subparagraph}{postcondition}{20}{}%
+\contentsline {paragraph}{算法实现}{20}{}%
+\contentsline {paragraph}{证明}{22}{}%
+\contentsline {subsection}{\numberline {0.5.3}Jordanline}{22}{}%
+\contentsline {subsubsection}{Jordanline的私有数据：identity，leftjordanline，type的更新函数Jordanline::update()}{22}{}%
+\contentsline {paragraph}{契约}{22}{}%
+\contentsline {subparagraph}{input}{22}{}%
+\contentsline {subparagraph}{output}{22}{}%
+\contentsline {subparagraph}{precondition}{22}{}%
+\contentsline {subparagraph}{postcondition}{22}{}%
+\contentsline {paragraph}{算法实现}{22}{}%
+\contentsline {paragraph}{证明}{23}{}%
+\contentsline {subsubsection}{static Jordanline::generator()}{23}{}%
+\contentsline {paragraph}{契约}{23}{}%
+\contentsline {subparagraph}{input}{23}{}%
+\contentsline {subparagraph}{output}{23}{}%
+\contentsline {subparagraph}{precondition}{23}{}%
+\contentsline {subparagraph}{postcondition}{23}{}%
+\contentsline {paragraph}{算法实现}{23}{}%
+\contentsline {paragraph}{证明}{24}{}%
+\contentsline {subsection}{\numberline {0.5.4}spadjor}{24}{}%
+\contentsline {subsubsection}{spadjor::complement()}{24}{}%
+\contentsline {paragraph}{契约}{24}{}%
+\contentsline {subparagraph}{input}{25}{}%
+\contentsline {subparagraph}{output}{25}{}%
+\contentsline {subparagraph}{precondition}{25}{}%
+\contentsline {subparagraph}{postcondition}{25}{}%
+\contentsline {paragraph}{算法实现}{25}{}%
+\contentsline {paragraph}{证明}{25}{}%
+\contentsline {subsubsection}{spadjor::meet(spadjor)}{25}{}%
+\contentsline {paragraph}{契约}{25}{}%
+\contentsline {subparagraph}{input}{25}{}%
+\contentsline {subparagraph}{output}{25}{}%
+\contentsline {subparagraph}{precondition}{25}{}%
+\contentsline {subparagraph}{postcondition}{25}{}%
+\contentsline {paragraph}{算法实现}{26}{}%
+\contentsline {paragraph}{证明}{26}{}%
+\contentsline {subsubsection}{spadjor::join(spadjor)}{26}{}%
+\contentsline {paragraph}{契约}{26}{}%
+\contentsline {subparagraph}{input}{26}{}%
+\contentsline {subparagraph}{output}{26}{}%
+\contentsline {subparagraph}{precondition}{26}{}%
+\contentsline {subparagraph}{postcondition}{26}{}%
+\contentsline {paragraph}{算法实现}{26}{}%
+\contentsline {paragraph}{证明}{26}{}%
+\contentsline {subsubsection}{friend operator<<(ostream\&, spadjor)}{26}{}%
+\contentsline {paragraph}{契约}{26}{}%
+\contentsline {subparagraph}{input}{27}{}%
+\contentsline {subparagraph}{output}{27}{}%
+\contentsline {subparagraph}{precondition}{27}{}%
+\contentsline {subparagraph}{postcondition}{27}{}%
+\contentsline {paragraph}{算法实现}{27}{}%
+\contentsline {paragraph}{证明}{27}{}%
+\contentsline {subsubsection}{friend operator>>(istream\&, spadjor)}{27}{}%
+\contentsline {paragraph}{契约}{27}{}%
+\contentsline {subparagraph}{input}{27}{}%
+\contentsline {subparagraph}{output}{27}{}%
+\contentsline {subparagraph}{precondition}{27}{}%
+\contentsline {subparagraph}{postcondition}{27}{}%
+\contentsline {paragraph}{算法实现}{27}{}%
+\contentsline {paragraph}{证明}{28}{}%
+\contentsline {subsection}{\numberline {0.5.5}Sweepline}{28}{}%
+\contentsline {subsubsection}{Sweepline::intersection()}{28}{}%
+\contentsline {paragraph}{契约}{28}{}%
+\contentsline {subparagraph}{input}{28}{}%
+\contentsline {subparagraph}{output}{28}{}%
+\contentsline {subparagraph}{precondition}{28}{}%
+\contentsline {subparagraph}{postcondition}{28}{}%
+\contentsline {paragraph}{算法实现}{28}{}%
+\contentsline {paragraph}{证明}{31}{}%
+\contentsline {subsubsection}{Sweepline::inter()}{31}{}%
+\contentsline {paragraph}{契约}{31}{}%
+\contentsline {subparagraph}{input}{31}{}%
+\contentsline {subparagraph}{output}{31}{}%
+\contentsline {subparagraph}{precondition}{32}{}%
+\contentsline {subparagraph}{postcondition}{32}{}%
+\contentsline {paragraph}{算法实现}{32}{}%
+\contentsline {paragraph}{证明}{35}{}%
+\contentsline {subsubsection}{Sweepline::update(int, bool, int = -1, bool = true)}{35}{}%
+\contentsline {paragraph}{契约}{35}{}%
+\contentsline {subparagraph}{input}{36}{}%
+\contentsline {subparagraph}{output}{36}{}%
+\contentsline {subparagraph}{precondition}{36}{}%
+\contentsline {subparagraph}{postcondition}{36}{}%
+\contentsline {paragraph}{算法实现}{36}{}%
+\contentsline {paragraph}{证明}{40}{}%
+\contentsline {subsection}{\numberline {0.5.6}template<class T> Class AVLTree}{40}{}%
+\contentsline {subsubsection}{AVLTree::add(T)}{40}{}%
+\contentsline {paragraph}{契约}{40}{}%
+\contentsline {subparagraph}{input}{40}{}%
+\contentsline {subparagraph}{output}{40}{}%
+\contentsline {subparagraph}{precondition}{40}{}%
+\contentsline {subparagraph}{postcondition}{40}{}%
+\contentsline {paragraph}{算法实现}{40}{}%
+\contentsline {paragraph}{证明}{40}{}%
+\contentsline {subsubsection}{AVLTree::del(T)}{40}{}%
+\contentsline {paragraph}{契约}{40}{}%
+\contentsline {subparagraph}{input}{40}{}%
+\contentsline {subparagraph}{output}{40}{}%
+\contentsline {subparagraph}{precondition}{40}{}%
+\contentsline {subparagraph}{postcondition}{40}{}%
+\contentsline {paragraph}{算法实现}{40}{}%
+\contentsline {paragraph}{证明}{40}{}%
+\contentsline {subsubsection}{AVLTree::del(AVLTreeNode<T>*)}{40}{}%
+\contentsline {paragraph}{契约}{40}{}%
+\contentsline {subparagraph}{input}{40}{}%
+\contentsline {subparagraph}{output}{41}{}%
+\contentsline {subparagraph}{precondition}{41}{}%
+\contentsline {subparagraph}{postcondition}{41}{}%
+\contentsline {paragraph}{算法实现}{41}{}%
+\contentsline {paragraph}{证明}{41}{}%
+\contentsline {subsubsection}{AVLTree::find(T)}{41}{}%
+\contentsline {paragraph}{契约}{41}{}%
+\contentsline {subparagraph}{input}{41}{}%
+\contentsline {subparagraph}{output}{41}{}%
+\contentsline {subparagraph}{precondition}{41}{}%
+\contentsline {subparagraph}{postcondition}{41}{}%
+\contentsline {paragraph}{算法实现}{41}{}%
+\contentsline {paragraph}{证明}{41}{}%
+\contentsline {subsubsection}{AVLTree::findprevnode(AVLTreeNode<T>*)}{41}{}%
+\contentsline {paragraph}{契约}{41}{}%
+\contentsline {subparagraph}{input}{41}{}%
+\contentsline {subparagraph}{output}{41}{}%
+\contentsline {subparagraph}{precondition}{41}{}%
+\contentsline {subparagraph}{postcondition}{41}{}%
+\contentsline {paragraph}{算法实现}{41}{}%
+\contentsline {paragraph}{证明}{41}{}%
+\contentsline {subsubsection}{AVLTree::findnextnode(AVLTreeNode<T>*)}{42}{}%
+\contentsline {subsubsection}{AVLTree::findfirstnode()}{42}{}%
+\contentsline {paragraph}{契约}{42}{}%
+\contentsline {subparagraph}{input}{42}{}%
+\contentsline {subparagraph}{output}{42}{}%
+\contentsline {subparagraph}{precondition}{42}{}%
+\contentsline {subparagraph}{postcondition}{42}{}%
+\contentsline {subsubsection}{AVLTree::findlastnode()}{42}{}%
