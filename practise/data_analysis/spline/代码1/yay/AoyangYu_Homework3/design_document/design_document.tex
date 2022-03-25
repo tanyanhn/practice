@@ -1,0 +1,245 @@
+\documentclass[12pt]{article}
+
+\usepackage{HWStyle_OWEN}
+
+\newcommand{\hmwkClass}{Programming Task \#3}
+\newcommand{\hmwkAuthorName}{Aoyang Yu}
+\newcommand{\hmwkTitle}{Design Documents}
+
+\setlist[3]{noitemsep}
+
+\begin{document}
+
+\maketitle
+
+In the following descriptions, mathematical constants and the corresponding 
+programming constants will be used in a mixed style, picking the appropriate one.
+
+For simplicity of presentation, namespace qualifications will be omitted.
+
+\section{Numerical Types}
+
+    \begin{itemize}
+        \item \texttt{using Real = double;}. \\
+              This is for flexibility on floating-point types. User codes \textit{should} use \texttt{Real}
+              instead of \texttt{double}.
+    \end{itemize}
+    
+\section{class Polynomial}
+
+    \begin{itemize}
+        \item Models the set \(\Pol_n[T]\), which contains all polynomials 
+              with degree less than or equal to \(n\) and coefficients of type \(T\).
+        \item Template: \texttt{template<int Order, typename CoefType>}. The template parameters
+              corresponds to \(n\) and \(T\) respectively.
+        \item Public Member Functions
+              \begin{enumerate}
+                  \item Arithmetic operators (addition, subtraction, multiplication, )
+                  \item Comparison operators (equal )
+                  \item \texttt{template<typename T> CoefType eval(const T \&x) const;} \\
+                        \textbf{Type Requirement:} \(\text{CoefType}*\text{T}\to \text{CoefType}\) \\
+                        \textbf{Input:} A point \(x\) of type \(T\). \\
+                        \textbf{Output:} The polynomial's value at \(x\).
+                  \item \texttt{Polynomial derivative() const;} \\
+                        \textbf{Input:} None. \\
+                        \textbf{Output:} The derivative of the current polynomial.
+                  \item \texttt{friend ostream\& operator<<(ostream \&, const Polynomial \&);} \\
+                        Print the polynomial to output stream.
+                  \item \texttt{CoefType\& operator[](size\_t i);} \\
+                        \texttt{const CoefType\& operator[](size\_t i) const;} \\
+                        \textbf{Input:} An index \(i\). \\
+                        \textbf{Precondition:} \(0\le i\le n\). \\
+                        \textbf{Output:} The coefficient of \(x^i\) of this polynomial.
+              \end{enumerate}
+    \end{itemize}
+
+\section{class Spline}
+
+    \begin{itemize}
+        \item Models the set \(\S_{n,d}^{n-1}\), which contains splines of degree \(n\) and 
+              smoothness class \(n-1\) mapping \(\R\) to \(\R^d\). 
+              Two forms, namely piecewise-polynomial splines and B-splines, are possible.
+        \item Template: \texttt{template<int Dim, int Order, SplineType st>}. \\
+              The template parameters corresponds to \(d,n\) and the form of splines respectively, where
+              \texttt{SplineType=\{ppForm, cardinalB\}}.
+        \item Template Specialization: \texttt{Dim = 1} and \texttt{Dim > 1} are different; \texttt{ppForm} and 
+              \texttt{cardinalB} are different. Therefore, we have four specializations. They along with the corresponding
+              member variables are described below.
+              \begin{enumerate}
+                  \item \texttt{Dim=1,st=SplineType::ppForm}.
+                        \begin{itemize}
+                            \item \texttt{int N}: the number of knots.
+                            \item \texttt{vector<Real> t}: the knots in strict ascending order. It is 0-indexed, which means the first
+                                  knot is \texttt{t[0]} and the \(N\)th knot is \texttt{t[N-1]}.
+                            \item \texttt{vector<Polynomial<Order, Real>> piece}: the \(N-1\) pieces of polynomials, 0-indexed.
+                        \end{itemize}
+                  \item \texttt{st=SplineType::ppForm}.
+                        \begin{itemize}
+                            \item \texttt{int N}: the number of knots.
+                            \item \texttt{vector<Real> t}: the knots in strict ascending order, 0-indexed.
+                            \item \texttt{vector<Polynomial<Order, Vec<Dim, Real>>> piece}: the \(N-1\) pieces of polynomials, with 
+                                  vector coefficients. 0-indexed.
+                        \end{itemize}
+                  \item \texttt{Dim=1,st=SplineType::cardinalB}.
+                        \begin{itemize}
+                            \item \texttt{vector<Polynomial<Order, Real>> Base}: \(B^n_{0,\mathbb Z}(x)\) where \(n=\text{Order}\).
+                            \item \texttt{int N}: the number of knots.
+                            \item \texttt{int p}: the knots base, which means the \(N\) knots are \(p+1,\dots, p+N\).
+                            \item \texttt{vector<Real> \_a}: the coefficients on B-spline bases. We have \texttt{\_a[j]} corresponds to \(a_{p+2-n+j}\).
+                        \end{itemize}
+                        \textbf{Mathematically:} This specialization models \(S(x)=\sum _{j=p+2-n}^{p+N}a_jB^n_{j,\mathbb Z}(x)\).
+                  \item \texttt{st=SplineType::cardinalB}.
+                        \begin{itemize}
+                            \item \texttt{vector<Polynomial<Order, Real>> Base}: the B-spline base, as above.
+                            \item \texttt{int N}: the number of knots, as above.
+                            \item \texttt{int p}: the knots base, as above.
+                            \item \texttt{vector<Vec<Dim, Real>> \_a}: the coefficients on B-spline bases. We have \texttt{\_a[j]} corresponds to \(\ve a_{p+2-n+j}\).
+                        \end{itemize}
+                        \textbf{Mathematically:} This specialization models \(S(x)=\sum _{j=p+2-n}^{p+N}\ve a_jB^n_{j,\mathbb Z}(x)\).
+              \end{enumerate}
+        \item Public Member Functions
+              \begin{itemize}
+                  \item When \texttt{Dim = 1}
+                        \begin{enumerate}
+                            \item \texttt{Real eval(Real x) const;} \\
+                                  Get the value of the spline at \(x\). \\
+                                  \textbf{Precondition:} \(t_1\le x\le t_N\).
+                        \end{enumerate}
+                  \item When \texttt{Dim > 1}
+                        \begin{enumerate}
+                            \item \texttt{Vec<Dim, Real> eval(Real x) const;} \\
+                                  Get the value of the spline at \(x\). \\
+                                  \textbf{Precondition:} \(t_1\le x\le t_N\).
+                        \end{enumerate} 
+              \end{itemize}
+    \end{itemize}
+
+\section{class SplineCondition}
+
+    \begin{itemize}
+        \item Template: \texttt{template<ValType>}. We define \texttt{default} to be the value produced by the 
+              default constructor of \texttt{ValType}. For numerical types like \texttt{float,double,int}, we have
+              \texttt{default=0}. \\
+              This template parameter enables higher-dimensional conditions to be passed.
+        \item This is the data structure for representing a set of conditions for building a spline. It contains
+              \begin{enumerate}
+                  \item A number \(N\in \mathbb N\) denoting the number of knots.
+                  \item A strictly ascending list \(t_1,\dots,t_N\in \R\) of the knots.
+                  \item A table of condition \(c_{i,j}:\)\texttt{ValType}, \(i,j\ge 0\).
+              \end{enumerate}
+              The specific configuration of these data is related to the boundary conditions, and will be defined 
+              exactly in the following section. \\
+              \textcolor{gray}{I don't use the \texttt{InterpCond} because spline conditions have their own characteristics and I want to start from scratch.}
+
+        \item Public Member Functions 
+              \begin{itemize}
+                  \item \texttt{void clear();} \\
+                        Clear the table, conceptually set \(N\leftarrow 0\), \(t\leftarrow \) \texttt{empty} and \(c_{i,j}\leftarrow\) \texttt{default}, \(\forall i,j\).
+                  \item \texttt{void setN(size\_t N);} \\
+                        Set \(N\) and let \(t_1,\dots, t_N\leftarrow 0\).
+                  \item \texttt{size\_t getN() const;} \\
+                        Get \(N\).
+                  \item \texttt{void setT(size\_t i, Real u);} \\
+                        Set \(t_i\leftarrow u\). \\
+                        \textbf{Precondition:} \(0\le i\le N\).
+                  \item \texttt{size\_t getT(size\_t i) const;} \\
+                        Get \(t_i\). \\
+                        \textbf{Precondition:} \(0\le i\le N\).
+                  \item \texttt{void setC(size\_t i, size\_t j, const ValType \&v);} \\
+                        Set \(c_{i,j}\leftarrow v\).
+                  \item \texttt{const ValType\& getC(size\_t i, size\_t j) const;} \\
+                        Get \(c_{i,j}\). Asking for any unspecified entry will get \texttt{default}.
+              \end{itemize}
+            
+    \end{itemize}
+
+\section{enum class BCType}
+
+    \begin{itemize}
+        \item This enum class give names to several \textbf{b}oundary \textbf{c}onditions. 
+              The following is a listing of all the boundary conditions supported, along with descriptions
+              of the corresponding \texttt{SplineCondition}. Denote the spline type by \texttt{st} and the
+              spline order by \texttt{Order}.
+              \begin{itemize}
+                  \item \texttt{BCType::complete}: Complete cubic spline. \\
+                        \textbf{Constraint:} \texttt{Ord=3, st=ppForm,cardinalB}. \\
+                        \textbf{SplineCondition:}
+                        \begin{enumerate}
+                            \item \(N\leftarrow\) the number of knots.
+                            \item For \texttt{ppForm}, \(t_i\leftarrow \text{knot}_i\) for \(i=1,\dots, N\). \\
+                                  For \texttt{cardinalB}, \(t_0\leftarrow a\), indicating that the knots are \(\{a+1,\dots, a+N\}\).
+                            \item For \(i=1,\dots,N\), \(c_{i,0}\leftarrow f(t_i)\). 
+                            \item \(c_{1,1}\leftarrow f'(t_1),c_{N,1}\leftarrow f'(t_N)\).
+                        \end{enumerate}
+                  \item \texttt{BCType::notAknot}: Not-a-knot cubic spline. \\
+                        \textbf{Constraint:} \texttt{Ord=3, st=ppForm}. \\
+                        \textbf{SplineCondition:}
+                        \begin{enumerate}
+                            \item \(N\leftarrow\) the number of knots.
+                            \item For \(i=1,\dots,N\), \(t_i\leftarrow \text{knot}_i, c_{i,0}\leftarrow f(t_i)\).
+                        \end{enumerate}
+                  \item \texttt{BCType::periodic}: Periodic cubic spline. \\
+                        \textbf{Mathematically:} \(s(f; a)=f(a)\) and \(s^{(j)}(f; b)=s^{(j)}(f; a)\) for \(j=0,1,2\). \\
+                        \textbf{Constraint:} \texttt{Ord=3, st=ppForm}. \\
+                        \textbf{SplineCondition:}
+                        \begin{enumerate}
+                            \item \(N\leftarrow\) the number of knots.
+                            \item For \(i=1,\dots,N\), \(t_i\leftarrow \text{knot}_i\). For \(i=1,\dots,N-1\), \(c_{i,0}\leftarrow f(t_i)\).
+                        \end{enumerate}
+                  \item \texttt{BCType::middleP}: Interpolation sites are the endpoints of the big interval and middle points
+                        of the sub-intervals. \\
+                        \textbf{Mathematically:} For \(a\in \mathbb Z\), find \(s\in \S_2^1\) with knots \(\{a+1,a+2,\dots,a+N\}\) that interpolates
+                        \(f\) at sites \(\{a+1,a+1/2,a+3/2,\dots, a+N-1/2,a+N\}\). \\
+                        \textbf{Constraint:} \texttt{Ord=2, st=cardinalB}. \\
+                        \textbf{SplineCondition:}
+                        \begin{enumerate}
+                            \item \(N\leftarrow\) the number of knots.
+                            \item If the knots are \(a+1,\dots, a+N\), then set \(t_0\leftarrow a\).
+                            \item \(c_{0,0}\leftarrow f(a+1)\); \(\forall i=1,\dots,N-1,c_{i,0}\leftarrow f(a+i+1/2)\); \(c_{N,0}\leftarrow f(a+N)\).
+                        \end{enumerate}
+                  \item \texttt{BCType::linear}: Find \(s\in \S_1^0\). In this case, boundary conditions are not needed.
+                        \textbf{Constraint:} \texttt{Ord=1, st=ppForm}. \\
+                        \textbf{SplineCondition:}
+                        \begin{enumerate}
+                            \item \(N\leftarrow\) the number of knots.
+                            \item For \(i=1,\dots,N\), \(t_i\leftarrow \text{knot}_i, c_{i,0}\leftarrow f(t_i)\).
+                        \end{enumerate}
+              \end{itemize}
+    \end{itemize}
+
+\section{namespace SplineBuilder}
+
+    \begin{itemize}
+        \item This namespace contains the spline building routines.
+        \item \textbf{Different from the advice given in the homework statement}, I only provide one class template
+              named \texttt{template<int Dim, int Order, SplineType st, BCType bc> class Interpolate;}. This class
+              supports multi-dimensional (include one-dimensional) spline interpolation. It has a specialization 
+              for each interpolation scheme defined above and is indicated by \texttt{SplineType} and \texttt{BCType}. 
+              Each of the specializations has only one member function -- a static member function \texttt{create} which takes in a 
+              \texttt{SplineCondition<Vec<Dim, Real>>} and gives out a corresponding \texttt{Spline}. \\
+              The following is a list of the specializations and their \texttt{create}'s return type.
+        \item Specializations
+              \begin{enumerate}
+                  \item \texttt{class Interpolate<Dim, 3, SplineType::ppForm, BCType::complete>}\\
+                        \texttt{create} returns: \texttt{Spline<Dim, 3, SplineType::ppForm>}
+                  \item \texttt{class Interpolate<Dim, 3, SplineType::ppForm, BCType::notAknot>}\\
+                        \texttt{create} returns: \texttt{Spline<Dim, 3, SplineType::ppForm>}
+                  \item \texttt{class Interpolate<Dim, 3, SplineType::ppForm, BCType::periodic>}\\
+                        \texttt{create} returns: \texttt{Spline<Dim, 3, SplineType::ppForm>}
+                  \item \texttt{class Interpolate<Dim, 1, SplineType::ppForm, BCType::linear>}\\
+                        \texttt{create} returns: \texttt{Spline<Dim, 1, SplineType::ppForm>}
+                  \item \texttt{class Interpolate<Dim, 3, SplineType::cardinalB, BCType::complete>}\\
+                        \texttt{create} returns: \texttt{Spline<Dim, 3, SplineType::cardinalB>}
+                  \item \texttt{class Interpolate<Dim, 2, SplineType::cardinalB, BCType::middleP>}\\
+                        \texttt{create} returns: \texttt{Spline<Dim, 2, SplineType::cardinalB>}
+              \end{enumerate}
+        \item What about the curve fittings? Well, since multi-dimensional interpolation is provided, 
+              we ask the user to construct a \texttt{SplineCondition} for his/her specific need
+              of curve fittings and call the interpolation routines.
+        \item Please note that we do not provide scalar interpolation and viewing scalars as
+              1-dimensional vectors. Therefore, to do scalar interpolation, please construct a \texttt{Vec<1, Real>}.
+
+    \end{itemize}
+
+
+\end{document}

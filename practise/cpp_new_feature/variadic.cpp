@@ -1,29 +1,38 @@
-#include <cmath>
 #include <iostream>
 
-using std::cout;
-
-template <class T>
-std::ostream& operator&&(std::ostream& os, T t) {
-  return os << t << "\n";
+template <class T, class... para>
+void p(T t, para... pa) {
+  std::cout << t << ' ';
+  if constexpr (sizeof...(pa) > 0) p(pa...);
 }
 
-template <class... Types>
-void print(Types... types) {
-  (cout && ... && types);
-}
+template <typename... Mixins>
+class Point : public Mixins... {
+  double x, y, z;
 
-template <class T, class... Types>
-void p(T t, Types... types) {
-  cout << t << "\n";
-  if constexpr (sizeof...(Types))  // also types
-    p(types...);
-}
-
+ public:
+  Point() : Mixins()...{}
+  void visitMixins() {
+    this->operator()(static_cast<Mixins&>(*this)()...);
+  }
+  void operator()(const Mixins&...) {}
+};
+struct Color {
+  char red, green = 'g', blue = 'b';
+  const Color& operator()() const{
+    p(red, green, blue);
+    return *this;
+  }
+};
+struct Label {
+  std::string name = "Label";
+  Label& operator()(){
+    p(name);
+    return *this;
+  }
+};
 int main() {
-  int i = 1, ii = -9;
-  double d = M_PI, dd = -M_Ef64;
-  auto s = "hello", ss = "world!";
-  print(ss, d, ii, s, i, "my", 'a', dd, '\n');
-  p(ss, d, ii, s, i, "my", 'a', dd);
+  Point<Color, Label> p;
+  p.red = 'r';
+  p.visitMixins();
 }
