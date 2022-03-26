@@ -4,6 +4,7 @@ template <class T, class... para>
 void p(T t, para... pa) {
   std::cout << t << ' ';
   if constexpr (sizeof...(pa) > 0) p(pa...);
+  else std::cout << '\n';
 }
 
 template <typename... Mixins>
@@ -13,7 +14,8 @@ class Point : public Mixins... {
  public:
   Point() : Mixins()...{}
   void visitMixins() {
-    this->operator()(static_cast<Mixins&>(*this)()...);
+    this->operator()(static_cast<Mixins&>(*this).help()...);
+    (static_cast<Mixins&>(*this).help(),...);
   }
   void operator()(const Mixins&...) {}
 };
@@ -23,6 +25,7 @@ struct Color {
     p(red, green, blue);
     return *this;
   }
+  auto help() { return operator()();}
 };
 struct Label {
   std::string name = "Label";
@@ -30,9 +33,12 @@ struct Label {
     p(name);
     return *this;
   }
+  auto help() { std::cout << "h "; return operator()(); }
 };
 int main() {
-  Point<Color, Label> p;
+  Point <Label, Color> p;
   p.red = 'r';
   p.visitMixins();
+  Point<> p2;
+  p2.visitMixins();
 }
