@@ -1,6 +1,6 @@
 #include <iostream>
 
-template <class T, class... para>
+template <class T, class... para, para... l, template<typename> class... templated>
 void p(T t, para... pa) {
   std::cout << t << ' ';
   if constexpr (sizeof...(pa) > 0) p(pa...);
