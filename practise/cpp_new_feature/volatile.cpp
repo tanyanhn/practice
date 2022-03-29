@@ -1,6 +1,16 @@
 #include <iostream>
 #include <thread>
 
+template <class T>
+struct A {
+  T t;
+};
+
+template <class T>
+struct A<T*> {
+  
+};
+
 int main() {
   int a = 0;
   volatile int flag = 0;
@@ -21,4 +31,6 @@ int main() {
   t1.join();
   t2.join();
   return 0;
+  A<int> ai;
+  A<int*> aip;
 }
