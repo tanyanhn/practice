@@ -11,7 +11,7 @@ struct Combine {
   Curve<2, 4> vd;
   double d = 0;
   int* p = nullptr;
-  X*   xp[2];
+  Vec<int, 2> vc[2];
 };
 
 int main() {
@@ -31,6 +31,7 @@ int main() {
   printf("before start vm: (%lf Mb)  rss: (%lf Mb).\n", vm / 1000, rss / 1000);
   delete test;
 
+  sleep(5);
   process_mem_usage(vm, rss);
   printf("before start vm: (%lf Mb)  rss: (%lf Mb).\n", vm / 1000, rss / 1000);
   st = clock();
