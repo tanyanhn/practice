@@ -16,7 +16,7 @@ struct Combine {
 
 int main() {
   vector<double> v;
-  int N = 10000;
+  int N = 1000;
   double vm, rss;
   Box<2> ghost(0, N - 1);
   cout << v.capacity() << endl;
