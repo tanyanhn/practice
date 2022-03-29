@@ -3,3 +3,5 @@
 /data
 *.o
 **.history/
+
+a.out
