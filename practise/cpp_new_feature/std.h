@@ -55,5 +55,10 @@ void process_mem_usage(double& vm_usage, double& resident_set)
    resident_set = rss * page_size_kb;
 }
 
+void mem_print() {
+   double vm, rss;
+   process_mem_usage(vm, rss);
+   printf(" vm: (%lf Mb)  rss: (%lf Mb).\n", vm / 1000, rss / 1000);
+}
 
 using namespace std;

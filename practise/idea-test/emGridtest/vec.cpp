@@ -1,4 +1,4 @@
-#include "std.h"
+#include "../../cpp_new_feature/std.h"
 #include "Tensor.h"
 #include "Curve.h"
 
@@ -14,49 +14,53 @@ struct Combine {
   Vec<int, 2> vc[2];
 };
 
-int main() {
+template<int Dim>
+void f(int N = 256) {
   vector<double> v;
-  int N = 1000;
   double vm, rss;
-  Box<2> ghost(0, N - 1);
+  Box<Dim> ghost(0, N - 1);
   cout << v.capacity() << endl;
-  process_mem_usage(vm, rss);
-  printf("before start vm: (%lf Mb)  rss: (%lf Mb).\n", vm / 1000, rss / 1000);
+  mem_print();
   auto st = clock();
-  Tensor<Combine, 2>* test  = new Tensor<Combine, 2>(ghost);
+  Tensor<Combine, Dim>* test  = new Tensor<Combine, Dim>(ghost);
   auto ed = clock() - st;
   printf("combine Tensor took me %ld clicks (%f seconds).\n", ed,
          ((float)ed) / CLOCKS_PER_SEC);
-  process_mem_usage(vm, rss);
-  printf("before start vm: (%lf Mb)  rss: (%lf Mb).\n", vm / 1000, rss / 1000);
+  mem_print();
   delete test;
 
   sleep(5);
-  process_mem_usage(vm, rss);
-  printf("before start vm: (%lf Mb)  rss: (%lf Mb).\n", vm / 1000, rss / 1000);
+  mem_print();
   st = clock();
-  Tensor<Combine*, 2>* testP  = new Tensor<Combine*, 2>(ghost);
-  for (auto i = 0; i < N; ++i) {
-    for (auto j = 0; j < N; ++j) {
-      if (((i + j) % N) < 4) {
-        testP->operator()({i, j}) = new Combine;
-      }
+  Tensor<Combine*, Dim>* testP = new Tensor<Combine*, Dim>(ghost);
+  if constexpr (Dim == 2) {
+    loop_box_2(ghost, i, j) if (((i + j) % N) < 4) {
+      testP->operator()({i, j}) = new Combine;
+    }
+  } else if constexpr (Dim == 3) {
+    loop_box_3(ghost, i, j, k) if (((i + j) % N) < 4) {
+      testP->operator()({i, j, k}) = new Combine;
     }
   }
+
   ed = clock() - st;
   printf("combine* Tensor took me %ld clicks (%f seconds).\n", ed,
          ((float)ed) / CLOCKS_PER_SEC);
-  process_mem_usage(vm, rss);
-  printf("before start vm: (%lf Mb)  rss: (%lf Mb).\n", vm / 1000, rss / 1000);
-  for (auto i = 0; i < N; ++i) {
-    for (auto j = 0; j < N; ++j) {
-      if (testP->operator()({i, j}) != nullptr) {
-        delete testP->operator()({i, j});
-      }
+  mem_print();
+  if constexpr (Dim == 2) {
+    loop_box_2(ghost, i, j) if (testP->operator()({i, j}) != nullptr) {
+      delete testP->operator()({i, j});
+    }
+  } else if constexpr (Dim == 3) {
+    loop_box_3(ghost, i, j, k) if (testP->operator()({i, j, k}) != nullptr) {
+      delete testP->operator()({i, j ,k});
     }
   }
   delete testP;
 
-  process_mem_usage(vm, rss);
-  printf("before start vm: (%lf Mb)  rss: (%lf Mb).\n", vm / 1000, rss / 1000);
+  mem_print();
+}
+
+int main() {
+  f<3>(256);
 }
