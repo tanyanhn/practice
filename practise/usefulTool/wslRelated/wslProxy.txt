@@ -1,0 +1,2 @@
+ipconfig找到wsl ip 设置ip：port.
+见 proxy.sh

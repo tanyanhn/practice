@@ -1,0 +1,7 @@
+startSSH*.ps1 文件将wsl端口映射到主机端口上，
+/etc/ssh/sshd_config  ListenAddress 0.0.0.0 + Port 2222 +
+映射2222端口实现 ssh -p 2222 ytan@windowsip 直连wsl.
+
+也可映射其他端口实现服务，例如映射80 网页等.
+
+ssh自动化见 startSSH 设置开机自动服务

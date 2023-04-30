@@ -1,0 +1,2 @@
+mklink /d d:\wsl2-home \\wsl$\Ubuntu-22.04\home\ytan
+可以添加软链接到wsl系统中，方便windows系统软件访问wsl系统文件。
