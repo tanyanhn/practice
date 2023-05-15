@@ -25,7 +25,7 @@ struct Color {
     p(red, green, blue);
     return *this;
   }
-  auto help() { return operator()();}
+  auto help() const { return operator()();}
 };
 struct Label {
   std::string name = "Label";

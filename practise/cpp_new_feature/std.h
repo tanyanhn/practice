@@ -3,10 +3,9 @@
 #include <array>
 #include <type_traits>
 #include <vector>
-#include <time.h>
+#include <ctime>
 #include <unistd.h>
 #include <ios>
-#include <iostream>
 #include <fstream>
 #include <string>
 

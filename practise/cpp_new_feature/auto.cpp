@@ -22,7 +22,7 @@ struct Beta_ab {
 struct Beta {
   Beta_ab ab;
   decltype(auto) getAB() const& { return (ab); }
-  decltype(auto) getAB() && { return move(ab); }
+  decltype(auto) getAB() && { return std::move(ab); }
 };                        
 
 int main() {

@@ -61,6 +61,8 @@ struct A {
   A operator()() { return *this; }
 };
 
+std::true_type t;
+
 template <class T>
 struct B {
   using cA = A<T>;
