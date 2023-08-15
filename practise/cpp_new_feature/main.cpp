@@ -1,10 +1,17 @@
 #include <iostream>
 #include <type_traits>
+#include "std.h"
+#include <valarray>
 
 void foo(char*);
+class X{};
+class K {};
+class Y : public X {};
+class Z : public K, public Y {};
 void foo(int);
 int main() {
   char* c = NULL;
+  valarray<int> mm(1);
   if (std::is_same<decltype(NULL), decltype(0)>::value)
     std::cout << "NULL == 0" << std::endl;
   if (std::is_same<decltype(NULL), decltype((void*)0)>::value)
@@ -14,6 +21,9 @@ int main() {
   foo(0);  // will call foo(int)
   // foo(NULL); // doesn't compile
   foo(nullptr);  // will call foo(char*)
+  cout << sizeof(X) << endl;
+  cout << sizeof(Y) << endl;
+  cout << sizeof(Z) << endl;
   return 0;
 }
 void foo(char*) {

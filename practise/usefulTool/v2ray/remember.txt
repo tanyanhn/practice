@@ -1,0 +1,7 @@
+1. using install-release.sh or github loc install
+
+2. config.json get from windows v2rayN export setting.
+
+3. server from cloudflare and ytan98.online domain.
+
+4. http port socks port change to 10809 and 10808.

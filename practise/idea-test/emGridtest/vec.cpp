@@ -29,7 +29,7 @@ void f(int N = 256) {
   mem_print();
   delete test;
 
-  sleep(5);
+  // sleep(5);
   mem_print();
   st = clock();
   Tensor<Combine*, Dim>* testP = new Tensor<Combine*, Dim>(ghost);
