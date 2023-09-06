@@ -1,2 +1,4 @@
 ipconfig找到wsl ip 设置ip：port.
 见 proxy.sh
+
+apt 也需要设置, 在 /etc/apt/apt.conf.d/proxy.conf.
