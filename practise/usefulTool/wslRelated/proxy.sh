@@ -10,14 +10,15 @@ port=7890
 # 注意代理有两种方式，一种基于 http，一种基于 socket5，河对岸是基于 socket5 的
 # PROXY_HTTP="socks5://${hostip}:${port}"
 PROXY_HTTP="http://${hostip}:${port}" # 如果是基于 http 的代理，则使用该命令
+PROXY_HTTPS="https://${hostip}:${port}" # 如果是基于 http 的代理，则使用该命令
 
 # 开启代理
 set_proxy(){
     export http_proxy="${PROXY_HTTP}"
-    export HTTP_PROXY="${PROXY_HTTP}"
+    export HTTP_PROXY="${PROXY_HTTPS}"
     
     export https_proxy="${PROXY_HTTP}"
-    export HTTPS_proxy="${PROXY_HTTP}"
+    export HTTPS_proxy="${PROXY_HTTPS}"
     
     export ALL_PROXY="${PROXY_SOCKS5}"
     export all_proxy=${PROXY_SOCKS5}
