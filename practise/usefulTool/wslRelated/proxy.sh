@@ -25,7 +25,7 @@ set_proxy(){
     
     # 配置 git 的代理
     git config --global http.https://github.com.proxy ${PROXY_HTTP}
-    git config --global https.https://github.com.proxy ${PROXY_HTTP}
+    git config --global https.https://github.com.proxy ${PROXY_HTTPS}
     
     echo "Proxy has been opened."
 }
