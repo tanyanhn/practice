@@ -15,9 +15,9 @@ PROXY_HTTPS="https://${hostip}:${port}" # 如果是基于 http 的代理，则�
 # 开启代理
 set_proxy(){
     export http_proxy="${PROXY_HTTP}"
-    export HTTP_PROXY="${PROXY_HTTPS}"
+    export HTTP_PROXY="${PROXY_HTTP}"
     
-    export https_proxy="${PROXY_HTTP}"
+    export https_proxy="${PROXY_HTTPS}"
     export HTTPS_proxy="${PROXY_HTTPS}"
     
     export ALL_PROXY="${PROXY_SOCKS5}"
